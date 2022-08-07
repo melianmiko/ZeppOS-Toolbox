@@ -26,6 +26,8 @@
         "page/files",
         "page/file_edit",
         "page/apps",
+        "page/storage",
+        "page/view_image",
         "page/delete_confirm"
       ],
       "window": {

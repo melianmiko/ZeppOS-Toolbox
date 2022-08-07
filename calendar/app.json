@@ -14,7 +14,11 @@
   },
   "configVersion": "v2",
   "debug": false,
-  "i18n": {},
+  "i18n": {
+    "ru-RU": {
+      "appName": "Календарь"
+    }
+  },
   "module": {
     "page": {
       "pages": [
