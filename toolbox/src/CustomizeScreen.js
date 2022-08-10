@@ -33,7 +33,7 @@ class CustomizeScreen {
       });
 
       btn.addEventListener(hmUI.event.CLICK_UP, () => {
-        hmUI.showToast({text: config.description})
+        hmUI.showToast({text: t("qs_" + id)})
         this._toggleTile(id, btn);
       });
     });

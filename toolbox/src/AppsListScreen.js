@@ -72,7 +72,7 @@ class AppsListScreen {
       y: 0,
       w: 96,
       h: 64,
-      text: "Apps",
+      text: t("title_apps"),
       color: 0xffffff,
       align_h: hmUI.align.CENTER_H,
       align_v: hmUI.align.CENTER_V,

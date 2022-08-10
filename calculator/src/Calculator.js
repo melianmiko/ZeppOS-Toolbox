@@ -108,8 +108,8 @@
         const pi = Math.round(Math.PI * 1e8) / 1e8;
 
         try {
-          let result = eval(this.screenData + "* 1e" + DIV_LIMIT);
-          result = Math.round(result).toString();
+          let result = eval(`(${this.screenData}) * 1e` + DIV_LIMIT);
+          result = Math.round(result).toString().padStart(DIV_LIMIT + 1, "0");
 
           let lh = result.substring(0, result.length - DIV_LIMIT);
           if(!lh) lh = "0";

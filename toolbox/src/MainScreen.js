@@ -53,11 +53,23 @@ class MainScreen {
       h: 72,
       align_h: hmUI.align.CENTER_H,
       align_v: hmUI.align.CENTER_V,
-      text: "Customize",
+      text: t("action_customize"),
       color: 0x999999
     }).addEventListener(hmUI.event.CLICK_UP, () => {
       gotoSubpage("customize");
     });
+
+    // Copyright
+    hmUI.createWidget(hmUI.widget.TEXT, {
+      x: 0,
+      y: edit_y + 72,
+      w: 192,
+      h: 64,
+      align_h: hmUI.align.CENTER_H,
+      align_v: hmUI.align.CENTER_V,
+      text: "by melianmiko\nv2022-08-10",
+      color: 0x444444
+    })
   }
 
   drawBrightness() {

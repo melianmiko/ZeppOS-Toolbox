@@ -31,7 +31,7 @@ class FileManagerScreen {
 
   rootfs = [
     "storage",
-    "mnt/system"
+    "storage/js_apps"
   ]
 
   constructor() {
@@ -49,7 +49,7 @@ class FileManagerScreen {
       h: 64,
       align_h: hmUI.align.CENTER_H,
       align_v: hmUI.align.CENTER_V,
-      text: "loading",
+      text: "",
       color: 0xffffff
     });
 

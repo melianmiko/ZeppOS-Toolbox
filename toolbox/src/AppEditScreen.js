@@ -53,7 +53,7 @@ class AppEditScreen {
       color: 0xff2222,
       normal_color: 0x111111,
       press_color: 0x333333,
-      text: "Uninstall",
+      text: t("action_uninstall"),
       click_func: () => this.uninstall()
     });
 
@@ -62,8 +62,8 @@ class AppEditScreen {
       x: 0,
       y: 396,
       w: 192,
-      h: 60,
-      text: "Don't fogot to reboot after uninstall!",
+      h: 96,
+      text: t("apps_notice_uninstall"),
       text_style: hmUI.text_style.WRAP,
       color: 0x999999,
       align_h: hmUI.align.CENTER_H

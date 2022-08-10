@@ -49,7 +49,7 @@ class FileEditScreen {
       hmUI.createWidget(hmUI.widget.BUTTON, {
         ...this.STYLE_BUTTON,
         y: posY,
-        text: "View as image",
+        text: t("file_view_as_image"),
         click_func: () => {
           gotoSubpage('view_image', {
             file: this.prepareTempFile(this.path)
@@ -64,7 +64,7 @@ class FileEditScreen {
       ...this.STYLE_BUTTON,
       y: posY,
       color: 0xff0000,
-      text: "Delete",
+      text: t("file_delete"),
       click_func: () => this.delete()
     })
   }

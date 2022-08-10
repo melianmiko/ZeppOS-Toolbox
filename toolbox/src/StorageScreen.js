@@ -24,32 +24,26 @@ class StorageScreen {
     const config = [
       {
         key: "total",
-        name: "Total",
         color: 0x999999,
       },
       {
         key: "free",
-        name: "Free",
         color: 0xAAAAAA,
       },
       {
         key: "system",
-        name: "ZeppOS",
         color: 0xFFCC80
       },
       {
         key: "watchface",
-        name: "Watchfaces",
         color: 0x4fc3f7,
       },
       {
         key: "app",
-        name: "Apps",
         color: 0xFFAB91,
       },
       {
         key: "unknown",
-        name: "Unknown",
         color: 0x616161,
       },
     ];
@@ -75,7 +69,7 @@ class StorageScreen {
         w: 120,
         h: 24,
         color: currentRow.color,
-        text: currentRow.name,
+        text: t("storage_" + currentRow.key),
       });
       hmUI.createWidget(hmUI.widget.TEXT, {
         x: 72,
