@@ -23,13 +23,13 @@ class CustomizeScreen {
       src: "brightness_cfg.png",
       alpha: this.settings.withBrightness ? 255 : 100
     });
-
-    brightnessToggle.addEventListener(hmUI.event.CLICK_UP, () => {
+    const brightnessToggleEvents = new TouchEventManager(brightnessToggle);
+    brightnessToggleEvents.ontouch = () => {
       this.settings.withBrightness = !this.settings.withBrightness;
       brightnessToggle.setProperty(hmUI.prop.MORE, {
         alpha: this.settings.withBrightness ? 255 : 100
       })
-    })
+    };
 
     Object.keys(QS_BUTTONS).forEach((id, i) => {
       const config = QS_BUTTONS[id];
@@ -47,12 +47,14 @@ class CustomizeScreen {
         src: id + ".png",
       });
 
-      btn.addEventListener(hmUI.event.CLICK_UP, () => {
+      const events = new TouchEventManager(btn);
+      events.ontouch = () => {
         hmUI.showToast({text: t("qs_" + id)})
         this._toggleTile(id, btn);
-      });
+      };
     });
 
+    // Screen overflow
     const end_y = 176 + Math.ceil(Object.keys(QS_BUTTONS).length / 2) * 90;
     hmUI.createWidget(hmUI.widget.TEXT, {
       x: 0,

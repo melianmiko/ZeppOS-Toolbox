@@ -34,91 +34,95 @@ class MainScreen {
       const config = QS_BUTTONS[id];
       if(!config) return;
 
-      const x = 12 + (i % 2) * 90;
-      const y = topOffset + Math.floor(i / 2) * 90;
-
-      hmUI.createWidget(hmUI.widget.IMG, {
-        x,
-        y,
+      const widgetConfig = {
+        x: 12 + (i % 2) * 90,
+        y: topOffset + Math.floor(i / 2) * 90,
         w: 78,
         h: 78,
         src: id + ".png",
-      }).addEventListener(hmUI.event.CLICK_UP, () => {
+      }
+
+      const widget = hmUI.createWidget(hmUI.widget.IMG, widgetConfig);
+      const events = new TouchEventManager(widget);
+
+      events.ontouch = () => {
         config.click();
-      });
+      };
+      events.onlongtouch = () => {
+        gotoSubpage("customize");
+      };
     });
 
     // Edit button
-    const edit_y = topOffset + 12 + Math.ceil(tiles.length / 2) * 90;
-    hmUI.createWidget(hmUI.widget.TEXT, {
+    const editButton = hmUI.createWidget(hmUI.widget.TEXT, {
       x: 0,
-      y: edit_y,
+      y: topOffset + 12 + Math.ceil(tiles.length / 2) * 90,
       w: 192,
       h: 72,
       align_h: hmUI.align.CENTER_H,
       align_v: hmUI.align.CENTER_V,
       text: t("action_customize"),
       color: 0x999999
-    }).addEventListener(hmUI.event.CLICK_UP, () => {
-      gotoSubpage("customize");
     });
+    const editButtonEvents = new TouchEventManager(editButton);
+    editButtonEvents.ontouch = () => {
+      gotoSubpage("customize");
+    }
 
-    // Copyright
-    hmUI.createWidget(hmUI.widget.IMG, {
+    // Info button
+    const infoButton = hmUI.createWidget(hmUI.widget.IMG, {
       x: 0,
-      y: edit_y + 72,
+      y: topOffset + 84 + Math.ceil(tiles.length / 2) * 90,
       w: 192,
       h: 48,
       pos_x: (192-24)/2,
       pos_y: 12,
       src: "info.png"
-    }).addEventListener(hmUI.event.CLICK_UP, () => {
+    });
+    const infoButtonEvents = new TouchEventManager(infoButton);
+    infoButtonEvents.ontouch = () => {
       gotoSubpage("about");
-    })
+    };
   }
 
   drawBrightness() {
     hmUI.createWidget(hmUI.widget.FILL_RECT, {
       ...this.baseBrightnessConfig,
       color: 0x222222,
-      w: 168,
+      w: 168
     });
 
     this.widgetBrightness = hmUI.createWidget(hmUI.widget.FILL_RECT, {
       ...this.baseBrightnessConfig,
       color: 0x555555,
       alpha: 80,
+      w: 10
     });
 
-    hmUI.createWidget(hmUI.widget.IMG, {
+    const basement = hmUI.createWidget(hmUI.widget.IMG, {
       ...this.baseBrightnessConfig,
-      x: 20,
-      y: this.baseBrightnessConfig.y + (80 - 36) / 2,
+      w: 168,
+      pos_x: 8,
+      pos_y: 22,
       alpha: 200,
       src: "brightness.png",
     });
 
-    // Make click zones
-    hmUI.createWidget(hmUI.widget.IMG, {
-      ...this.baseBrightnessConfig,
-      src: "",
-      w: 84,
-    }).addEventListener(hmUI.event.CLICK_UP, () => {
-      const val = Math.max(hmSetting.getBrightness() - 10, 0);
-      hmSetting.setBrightness(val);
-      this._updateBrightness();
-    });
+    // Events
+    const handleChange = (e) => {
+      const delta = e.x > 96 ? 1 : -1;
 
-    hmUI.createWidget(hmUI.widget.IMG, {
-      ...this.baseBrightnessConfig,
-      src: "",
-      w: 84,
-      x: 96,
-    }).addEventListener(hmUI.event.CLICK_UP, () => {
-      const val = Math.min(hmSetting.getBrightness() + 10, 100);
+      let val = hmSetting.getBrightness() + (5 * delta);
+      val = Math.min(Math.max(0, val), 100);
+
       hmSetting.setBrightness(val);
       this._updateBrightness();
-    });
+    };
+
+    const events = new TouchEventManager(basement);
+    events.ontouch = handleChange;
+    events.onlongtouch = handleChange;
+    events.onlongtouchrepeatly = handleChange;
 
     this._updateBrightness();
   }
