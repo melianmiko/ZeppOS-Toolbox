@@ -16,6 +16,7 @@ registerTranslation('en-US', {
 	"qs_system": "System settings",
 	"qs_applistsort": "App list sort",
 	"qs_poweroff": "Power off",
+	"qs_reboot": "Reboot",
 
 	// Storage screen
 	"storage_total": "Total",
@@ -27,12 +28,13 @@ registerTranslation('en-US', {
 
 	// File manager
 	"file_view_as_image": "View as image",
+	"file_view_as_text": "View as text",
 	"file_delete": "Delete",
 
 	// Apps screen
 	"title_apps": "Apps",
 	"action_uninstall": "Uninstall",
-	"apps_notice_uninstall": "Don't fogot to reboot after uninstall!"
+	"apps_notice_uninstall": "Device will restart after uninstall"
 });
 
 // Chinese (simplified)
@@ -46,30 +48,32 @@ registerTranslation('zh-CN', {
 	"qs_dnd": "请勿打扰",
 	"qs_flashlight": "手电筒",
 	"qs_camera": "相机",
-	"qs_settings": "设置",
+	"qs_settings": "设置应用",
 	"qs_brightness_btn": "亮度",
 	"qs_aod": "AOD",
 	"qs_powersave": "节能",
 	"qs_system": "系统设置",
 	"qs_applistsort": "应用列表设置",
 	"qs_poweroff": "关机",
+	"qs_reboot": "重启",
 
 	// Storage screen
-	"storage_total": "关机",
-	"storage_free": "关机",
-	"storage_system": "ZeppOS",
-	"storage_watchface": "表盘",
-	"storage_app": "应用",
+	"storage_total": "总空间",
+	"storage_free": "余空间",
+	"storage_system": "系统固件",
+	"storage_watchface": "JS表盘",
+	"storage_app": "JS应用",
 	"storage_unknown": "未知",
 
 	// File manager
-	"file_view_as_image": "图片",
-	"file_delete": "图片",
+	"file_view_as_image": "以图片形式查看",
+	"file_view_as_text": "以文本形式查看",
+	"file_delete": "删除",
 
 	// Apps screen
 	"title_apps": "应用",
-	"action_uninstall": "图片",
-	"apps_notice_uninstall": "卸载后重启！！"
+	"action_uninstall": "卸载",
+	"apps_notice_uninstall": "设备将重新启动"
 });
 
 // Russian
@@ -90,6 +94,7 @@ registerTranslation('ru-RU', {
 	"qs_system": "Настройки системы",
 	"qs_applistsort": "Настр. меню приложений",
 	"qs_poweroff": "Выключить",
+	"qs_reboot": "Перезагрузить",
 
 	// Storage screen
 	"storage_total": "Всего",
@@ -101,10 +106,11 @@ registerTranslation('ru-RU', {
 
 	// File manager
 	"file_view_as_image": "Прсм. изображение",
+	"file_view_as_text": "Просм. текст",
 	"file_delete": "Удалить",
 
 	// Apps screen
 	"title_apps": "Приложения",
 	"action_uninstall": "Удалить",
-	"apps_notice_uninstall": "Перезагрузите устройство после удаления"
+	"apps_notice_uninstall": "Устройство будет перезагружено"
 });

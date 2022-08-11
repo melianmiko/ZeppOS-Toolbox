@@ -58,6 +58,19 @@ class FileEditScreen {
       });
 
       posY += 76;
+
+      hmUI.createWidget(hmUI.widget.BUTTON, {
+        ...this.STYLE_BUTTON,
+        y: posY,
+        text: t("file_view_as_text"),
+        click_func: () => {
+          gotoSubpage('view_text', {
+            file: this.path
+          })
+        }
+      });
+
+      posY += 76;
     }
 
     if(this.path.startsWith("/storage")) hmUI.createWidget(hmUI.widget.BUTTON, {

@@ -4,15 +4,22 @@ class AppEditScreen {
   }
 
   start() {
+    const group = hmUI.createWidget(hmUI.widget.GROUP, {
+      x: 0,
+      y: 0,
+      w: 192,
+      h: 482
+    })
+
     // Icon
-    hmUI.createWidget(hmUI.widget.IMG, {
+    group.createWidget(hmUI.widget.IMG, {
       x: 46,
       y: 48,
       src: this.data.icon
     });
 
     // App name
-    hmUI.createWidget(hmUI.widget.TEXT, {
+    group.createWidget(hmUI.widget.TEXT, {
       x: 0,
       y: 200,
       w: 192,
@@ -23,7 +30,7 @@ class AppEditScreen {
     });
 
     // Vendor
-    hmUI.createWidget(hmUI.widget.TEXT, {
+    group.createWidget(hmUI.widget.TEXT, {
       x: 0,
       y: 248,
       w: 192,
@@ -34,7 +41,7 @@ class AppEditScreen {
     });
 
     // App size
-    hmUI.createWidget(hmUI.widget.TEXT, {
+    group.createWidget(hmUI.widget.TEXT, {
       x: 0,
       y: 280,
       w: 192,
@@ -45,7 +52,7 @@ class AppEditScreen {
     });
 
     // Uninstall button
-    hmUI.createWidget(hmUI.widget.BUTTON, {
+    group.createWidget(hmUI.widget.BUTTON, {
       x: 8,
       y: 320,
       w: 192-16,
@@ -58,7 +65,7 @@ class AppEditScreen {
     });
 
     // Uninstall notice
-    hmUI.createWidget(hmUI.widget.TEXT, {
+    group.createWidget(hmUI.widget.TEXT, {
       x: 0,
       y: 396,
       w: 192,
@@ -68,12 +75,15 @@ class AppEditScreen {
       color: 0x999999,
       align_h: hmUI.align.CENTER_H
     });
+
+    this.group = group;
   }
 
   uninstall() {
     FsUtils.rmTree("/storage/js_apps/" + this.data.dirname);
     FsUtils.rmTree("/storage/js_apps/data" + this.data.dirname);
 
+    hmUI.deleteWidget(this.group);
     hmApp.gotoHome();
   }
 

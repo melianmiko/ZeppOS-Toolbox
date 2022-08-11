@@ -41,7 +41,13 @@ class FileManagerScreen {
     if(!!lastPath) this.path = lastPath;
   }
 
+  finish() {
+    hmSetting.setBrightScreenCancel();
+  }
+
   start() {
+    hmSetting.setBrightScreen(1800);
+
     this.viewPath = hmUI.createWidget(hmUI.widget.TEXT, {
       x: 48,
       y: 0,

@@ -48,6 +48,12 @@ __$$module$$__.module = DeviceRuntimeCore.Page({
       case "view_image":
         currentScreen = new ImageViewScreen(data);
         break;
+      case "view_text":
+        currentScreen = new TextViewScreen(data);
+        break;
+      case "about":
+        currentScreen = new AboutScreen(data);
+        break;
     }
 
     currentScreen.start();

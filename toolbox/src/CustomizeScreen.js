@@ -1,20 +1,35 @@
 class CustomizeScreen {
   userTiels = null;
+  settings = null;
 
-  _listTiles() {
-    let tiles = ["apps", "files"]
-
+  _load() {
     try {
-      tiles = FsUtils.fetchJSON("settings.json").tiles;
+      this.settings = FsUtils.fetchJSON("settings.json");
     } catch(e) {
-      console.warn(e);
+      console.log(e);
+      this.settings = {
+        tiles: ["apps", "files"],
+        withBrightness: true
+      };
     }
-
-    return tiles;
   }
 
   start () {
-    this.userTiles = this._listTiles();
+    this._load();
+
+    const brightnessToggle = hmUI.createWidget(hmUI.widget.IMG, {
+      x: 12,
+      y: 72,
+      src: "brightness_cfg.png",
+      alpha: this.settings.withBrightness ? 255 : 100
+    });
+
+    brightnessToggle.addEventListener(hmUI.event.CLICK_UP, () => {
+      this.settings.withBrightness = !this.settings.withBrightness;
+      brightnessToggle.setProperty(hmUI.prop.MORE, {
+        alpha: this.settings.withBrightness ? 255 : 100
+      })
+    })
 
     Object.keys(QS_BUTTONS).forEach((id, i) => {
       const config = QS_BUTTONS[id];
@@ -28,7 +43,7 @@ class CustomizeScreen {
         y,
         w: 78,
         h: 78,
-        alpha: this.userTiles.indexOf(id) > -1 ? 255 : 100,
+        alpha: this.settings.tiles.indexOf(id) > -1 ? 255 : 100,
         src: id + ".png",
       });
 
@@ -49,21 +64,18 @@ class CustomizeScreen {
   }
 
   finish() {
-    const settings = FsUtils.fetchJSON("settings.json");
-
-    settings.tiles = this.userTiles;
-    FsUtils.writeText("settings.json", JSON.stringify(settings));
+    FsUtils.writeText("settings.json", JSON.stringify(this.settings));
   }
 
   _toggleTile(id, btn) {
-    const ind = this.userTiles.indexOf(id);
+    const ind = this.settings.tiles.indexOf(id);
 
     if(ind < 0) {
-      this.userTiles.push(id);
+      this.settings.tiles.push(id);
       btn.setProperty(hmUI.prop.MORE, {alpha: 255})
     } else {
-      this.userTiles = this.userTiles.filter((i) => i !== id);
-      console.log(this.userTiles);
+      this.settings.tiles = this.settings.tiles.filter((i) => i !== id);
+      console.log(this.settings.tiles);
       btn.setProperty(hmUI.prop.MORE, {alpha: 100})
     }
   }

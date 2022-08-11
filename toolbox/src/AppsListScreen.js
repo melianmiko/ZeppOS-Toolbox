@@ -37,7 +37,15 @@ class AppsListScreen {
 
         out.push({ name, data, icon });
       } catch (e) {
-        console.warn(e);
+        out.push({
+          name: dirname,
+          data: {
+            dirname, 
+            name: dirname, 
+            vender: "???"
+          },
+          icon: ""
+        });
       }
     }
 
@@ -51,6 +59,8 @@ class AppsListScreen {
       hmFS.remove(path);
     }
 
+    if(sourcePath === "") return "";
+      
     const data = FsUtils.read(sourcePath);
     const newFile = "temp_" + Math.round(Math.random() * 100000) + ".png";
     const dest = hmFS.open_asset(newFile, hmFS.O_WRONLY | hmFS.O_CREAT);
@@ -82,7 +92,7 @@ class AppsListScreen {
       x: 8,
       y: 64,
       w: 192 - 16,
-      h: 445,
+      h: 378,
       item_space: 8,
       item_config: [this.app_list_item_type],
       item_config_count: 1,

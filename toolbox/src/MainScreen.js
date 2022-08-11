@@ -6,32 +6,36 @@ class MainScreen {
     radius: 8,
   };
 
-  start() {
-    this.drawBrightness();
-    this.drawButtons();
-  }
-
-  _listTiles() {
-    let tiles = ["apps", "files"]
+  _getSettings() {
+    let settings = {
+      tiles: ["apps", "files"],
+      withBrightness: true
+    };
 
     try {
-      tiles = FsUtils.fetchJSON("settings.json").tiles;
+      settings = FsUtils.fetchJSON("settings.json");
     } catch(e) {
-      console.warn(e);
+      console.log(e);
     }
 
-    return tiles;
+    return settings;
   }
 
-  drawButtons() {
-    const tiles = this._listTiles();
+  start() {
+    const {tiles, withBrightness} = this._getSettings();
+    const topOffset = withBrightness ? 164 : 72
 
+    if(withBrightness) this.drawBrightness();
+    this.drawButtons(tiles, topOffset);
+  }
+
+  drawButtons(tiles, topOffset) {
     tiles.forEach((id, i) => {
       const config = QS_BUTTONS[id];
       if(!config) return;
 
       const x = 12 + (i % 2) * 90;
-      const y = 164 + Math.floor(i / 2) * 90;
+      const y = topOffset + Math.floor(i / 2) * 90;
 
       hmUI.createWidget(hmUI.widget.IMG, {
         x,
@@ -45,7 +49,7 @@ class MainScreen {
     });
 
     // Edit button
-    const edit_y = 176 + Math.ceil(tiles.length / 2) * 90;
+    const edit_y = topOffset + 12 + Math.ceil(tiles.length / 2) * 90;
     hmUI.createWidget(hmUI.widget.TEXT, {
       x: 0,
       y: edit_y,
@@ -60,15 +64,16 @@ class MainScreen {
     });
 
     // Copyright
-    hmUI.createWidget(hmUI.widget.TEXT, {
+    hmUI.createWidget(hmUI.widget.IMG, {
       x: 0,
       y: edit_y + 72,
       w: 192,
-      h: 64,
-      align_h: hmUI.align.CENTER_H,
-      align_v: hmUI.align.CENTER_V,
-      text: "by melianmiko\nv2022-08-10",
-      color: 0x444444
+      h: 48,
+      pos_x: (192-24)/2,
+      pos_y: 12,
+      src: "info.png"
+    }).addEventListener(hmUI.event.CLICK_UP, () => {
+      gotoSubpage("about");
     })
   }
 
@@ -97,7 +102,7 @@ class MainScreen {
     hmUI.createWidget(hmUI.widget.IMG, {
       ...this.baseBrightnessConfig,
       src: "",
-      w: 56,
+      w: 84,
     }).addEventListener(hmUI.event.CLICK_UP, () => {
       const val = Math.max(hmSetting.getBrightness() - 10, 0);
       hmSetting.setBrightness(val);
@@ -107,8 +112,8 @@ class MainScreen {
     hmUI.createWidget(hmUI.widget.IMG, {
       ...this.baseBrightnessConfig,
       src: "",
-      w: 56,
-      x: 192 - 12 - 56,
+      w: 84,
+      x: 96,
     }).addEventListener(hmUI.event.CLICK_UP, () => {
       const val = Math.min(hmSetting.getBrightness() + 10, 100);
       hmSetting.setBrightness(val);

@@ -70,4 +70,15 @@ const QS_BUTTONS = {
       url: "HmReStartScreen", native: true 
     })
   },
+
+  reboot: {
+    click: () => {
+      const a = hmUI.createWidget(hmUI.widget.GROUP, {
+        x: 0, y: 0, w: 192, h: 490
+      });
+
+      a.createWidget(hmUI.widget.IMG, {x: 0, y: 0, src: ""});
+      hmUI.deleteWidget(a);
+    }
+  }
 };
