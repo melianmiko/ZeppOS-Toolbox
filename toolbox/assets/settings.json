@@ -3,6 +3,7 @@
 		"apps",
 		"files",
 		"storage",
+		"timer",
 		"dnd",
 		"camera"
 	],

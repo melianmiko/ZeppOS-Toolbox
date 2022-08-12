@@ -26,12 +26,7 @@
     "page": {
       "pages": [
         "page/index",
-        "page/files",
-        "page/file_edit",
-        "page/apps",
-        "page/storage",
-        "page/view_image",
-        "page/delete_confirm"
+        "page/timer_out"
       ],
       "window": {
         "backgroundColor": "#eeeeee",

@@ -11,6 +11,10 @@ const QS_BUTTONS = {
     click: () => gotoSubpage("storage")
   },
 
+  timer: {
+    click: () => gotoSubpage("timer")
+  },
+
   dnd: {
     click: () => hmApp.startApp({ 
       url: "Settings_dndModelScreen", native: true 

@@ -29,7 +29,12 @@ registerTranslation('en-US', {
 	// File manager
 	"file_view_as_image": "View as image",
 	"file_view_as_text": "View as text",
+	"file_view_as_bin": "View as binary",
 	"file_delete": "Delete",
+
+	// Timer miniapp
+	"timer_start": "Begin",
+	"timer_stop": "Cancel",
 
 	// Apps screen
 	"title_apps": "Apps",

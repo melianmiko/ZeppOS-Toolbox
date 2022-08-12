@@ -51,8 +51,14 @@ __$$module$$__.module = DeviceRuntimeCore.Page({
       case "view_text":
         currentScreen = new TextViewScreen(data);
         break;
+      case "view_hexdump":
+        currentScreen = new HexdumpScreen(data);
+        break;
       case "about":
         currentScreen = new AboutScreen(data);
+        break;
+      case "timer":
+        currentScreen = new TimerScreen(data);
         break;
     }
 

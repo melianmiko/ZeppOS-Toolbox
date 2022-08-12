@@ -29,11 +29,6 @@ class FileManagerScreen {
   content = [];
   rows = [];
 
-  rootfs = [
-    "storage",
-    "storage/js_apps"
-  ]
-
   constructor() {
     this.path = FsUtils.getSelfPath();
 
@@ -107,8 +102,8 @@ class FileManagerScreen {
     const [files, e] = hmFS.readdir(this.path);
     console.log("refr", this.path);
 
-    if (this.path === "") {
-      this.contents = [...this.rootfs];
+    if (this.path === "/storage") {
+      this.contents = [...files];
     } else {
       this.contents = ["..", ...files];
     }

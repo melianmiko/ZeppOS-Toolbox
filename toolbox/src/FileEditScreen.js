@@ -44,41 +44,66 @@ class FileEditScreen {
 
     posY += textHeight + 12;
 
-    // Open 
+    // Open btns
     if(fileSize > 0) {
-      hmUI.createWidget(hmUI.widget.BUTTON, {
-        ...this.STYLE_BUTTON,
-        y: posY,
-        text: t("file_view_as_image"),
-        click_func: () => {
-          gotoSubpage('view_image', {
-            file: this.prepareTempFile(this.path)
-          })
-        }
-      });
+      if(this.path.endsWith(".png")) {
+        this.addViewAsImageButton(posY);
+        posY += 76;
+      }
 
+      this.addViewAsTextButton(posY);
       posY += 76;
 
-      hmUI.createWidget(hmUI.widget.BUTTON, {
-        ...this.STYLE_BUTTON,
-        y: posY,
-        text: t("file_view_as_text"),
-        click_func: () => {
-          gotoSubpage('view_text', {
-            file: this.path
-          })
-        }
-      });
-
+      this.addViewAsBinaryButton(posY);
       posY += 76;
     }
 
-    if(this.path.startsWith("/storage")) hmUI.createWidget(hmUI.widget.BUTTON, {
+    // Delete btn
+    if(this.path.startsWith("/storage/")) hmUI.createWidget(hmUI.widget.BUTTON, {
       ...this.STYLE_BUTTON,
       y: posY,
       color: 0xff0000,
       text: t("file_delete"),
       click_func: () => this.delete()
+    })
+  }
+
+  addViewAsImageButton(y) {
+    hmUI.createWidget(hmUI.widget.BUTTON, {
+      ...this.STYLE_BUTTON,
+      y,
+      text: t("file_view_as_image"),
+      click_func: () => {
+        gotoSubpage('view_image', {
+          file: this.prepareTempFile(this.path)
+        })
+      }
+    });
+  }
+
+  addViewAsTextButton(y) {
+    hmUI.createWidget(hmUI.widget.BUTTON, {
+      ...this.STYLE_BUTTON,
+      y,
+      text: t("file_view_as_text"),
+      click_func: () => {
+        gotoSubpage('view_text', {
+          file: this.path
+        })
+      }
+    });
+  }
+
+  addViewAsBinaryButton(y) {
+    hmUI.createWidget(hmUI.widget.BUTTON, {
+      ...this.STYLE_BUTTON,
+      y,
+      text: t("file_view_as_bin"),
+      click_func: () => {
+        gotoSubpage("view_hexdump", {
+          path: this.path
+        })
+      }
     })
   }
 
