@@ -110,9 +110,9 @@ class TimerScreen {
 			w: 192,
 			h: 90,
 			text: "Start",
-			normal_color: 0x0,
-			press_color: 0x111111,
-			color: 0x0099FF,
+			normal_color: 0x222222,
+			press_color: 0x333333,
+			color: 0xFFFFFF,
 			click_func: () => {
 				this.timerID !== null ? this.stopTimer() : this.runTimer();
 			}

@@ -99,15 +99,39 @@ class FileManagerScreen {
   }
 
   refresh() {
-    const [files, e] = hmFS.readdir(this.path);
+    const [dirContent, e] = hmFS.readdir(this.path);
     console.log("refr", this.path);
 
-    if (this.path === "/storage") {
-      this.contents = [...files];
-    } else {
-      this.contents = ["..", ...files];
+    let folders = [],
+      files = [];
+
+    if (this.path !== "/storage") {
+      folders.push({name: "..", icon: "folder.png"});
     }
 
+    for(let fn of dirContent) {
+      if(this.isFolder(this.path + "/" + fn)) {
+        folders.push({
+          name: fn,
+          icon: "folder.png"
+        });
+        continue;
+      }
+
+      let icon = "file.png";
+      if(fn.endsWith(".png")) {
+        icon = "file_img.png";
+      } else if(fn.endsWith('.js') || fn.endsWith(".json")) {
+        icon = "file_code.png";
+      }
+
+      files.push({
+        name: fn,
+        icon
+      });
+    }
+
+    this.contents = [...folders, ...files];
     this.viewPath.setProperty(hmUI.prop.TEXT, this.path);
 
     this.viewFiles.setProperty(hmUI.prop.UPDATE_DATA, {
@@ -118,21 +142,14 @@ class FileManagerScreen {
       }],
       data_type_config_count: 1,
       data_count: this.contents.length,
-      data_array: this.contents.map((name) => {
-        const isDir = this.isFolder(this.path + "/" + name);
-
-        return {
-          name,
-          icon: isDir ? "folder.png" : "file.png"
-        };
-      }),
+      data_array: this.contents,
       on_page: 1
     })
   }
 
   onRowClick(i) {
-    const val = this.contents[i];
-    if (!val) return;
+    if(!this.contents[i]) return;
+    let val = this.contents[i].name;
 
     let path = this.path + "/" + val;
     if (val == "..") {
