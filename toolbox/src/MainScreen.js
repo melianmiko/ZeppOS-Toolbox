@@ -9,7 +9,8 @@ class MainScreen {
   _getSettings() {
     let settings = {
       tiles: ["apps", "files"],
-      withBrightness: true
+      withBrightness: true,
+      withBattery: false
     };
 
     try {
@@ -22,11 +23,33 @@ class MainScreen {
   }
 
   start() {
-    const {tiles, withBrightness} = this._getSettings();
+    const {tiles, withBrightness, withBattery} = this._getSettings();
     const topOffset = withBrightness ? 164 : 72
 
+    if(withBattery) this.drawBattery();
     if(withBrightness) this.drawBrightness();
     this.drawButtons(tiles, topOffset);
+  }
+
+  drawBattery() {
+    const battery = hmSensor.createSensor(hmSensor.id.BATTERY);
+    const value = battery.current + "%";
+
+    hmUI.createWidget(hmUI.widget.IMG, {
+      x: 60,
+      y: 28,
+      src: "battery.png"
+    })
+    hmUI.createWidget(hmUI.widget.TEXT, {
+      x: 84,
+      y: 28,
+      w: 48,
+      h: 24,
+      text: value,
+      color: 0x999999,
+      align_h: hmUI.align.CENTER_H,
+      align_v: hmUI.align.CENTER_V
+    })
   }
 
   drawButtons(tiles, topOffset) {
@@ -39,7 +62,7 @@ class MainScreen {
         y: topOffset + Math.floor(i / 2) * 90,
         w: 78,
         h: 78,
-        src: id + ".png",
+        src: "qs/" + id + ".png",
       }
 
       const widget = hmUI.createWidget(hmUI.widget.IMG, widgetConfig);
@@ -49,7 +72,7 @@ class MainScreen {
         config.click();
       };
       events.onlongtouch = () => {
-        gotoSubpage("customize");
+        gotoSubpage("cfg_ui");
       };
     });
 
@@ -66,23 +89,8 @@ class MainScreen {
     });
     const editButtonEvents = new TouchEventManager(editButton);
     editButtonEvents.ontouch = () => {
-      gotoSubpage("customize");
+      gotoSubpage("cfg_root");
     }
-
-    // Info button
-    const infoButton = hmUI.createWidget(hmUI.widget.IMG, {
-      x: 0,
-      y: topOffset + 84 + Math.ceil(tiles.length / 2) * 90,
-      w: 192,
-      h: 48,
-      pos_x: (192-24)/2,
-      pos_y: 12,
-      src: "info.png"
-    });
-    const infoButtonEvents = new TouchEventManager(infoButton);
-    infoButtonEvents.ontouch = () => {
-      gotoSubpage("about");
-    };
   }
 
   drawBrightness() {

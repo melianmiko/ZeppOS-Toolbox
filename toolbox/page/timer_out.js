@@ -10,7 +10,7 @@
       let icon = hmUI.createWidget(hmUI.widget.IMG, {
         x: (192-64)/2,
         y: 120,
-        src: "bell.png"
+        src: "timer/bell.png"
       });
 
       // Auto-exit after 0.5m
@@ -22,7 +22,7 @@
       hmUI.createWidget(hmUI.widget.IMG, {
         x: (192-72)/2,
         y: 300,
-        src: "bell_stop.png"
+        src: "timer/bell_stop.png"
       }).addEventListener(hmUI.event.CLICK_UP, () => {
         hmApp.goBack();
       });

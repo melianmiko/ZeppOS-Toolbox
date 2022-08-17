@@ -17,10 +17,26 @@ class CustomizeScreen {
   start () {
     this._load();
 
+    // Battety
+    const batteryToggle = hmUI.createWidget(hmUI.widget.IMG, {
+      x: 60,
+      y: 28,
+      src: 'edit/battery_pv.png',
+      alpha: this.settings.withBattery ? 255 : 100
+    });
+    const batteryToggleEvents = new TouchEventManager(batteryToggle);
+    batteryToggleEvents.ontouch = () => {
+      this.settings.withBattery = !this.settings.withBattery;
+      batteryToggle.setProperty(hmUI.prop.MORE, {
+        alpha: this.settings.withBattery ? 255 : 100
+      })
+    };
+
+    // Brightness
     const brightnessToggle = hmUI.createWidget(hmUI.widget.IMG, {
       x: 12,
       y: 72,
-      src: "brightness_cfg.png",
+      src: "edit/brightness_cfg.png",
       alpha: this.settings.withBrightness ? 255 : 100
     });
     const brightnessToggleEvents = new TouchEventManager(brightnessToggle);
@@ -44,7 +60,7 @@ class CustomizeScreen {
         w: 78,
         h: 78,
         alpha: this.settings.tiles.indexOf(id) > -1 ? 255 : 100,
-        src: id + ".png",
+        src: "qs/" + id + ".png",
       });
 
       const events = new TouchEventManager(btn);

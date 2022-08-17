@@ -106,23 +106,23 @@ class FileManagerScreen {
       files = [];
 
     if (this.path !== "/storage") {
-      folders.push({name: "..", icon: "folder.png"});
+      folders.push({name: "..", icon: "files/folder.png"});
     }
 
     for(let fn of dirContent) {
       if(this.isFolder(this.path + "/" + fn)) {
         folders.push({
           name: fn,
-          icon: "folder.png"
+          icon: "files/folder.png"
         });
         continue;
       }
 
-      let icon = "file.png";
+      let icon = "files/file.png";
       if(fn.endsWith(".png")) {
-        icon = "file_img.png";
+        icon = "files/file_img.png";
       } else if(fn.endsWith('.js') || fn.endsWith(".json")) {
-        icon = "file_code.png";
+        icon = "files/file_code.png";
       }
 
       files.push({

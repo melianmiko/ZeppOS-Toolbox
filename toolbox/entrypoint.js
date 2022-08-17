@@ -27,11 +27,17 @@ __$$module$$__.module = DeviceRuntimeCore.Page({
       case "main":
         currentScreen = new MainScreen(data);
         break;
+      case "cfg_root":
+        currentScreen = new AppSettingsScreen(data);
+        break;
+      case "cfg_ui":
+        currentScreen = new CustomizeScreen(data);
+        break;
+      case "cfg_lang":
+        currentScreen = new AppSettingsLanguage(data);
+        break;
       case "storage":
         currentScreen = new StorageScreen(data);
-        break;
-      case "customize":
-        currentScreen = new CustomizeScreen(data);
         break;
       case "apps":
         currentScreen = new AppsListScreen(data);

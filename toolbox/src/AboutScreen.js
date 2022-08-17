@@ -1,4 +1,4 @@
-const APP_VERSION = "v2022-08-12";
+const APP_VERSION = "v2022-08-17";
 
 const AUTHORS = [
   ["melianmiko", "Developer"],
@@ -42,7 +42,7 @@ class AboutScreen {
     const img = hmUI.createWidget(hmUI.widget.IMG, {
       x: (192-78)/2,
       y: 64,
-      src: names[0] + ".png"
+      src: "qs/" + names[0] + ".png"
     });
 
     // Let's do some animation =)
@@ -70,7 +70,7 @@ class AboutScreen {
         currentColor = (currentColor + 1) % COLORS.length;
 
         img.setProperty(hmUI.prop.MORE, {
-          src: names[currentIcon] + ".png"
+          src: "qs/" + names[currentIcon] + ".png"
         });
 
         currentIcon = (currentIcon + 1) % names.length;

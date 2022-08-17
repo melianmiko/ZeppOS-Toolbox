@@ -1,6 +1,11 @@
 // English
 registerTranslation('en-US', {
-  "action_customize": "Customize",
+  "name": "English",
+
+  "action_customize": "Settings",
+  "settings_ui": "Customize",
+  "settings_lang": "Language",
+  "action_info": "About",
 
   // Quick settings descriptions
   "qs_apps": "Apps manager",
@@ -17,6 +22,7 @@ registerTranslation('en-US', {
   "qs_applistsort": "App list sort",
   "qs_poweroff": "Power off",
   "qs_reboot": "Reboot",
+  "qs_timer": "Background timer",
 
   // Storage screen
   "storage_total": "Total",
@@ -44,7 +50,12 @@ registerTranslation('en-US', {
 
 // Chinese (simplified)
 registerTranslation('zh-CN', {
-  "action_customize": "定制",
+  "name": " 中文",
+
+  "action_customize": "设置",
+  "settings_ui": "定制",
+  "settings_lang": "语",
+  "action_info": "关于",
 
   // Quick settings descriptions
   "qs_apps": "应用管理器",
@@ -61,6 +72,7 @@ registerTranslation('zh-CN', {
   "qs_applistsort": "应用列表设置",
   "qs_poweroff": "关机",
   "qs_reboot": "重启",
+  "qs_timer": "后台定时器",
 
   // Storage screen
   "storage_total": "总空间",
@@ -89,7 +101,12 @@ registerTranslation('zh-CN', {
 // Chinese (traditional)
 // Big thanks to 天劍血狐
 registerTranslation('zh-TW', {
-  "action_customize": "定製",
+  "name": "中文(台灣)",
+
+  "action_customize": "設置",
+  "settings_ui": "定制",
+  "settings_lang": "語",
+  "action_info": "關於",
 
   // Quick settings descriptions
   "qs_apps": "應用管理器",
@@ -106,6 +123,7 @@ registerTranslation('zh-TW', {
   "qs_applistsort": "應用列表設定",
   "qs_poweroff": "關機",
   "qs_reboot": "重啟",
+  "qs_timer": "後台定時器",
 
   // Storage screen
   "storage_total": "容量",
@@ -133,7 +151,12 @@ registerTranslation('zh-TW', {
 
 // Russian
 registerTranslation('ru-RU', {
+  "name": "Русский",
+  
   "action_customize": "Настроить",
+  "settings_ui": "Главная",
+  "settings_lang": "Язык",
+  "action_info": "О Toolbox",
 
   // Quick settings descriptions
   "qs_apps": "Упр. приложениями",
@@ -150,6 +173,7 @@ registerTranslation('ru-RU', {
   "qs_applistsort": "Настр. меню приложений",
   "qs_poweroff": "Выключить",
   "qs_reboot": "Перезагрузить",
+  "qs_timer": "Фоновый таймер",
 
   // Storage screen
   "storage_total": "Всего",

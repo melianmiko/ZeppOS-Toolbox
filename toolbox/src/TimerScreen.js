@@ -53,9 +53,9 @@ class TimerScreen {
 		if(state) {
 			const [id, startedTime, endTime] = state.split(":");
 			if(Date.now() < endTime) {
-				this.timerID = id;
-				this.startedTime = startedTime;
-				this.endTime = endTime;
+				this.timerID = parseInt(id);
+				this.startedTime = parseInt(startedTime);
+				this.endTime = parseInt(endTime);
 			}
 		}
 
@@ -121,6 +121,8 @@ class TimerScreen {
 
 	runTimer() {
 		const dx = this.hour * 3600 + this.minute * 60 + this.second;
+		if(dx === 0) return;
+
 		this.startedTime = Date.now();
 		this.endTime = this.startedTime + dx * 1000;
 		this.timerID = 1;
