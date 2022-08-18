@@ -1,4 +1,6 @@
-const APP_VERSION = "v2022-08-17";
+import {QS_BUTTONS} from "../utils/QS_BUTTONS";
+
+const APP_VERSION = "v2022-08-18";
 
 const AUTHORS = [
   ["melianmiko", "Developer"],
@@ -141,3 +143,12 @@ class AboutScreen {
     hmSetting.setBrightScreenCancel();
   }
 }
+
+let __$$app$$__ = __$$hmAppManager$$__.currentApp;
+let __$$module$$__ = __$$app$$__.current;
+__$$module$$__.module = DeviceRuntimeCore.Page({
+  onInit(p) {
+    this.screen = new AboutScreen();
+    this.screen.start();
+  }
+});

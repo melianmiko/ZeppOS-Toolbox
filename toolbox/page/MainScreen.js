@@ -1,3 +1,17 @@
+import {FsUtils} from "../lib/FsUtils";
+import {t, extendLocale} from "../lib/i18n";
+import {TouchEventManager} from "../lib/TouchEventManager";
+import {QS_BUTTONS} from "../utils/QS_BUTTONS";
+
+extendLocale({
+  "action_customize": {
+      "en-US": "Settings",
+      "zh-CN": "设置",
+      "zh-TW": "設置",
+      "ru-RU": "Настроить"
+  }
+});
+
 class MainScreen {
   baseBrightnessConfig = {
     x: 12,
@@ -69,10 +83,20 @@ class MainScreen {
       const events = new TouchEventManager(widget);
 
       events.ontouch = () => {
-        config.click();
+        switch(config.type) {
+          case "internal":
+            hmApp.gotoPage({url: config.url});
+            break;
+          case "native":
+            hmApp.startApp({url: config.url, native: true});
+            break;
+        }
       };
+      
       events.onlongtouch = () => {
-        gotoSubpage("cfg_ui");
+        hmApp.gotoPage({
+          url: "page/SettingsUiScreen"
+        })
       };
     });
 
@@ -89,7 +113,9 @@ class MainScreen {
     });
     const editButtonEvents = new TouchEventManager(editButton);
     editButtonEvents.ontouch = () => {
-      gotoSubpage("cfg_root");
+      hmApp.gotoPage({
+        url: "page/SettingsHomePage"
+      })
     }
   }
 
@@ -143,3 +169,12 @@ class MainScreen {
     });
   }
 }
+
+
+let __$$app$$__ = __$$hmAppManager$$__.currentApp;
+let __$$module$$__ = __$$app$$__.current;
+__$$module$$__.module = DeviceRuntimeCore.Page({
+  onInit(p) {
+    new MainScreen().start();
+  }
+});

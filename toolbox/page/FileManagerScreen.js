@@ -1,3 +1,5 @@
+import {FsUtils} from "../lib/FsUtils";
+
 class FileManagerScreen {
   FILE_ROW_TYPE = {
     type_id: 1,
@@ -83,7 +85,10 @@ class FileManagerScreen {
   }
 
   modify(path) {
-    gotoSubpage("file_edit", {path})
+    hmApp.gotoPage({
+      url: "page/FileEditScreen",
+      param: path
+    })
   }
 
   applyPath(path) {
@@ -165,3 +170,17 @@ class FileManagerScreen {
     }
   }
 }
+
+
+let screen;
+let __$$app$$__ = __$$hmAppManager$$__.currentApp;
+let __$$module$$__ = __$$app$$__.current;
+__$$module$$__.module = DeviceRuntimeCore.Page({
+  onInit(p) {
+    screen = new FileManagerScreen();
+    screen.start();
+  },
+  onDestroy: () => {
+    screen.finish();
+  }
+});

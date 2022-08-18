@@ -1,4 +1,9 @@
-class CustomizeScreen {
+import {FsUtils} from "../lib/FsUtils";
+import {t} from "../lib/i18n";
+import {TouchEventManager} from "../lib/TouchEventManager";
+import {QS_BUTTONS} from "../utils/QS_BUTTONS";
+
+class SettingsUiScreen {
   userTiels = null;
   settings = null;
 
@@ -98,3 +103,17 @@ class CustomizeScreen {
     }
   }
 }
+
+
+let screen;
+let __$$app$$__ = __$$hmAppManager$$__.currentApp;
+let __$$module$$__ = __$$app$$__.current;
+__$$module$$__.module = DeviceRuntimeCore.Page({
+  onInit(p) {
+    screen = new SettingsUiScreen();
+    screen.start();
+  },
+  onDestroy: () => {
+    screen.finish();
+  }
+});

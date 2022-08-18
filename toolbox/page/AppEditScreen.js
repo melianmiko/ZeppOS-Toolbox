@@ -1,3 +1,21 @@
+import {FsUtils} from "../lib/FsUtils";
+import {t, extendLocale} from "../lib/i18n";
+
+extendLocale({
+  "action_uninstall": {
+      "en-US": "Uninstall",
+      "zh-CN": "卸载",
+      "zh-TW": "解除安裝",
+      "ru-RU": "Удалить"
+  },
+  "apps_notice_uninstall": {
+      "en-US": "Device will restart after uninstall",
+      "zh-CN": "设备将重新启动",
+      "zh-TW": "裝置將重新啟動",
+      "ru-RU": "Устройство будет перезагружено"
+  }
+})
+
 class AppEditScreen {
   constructor(data) {
     this.data = data;
@@ -41,12 +59,13 @@ class AppEditScreen {
     });
 
     // App size
+    const size = FsUtils.sizeTree("/storage/js_apps/" + this.data.dirname);
     group.createWidget(hmUI.widget.TEXT, {
       x: 0,
       y: 280,
       w: 192,
       h: 32,
-      text: this.getAppSize(),
+      text: FsUtils.printBytes(size),
       color: 0xffffff,
       align_h: hmUI.align.CENTER_H
     });
@@ -86,19 +105,16 @@ class AppEditScreen {
     hmUI.deleteWidget(this.group);
     hmApp.gotoHome();
   }
-
-  getAppSize() {
-    const options = ["B", "KB", "MB"];
-    const path = "/storage/js_apps/" + this.data.dirname;
-
-    let val = FsUtils.sizeTree(path);
-    let curr = 0;
-
-    while (val > 800 && curr < options.length) {
-      val = val / 1000;
-      curr++;
-    }
-
-    return Math.round(val * 100) / 100 + " " + options[curr];
-  }
 }
+
+
+let __$$app$$__ = __$$hmAppManager$$__.currentApp;
+let __$$module$$__ = __$$app$$__.current;
+__$$module$$__.module = DeviceRuntimeCore.Page({
+  onInit(p) {
+    const data = JSON.parse(p);
+
+    this.screen = new AppEditScreen(data);
+    this.screen.start();
+  }
+});

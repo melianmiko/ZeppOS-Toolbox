@@ -130,7 +130,7 @@ class TimerScreen {
 		try {
 			this.timerID = hmApp.alarmNew({
 				url: "page/timer_out",
-				appid: 33904,
+				appid: 95053,
 				delay: dx
 			})
 		} catch(e) {

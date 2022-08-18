@@ -1,8 +1,10 @@
+import {FsUtils} from "../lib/FsUtils";
+
 class TextViewScreen {
 	PAGE_SIZE = 256;
 
 	constructor(data) {
-		this.path = data.file;
+		this.path = data;
 		this.offset = 0;
 	}
 
@@ -84,3 +86,12 @@ class TextViewScreen {
 		hmFS.close(this.file);
 	}
 }
+
+
+let __$$app$$__ = __$$hmAppManager$$__.currentApp;
+let __$$module$$__ = __$$app$$__.current;
+__$$module$$__.module = DeviceRuntimeCore.Page({
+  onInit(p) {
+    new TextViewScreen(p).start();
+  }
+});

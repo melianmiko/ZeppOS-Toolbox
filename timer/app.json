@@ -1,8 +1,8 @@
 {
   "app": {
-    "appId": 33904,
+    "appId": 95053,
     "appIdType": 0,
-    "appName": "Toolbox",
+    "appName": "Timer",
     "appType": "app",
     "description": "",
     "icon": "icon.png",
@@ -16,18 +16,13 @@
   "debug": false,
   "i18n": {
     "ru-RU": {
-      "appName": "Инструменты"
-    },
-    "zh-CN": {
-      "appName": "工具箱"
+      "appName": "Таймер"
     }
   },
   "module": {
     "page": {
       "pages": [
-        "page/MainScreen",
-        "page/StorageInfoScreen",
-        "page/timer_out"
+        "page/index"
       ],
       "window": {
         "backgroundColor": "#eeeeee",
@@ -39,8 +34,7 @@
     }
   },
   "permissions": [
-    "gps",
-    "fs"
+    "gps"
   ],
   "runtime": {
     "apiVersion": {

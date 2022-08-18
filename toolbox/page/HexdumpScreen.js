@@ -1,6 +1,8 @@
+import {FsUtils} from "../lib/FsUtils";
+
 class HexdumpScreen {
 	constructor(data) {
-		this.path = data.path;
+		this.path = data;
 		this.offset = 0;
 	}
 
@@ -101,3 +103,11 @@ class HexdumpScreen {
 		this.offset = newOffset;
 	}
 }
+
+let __$$app$$__ = __$$hmAppManager$$__.currentApp;
+let __$$module$$__ = __$$app$$__.current;
+__$$module$$__.module = DeviceRuntimeCore.Page({
+  onInit(p) {
+    new HexdumpScreen(p).start();
+  }
+});

@@ -1,22 +1,52 @@
-class StorageScreen {
+import {FsUtils} from "../lib/FsUtils";
+import {t, extendLocale} from "../lib/i18n";
+
+extendLocale({
+  "storage_total": {
+      "en-US": "Total",
+      "zh-CN": "总空间",
+      "zh-TW": "容量",
+      "ru-RU": "Всего"
+  },
+  "storage_free": {
+      "en-US": "Free",
+      "zh-CN": "余空间",
+      "zh-TW": "可用空間",
+      "ru-RU": "Свободно"
+  },
+  "storage_system": {
+      "en-US": "ZeppOS",
+      "zh-CN": "系统固件",
+      "zh-TW": "系統韌體",
+      "ru-RU": "ZeppOS"
+  },
+  "storage_watchface": {
+      "en-US": "Watchfaces",
+      "zh-CN": "JS表盘",
+      "zh-TW": "JS錶盤",
+      "ru-RU": "Циферблаты"
+  },
+  "storage_app": {
+      "en-US": "Apps",
+      "zh-CN": "JS应用",
+      "zh-TW": "JS應用",
+      "ru-RU": "Приложения"
+  },
+  "storage_unknown": {
+      "en-US": "Unknown",
+      "zh-CN": "未知",
+      "zh-TW": "未知",
+      "ru-RU": "Неизвестно"
+  },
+})
+
+class StorageInfoScreen {
   cupStyle = {
     x: 16,
     y: 72,
     w: 32,
     h: 320,
     color: 0x111111
-  }
-
-  printBytes(val) {
-    const options = ["B", "KB", "MB"];
-    let curr = 0;
-
-    while (val > 800 && curr < options.length) {
-      val = val / 1000;
-      curr++;
-    }
-
-    return Math.round(val * 100) / 100 + " " + options[curr];
   }
 
   start() {
@@ -78,7 +108,7 @@ class StorageScreen {
         h: 48,
         text_size: 24,
         color: 0xffffff,
-        text: this.printBytes(storage[currentRow.key]),
+        text: FsUtils.printBytes(storage[currentRow.key]),
       });
       posY += 64;
 
@@ -101,3 +131,12 @@ class StorageScreen {
     }
   }
 }
+
+
+let __$$app$$__ = __$$hmAppManager$$__.currentApp;
+let __$$module$$__ = __$$app$$__.current;
+__$$module$$__.module = DeviceRuntimeCore.Page({
+  onInit(p) {
+    new StorageInfoScreen().start();
+  }
+});

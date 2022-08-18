@@ -1,11 +1,15 @@
-class AppSettingsLanguage {
+
+class SettingsLangScreen {
 	start() {
 		let current = hmFS.SysProGetChars("mmk_tb_lang");
 		if(!current) current = "false";
 
 		const data = {
 			"false": "(system)",
-			...listTranslations()
+      "en-US": "English",
+      "zh-CN": " 中文",
+      "zh-TW": "中文(台灣)",
+      "ru-RU": "Русский"
 		};
 
 		let y = 64;
@@ -33,3 +37,12 @@ class AppSettingsLanguage {
 		})
 	}
 }
+
+let __$$app$$__ = __$$hmAppManager$$__.currentApp;
+let __$$module$$__ = __$$app$$__.current;
+__$$module$$__.module = DeviceRuntimeCore.Page({
+  onInit(p) {
+    this.screen = new SettingsLangScreen();
+    this.screen.start();
+  }
+});

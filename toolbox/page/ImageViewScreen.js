@@ -1,6 +1,6 @@
 class ImageViewScreen {
 	constructor(data) {
-		this.path = data.file;
+		this.path = data;
 	}
 
 	start() {
@@ -23,3 +23,12 @@ class ImageViewScreen {
       });
 	}
 }
+
+
+let __$$app$$__ = __$$hmAppManager$$__.currentApp;
+let __$$module$$__ = __$$app$$__.current;
+__$$module$$__.module = DeviceRuntimeCore.Page({
+  onInit(p) {
+    new ImageViewScreen(p).start();
+  }
+});

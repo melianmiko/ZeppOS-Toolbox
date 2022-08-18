@@ -1,3 +1,15 @@
+import {FsUtils} from "../lib/FsUtils";
+import {t, extendLocale} from "../lib/i18n";
+
+extendLocale({
+  "title_apps": {
+      "en-US": "Apps",
+      "zh-CN": "应用",
+      "zh-TW": "應用",
+      "ru-RU": "Приложения"
+  },
+})
+
 class AppsListScreen {
   app_list_item_type = {
     type_id: 1,
@@ -18,6 +30,23 @@ class AppsListScreen {
     text_view_count: 1,
   }
 
+  mkEditParam(dirname) {
+      try {
+        const path = "/storage/js_apps/" + dirname;
+        const appConfig = FsUtils.fetchJSON(path + '/app.json');
+
+        let name = appConfig.app.appName;
+        let vender = appConfig.app.vender;
+        let data = {dirname, name, vender};
+        let icon = path + "/assets/" + appConfig.app.icon;
+        icon = this.prepareTempFile(icon);
+
+        return {dirname, name, vender, icon}
+      } catch (e) {
+        return {};
+      }
+  }
+
   fetchApps() {
     const out = [];
     const [contents, e] = hmFS.readdir("/storage/js_apps");
@@ -28,23 +57,21 @@ class AppsListScreen {
 
       try {
         const path = "/storage/js_apps/" + dirname;
-        const appConfig = FsUtils.fetchJSON(path + '/app.json');
+        const jsonString = FsUtils.fetchTextFile(path + '/app.json', 368);
 
-        let name = appConfig.app.appName;
-        let vender = appConfig.app.vender;
-        let icon = path + "/assets/" + appConfig.app.icon;
-        let data = {dirname, name, vender};
+        const appNameIndex = jsonString.indexOf("appName") + 8;
+        const stIndex = jsonString.indexOf("\"", appNameIndex) + 1;
+        const endIndex = jsonString.indexOf("\"", stIndex);
 
-        out.push({ name, data, icon });
+        let name = jsonString.substring(stIndex, endIndex);
+        if(stIndex < 0 || endIndex < 0) name = dirname;
+
+        out.push({ name, dirname });
       } catch (e) {
+        console.log(e);
         out.push({
           name: dirname,
-          data: {
-            dirname, 
-            name: dirname, 
-            vender: "???"
-          },
-          icon: ""
+          dirname
         });
       }
     }
@@ -98,11 +125,9 @@ class AppsListScreen {
       item_config_count: 1,
       item_click_func: (list, index) => {
         const data = apps[index];
-        const newFile = this.prepareTempFile(data.icon);
-
-        gotoSubpage('app_edit', {
-          ...data.data,
-          icon: newFile
+        hmApp.gotoPage({
+          url: "page/AppEditScreen",
+          param: JSON.stringify(this.mkEditParam(data.dirname))
         })
       },
       data_type_config: [
@@ -114,3 +139,12 @@ class AppsListScreen {
     });
   }
 }
+
+
+let __$$app$$__ = __$$hmAppManager$$__.currentApp;
+let __$$module$$__ = __$$app$$__.current;
+__$$module$$__.module = DeviceRuntimeCore.Page({
+  onInit(p) {
+    new AppsListScreen().start();
+  }
+});

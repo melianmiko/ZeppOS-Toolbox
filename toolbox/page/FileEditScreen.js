@@ -1,3 +1,33 @@
+import {FsUtils} from "../lib/FsUtils";
+import {t, extendLocale} from "../lib/i18n";
+
+extendLocale({
+  "file_view_as_image": {
+      "en-US": "View as image",
+      "zh-CN": "以图片形式查看",
+      "zh-TW": "以圖片形式檢視",
+      "ru-RU": "Прсм. изображение"
+  },
+  "file_view_as_text": {
+      "en-US": "View as text",
+      "zh-CN": "以文本形式查看",
+      "zh-TW": "以文字形式檢視",
+      "ru-RU": "Просм. текст"
+  },
+  "file_view_as_bin": {
+      "en-US": "View as binary",
+      "zh-CN": "以文字形式檢視",
+      "zh-TW": "以二進制形式查看",
+      "ru-RU": "Просм. бинарно"
+  },
+  "file_delete": {
+      "en-US": "Delete",
+      "zh-CN": "删除",
+      "zh-TW": "刪除",
+      "ru-RU": "Удалить"
+  },
+})
+
 class FileEditScreen {
   STYLE_BUTTON = {
     normal_color: 0x111111,
@@ -8,7 +38,7 @@ class FileEditScreen {
   }
 
   constructor(data) {
-    this.path = data.path;
+    this.path = data;
   }
 
   start() {
@@ -74,9 +104,10 @@ class FileEditScreen {
       y,
       text: t("file_view_as_image"),
       click_func: () => {
-        gotoSubpage('view_image', {
-          file: this.prepareTempFile(this.path)
-        })
+        hmApp.gotoPage({
+          url: "page/ImageViewScreen",
+          param: this.prepareTempFile(this.path)
+        });
       }
     });
   }
@@ -87,9 +118,10 @@ class FileEditScreen {
       y,
       text: t("file_view_as_text"),
       click_func: () => {
-        gotoSubpage('view_text', {
-          file: this.path
-        })
+        hmApp.gotoPage({
+          url: "page/TextViewScreen",
+          param: this.path
+        });
       }
     });
   }
@@ -100,9 +132,10 @@ class FileEditScreen {
       y,
       text: t("file_view_as_bin"),
       click_func: () => {
-        gotoSubpage("view_hexdump", {
-          path: this.path
-        })
+        hmApp.gotoPage({
+          url: "page/HexdumpScreen",
+          param: this.path
+        });
       }
     })
   }
@@ -130,3 +163,12 @@ class FileEditScreen {
     return newFile;
   }
 }
+
+
+let __$$app$$__ = __$$hmAppManager$$__.currentApp;
+let __$$module$$__ = __$$app$$__.current;
+__$$module$$__.module = DeviceRuntimeCore.Page({
+  onInit(p) {
+    new FileEditScreen(p).start();
+  }
+});
