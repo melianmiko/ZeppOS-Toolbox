@@ -7,7 +7,7 @@ extendLocale({
   "action_customize": {
       "en-US": "Settings",
       "zh-CN": "设置",
-      "zh-TW": "設置",
+      "zh-TW": "設定",
       "ru-RU": "Настроить"
   }
 });
@@ -88,7 +88,11 @@ class MainScreen {
             hmApp.gotoPage({url: config.url});
             break;
           case "native":
-            hmApp.startApp({url: config.url, native: true});
+            hmApp.startApp({
+              url: config.url, 
+              native: true,
+              param: config.param
+            });
             break;
         }
       };

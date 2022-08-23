@@ -5,7 +5,7 @@ extendLocale({
   "storage_total": {
       "en-US": "Total",
       "zh-CN": "总空间",
-      "zh-TW": "容量",
+      "zh-TW": "手環容量",
       "ru-RU": "Всего"
   },
   "storage_free": {

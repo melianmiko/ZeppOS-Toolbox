@@ -34,7 +34,7 @@ class FileEditScreen {
     press_color: 0x222222,
     x: 12,
     w: 168,
-    h: 64,
+    h: 56
   }
 
   constructor(data) {
@@ -44,16 +44,15 @@ class FileEditScreen {
   start() {
     // Stats
     let posY = 72;
-    let text = this.path + "\n\n", fileSize = 0;
+    let text = this.path + "\n", fileSize = 0;
     try {
 
       const [st, e] = FsUtils.stat(this.path);
 
-      for(let key in st)
-        text += key + ": " + st[key] + "\n";
-
-      if(st.size)
+      if(st.size) {
+        text += "Size: " + FsUtils.printBytes(st.size) + "\n";
         fileSize = st.size;
+      }
 
     } catch(e) {
       console.warn(e);
@@ -78,14 +77,14 @@ class FileEditScreen {
     if(fileSize > 0) {
       if(this.path.endsWith(".png")) {
         this.addViewAsImageButton(posY);
-        posY += 76;
+        posY += 64;
       }
 
       this.addViewAsTextButton(posY);
-      posY += 76;
+      posY += 64;
 
       this.addViewAsBinaryButton(posY);
-      posY += 76;
+      posY += 64;
     }
 
     // Delete btn

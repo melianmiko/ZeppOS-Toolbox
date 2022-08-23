@@ -4,6 +4,7 @@ import {TouchEventManager} from "../lib/TouchEventManager";
 extendLocale({
 	"reboot_confirm": {
 		"en-US": "Click to confirm",
+		"zh-TW": "\u8f15\u6309\u4ee5\u91cd\u555f",
 		"ru-RU": "Нажмите для подтверждения"
 	}
 })

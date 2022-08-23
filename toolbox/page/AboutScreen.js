@@ -110,7 +110,7 @@ class AboutScreen {
         x: 0,
         y: posY,
         w: 192,
-        h: 20,
+        h: 22,
         text_size: 18,
         color: 0xFFFFFF,
         text: name,

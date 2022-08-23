@@ -22,7 +22,7 @@ extendLocale({
   qs_dnd: {
     "en-US": "DND settings",
     "zh-CN": "请勿打扰",
-    "zh-TW": "勿擾模式",
+    "zh-TW": "勿擾",
     "ru-RU": "Не беспокоить",
   },
   qs_flashlight: {
@@ -40,7 +40,7 @@ extendLocale({
   qs_settings: {
     "en-US": "Settings app",
     "zh-CN": "设置应用",
-    "zh-TW": "設定",
+    "zh-TW": "手環設定",
     "ru-RU": "Настройки",
   },
   qs_brightness_btn: {
@@ -88,7 +88,7 @@ extendLocale({
   qs_timer: {
     "en-US": "Background timer",
     "zh-CN": "后台定时器",
-    "zh-TW": "後台定時器",
+    "zh-TW": "後台計時器",
     "ru-RU": "Фоновый таймер",
   },
 });
@@ -165,7 +165,10 @@ export const QS_BUTTONS = {
   },
 
   reboot: {
-    url: "page/RebootConfirmScreen",
-    type: "internal",
+    url: "HmReStartScreen",
+    type: "native",
+    param: '\x04'
+    // url: "page/RebootConfirmScreen",
+    // type: "internal",
   },
 };

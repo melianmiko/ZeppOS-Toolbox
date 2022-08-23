@@ -3,16 +3,22 @@ import {t, extendLocale} from "../lib/i18n";
 
 extendLocale({
   "action_uninstall": {
-      "en-US": "Uninstall",
-      "zh-CN": "卸载",
-      "zh-TW": "解除安裝",
-      "ru-RU": "Удалить"
+    "en-US": "Uninstall",
+    "zh-CN": "卸载",
+    "zh-TW": "卸載",
+    "ru-RU": "Удалить"
+  },
+  "uninstall_complete": {
+    "en-US": "Uninstalled",
+    "zh-CN": "已卸载",
+    "zh-TW": "已卸載",
+    "ru-RU": "Удалено"
   },
   "apps_notice_uninstall": {
-      "en-US": "Device will restart after uninstall",
-      "zh-CN": "设备将重新启动",
-      "zh-TW": "裝置將重新啟動",
-      "ru-RU": "Устройство будет перезагружено"
+    "en-US": "Please reboot device to finish",
+    "zh-CN": "请重启设备以完成",
+    "zh-TW": "請重啟設備以完成",
+    "ru-RU": "Перезагрузите устройство для завершения"
   }
 })
 
@@ -22,22 +28,15 @@ class AppEditScreen {
   }
 
   start() {
-    const group = hmUI.createWidget(hmUI.widget.GROUP, {
-      x: 0,
-      y: 0,
-      w: 192,
-      h: 482
-    })
-
     // Icon
-    group.createWidget(hmUI.widget.IMG, {
+    hmUI.createWidget(hmUI.widget.IMG, {
       x: 46,
       y: 48,
       src: this.data.icon
     });
 
     // App name
-    group.createWidget(hmUI.widget.TEXT, {
+    hmUI.createWidget(hmUI.widget.TEXT, {
       x: 0,
       y: 200,
       w: 192,
@@ -48,7 +47,7 @@ class AppEditScreen {
     });
 
     // Vendor
-    group.createWidget(hmUI.widget.TEXT, {
+    hmUI.createWidget(hmUI.widget.TEXT, {
       x: 0,
       y: 248,
       w: 192,
@@ -60,7 +59,7 @@ class AppEditScreen {
 
     // App size
     const size = FsUtils.sizeTree("/storage/js_apps/" + this.data.dirname);
-    group.createWidget(hmUI.widget.TEXT, {
+    hmUI.createWidget(hmUI.widget.TEXT, {
       x: 0,
       y: 280,
       w: 192,
@@ -71,7 +70,7 @@ class AppEditScreen {
     });
 
     // Uninstall button
-    group.createWidget(hmUI.widget.BUTTON, {
+    hmUI.createWidget(hmUI.widget.BUTTON, {
       x: 8,
       y: 320,
       w: 192-16,
@@ -83,27 +82,67 @@ class AppEditScreen {
       click_func: () => this.uninstall()
     });
 
-    // Uninstall notice
+    // Finish page
+    const group = hmUI.createWidget(hmUI.widget.GROUP, {
+      x: 0,
+      y: 0,
+      w: 192,
+      h: 482
+    });
+    group.createWidget(hmUI.widget.FILL_RECT, {
+      x: 0,
+      y: 0,
+      w: 192,
+      h: 482,
+      color: 0x0
+    });
     group.createWidget(hmUI.widget.TEXT, {
       x: 0,
-      y: 396,
+      y: 120,
       w: 192,
-      h: 96,
-      text: t("apps_notice_uninstall"),
+      h: 48,
+      text_size: 26,
       text_style: hmUI.text_style.WRAP,
-      color: 0x999999,
-      align_h: hmUI.align.CENTER_H
+      align_h: hmUI.align.CENTER_H,
+      color: 0x66BB6A,
+      text: t("uninstall_complete")
+    });
+    group.createWidget(hmUI.widget.TEXT, {
+      x: 0,
+      y: 180,
+      w: 192,
+      h: 80,
+      text_size: 20,
+      text_style: hmUI.text_style.WRAP,
+      align_h: hmUI.align.CENTER_H,
+      color: 0xffffff,
+      text: t("apps_notice_uninstall")
     });
 
-    this.group = group;
+    group.createWidget(hmUI.widget.IMG, {
+      x: 0,
+      y: 320,
+      w: 192,
+      h: 48,
+      pos_x: (192-48)/2,
+      pos_y: 0,
+      src: "i_next.png"
+    }).addEventListener(hmUI.event.CLICK_UP, () => {
+      hmApp.startApp({
+        url: "Settings_systemScreen",
+        native: true
+      });
+    });
+
+    group.setProperty(hmUI.prop.VISIBLE, false);
+    this.finishGroup = group;
   }
 
   uninstall() {
     FsUtils.rmTree("/storage/js_apps/" + this.data.dirname);
     FsUtils.rmTree("/storage/js_apps/data" + this.data.dirname);
 
-    hmUI.deleteWidget(this.group);
-    hmApp.gotoHome();
+    this.finishGroup.setProperty(hmUI.prop.VISIBLE, true);
   }
 }
 

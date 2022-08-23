@@ -11,7 +11,7 @@ extendLocale({
   "timer_stop": {
       "en-US": "Cancel",
       "zh-CN": "取消",
-      "zh-TW": "撤消",
+      "zh-TW": "取消",
       "ru-RU": "Отмена"
   },
 })
@@ -59,8 +59,11 @@ class TimerSetScreen {
 
 	start() {
 		// Load all
+		let cfg = hmFS.SysProGetBool("mmk_tb_cfg_timer_keep");
+		if(cfg === undefined) cfg = true;
+
 		const lastDX = hmFS.SysProGetInt("mmk_tb_timer_last");
-		if(lastDX) {
+		if(lastDX && cfg) {
 			this.hour = Math.floor(lastDX / 3600);
 			this.minute = Math.floor((lastDX % 3600) / 60);
 			this.second = lastDX % 60;

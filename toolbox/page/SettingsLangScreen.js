@@ -7,8 +7,8 @@ class SettingsLangScreen {
 		const data = {
 			"false": "(system)",
       "en-US": "English",
-      "zh-CN": " 中文",
-      "zh-TW": "中文(台灣)",
+      "zh-CN": "简体中文",
+      "zh-TW": "繁體中文",
       "ru-RU": "Русский"
 		};
 
