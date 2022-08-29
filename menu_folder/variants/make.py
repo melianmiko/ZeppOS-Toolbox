@@ -34,7 +34,7 @@ for fn in VARIANTS_ROOT.rglob("*.png"):
 	shutil.copytree(DATA_ROOT / "assets", BUILD_ROOT / "assets")
 	shutil.copy(VARIANTS_ROOT / fn, BUILD_ROOT / "assets/icon.png")
 	with (BUILD_ROOT / "app.json").open("w") as f:
-		f.write(json.dumps(appConf))
+		f.write(json.dumps(appConf, ensure_ascii=False))
 
 	subprocess.Popen(["bash", "-c", f"zmake {BUILD_ROOT}"]).wait()
 	shutil.copy(BUILD_ROOT / "dist/build.bin", DIST_ROOT / f"{appName}.bin")

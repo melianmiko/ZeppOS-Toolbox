@@ -37,7 +37,7 @@ export class FsUtils {
 	static stat(path) {
       if(path.startsWith("/storage")) {
         const statPath = "../../../" + path.substring(9);
-        return hmFS.stat_asset(statPath);
+	      return hmFS.stat_asset(statPath);
       }
 
       return hmFS.stat_asset(path);
@@ -49,7 +49,7 @@ export class FsUtils {
         return hmFS.open_asset(statPath, m);
       }
 
-      return hmFS.open(path, m);
+      return hmFS.open_asset(path, m);
 	}
 
 	static fetchJSON(fn) {
@@ -57,58 +57,12 @@ export class FsUtils {
 		return JSON.parse(text);
 	}
 
-	static copy(source, dest) {
-		try {
-			hmFS.remove(dest);
-		} catch(e) {}
-
-		const buffer = FsUtils.read(source);
-		const f = FsUtils.open(dest, hmFS.O_WRONLY | hmFS.O_CREAT);
-		hmFS.write(f, buffer, 0, buffer.byteLength);
-		hmFS.close(f);
-	}
-
 	static getSelfPath() {
-		if(!FsUtils.selfPath) {
-			const pkg = hmApp.packageInfo();
-			const idn = pkg.appId.toString(16).padStart(8, "0").toUpperCase();
-			return "/storage/js_" + pkg.type + "s/" + idn;
-		}
-
-		return FsUtils.selfPath;
+		return "/storage/js_apps/000049AA";
 	}
 
 	static fullPath(path) {
 		return FsUtils.getSelfPath() + "/assets/" + path;
-	}
-
-	static rmTree(path) {
-		if(!path.startsWith("/storage")) path = FsUtils.fullPath(path);
-
-    const [files, e] = hmFS.readdir(path);
-
-    for(let i in files) {
-      FsUtils.rmTree(path + "/" + files[i]);
-    }
-
-    console.log(path);
-    hmFS.remove(path);
-	}
-
-	static sizeTree(path) {
-		if(!path.startsWith("/storage")) path = FsUtils.fullPath(path);
-
-    const [files, e] = hmFS.readdir(path);
-    let value = 0;
-
-    for(let fn in files) {
-      const file = path + "/" + files[fn];
-      const statPath = "../../../" + file.substring(9);
-      const [st, e] = hmFS.stat_asset(statPath);
-      value += st.size ? st.size : FsUtils.sizeTree(file);
-    }
-
-    return value;
 	}
 
 	// https://stackoverflow.com/questions/18729405/how-to-convert-utf8-string-to-byte-array
@@ -183,20 +137,4 @@ export class FsUtils {
 
 		return out;
 	}
-
-	static printBytes(val) {
-		if(this.fsUnitCfg === undefined)
-			this.fsUnitCfg = hmFS.SysProGetBool("mmk_tb_fs_unit");
-
-    const options = this.fsUnitCfg ? ["B", "KiB", "MiB"] : ["B", "KB", "MB"];
-  	const base = this.fsUnitCfg ? 1024 : 1000;
-
-    let curr = 0;
-    while (val > 800 && curr < options.length) {
-      val = val / base;
-      curr++;
-    }
-
-    return Math.round(val * 100) / 100 + " " + options[curr];
-  }
 }
