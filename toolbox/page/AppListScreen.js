@@ -127,7 +127,7 @@ class AppsListScreen {
         const data = apps[index];
         hmApp.gotoPage({
           url: "page/AppEditScreen",
-          param: JSON.stringify(this.mkEditParam(data.dirname))
+          param: data.dirname
         })
       },
       data_type_config: [

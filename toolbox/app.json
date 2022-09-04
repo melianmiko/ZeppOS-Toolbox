@@ -20,27 +20,20 @@
     },
     "zh-CN": {
       "appName": "工具箱"
+    },
+    "zh-TW": {
+      "appName": "工具箱"
     }
   },
   "module": {
     "page": {
       "pages": [
-        "page/MainScreen",
-        "page/StorageInfoScreen",
-        "page/timer_out"
-      ],
-      "window": {
-        "backgroundColor": "#eeeeee",
-        "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#ffffff",
-        "navigationBarTextStyle": "black",
-        "navigationBarTitleText": ""
-      }
+        "page/MainScreen"
+      ]
     }
   },
   "permissions": [
-    "gps",
-    "fs"
+    "gps"
   ],
   "runtime": {
     "apiVersion": {
@@ -48,5 +41,8 @@
       "minVersion": "1.0.0",
       "target": "1.0.1"
     }
-  }
+  },
+  "externalFilesList": [
+    "/storage/mmk_tb_layout.json"
+  ]
 }

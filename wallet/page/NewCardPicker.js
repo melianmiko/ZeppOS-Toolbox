@@ -2,9 +2,14 @@ import {TouchEventManager} from "../lib/TouchEventManager";
 import {ScreenBoard} from "../utils/ScreenBoard";
 import {CardsStorage} from "../utils/CardsStorage";
 import {CardTypes} from "../utils/database";
+import {goBackGestureCallback} from "../lib/bugWorkaround";
 
 class SubScreen {
   widgets = [];
+
+  constructor() {
+    hmApp.setLayerY(0);
+  }
 
   createWidget(a, b) {
     const w = hmUI.createWidget(a, b);
@@ -21,14 +26,6 @@ class SubScreen {
 
 class IconsSubscreen extends SubScreen {
   build() {
-    this.createWidget(hmUI.widget.FILL_RECT, {
-      x: 0,
-      y: 0,
-      w: 192,
-      h: Math.max(490, 192 + 77 * Math.ceil(Object.keys(CardTypes).length / 2)),
-      color: 0x0
-    })
-
     this.createWidget(hmUI.widget.TEXT, {
       x: 0,
       y: 56,
@@ -46,7 +43,7 @@ class IconsSubscreen extends SubScreen {
       i++;
     }
 
-    hmUI.createWidget(hmUI.widget.BUTTON, {
+    this.createWidget(hmUI.widget.BUTTON, {
       x: 0,
       y: 96 + 77 * Math.ceil(Object.keys(CardTypes).length / 2),
       w: 192,
@@ -76,6 +73,7 @@ class IconsSubscreen extends SubScreen {
   onItemClick(id) {
     if(CardTypes[id].info) {
       this.close();
+      hmApp.setLayerY(0);
       this.createWidget(hmUI.widget.TEXT, {
         x: 0,
         y: 0,
@@ -138,6 +136,14 @@ class KeyboardSubscreen extends SubScreen {
       value = this.data.codePostProcessing(value);
     }
 
+    hmUI.createWidget(hmUI.widget.FILL_RECT, {
+      x: 0,
+      y: 0,
+      w: 192,
+      h: 490,
+      color: 0x0
+    });
+
     const t = timer.createTimer(0, 500, () => {
       timer.stopTimer(t);
 
@@ -151,12 +157,15 @@ class KeyboardSubscreen extends SubScreen {
 }
 
 
-
 let __$$app$$__ = __$$hmAppManager$$__.currentApp;
 let __$$module$$__ = __$$app$$__.current;
 __$$module$$__.module = DeviceRuntimeCore.Page({
   onInit() {
     hmSetting.setBrightScreen(600);
+    hmApp.registerGestureEvent(goBackGestureCallback);
     (new IconsSubscreen()).build();
+  },
+  onDestroy() {
+    hmApp.unregisterGestureEvent();
   }
 });

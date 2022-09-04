@@ -93,6 +93,20 @@ extendLocale({
   },
 });
 
+export const DEFAULT_SETTINGS = {
+  tiles: [
+    "apps",
+    "files",
+    "storage",
+    "timer",
+    "dnd",
+    "camera"
+  ],
+  withBrightness: true,
+  withBattery: false
+};
+
+
 export const QS_BUTTONS = {
   apps: {
     url: "page/AppListScreen",

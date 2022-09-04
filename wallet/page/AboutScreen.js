@@ -1,6 +1,6 @@
 import {FsUtils} from "../lib/FsUtils";
 
-const APP_VERSION = "v2022-08-29";
+const APP_VERSION = "v2022-09-04";
 
 const ABOUT_INFO = [
   ["melianmiko", "Разработчик"],
@@ -47,6 +47,24 @@ class AboutScreen {
       press_color: 0x380621,
       click_func: () => this.openDonate()
     })
+    hmUI.createWidget(hmUI.widget.BUTTON, {
+      x: 16,
+      y: 296,
+      w: 192-32,
+      h: 48,
+      text: "Экспорт",
+      radius: 24,
+      color: 0xFFFFFF,
+      normal_color: 0x111111,
+      press_color: 0x222222,
+      click_func: () => this.openBackup()
+    })
+  }
+
+  openBackup() {
+    hmApp.gotoPage({
+      url: "page/BackupTool"
+    })
   }
 
   openDonate() {
@@ -66,13 +84,13 @@ class AboutScreen {
     } else {
       hmApp.gotoPage({
         url: "page/CardView",
-        param: `donate.png,175,175`
+        param: JSON.stringify({filename: 'donate.png', width: 175, height: 175, i: -1})
       });
     }
   }
 
   drawInfo() {
-    let posY = 310;
+    let posY = 364;
     for(let [name, info] of ABOUT_INFO) {
       const metrics = hmUI.getTextLayout(name, {
         text_width: 192,

@@ -23,14 +23,7 @@
     "page": {
       "pages": [
         "page/index"
-      ],
-      "window": {
-        "backgroundColor": "#eeeeee",
-        "backgroundTextStyle": "light",
-        "navigationBarBackgroundColor": "#ffffff",
-        "navigationBarTextStyle": "black",
-        "navigationBarTitleText": ""
-      }
+      ]
     }
   },
   "permissions": [
@@ -42,5 +35,8 @@
       "minVersion": "1.0.0",
       "target": "1.0.1"
     }
-  }
+  },
+  "externalFilesList": [
+    "/storage/mmk_cards.json"
+  ]
 }

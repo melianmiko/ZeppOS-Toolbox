@@ -1,0 +1,5 @@
+To build this application, you need 
+- esbuild
+- zmake , v1.5+
+
+Just drag `wallet` dir to zmake executable.

@@ -1,7 +1,7 @@
 import {FsUtils} from "../lib/FsUtils";
 import {t, extendLocale} from "../lib/i18n";
 import {TouchEventManager} from "../lib/TouchEventManager";
-import {QS_BUTTONS} from "../utils/QS_BUTTONS";
+import {QS_BUTTONS, DEFAULT_SETTINGS} from "../utils/data";
 
 extendLocale({
   "action_customize": {
@@ -28,9 +28,10 @@ class MainScreen {
     };
 
     try {
-      settings = FsUtils.fetchJSON("settings.json");
+      settings = FsUtils.fetchJSON("/storage/mmk_tb_layout.json");
     } catch(e) {
       console.log(e);
+      settings = DEFAULT_SETTINGS;
     }
 
     return settings;

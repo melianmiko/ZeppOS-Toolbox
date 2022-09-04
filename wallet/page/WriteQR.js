@@ -18,7 +18,7 @@ class QRWriter extends CardWriterUI {
     let canvas = new CanvasTGA(count * pixelSize, count * pixelSize);
     qr.renderTo2dContext(canvas, pixelSize);
 
-    canvas = autoPrettifyBarcode(canvas);
+    // canvas = autoPrettifyBarcode(canvas);
 
     const storage = new CardsStorage();
     this.result = storage.addCard(data, canvas);

@@ -1,6 +1,7 @@
 import {FsUtils} from "../lib/FsUtils";
 import {CardsStorage} from "../utils/CardsStorage";
 import {TouchEventManager} from "../lib/TouchEventManager";
+import {loadBackup} from "../utils/BackupLoader.js";
 
 class HomePage {
   viewerVisible = false;
@@ -8,6 +9,16 @@ class HomePage {
 
   constructor() {
     this.storage = new CardsStorage();
+
+    const [st, e] = FsUtils.stat(FsUtils.fullPath('backup.txt'));
+    if(e == 0) {
+      try {
+        loadBackup(this.storage);
+      } catch(e) {
+        console.log(e);
+        hmUI.showToast({text: "Не удалось восстановить бэкап"});
+      }
+    }
   }
 
   start() {
@@ -20,9 +31,9 @@ class HomePage {
 
     hmUI.createWidget(hmUI.widget.FILL_RECT, {
       x: 0,
-      y: 0,
-      w: 192,
-      h: Math.max(490, 192 + 77 * Math.ceil(viewData.length / 2)),
+      y: Math.max(490, 96 + 77 * Math.ceil(viewData.length / 2)),
+      w: 1,
+      h: 96,
       color: 0x0
     })
 
@@ -61,25 +72,17 @@ class HomePage {
 
         this.openImage(info);
       };
-
-      events.onlongtouch = () => {
-        this.storage.deleteCard(i);
-        hmUI.showToast({text: "Удалено"});
-        b.setProperty(hmUI.prop.MORE, {
-          alpha: 50
-        })
-      };
     });
   }
 
   openImage(data) {
     const [st, e] = FsUtils.stat(FsUtils.fullPath(data.filename));
     if(e != 0)
-      return CardsStorage.startWrite(data.icon, data.format, data.content);
+      return CardsStorage.startWrite(data);
 
     hmApp.gotoPage({
       url: "page/CardView",
-      param: `${data.filename},${data.width},${data.height}`
+      param: JSON.stringify(data)
     });
   }
 }
@@ -89,6 +92,6 @@ let __$$app$$__ = __$$hmAppManager$$__.currentApp;
 let __$$module$$__ = __$$app$$__.current;
 __$$module$$__.module = DeviceRuntimeCore.Page({
   onInit() {
-      (new HomePage()).start();
+    (new HomePage()).start();
   }
 });

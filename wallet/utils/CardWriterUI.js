@@ -27,8 +27,6 @@ export class CardWriterUI {
   }
 
   finish() {
-    const out = this.result;
-
     hmUI.deleteWidget(this.viewText);
     hmFS.SysProSetBool("mmk_c_aw", false);
 
@@ -36,7 +34,7 @@ export class CardWriterUI {
       timer.stopTimer(t);
       hmApp.gotoPage({
         url: "page/CardView",
-        param: `${out.filename},${out.width},${out.height}`,
+        param: JSON.stringify(this.result),
       });
     });
   }

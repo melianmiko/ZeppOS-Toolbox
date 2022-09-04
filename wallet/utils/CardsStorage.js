@@ -16,6 +16,9 @@ export class CardsStorage {
 			case "PDF417":
 				url = "page/WritePDF417";
 				break;
+			case "INT2OF5":
+				url = "page/WriteInt2of5";
+				break;
 			default:
 				url = "page/WriteBarcode";
 		}
@@ -33,15 +36,19 @@ export class CardsStorage {
 			const row = this.data[i];
 			if(row.content === data.content && 
 				row.format === data.format &&
-				row.icon === data.icon) {
+				row.icon === data.icon
+			) {
 				console.log("recover exiting card!");
-
-				this._writeCanvas(canvas, this.data[i].filename);
+				
+				row.width = canvas.width;
+				row.height = canvas.height;
+				this._writeCanvas(canvas, row.filename);
+				this._write();
 				return row;
 			}
 		}
 
-		let fn = `card_${Math.round(Math.random() * 10000)}.png`;
+		let fn = `card_${Math.round(Math.random() * 1e8)}.png`;
 		if(data.forceFilename) fn = data.forceFilename;
 		this._writeCanvas(canvas, fn);
 
@@ -50,6 +57,7 @@ export class CardsStorage {
 			filename: fn,
 			width: canvas.width,
 			height: canvas.height,
+			index: this.data.length
 		};
 
 		if(data.noStore) return newData;
@@ -68,15 +76,18 @@ export class CardsStorage {
 		hmFS.close(f);
 	}
 
-	deleteCard(id) {
+	deleteCard(data) {
+		const index = data.index;
+		if(index < 0) return;
+		
 		try {
-			const fn = this.data[id].filename;
+			const fn = this.data[index].filename;
 			hmFS.remove(FsUtils.fullPath(fn));
 		} catch(e) {}
 
 		const newData = [];
 		for(let i = 0; i < this.data.length; i++) {
-			if(i == id) continue;
+			if(i == index) continue;
 			newData.push(this.data[i]);
 		}
 

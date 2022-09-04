@@ -12,7 +12,7 @@ extendLocale({
     "en-US": "Use Base-2 filesize\n1KB = 1024 B",
     "zh-CN": "使用 Base-2 文件大小\n1KB = 1024 B",
     "zh-TW": "使用 Base-2 文件大小\n1KB = 1024 B",
-    "ru-RU": "Счтиать размер файлов в осн. 2\n1KB = 1024 B"
+    "ru-RU": "Считать размер файлов в осн. 2\n1KB = 1024 B"
   },
   settings_ui: {
     "en-US": "Customize",

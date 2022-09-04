@@ -1,7 +1,7 @@
 import {FsUtils} from "../lib/FsUtils";
 import {t} from "../lib/i18n";
 import {TouchEventManager} from "../lib/TouchEventManager";
-import {QS_BUTTONS} from "../utils/QS_BUTTONS";
+import {QS_BUTTONS, DEFAULT_SETTINGS} from "../utils/data";
 
 class SettingsUiScreen {
   userTiels = null;
@@ -9,13 +9,10 @@ class SettingsUiScreen {
 
   _load() {
     try {
-      this.settings = FsUtils.fetchJSON("settings.json");
+      this.settings = FsUtils.fetchJSON("/storage/mmk_tb_layout.json");
     } catch(e) {
       console.log(e);
-      this.settings = {
-        tiles: ["apps", "files"],
-        withBrightness: true
-      };
+      this.settings = DEFAULT_SETTINGS;
     }
   }
 
@@ -87,7 +84,7 @@ class SettingsUiScreen {
   }
 
   finish() {
-    FsUtils.writeText("settings.json", JSON.stringify(this.settings));
+    FsUtils.writeText("/storage/mmk_tb_layout.json", JSON.stringify(this.settings));
   }
 
   _toggleTile(id, btn) {

@@ -1,6 +1,7 @@
 import {ScreenBoard} from "../utils/ScreenBoard";
 import {TouchEventManager} from "../lib/TouchEventManager";
 import {CardsStorage} from "../utils/CardsStorage";
+import {goBackGestureCallback} from "../lib/bugWorkaround";
 
 const FORMATS = [
   "QR",
@@ -12,6 +13,7 @@ const FORMATS = [
   "EAN5",
   "UPC",
   "ITF14",
+  "INT2OF5",
   "codabar"
 ]
 
@@ -150,6 +152,10 @@ let __$$module$$__ = __$$app$$__.current;
 __$$module$$__.module = DeviceRuntimeCore.Page({
   onInit() {
     hmSetting.setBrightScreen(600);
+    hmApp.registerGestureEvent(goBackGestureCallback);
     (new AdvEditorScreen()).start();
+  },
+  onDestroy() {
+    hmApp.unregisterGestureEvent();
   }
 });
