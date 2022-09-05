@@ -1,0 +1,46 @@
+[
+	{
+		"type": "text",
+		"text": {
+			"en-US": "Settings will be applied after watchface reload, eg. after join and exit watchface settings screen"
+		}
+	},
+	{
+		"type": "headline",
+		"text": {
+			"en-US": "Hello",
+			"ru-RU": "Привет"
+		}
+	},
+	{
+		"type": "color",
+		"key": "testColor",
+		"text": {
+			"en-US": "Test color"
+		}
+	},
+	{
+		"type": "select",
+		"key": "testSelect",
+		"text": {
+			"en-US": "Test select"
+		},
+		"options": [
+			"A", "B", "C"
+		]
+	},
+	{
+		"type": "checkbox",
+		"key": "checkbox1",
+		"text": {
+			"en-US": "Checkbox 1"
+		}
+	},
+	{
+		"type": "checkbox",
+		"key": "checkbox2",
+		"text": {
+			"en-US": "Checkbox 2"
+		}
+	}
+]
