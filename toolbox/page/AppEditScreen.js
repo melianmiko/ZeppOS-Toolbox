@@ -7,49 +7,57 @@ extendLocale({
 		"en-US": "Uninstall",
 		"zh-CN": "卸载",
 		"zh-TW": "卸載",
-		"ru-RU": "Удалить"
+		"ru-RU": "Удалить",
+		"de-de": "Deinstallieren"
 	},
 	"uninstall_complete": {
 		"en-US": "Uninstalled",
 		"zh-CN": "已卸载",
 		"zh-TW": "已卸載",
-		"ru-RU": "Удалено"
+		"ru-RU": "Удалено",
+		"de-de": "Deinstalliert"
 	},
 	"apps_notice_uninstall": {
 		"en-US": "Please reboot device to finish",
 		"zh-CN": "请重启设备以完成",
 		"zh-TW": "請重啟設備以完成",
-		"ru-RU": "Перезагрузите устройство для завершения"
+		"ru-RU": "Перезагрузите устройство для завершения",
+		"de-de": "Bitte das Gerät neustarten um abzuschließen"
 	},
 	"field_size": {
 		"en-US": "Size",
 		"zh-CN": "应用程序大小",
 		"zh-TW": "應用程序大小",
-		"ru-RU": "Размер"
+		"ru-RU": "Размер",
+		"de-de": "Größe"
 	},
 	"field_vendor": {
 		"en-US": "Vendor",
 		"zh-TW": "小販",
 		"zh-CN": "小贩",
-		"ru-RU": "Разработчик"
+		"ru-RU": "Разработчик",
+		"de-de": "Hersteller"
 	},
 	"file_size_ext": {
 		"en-US": "Size (ext. config)",
 		"zh-CN": "大小（外部文件）",
 		"zh-TW": "大小（外部文件）",
-		"ru-RU": "Размер (внешн. файлы)"
+		"ru-RU": "Размер (внешн. файлы)",
+		"de-de": "Größe (ext. config)"
 	},
 	"conf_full": {
 		"en-US": "Don't keep ext. files on uninstall",
 		"zh-CN": "卸载时删除外部文件",
 		"zh-TW": "卸載時刪除外部文件",
-		"ru-RU": "Также удалять внешние файлы"
+		"ru-RU": "Также удалять внешние файлы",
+		"de-de": "ext Dateien bei Deinstallation NICHT bebehalten"
 	},
 	"headline_adv": {
 		"en-US": "Advanced",
 		"zh-CN": "先进的",
 		"zh-TW": "先進的",
-		"ru-RU": "Дополнительно"
+		"ru-RU": "Дополнительно",
+		"de-de": "Erweitert"
 	}
 })
 

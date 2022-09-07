@@ -6,37 +6,43 @@ extendLocale({
       "en-US": "Total",
       "zh-CN": "总空间",
       "zh-TW": "手環容量",
-      "ru-RU": "Всего"
+      "ru-RU": "Всего",
+      "de-de": "Gesamt"
   },
   "storage_free": {
       "en-US": "Free",
       "zh-CN": "余空间",
       "zh-TW": "可用空間",
-      "ru-RU": "Свободно"
+      "ru-RU": "Свободно",
+      "de-de": "Frei"
   },
   "storage_system": {
       "en-US": "ZeppOS",
       "zh-CN": "系统固件",
       "zh-TW": "系統韌體",
-      "ru-RU": "ZeppOS"
+      "ru-RU": "ZeppOS",
+      "de-de": "ZeppOS"
   },
   "storage_watchface": {
       "en-US": "Watchfaces",
       "zh-CN": "JS表盘",
       "zh-TW": "JS錶盤",
-      "ru-RU": "Циферблаты"
+      "ru-RU": "Циферблаты",
+      "de-de": "Ziffernblätter"
   },
   "storage_app": {
       "en-US": "Apps",
       "zh-CN": "JS应用",
       "zh-TW": "JS應用",
-      "ru-RU": "Приложения"
+      "ru-RU": "Приложения",
+      "de-de": "Apps"
   },
   "storage_unknown": {
       "en-US": "Unknown",
       "zh-CN": "未知",
       "zh-TW": "未知",
-      "ru-RU": "Неизвестно"
+      "ru-RU": "Неизвестно",
+      "de-de": "Unbekannt"
   },
 })
 
