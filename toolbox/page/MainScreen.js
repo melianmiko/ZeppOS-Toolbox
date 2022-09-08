@@ -8,7 +8,8 @@ extendLocale({
       "en-US": "Settings",
       "zh-CN": "设置",
       "zh-TW": "設定",
-      "ru-RU": "Настроить"
+      "ru-RU": "Настроить",
+      "de-de": "Einstellungen"
   }
 });
 

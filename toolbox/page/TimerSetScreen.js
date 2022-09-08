@@ -6,13 +6,15 @@ extendLocale({
       "en-US": "Begin",
       "zh-CN": "开始",
       "zh-TW": "開始",
-      "ru-RU": "Начать"
+      "ru-RU": "Начать",
+	  "de-de": "Start"
   },
   "timer_stop": {
       "en-US": "Cancel",
       "zh-CN": "取消",
       "zh-TW": "取消",
-      "ru-RU": "Отмена"
+      "ru-RU": "Отмена",
+	  "de-de": "Stop"
   },
 })
 
