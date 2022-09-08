@@ -3,6 +3,7 @@
 Main developer: melianmiko
 BandBBS publisher: Vanek905/zhenyok905
 zh-TW translation author: 天劍血狐
+de-DE translation author: harrybin
 
 Full source code can be found here: 
 https://notabug.org/melianmiko/mb7_apps

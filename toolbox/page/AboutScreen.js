@@ -5,7 +5,8 @@ const APP_VERSION = "v2022-09-04";
 const AUTHORS = [
   ["melianmiko", "Developer"],
   ["Vanek905/zhenyok905", "BandBBS publisher"],
-  ["天劍血狐", "zh-TW translation"]
+  ["天劍血狐", "zh-TW translation"],
+  ["harrybin", "de-DE translation"]
 ];
 
 const COLORS = [
