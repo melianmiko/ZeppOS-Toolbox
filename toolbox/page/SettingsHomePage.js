@@ -7,35 +7,35 @@ extendLocale({
     "zh-CN": "保留最后一个计时器值",
     "zh-TW": "保留最後一個計時器值",
     "ru-RU": "Запоминать посл. таймер",
-    "de-de": "Letzten Timerwert bebehalten"
+    "de-DE": "Letzten Timerwert bebehalten"
   },
   cfg_fs_unit: {
     "en-US": "Use Base-2 filesize\n1KB = 1024 B",
     "zh-CN": "使用 Base-2 文件大小\n1KB = 1024 B",
     "zh-TW": "使用 Base-2 文件大小\n1KB = 1024 B",
     "ru-RU": "Считать размер файлов в осн. 2\n1KB = 1024 B",
-    "de-de": "Base-2 Dateigröße\n1KB = 1024 B"
+    "de-DE": "Base-2 Dateigröße\n1KB = 1024 B"
   },
   settings_ui: {
     "en-US": "Customize",
     "zh-CN": "定制",
     "zh-TW": "定製",
     "ru-RU": "Главная",
-    "de-de": "Anpassen"
+    "de-DE": "Anpassen"
   },
   settings_lang: {
     "en-US": "Language",
     "zh-CN": "语言",
     "zh-TW": "語言",
     "ru-RU": "Язык",
-    "de-de": "Sprache"
+    "de-DE": "Sprache"
   },
   action_info: {
     "en-US": "About",
     "zh-CN": "关于",
     "zh-TW": "關於",
     "ru-RU": "О Toolbox",
-    "de-de": "Über..."
+    "de-DE": "Über..."
   },
 });
 

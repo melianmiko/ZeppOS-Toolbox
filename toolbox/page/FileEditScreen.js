@@ -7,28 +7,28 @@ extendLocale({
       "zh-CN": "以图片形式查看",
       "zh-TW": "以圖片形式檢視",
       "ru-RU": "Прсм. изображение",
-      "de-de": "Zeige als Bild"
+      "de-DE": "Zeige als Bild"
   },
   "file_view_as_text": {
       "en-US": "View as text",
       "zh-CN": "以文本形式查看",
       "zh-TW": "以文字形式檢視",
       "ru-RU": "Просм. текст",
-      "de-de": "Zeige als Text"
+      "de-DE": "Zeige als Text"
   },
   "file_view_as_bin": {
       "en-US": "View as binary",
       "zh-CN": "以文字形式檢視",
       "zh-TW": "以二進制形式查看",
       "ru-RU": "Просм. бинарно",
-      "de-de": "Zeige binär"
+      "de-DE": "Zeige binär"
   },
   "file_delete": {
       "en-US": "Delete",
       "zh-CN": "删除",
       "zh-TW": "刪除",
       "ru-RU": "Удалить",
-      "de-de": "Löschen"
+      "de-DE": "Löschen"
   },
 })
 

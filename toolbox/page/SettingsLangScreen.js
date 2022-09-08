@@ -10,7 +10,7 @@ class SettingsLangScreen {
       "zh-CN": "简体中文",
       "zh-TW": "繁體中文",
       "ru-RU": "Русский",
-	  "de-de": "Deutsch"
+		  "de-DE": "Deutsch"
 		};
 
 		let y = 64;
