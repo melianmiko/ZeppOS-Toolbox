@@ -1,0 +1,34 @@
+{
+  "app": {
+    "appId": 85859,
+    "appName": "Vibrant Rewrite",
+    "appType": "watchface",
+    "description": "",
+    "icon": "preview.png",
+    "vender": "melianmiko",
+    "version": {
+      "code": 1,
+      "name": "1.0"
+    }
+  },
+  "configVersion": "v2",
+  "module": {
+    "watchface": {
+      "editable": 1,
+      "hightCost": 0,
+      "lockscreen": 1,
+      "main": 1,
+      "path": "watchface/index"
+    }
+  },
+  "permissions": [
+    "gps"
+  ],
+  "runtime": {
+    "apiVersion": {
+      "compatible": "1.0.0",
+      "minVersion": "1.0.0",
+      "target": "1.0.1"
+    }
+  }
+}
