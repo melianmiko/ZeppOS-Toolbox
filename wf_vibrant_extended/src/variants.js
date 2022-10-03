@@ -230,7 +230,7 @@ const EDIT_WIDGETS = {
     config: {
       type: hmUI.data_type.SLEEP,
       font_array: FONT_WHITE,
-      padding: 1,
+      dot_image: 'fonts/white/10.png',
     },
   },
   alarm: {
