@@ -106,6 +106,13 @@ extendLocale({
     "ru-RU": "Фоновый таймер",
     "de-DE": "Hintergrund Timer"
   },
+  qs_wake_on_wrist: {
+    "en-US": "Wake on Wrist",
+    "zh-CN": "唤醒手腕",
+    "zh-TW": "喚醒手腕",
+    "ru-RU": "Пробуждение при повороте",
+    "de-DE": "Aufwachen am Handgelenk"
+  }
 });
 
 export const DEFAULT_SETTINGS = {
@@ -194,10 +201,12 @@ export const QS_BUTTONS = {
   },
 
   reboot: {
-    url: "HmReStartScreen",
+    url: "page/RebootConfirmScreen",
+    type: "internal",
+  },
+
+  wake_on_wrist: {
+    url: "Settings_wristHomeScreen",
     type: "native",
-    param: '\x04'
-    // url: "page/RebootConfirmScreen",
-    // type: "internal",
   },
 };
