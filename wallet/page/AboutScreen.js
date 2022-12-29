@@ -1,6 +1,6 @@
 import {FsUtils} from "../lib/FsUtils";
 
-const APP_VERSION = "v2022-09-04";
+const APP_VERSION = "v2022-12-29";
 
 const ABOUT_INFO = [
   ["melianmiko", "Разработчик"],
