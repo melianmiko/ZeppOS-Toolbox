@@ -1,7 +1,6 @@
 import {FsUtils} from "../lib/FsUtils";
 import {CardsStorage} from "../utils/CardsStorage";
 import {TouchEventManager} from "../lib/TouchEventManager";
-import {loadBackup} from "../utils/BackupLoader.js";
 
 class HomePage {
   viewerVisible = false;
@@ -9,11 +8,17 @@ class HomePage {
 
   constructor() {
     this.storage = new CardsStorage();
+    this.loadBackup();
+  }
 
-    const [st, e] = FsUtils.stat(FsUtils.fullPath('backup.txt'));
+  loadBackup() {
+    const backupPath = FsUtils.fullPath('backup.json');
+    const [st, e] = FsUtils.stat(backupPath);
     if(e == 0) {
       try {
-        loadBackup(this.storage);
+        const data = FsUtils.fetchJSON(backupPath);
+        this.storage.loadBackup(data);
+        hmFS.remove(backupPath);
       } catch(e) {
         console.log(e);
         hmUI.showToast({text: "Не удалось восстановить бэкап"});

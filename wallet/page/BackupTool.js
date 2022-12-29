@@ -24,20 +24,7 @@ class BackupTool {
 	}
 
 	process() {
-		const data = new CardsStorage().data;
-		let out = [];
-
-		for (const row of data) {
-			if (row.icon !== "") {
-				// Format 0, prebuild cards
-				out.push(`0${row.icon};${row.content}`)
-			} else {
-				// Format 1, user-defined card
-				row.title = row.title.replaceAll(";", "");
-				out.push(`1${row.title};${row.content};${row.format};${row.color}`);
-			}
-		}
-
+		const out = FsUtils.fetchTextFile("/storage/mmk_cards.json");
 		(new QrDumpScreen(out)).start();
 	}
 
@@ -130,12 +117,9 @@ class QrDumpScreen {
   }
 
   pageData() {
-  	let data = "";
-  	do {
-  		const line = this.data[this.position];
-  		data += line + "\n";
-  		this.position++;
-  	} while(data.length < 90 && this.position < this.data.length);
+    const len = Math.min(90, this.data.length - this.position);
+    const data = this.data.substring(this.position, this.position + len);
+    this.position += len;
 
   	console.log(data);
     const qr = qrcode(5, "L");

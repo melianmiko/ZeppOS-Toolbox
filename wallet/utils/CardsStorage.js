@@ -76,6 +76,11 @@ export class CardsStorage {
 		hmFS.close(f);
 	}
 
+	loadBackup(backup) {
+		this.data = backup;
+		this._write();
+	}
+
 	deleteCard(data) {
 		const index = data.index;
 		if(index < 0) return;

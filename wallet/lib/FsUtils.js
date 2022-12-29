@@ -93,12 +93,12 @@ export class FsUtils {
 	}
 
 	// source: https://stackoverflow.com/questions/13356493/decode-utf-8-with-javascript
-	static Utf8ArrayToStr(array) {
+	static Utf8ArrayToStr(array, limit=0) {
 		var out, i, len, c;
 		var char2, char3;
 
 		out = "";
-		len = array.length;
+		len = limit > 0 ? limit : array.length;
 		i = 0;
 		while (i < len) {
 			c = array[i++];
