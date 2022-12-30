@@ -34,7 +34,7 @@ extendLocale({
     "zh-CN": "手电筒",
     "zh-TW": "手電筒",
     "ru-RU": "Фонарик",
-    "de-DE": "Blitzlicht App"
+    "de-DE": "Tachenlampe App"
   },
   qs_camera: {
     "en-US": "Camera app",
