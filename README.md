@@ -1,3 +1,7 @@
-# mb7_apps
+# SmartBand7 Apps
 
-Mi Band 7 apps
+This repo contain source code of my Xiaomi Smart Band 7 apps.
+
+## Main
+- [Toolbox](toolbox/)
+
