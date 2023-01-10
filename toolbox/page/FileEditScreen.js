@@ -83,7 +83,7 @@ class FileEditScreen extends SettingsListScreen {
     // Open btns
     if(fileSize > 0) {
       if(this.path.endsWith(".png")) {
-        this.clickableItem(t("file_view_as_image"), "", () => {
+        this.clickableItem(t("file_view_as_image"), "files/img.png", () => {
           hmApp.gotoPage({
             url: "page/ImageViewScreen",
             param: this.prepareTempFile(this.path)
@@ -91,14 +91,14 @@ class FileEditScreen extends SettingsListScreen {
         })
       }
 
-      this.clickableItem(t("file_view_as_text"), "", () => {
+      this.clickableItem(t("file_view_as_text"), "files/text.png", () => {
         hmApp.gotoPage({
           url: "page/TextViewScreen",
           param: this.path
         });
       });
 
-      this.clickableItem(t("file_view_as_bin"), "", () => {
+      this.clickableItem(t("file_view_as_bin"), "files/file.png", () => {
         hmApp.gotoPage({
           url: "page/HexdumpScreen",
           param: this.path
@@ -114,10 +114,10 @@ class FileEditScreen extends SettingsListScreen {
       })
     }
     this.clickableItem(t("file_cut"), "menu/cut.png", () => {
-      this.pathToBuffer(false);
+      this.pathToBuffer(true);
     });
     this.clickableItem(t("file_copy"), "menu/copy.png", () => {
-      this.copyToBuffer(true);
+      this.pathToBuffer(false);
     });
     this.clickableItem(t("file_delete"), "menu/delete.png", () => {
       this.delete();
@@ -130,24 +130,27 @@ class FileEditScreen extends SettingsListScreen {
   }
 
   canPaste() {
-    const val = hmFS.SysProGetChars("mmk_tb_fm_buf");
+    const val = hmFS.SysProGetChars("mmk_tb_fm_buffer_path");
     if(!val) return false;
 
     const [st, e] = FsUtils.stat(val);
-    return e == 0;
+    return e == 0 && !this.path.startsWith(val) && this.path != val;
   }
 
   doPaste() {
     const src = hmFS.SysProGetChars("mmk_tb_fm_buffer_path");
+    const deleteSource = hmFS.SysProGetBool("mmk_tb_buffer_del");
     const filename = src.substring(src.lastIndexOf("/"));
     const dest = this.path + filename;
 
-    // йа ебал, потом доделаю
+    FsUtils.copyTree(src, dest, deleteSource);
+    hmFS.SysProSetChars("mmk_tb_fm_buffer_path", "");
+    hmApp.goBack();
   }
 
-  pathToBuffer(keepSource) {
+  pathToBuffer(deleteSource) {
     hmFS.SysProSetChars("mmk_tb_fm_buffer_path", this.path);
-    hmFS.SysProSetBool("mmk_tb_buffer_keep_source", keepSource);
+    hmFS.SysProSetBool("mmk_tb_buffer_del", deleteSource);
     hmApp.goBack();
   }
 
