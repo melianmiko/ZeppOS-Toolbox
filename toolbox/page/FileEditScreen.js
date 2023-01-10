@@ -26,24 +26,24 @@ extendLocale({
   },
   "file_paste": {
       "en-US": "Paste",
-      "zh-CN": "",
-      "zh-TW": "",
+      "zh-CN": "粘贴",
+      "zh-TW": "貼上",
       "ru-RU": "Вставить",
-      "de-DE": ""
+      "de-DE": "Einfügen"
   },
   "file_cut": {
       "en-US": "Cut",
-      "zh-CN": "",
-      "zh-TW": "",
+      "zh-CN": "剪切",
+      "zh-TW": "剪下",
       "ru-RU": "Вырезать",
-      "de-DE": ""
+      "de-DE": "Ausschneiden"
   },
   "file_copy": {
       "en-US": "Copy",
-      "zh-CN": "",
-      "zh-TW": "",
+      "zh-CN": "复制",
+      "zh-TW": "複製",
       "ru-RU": "Копировать",
-      "de-DE": ""
+      "de-DE": "Kopieren"
   },
   "file_delete": {
       "en-US": "Delete",
@@ -53,11 +53,11 @@ extendLocale({
       "de-DE": "Löschen"
   },
   "file_manage": {
-    "en-US": "Managment",
-    "zh-CN": "",
-    "zh-TW": "",
-    "ru-RU": "Управление",
-    "de-DE": ""
+    "en-US": "Edit...",
+    "zh-CN": "编辑...",
+    "zh-TW": "編輯...",
+    "ru-RU": "Изменить...",
+    "de-DE": "Bearbeiten..."
   }
 })
 
