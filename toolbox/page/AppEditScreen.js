@@ -10,6 +10,13 @@ extendLocale({
 		"ru-RU": "Удалить",
 		"de-DE": "Deinstallieren"
 	},
+	"action_launch": {
+		"en-US": "Launch",
+		"zh-CN": "发射",
+		"zh-TW": "發射",
+		"ru-RU": "Запустить",
+		"de-DE": "Starten"
+	},
 	"uninstall_complete": {
 		"en-US": "Uninstalled",
 		"zh-CN": "已卸载",
@@ -80,15 +87,22 @@ class AppEditScreen extends SettingsListScreen {
 		this.image(this.iconPath, 100);
 		this.h1(this.appConfig.app.appName);
 
+		this.clickableItem(t("action_launch"), "menu/play.png", () => {
+			hmApp.startApp({
+				appid: this.appConfig.app.appId,
+				url: this.appConfig.module.page.pages[0]
+			});
+		});
+
+		this.field(t("field_vendor"), this.appConfig.app.vender);
+		this.field(t("field_size"), FsUtils.printBytes(size));
+
 		this.baseColor = 0xFF8888;
 		this.clickableItem(t("action_uninstall"), "menu/delete.png", () => {
 			this.uninstall();
 		})
 
 		this.baseColor = 0xFFFFFF;
-		this.field(t("field_vendor"), this.appConfig.app.vender);
-		this.field(t("field_size"), FsUtils.printBytes(size));
-
 		if(this.appConfig.externalFilesList) {
 			let configSize = 0;
 			for(const path of this.appConfig.externalFilesList) {
