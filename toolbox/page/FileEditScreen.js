@@ -1,5 +1,6 @@
 import {FsUtils} from "../lib/FsUtils";
 import {t, extendLocale} from "../lib/i18n";
+import {SettingsListScreen} from "../utils/SettingsListScreen";
 
 extendLocale({
   "file_view_as_image": {
@@ -23,6 +24,27 @@ extendLocale({
       "ru-RU": "Просм. бинарно",
       "de-DE": "Zeige binär"
   },
+  "file_paste": {
+      "en-US": "Paste",
+      "zh-CN": "",
+      "zh-TW": "",
+      "ru-RU": "Вставить",
+      "de-DE": ""
+  },
+  "file_cut": {
+      "en-US": "Cut",
+      "zh-CN": "",
+      "zh-TW": "",
+      "ru-RU": "Вырезать",
+      "de-DE": ""
+  },
+  "file_copy": {
+      "en-US": "Copy",
+      "zh-CN": "",
+      "zh-TW": "",
+      "ru-RU": "Копировать",
+      "de-DE": ""
+  },
   "file_delete": {
       "en-US": "Delete",
       "zh-CN": "删除",
@@ -30,121 +52,102 @@ extendLocale({
       "ru-RU": "Удалить",
       "de-DE": "Löschen"
   },
+  "file_manage": {
+    "en-US": "Managment",
+    "zh-CN": "",
+    "zh-TW": "",
+    "ru-RU": "Управление",
+    "de-DE": ""
+  }
 })
 
-class FileEditScreen {
-  STYLE_BUTTON = {
-    normal_color: 0x111111,
-    press_color: 0x222222,
-    x: 12,
-    w: 168,
-    h: 56
-  }
-
+class FileEditScreen extends SettingsListScreen {
   constructor(data) {
+    super();
     this.path = data;
   }
 
-  start() {
+  build() {
     // Stats
-    let posY = 72;
-    let text = this.path + "\n", fileSize = 0;
+    this.field("Location", this.path);
+
+    let fileSize = 0;
     try {
-
       const [st, e] = FsUtils.stat(this.path);
-
       if(st.size) {
-        text += "Size: " + FsUtils.printBytes(st.size) + "\n";
+        this.field(t("field_size"), FsUtils.printBytes(st.size));
         fileSize = st.size;
       }
-
-    } catch(e) {
-      console.warn(e);
-    }
-
-    let textLayout = hmUI.getTextLayout(text, {text_size: 18, text_width: 168})
-    let textHeight = textLayout.height;
-    hmUI.createWidget(hmUI.widget.TEXT, {
-      x: 12,
-      y: posY,
-      w: 168,
-      h: textHeight,
-      text_size: 18,
-      color: 0xffffff,
-      text_style: hmUI.text_style.WRAP,
-      text
-    });
-
-    posY += textHeight + 12;
+    } catch(e) {}
 
     // Open btns
     if(fileSize > 0) {
       if(this.path.endsWith(".png")) {
-        this.addViewAsImageButton(posY);
-        posY += 64;
+        this.clickableItem(t("file_view_as_image"), "", () => {
+          hmApp.gotoPage({
+            url: "page/ImageViewScreen",
+            param: this.prepareTempFile(this.path)
+          });
+        })
       }
 
-      this.addViewAsTextButton(posY);
-      posY += 64;
-
-      this.addViewAsBinaryButton(posY);
-      posY += 64;
-    }
-
-    // Delete btn
-    if(this.path.startsWith("/storage/")) hmUI.createWidget(hmUI.widget.BUTTON, {
-      ...this.STYLE_BUTTON,
-      y: posY,
-      color: 0xff0000,
-      text: t("file_delete"),
-      click_func: () => this.delete()
-    })
-  }
-
-  addViewAsImageButton(y) {
-    hmUI.createWidget(hmUI.widget.BUTTON, {
-      ...this.STYLE_BUTTON,
-      y,
-      text: t("file_view_as_image"),
-      click_func: () => {
-        hmApp.gotoPage({
-          url: "page/ImageViewScreen",
-          param: this.prepareTempFile(this.path)
-        });
-      }
-    });
-  }
-
-  addViewAsTextButton(y) {
-    hmUI.createWidget(hmUI.widget.BUTTON, {
-      ...this.STYLE_BUTTON,
-      y,
-      text: t("file_view_as_text"),
-      click_func: () => {
+      this.clickableItem(t("file_view_as_text"), "", () => {
         hmApp.gotoPage({
           url: "page/TextViewScreen",
           param: this.path
         });
-      }
-    });
-  }
+      });
 
-  addViewAsBinaryButton(y) {
-    hmUI.createWidget(hmUI.widget.BUTTON, {
-      ...this.STYLE_BUTTON,
-      y,
-      text: t("file_view_as_bin"),
-      click_func: () => {
+      this.clickableItem(t("file_view_as_bin"), "", () => {
         hmApp.gotoPage({
           url: "page/HexdumpScreen",
           param: this.path
         });
-      }
-    })
+      });
+    }
+
+    // Delete btn
+    this.headline(t("file_manage"));
+    if(this.canPaste() && fileSize == 0) {
+      this.clickableItem(t("file_paste"), "menu/paste.png", () => {
+        this.doPaste();
+      })
+    }
+    this.clickableItem(t("file_cut"), "menu/cut.png", () => {
+      this.pathToBuffer(false);
+    });
+    this.clickableItem(t("file_copy"), "menu/copy.png", () => {
+      this.copyToBuffer(true);
+    });
+    this.clickableItem(t("file_delete"), "menu/delete.png", () => {
+      this.delete();
+    });
   }
 
   delete() {
     FsUtils.rmTree(this.path);
+    hmApp.goBack();
+  }
+
+  canPaste() {
+    const val = hmFS.SysProGetChars("mmk_tb_fm_buf");
+    if(!val) return false;
+
+    const [st, e] = FsUtils.stat(val);
+    return e == 0;
+  }
+
+  doPaste() {
+    const src = hmFS.SysProGetChars("mmk_tb_fm_buffer_path");
+    const filename = src.substring(src.lastIndexOf("/"));
+    const dest = this.path + filename;
+
+    // йа ебал, потом доделаю
+  }
+
+  pathToBuffer(keepSource) {
+    hmFS.SysProSetChars("mmk_tb_fm_buffer_path", this.path);
+    hmFS.SysProSetBool("mmk_tb_buffer_keep_source", keepSource);
     hmApp.goBack();
   }
 

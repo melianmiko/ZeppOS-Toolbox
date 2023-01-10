@@ -112,10 +112,9 @@ export class SettingsListScreen {
 		group.createWidget(hmUI.widget.TEXT, {
 			x: 4,
 			y: 4,
-			w: 144,
+			w: 192,
 			h: 24,
 			align_v: hmUI.align.CENTER_V,
-			text_style: hmUI.text_style.WRAP,
 			text_size: 18,
 			color: 0xAAAAAA,
 			text: name
@@ -124,10 +123,9 @@ export class SettingsListScreen {
 		const viewValue = group.createWidget(hmUI.widget.TEXT, {
 			x: 4,
 			y: 28,
-			w: 144,
+			w: 192,
 			h: 32,
 			align_v: hmUI.align.CENTER_V,
-			text_style: hmUI.text_style.WRAP,
 			text_size: 20,
 			color: 0xFFFFFF,
 			text: value

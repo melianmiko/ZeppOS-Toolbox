@@ -103,6 +103,18 @@ class FileManagerScreen {
       return (st.mode & 32768) == 0;
   }
 
+  getFileIcon(path) {
+    if(path.endsWith(".png")) {
+      return "files/img.png";
+    } else if(path.endsWith(".txt")) {
+      return "files/text.png";
+    } else if(path.endsWith(".js") || path.endsWith(".json")) {
+      return "files/code.png";
+    }
+
+    return "files/file.png";
+  }
+
   refresh() {
     const [dirContent, e] = hmFS.readdir(this.path);
     console.log("refr", this.path);
@@ -111,7 +123,7 @@ class FileManagerScreen {
       files = [];
 
     if (this.path !== "/storage") {
-      folders.push({name: "..", icon: "files/folder.png"});
+      folders.push({name: "..", icon: "files/up.png"});
     }
 
     for(let fn of dirContent) {
@@ -123,16 +135,9 @@ class FileManagerScreen {
         continue;
       }
 
-      let icon = "files/file.png";
-      if(fn.endsWith(".png")) {
-        icon = "files/file_img.png";
-      } else if(fn.endsWith('.js') || fn.endsWith(".json")) {
-        icon = "files/file_code.png";
-      }
-
       files.push({
         name: fn,
-        icon
+        icon: this.getFileIcon(fn)
       });
     }
 
