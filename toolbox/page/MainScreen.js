@@ -42,6 +42,8 @@ class MainScreen {
     const {tiles, withBrightness, withBattery} = this._getSettings();
     const topOffset = withBrightness ? 164 : 72
 
+    this.allowDanger = hmFS.SysProGetBool("mmk_tb_danger_mode");
+
     if(withBattery) this.drawBattery();
     if(withBrightness) this.drawBrightness();
     this.drawButtons(tiles, topOffset);
@@ -69,9 +71,11 @@ class MainScreen {
   }
 
   drawButtons(tiles, topOffset) {
-    tiles.forEach((id, i) => {
+    let i = 0;
+    tiles.forEach((id) => {
       const config = QS_BUTTONS[id];
       if(!config) return;
+      if(config.danger && !this.allowDanger) return;
 
       const widgetConfig = {
         x: 12 + (i % 2) * 90,
@@ -104,12 +108,14 @@ class MainScreen {
           url: "page/SettingsUiScreen"
         })
       };
+
+      i++;
     });
 
     // Edit button
     const editButton = hmUI.createWidget(hmUI.widget.TEXT, {
       x: 0,
-      y: topOffset + 12 + Math.ceil(tiles.length / 2) * 90,
+      y: topOffset + 12 + Math.ceil(i / 2) * 90,
       w: 192,
       h: 72,
       align_h: hmUI.align.CENTER_H,

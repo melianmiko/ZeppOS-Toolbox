@@ -18,6 +18,7 @@ class SettingsUiScreen {
 
   start () {
     this._load();
+    this.allowDanger = hmFS.SysProGetBool("mmk_tb_danger_mode");
 
     // Battety
     const batteryToggle = hmUI.createWidget(hmUI.widget.IMG, {
@@ -49,9 +50,11 @@ class SettingsUiScreen {
       })
     };
 
-    Object.keys(QS_BUTTONS).forEach((id, i) => {
+    let i = 0;
+    Object.keys(QS_BUTTONS).forEach((id) => {
       const config = QS_BUTTONS[id];
       if(!config) return;
+      if(config.danger && !this.allowDanger) return;
 
       const x = 12 + (i % 2) * 90;
       const y = 164 + Math.floor(i / 2) * 90;
@@ -70,6 +73,8 @@ class SettingsUiScreen {
         hmUI.showToast({text: t("qs_" + id)})
         this._toggleTile(id, btn);
       };
+
+      i++;
     });
 
     // Screen overflow

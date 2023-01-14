@@ -1,5 +1,3 @@
-![Icon](assets/icon.png)
-
 SmartBand7 MoreLocale
 ----------------------
 

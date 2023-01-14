@@ -203,6 +203,7 @@ export const QS_BUTTONS = {
   reboot: {
     url: "page/RebootConfirmScreen",
     type: "internal",
+    danger: true,
   },
 
   wake_on_wrist: {

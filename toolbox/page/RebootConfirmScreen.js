@@ -41,6 +41,5 @@ __$$module$$__.module = DeviceRuntimeCore.Page({
   		color: 0x999999,
   		text: t("reboot_confirm")
   	})
-
   }
 });

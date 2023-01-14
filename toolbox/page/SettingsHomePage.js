@@ -16,6 +16,10 @@ extendLocale({
     "ru-RU": "Считать размер файлов в осн. 2\n1KB = 1024 B",
     "de-DE": "Base-2 Dateigröße\n1KB = 1024 B"
   },
+  cfg_danger_mode: {
+    "en-US": "Show danger features",
+    "ru-RU": "Разрешить опасные функции"
+  },
   settings_ui: {
     "en-US": "Customize",
     "zh-CN": "定制",
@@ -50,6 +54,11 @@ class SettingsHomePage extends SettingsListScreen {
 
     this.propCheckbox(t("cfg_timer_keep"), "mmk_tb_cfg_timer_keep", true);
     this.propCheckbox(t("cfg_fs_unit"), "mmk_tb_fs_unit", false);
+
+    const allowDanger = !!hmFS.SysProGetBool("mmk_tb_danger_mode");
+    this.clickableItem(t("cfg_danger_mode"), `menu/cb_${allowDanger}.png`, () => {
+      hmApp.gotoPage({url: "page/ToggleDanger"});
+    })
 
     this.clickableItem(t("action_info"), "menu/info.png", () =>
       this.openPage("AboutScreen")
