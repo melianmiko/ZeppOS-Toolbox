@@ -7,39 +7,46 @@ extendLocale({
     "zh-CN": "保留最后一个计时器值",
     "zh-TW": "保留最後一個計時器值",
     "ru-RU": "Запоминать посл. таймер",
-    "de-DE": "Letzten Timerwert bebehalten"
+    "de-DE": "Letzten Timerwert bebehalten",
+    "es-Es": "Mantener valor del último temporizador"
   },
   cfg_fs_unit: {
     "en-US": "Use Base-2 filesize\n1KB = 1024 B",
     "zh-CN": "使用 Base-2 文件大小\n1KB = 1024 B",
     "zh-TW": "使用 Base-2 文件大小\n1KB = 1024 B",
     "ru-RU": "Считать размер файлов в осн. 2\n1KB = 1024 B",
-    "de-DE": "Base-2 Dateigröße\n1KB = 1024 B"
+    "de-DE": "Base-2 Dateigröße\n1KB = 1024 B",
+    "es-Es": "Usar tamaño de archivo base-2\n1KB = 1024 B"
   },
   cfg_danger_mode: {
     "en-US": "Show danger features",
-    "ru-RU": "Разрешить опасные функции"
+    "ru-RU": "Разрешить опасные функции",
+    "es-Es": "Mostrar funcionalidades peligrosas"
   },
   settings_ui: {
     "en-US": "Customize",
     "zh-CN": "定制",
     "zh-TW": "定製",
     "ru-RU": "Главная",
-    "de-DE": "Anpassen"
+    "de-DE": "Anpassen",
+    "es-Es": "Editar"
   },
   settings_lang: {
     "en-US": "Language",
     "zh-CN": "语言",
     "zh-TW": "語言",
     "ru-RU": "Язык",
-    "de-DE": "Sprache"
+    "de-DE": "Sprache",
+    "es-Es": "Idioma"
+
   },
   action_info: {
     "en-US": "About",
     "zh-CN": "关于",
     "zh-TW": "關於",
     "ru-RU": "О Toolbox",
-    "de-DE": "Über..."
+    "de-DE": "Über...",
+    "es-Es": "Acerca de"
   },
 });
 
