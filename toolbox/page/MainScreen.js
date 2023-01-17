@@ -9,7 +9,8 @@ extendLocale({
       "zh-CN": "设置",
       "zh-TW": "設定",
       "ru-RU": "Настроить",
-      "de-DE": "Einstellungen"
+      "de-DE": "Einstellungen",
+      "es-Es": "Ajustes"
   }
 });
 

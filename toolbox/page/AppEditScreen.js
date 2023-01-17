@@ -8,63 +8,72 @@ extendLocale({
 		"zh-CN": "卸载",
 		"zh-TW": "卸載",
 		"ru-RU": "Удалить",
-		"de-DE": "Deinstallieren"
+		"de-DE": "Deinstallieren",
+		"es-Es": "Desinstalar"
 	},
 	"action_launch": {
 		"en-US": "Launch",
 		"zh-CN": "发射",
 		"zh-TW": "發射",
 		"ru-RU": "Запустить",
-		"de-DE": "Starten"
+		"de-DE": "Starten",
+		"es-Es": "Ejecutar"
 	},
 	"uninstall_complete": {
 		"en-US": "Uninstalled",
 		"zh-CN": "已卸载",
 		"zh-TW": "已卸載",
 		"ru-RU": "Удалено",
-		"de-DE": "Deinstalliert"
+		"de-DE": "Deinstalliert",
+		"es-Es": "Desinstalado"
 	},
 	"apps_notice_uninstall": {
 		"en-US": "Please reboot device to finish",
 		"zh-CN": "请重启设备以完成",
 		"zh-TW": "請重啟設備以完成",
 		"ru-RU": "Перезагрузите устройство для завершения",
-		"de-DE": "Bitte das Gerät neustarten um abzuschließen"
+		"de-DE": "Bitte das Gerät neustarten um abzuschließen",
+		"es-Es": "Por favor reinicie el dispositivo"
 	},
 	"field_size": {
 		"en-US": "Size",
 		"zh-CN": "应用程序大小",
 		"zh-TW": "應用程序大小",
 		"ru-RU": "Размер",
-		"de-DE": "Größe"
+		"de-DE": "Größe",
+		"es-Es": "Tamaño"
 	},
 	"field_vendor": {
 		"en-US": "Vendor",
 		"zh-TW": "小販",
 		"zh-CN": "小贩",
 		"ru-RU": "Разработчик",
-		"de-DE": "Hersteller"
+		"de-DE": "Hersteller",
+		"es-Es": "Desarrollador"
 	},
 	"file_size_ext": {
 		"en-US": "Size (ext. config)",
 		"zh-CN": "大小（外部文件）",
 		"zh-TW": "大小（外部文件）",
 		"ru-RU": "Размер (внешн. файлы)",
-		"de-DE": "Größe (ext. config)"
+		"de-DE": "Größe (ext. config)",
+		"es-Es": "Tamaño (ext. config)"
 	},
 	"conf_full": {
 		"en-US": "Don't keep ext. files on uninstall",
 		"zh-CN": "卸载时删除外部文件",
 		"zh-TW": "卸載時刪除外部文件",
 		"ru-RU": "Также удалять внешние файлы",
-		"de-DE": "ext Dateien bei Deinstallation NICHT bebehalten"
+		"de-DE": "ext Dateien bei Deinstallation NICHT bebehalten",
+		"es-Es": "No conservar archivos ext. después de desinstalar"
 	},
 	"headline_adv": {
 		"en-US": "Advanced",
 		"zh-CN": "先进的",
 		"zh-TW": "先進的",
 		"ru-RU": "Дополнительно",
-		"de-DE": "Erweitert"
+		"de-DE": "Erweitert",
+		"es-Es": "Avanzado"
 	}
 })
 
