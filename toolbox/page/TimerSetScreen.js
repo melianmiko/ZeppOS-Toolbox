@@ -7,14 +7,16 @@ extendLocale({
       "zh-CN": "开始",
       "zh-TW": "開始",
       "ru-RU": "Начать",
-	  "de-DE": "Start"
+	  "de-DE": "Start",
+	  "es-Es": "Iniciar"
   },
   "timer_stop": {
       "en-US": "Cancel",
       "zh-CN": "取消",
       "zh-TW": "取消",
       "ru-RU": "Отмена",
-	  "de-DE": "Stop"
+	  "de-DE": "Stop",
+	  "es-Es": "Detener"
   },
 })
 

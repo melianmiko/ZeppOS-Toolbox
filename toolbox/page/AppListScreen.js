@@ -6,7 +6,8 @@ extendLocale({
       "en-US": "Apps",
       "zh-CN": "应用",
       "zh-TW": "應用",
-      "ru-RU": "Приложения"
+      "ru-RU": "Приложения",
+      "es-Es": "Apps"
   },
 })
 

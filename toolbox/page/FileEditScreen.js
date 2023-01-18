@@ -8,56 +8,64 @@ extendLocale({
       "zh-CN": "以图片形式查看",
       "zh-TW": "以圖片形式檢視",
       "ru-RU": "Прсм. изображение",
-      "de-DE": "Zeige als Bild"
+      "de-DE": "Zeige als Bild",
+      "es-Es": "Mostrar como imagen"
   },
   "file_view_as_text": {
       "en-US": "View as text",
       "zh-CN": "以文本形式查看",
       "zh-TW": "以文字形式檢視",
       "ru-RU": "Просм. текст",
-      "de-DE": "Zeige als Text"
+      "de-DE": "Zeige als Text",
+      "es-Es": "Mostrar como texto"
   },
   "file_view_as_bin": {
       "en-US": "View as binary",
       "zh-CN": "以文字形式檢視",
       "zh-TW": "以二進制形式查看",
       "ru-RU": "Просм. бинарно",
-      "de-DE": "Zeige binär"
+      "de-DE": "Zeige binär",
+      "es-Es": "Mostrar como binario"
   },
   "file_paste": {
       "en-US": "Paste",
       "zh-CN": "粘贴",
       "zh-TW": "貼上",
       "ru-RU": "Вставить",
-      "de-DE": "Einfügen"
+      "de-DE": "Einfügen",
+      "es-Es": "Pegar"
   },
   "file_cut": {
       "en-US": "Cut",
       "zh-CN": "剪切",
       "zh-TW": "剪下",
       "ru-RU": "Вырезать",
-      "de-DE": "Ausschneiden"
+      "de-DE": "Ausschneiden",
+      "es-Es": "Cortar"
   },
   "file_copy": {
       "en-US": "Copy",
       "zh-CN": "复制",
       "zh-TW": "複製",
       "ru-RU": "Копировать",
-      "de-DE": "Kopieren"
+      "de-DE": "Kopieren",
+      "es-Es": "Copiar"
   },
   "file_delete": {
       "en-US": "Delete",
       "zh-CN": "删除",
       "zh-TW": "刪除",
       "ru-RU": "Удалить",
-      "de-DE": "Löschen"
+      "de-DE": "Löschen",
+      "es-Es": "Borrar"
   },
   "file_manage": {
     "en-US": "Edit...",
     "zh-CN": "编辑...",
     "zh-TW": "編輯...",
     "ru-RU": "Изменить...",
-    "de-DE": "Bearbeiten..."
+    "de-DE": "Bearbeiten...",
+    "es-Es": "Editar..."
   }
 })
 
