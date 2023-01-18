@@ -1,3 +1,15 @@
+//Template for new strings
+const TEMPLATE = {
+  keyName: {
+    "en-US": "",
+    "zh-CN": "",
+    "zh-TW": "",
+    "ru-RU": "",
+    "de-DE": "",
+    "es-ES": "",
+  }
+}
+
 /**
  * App edit screen translations
  */
@@ -85,6 +97,7 @@ export const APP_LIST_TRANSLATIONS = {
     "zh-CN": "应用",
     "zh-TW": "應用",
     "ru-RU": "Приложения",
+    "de-DE": "",
     "es-ES": "Apps",
   },
 };
@@ -173,6 +186,7 @@ export const MAIN_SCREEN_TRANSLATIONS = {
 export const REBOOT_CONFIRM_TRANSLATIONS = {
   reboot_confirm: {
     "en-US": "Click to confirm",
+    "zh-CN": "",
     "zh-TW": "輕按以重啟",
     "ru-RU": "Нажмите для подтверждения",
     "de-DE": "Klick zum Bestätigen",
@@ -199,7 +213,10 @@ export const SETTINGS_HOME_TRANSLATIONS = {
   },
   cfg_danger_mode: {
     "en-US": "Show danger features",
+    "zh-CN": "",
+    "zh-TW": "",
     "ru-RU": "Разрешить опасные функции",
+    "de-DE": "",
     "es-ES": "Mostrar funcionalidades peligrosas",
   },
   settings_ui: {
@@ -228,11 +245,19 @@ export const SETTINGS_HOME_TRANSLATIONS = {
   },
   headline_tools: {
     "en-US": "Settings:",
+    "zh-CN": "",
+    "zh-TW": "",
     "ru-RU": "Настройки:",
+    "de-DE": "",
+    "es-ES": "",
   },
   prop_font_size: {
     "en-US": "Reader font size",
+    "zh-CN": "",
+    "zh-TW": "",
     "ru-RU": "Разм. текста при чтении:"
+    "de-DE": "",
+    "es-ES": "",
   }
 };
 
@@ -308,13 +333,25 @@ export const TIMER_TRANSLATIONS = {
 
 export const TOGGLE_DANGER_TRANSLATIONS = {
   danger_warn: {
-    "en-US":
-      "This option will show some features, that may cause your device to fail to boot. Continuing, you agree that in some moment all settings of that device may become lost.",
-    "es-ES":
-      "Esta opción mostrará algunas características que pueden causar que su dispositivo no arranque. Continuando, usted acepta que en algún momento se pueden perder todas las configuraciones de ese dispositivo.",
+    "en-US": "This option will show some features, "+
+      "that may cause your device to fail to boot. "+
+      "Continuing, you agree that in some moment all"+
+      " settings of that device may become lost.",
+    "zh-CN": "",
+    "zh-TW": "",
+    "ru-RU": "",
+    "de-De": "",
+    "es-ES": "Esta opción mostrará algunas características "+
+      "que pueden causar que su dispositivo no arranque. "+
+      "Continuando, usted acepta que en algún momento se "+
+      "pueden perder todas las configuraciones de ese dispositivo.",
   },
   danger_agree: {
     "en-US": "Agree, enable",
+    "zh-CN": "",
+    "zh-TW": "",
+    "ru-RU": "",
+    "de-De": "",
     "es-ES": "Aceptar, habilitar",
   },
 };
