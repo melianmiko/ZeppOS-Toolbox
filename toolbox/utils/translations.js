@@ -226,6 +226,14 @@ export const SETTINGS_HOME_TRANSLATIONS = {
     "de-DE": "Über...",
     "es-ES": "Acerca de",
   },
+  headline_tools: {
+    "en-US": "Settings:",
+    "ru-RU": "Настройки:",
+  },
+  prop_font_size: {
+    "en-US": "Reader font size",
+    "ru-RU": "Разм. текста при чтении:"
+  }
 };
 
 export const STORAGE_INFO_TRANSLATIONS = {

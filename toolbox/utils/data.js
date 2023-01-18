@@ -16,7 +16,6 @@ export const DEFAULT_SETTINGS = {
   withBattery: false
 };
 
-
 export const QS_BUTTONS = {
   apps: {
     url: "page/AppListScreen",
