@@ -1,6 +1,7 @@
-import {FsUtils} from "../lib/FsUtils";
-import {t, extendLocale} from "../lib/i18n";
 import {SettingsListScreen} from "../utils/SettingsListScreen";
+
+import {FsUtils} from "../../lib/FsUtils";
+import {t, extendLocale} from "../../lib/i18n";
 
 extendLocale({
   "file_view_as_image": {

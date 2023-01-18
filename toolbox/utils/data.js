@@ -1,4 +1,4 @@
-import { extendLocale } from "../lib/i18n";
+import { extendLocale } from "../../lib/i18n";
 
 extendLocale({
   qs_apps: {

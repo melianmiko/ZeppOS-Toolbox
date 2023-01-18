@@ -1,5 +1,5 @@
-import {t, extendLocale} from "../lib/i18n";
-import {TouchEventManager} from "../lib/TouchEventManager";
+import {t, extendLocale} from "../../lib/i18n";
+import {TouchEventManager} from "../../lib/TouchEventManager";
 
 extendLocale({
   "timer_start": {

@@ -1,4 +1,4 @@
-import {FsUtils} from "../lib/FsUtils";
+import {FsUtils} from "../../lib/FsUtils";
 
 class HexdumpScreen {
 	constructor(data) {

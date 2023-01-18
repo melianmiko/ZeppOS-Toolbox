@@ -1,4 +1,4 @@
-import {t, extendLocale} from "../lib/i18n";
+import {t, extendLocale} from "../../lib/i18n";
 import { SettingsListScreen } from "../utils/SettingsListScreen";
 
 extendLocale({

@@ -1,4 +1,4 @@
-import {FsUtils} from "../lib/FsUtils";
+import {FsUtils} from "../../lib/FsUtils";
 
 class TextViewScreen {
 	PAGE_SIZE = 256;

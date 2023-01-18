@@ -1,6 +1,6 @@
-import {FsUtils} from "../lib/FsUtils";
-import {t} from "../lib/i18n";
-import {TouchEventManager} from "../lib/TouchEventManager";
+import {FsUtils} from "../../lib/FsUtils";
+import {t} from "../../lib/i18n";
+import {TouchEventManager} from "../../lib/TouchEventManager";
 import {QS_BUTTONS, DEFAULT_SETTINGS} from "../utils/data";
 
 class SettingsUiScreen {

@@ -1,4 +1,3 @@
-
 class SettingsLangScreen {
 	start() {
 		let current = hmFS.SysProGetChars("mmk_tb_lang");
