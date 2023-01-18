@@ -1,6 +1,6 @@
 import {FsUtils} from "../../lib/FsUtils";
 
-const BOX_HEIGHT = 346;
+const BOX_HEIGHT = 300;
 
 class TextViewScreen {
 	PAGE_SIZE = 256;
@@ -36,7 +36,7 @@ class TextViewScreen {
 		// Text view
 		this.textView = hmUI.createWidget(hmUI.widget.TEXT, {
 			x: 0,
-			y: 72,
+			y: (490 - BOX_HEIGHT) / 2,
 			w: 192,
 			h: BOX_HEIGHT,
 			text_size: this.fontSize,
@@ -50,7 +50,7 @@ class TextViewScreen {
 			x: 0,
 			y: 0,
 			w: 192,
-			h: 72,
+			h: (490 - BOX_HEIGHT) / 2,
 			text_size: 20,
 			align_h: hmUI.align.CENTER_H,
 			align_v: hmUI.align.CENTER_V,
@@ -77,6 +77,14 @@ class TextViewScreen {
 		}).addEventListener(hmUI.event.CLICK_UP, () => {
 			this.pageBack();
 		});
+
+		// Overlay
+		this.overlay = hmUI.createWidget(hmUI.widget.IMG, {
+			x: 0,
+			y: 0,
+			src: "loading.png",
+			alpha: 200
+		});
 	}
 
 	getTextHeight(text) {
@@ -101,24 +109,32 @@ class TextViewScreen {
 	}
 
 	displayForward() {
+		this.overlay.setProperty(hmUI.prop.VISIBLE, true);
+		const ti = timer.createTimer(150, 150, () => {
+			timer.stopTimer(ti);
+			this._displayForward();
+			this.overlay.setProperty(hmUI.prop.VISIBLE, false);
+		});
+	}
+
+	_displayForward() {
 		const temp = new Uint8Array(4);
 
 		hmFS.read(this.file, temp.buffer, 0, temp.byteLength);
 
 		let readBytes = 0,
+			readLimit = this.fileSize - this.position,
 			readSinceLastSpace = 0,
 			result = "";
 
-		while(readBytes < 1024) {
+		while(readBytes < readLimit) {
 			hmFS.seek(this.file, this.position + readBytes, hmFS.SEEK_SET);
-			hmFS.read(this.file, temp.buffer, 0, temp.byteLength);
-			if(temp[0] == 0) break;
+			hmFS.read(this.file, temp.buffer, 0, 4);
 
 			const [char, byteLength] = FsUtils.decodeUtf8(temp, 1, 0);
 
 			// Check screen fit
 			if(this.getTextHeight(result + char) > BOX_HEIGHT) {
-				console.log(char, readBytes, readSinceLastSpace)
 				if(char != " " && char != "\n" && readBytes - readSinceLastSpace > 0) {
 					readBytes -= readSinceLastSpace;
 					result = result.substring(0, result.lastIndexOf(" "));
@@ -136,7 +152,6 @@ class TextViewScreen {
 		this.bufferSize = readBytes;
 		this.textView.setProperty(hmUI.prop.TEXT, result);
 
-		console.log(this.position, this.bufferSize, this.fileSize, "\n", result);
 		const progress = Math.floor((this.position + this.bufferSize) / this.fileSize * 100);
 		this.posView.setProperty(hmUI.prop.TEXT, progress + "%");
 	}

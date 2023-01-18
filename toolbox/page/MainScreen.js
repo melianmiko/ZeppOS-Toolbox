@@ -4,6 +4,7 @@ import {TouchEventManager} from "../../lib/TouchEventManager";
 
 import {QS_BUTTONS, DEFAULT_SETTINGS} from "../utils/data";
 import {MAIN_SCREEN_TRANSLATIONS} from "../utils/translations";
+import {openPage} from "../utils/misc";
 
 extendLocale(MAIN_SCREEN_TRANSLATIONS);
 
@@ -84,7 +85,7 @@ class MainScreen {
       events.ontouch = () => {
         switch(config.type) {
           case "internal":
-            hmApp.gotoPage({url: config.url});
+            openPage(config.url);
             break;
           case "native":
             hmApp.startApp({
@@ -97,9 +98,7 @@ class MainScreen {
       };
       
       events.onlongtouch = () => {
-        hmApp.gotoPage({
-          url: "page/SettingsUiScreen"
-        })
+        openPage("SettingsUiScreen");
       };
 
       i++;
@@ -118,9 +117,7 @@ class MainScreen {
     });
     const editButtonEvents = new TouchEventManager(editButton);
     editButtonEvents.ontouch = () => {
-      hmApp.gotoPage({
-        url: "page/SettingsHomePage"
-      })
+      openPage("SettingsHomePage");
     }
   }
 

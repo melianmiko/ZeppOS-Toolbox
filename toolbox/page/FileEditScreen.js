@@ -3,6 +3,7 @@ import {t, extendLocale} from "../../lib/i18n";
 import {SettingsListScreen} from "../../lib/SettingsListScreen";
 
 import {FILE_EDIT_TRANSLATIONS} from "../utils/translations";
+import {openPage} from "../utils/misc";
 
 extendLocale(FILE_EDIT_TRANSLATIONS);
 
@@ -29,25 +30,16 @@ class FileEditScreen extends SettingsListScreen {
     if(fileSize > 0) {
       if(this.path.endsWith(".png")) {
         this.clickableItem(t("file_view_as_image"), "files/img.png", () => {
-          hmApp.gotoPage({
-            url: "page/ImageViewScreen",
-            param: this.prepareTempFile(this.path)
-          });
+          openPage("ImageViewScreen", this.prepareTempFile(this.path));
         })
       }
 
       this.clickableItem(t("file_view_as_text"), "files/text.png", () => {
-        hmApp.gotoPage({
-          url: "page/TextViewScreen",
-          param: this.path
-        });
+        openPage("TextViewScreen", this.path);
       });
 
       this.clickableItem(t("file_view_as_bin"), "files/file.png", () => {
-        hmApp.gotoPage({
-          url: "page/HexdumpScreen",
-          param: this.path
-        });
+        openPage("HexdumpScreen", this.path);
       });
     }
 

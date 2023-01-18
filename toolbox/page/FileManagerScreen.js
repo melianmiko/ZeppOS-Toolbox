@@ -1,5 +1,7 @@
 import {FsUtils} from "../../lib/FsUtils";
 
+import {openPage} from "../utils/misc";
+
 class FileManagerScreen {
   FILE_ROW_TYPE = {
     type_id: 1,
@@ -85,10 +87,7 @@ class FileManagerScreen {
   }
 
   modify(path) {
-    hmApp.gotoPage({
-      url: "page/FileEditScreen",
-      param: path
-    })
+    openPage("FileEditScreen", path);
   }
 
   applyPath(path) {

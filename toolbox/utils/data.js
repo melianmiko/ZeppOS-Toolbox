@@ -18,22 +18,22 @@ export const DEFAULT_SETTINGS = {
 
 export const QS_BUTTONS = {
   apps: {
-    url: "page/AppListScreen",
+    url: "AppListScreen",
     type: "internal",
   },
 
   files: {
-    url: "page/FileManagerScreen",
+    url: "FileManagerScreen",
     type: "internal",
   },
 
   storage: {
-    url: "page/StorageInfoScreen",
+    url: "StorageInfoScreen",
     type: "internal",
   },
 
   timer: {
-    url: "page/TimerSetScreen",
+    url: "TimerSetScreen",
     type: "internal",
   },
 
@@ -88,7 +88,7 @@ export const QS_BUTTONS = {
   },
 
   reboot: {
-    url: "page/RebootConfirmScreen",
+    url: "RebootConfirmScreen",
     type: "internal",
     danger: true,
   },

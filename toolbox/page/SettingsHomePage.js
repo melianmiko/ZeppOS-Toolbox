@@ -2,6 +2,7 @@ import { t, extendLocale } from "../../lib/i18n";
 import { SettingsListScreen } from "../../lib/SettingsListScreen";
 
 import { SETTINGS_HOME_TRANSLATIONS } from "../utils/translations";
+import {openPage} from "../utils/misc";
 
 extendLocale(SETTINGS_HOME_TRANSLATIONS);
 
@@ -24,12 +25,12 @@ class SettingsHomePage extends SettingsListScreen {
 
     const allowDanger = !!hmFS.SysProGetBool("mmk_tb_danger_mode");
     this.clickableItem(t("cfg_danger_mode"), `menu/cb_${allowDanger}.png`, () => {
-      hmApp.gotoPage({url: "page/ToggleDanger"});
+      openPage("ToggleDanger");
     })
   }
 
   openPage(id) {
-    hmApp.gotoPage({ url: "page/" + id });
+    openPage(id);
   }
 }
 

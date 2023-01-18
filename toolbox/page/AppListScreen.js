@@ -2,6 +2,7 @@ import {FsUtils} from "../../lib/FsUtils";
 import {t, extendLocale} from "../../lib/i18n";
 
 import {APP_LIST_TRANSLATIONS} from "../utils/translations";
+import {openPage} from "../utils/misc";
 
 extendLocale(APP_LIST_TRANSLATIONS);
 
@@ -120,10 +121,7 @@ class AppsListScreen {
       item_config_count: 1,
       item_click_func: (list, index) => {
         const data = apps[index];
-        hmApp.gotoPage({
-          url: "page/AppEditScreen",
-          param: data.dirname
-        })
+        openPage("AppEditScreen", data.dirname);
       },
       data_type_config: [
         { start: 0, end: apps.length - 1, type_id: 1 },
