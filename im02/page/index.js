@@ -1,125 +1,126 @@
-(() => {
-  class ElIM02TopScore {
-    static colorVariants = [
-      0xc8ffdb, 0x6da175, 0xc4b984, 0xc484a2, 0xbbbbbb, 0xfbffd9,
-    ];
+import {Vibro} from "../../lib/Vibro"
+import {TouchEventManager} from "../../lib/TouchEventManager";
 
-    fetch() {
-      const current = [];
-      for (let i = 0; i < 5; i++) {
-        current[i] = hmFS.SysProGetInt("el02_top" + i);
-        if (!current[i]) current[i] = i == 4 ? 0 : (4 - i) * 100;
-      }
-      return current;
-    }
+import {Im02Game} from "../src/Im02Game";
+import {BG_OPTIONS, BG_OPTION_KEY, HIGHSCORE_KEY} from "../src/Options.js"
 
-    addResult(v) {
-      const current = this.fetch();
+const STYLE_FULLSCREEN = {
+	x: 0,
+	y: 0,
+	w: 192,
+	h: 490
+};
 
-      if (v > current[4]) current[4] = v;
-      current.sort();
-      current.reverse();
+class GameHomeScreen {
+	onGameFinish(score) {
+		let highscore = hmFS.SysProGetInt(HIGHSCORE_KEY);
+		if(!highscore || score > highscore) {
+			hmFS.SysProSetInt(HIGHSCORE_KEY, score);
+		}
 
-      for (let i = 0; i < 5; i++) {
-        hmFS.SysProSetInt("el02_top" + i, current[i]);
-      }
-    }
+		this.updateMenuVisibility();
+	}
 
-    start() {
-      let current = this.fetch();
+	updateMenuVisibility() {
+		this.menu.setProperty(hmUI.prop.VISIBLE, !this.game.started);
 
-      let currentBgColor = hmFS.SysProGetInt("im02_bg");
-      if (!currentBgColor) currentBgColor = 0;
-      let color = ElIM02TopScore.colorVariants[currentBgColor];
+		let highscore = hmFS.SysProGetInt(HIGHSCORE_KEY);
+		if(!highscore) highscore = 0;
+		this.viewScore.setProperty(hmUI.prop.TEXT, String(highscore));
+	}
 
-      let bg = hmUI.createWidget(hmUI.widget.FILL_RECT, {
-        x: 0,
-        y: 0,
-        w: 192,
-        h: 490,
-        color,
-      });
+	build() {
+		// Fetch color
+		let colorID = hmFS.SysProGetInt(BG_OPTION_KEY);
+		if(!colorID) colorID = 0;
 
-      hmUI.createWidget(hmUI.widget.IMG, {
-        x: 49,
-        y: 30,
-        src: "title_top.png",
-      });
+		const backgroundColor = BG_OPTIONS[colorID][1];
 
-      const base = {
-        font_array: [...Array(10).keys()].map((i) => `font/${i}.png`)
-      };
+		// Setup gesture controller
+		hmApp.registerGestureEvent(() => {
+			return this.game.started;
+		});
 
-      // TOP
-      for (let i = 0; i < 5; i++) {
-        hmUI.createWidget(hmUI.widget.TEXT_IMG, {
-          x: 30,
-          y: 100 + i * 30,
-          text: (i + 1).toString(),
-          ...base,
-        });
-        hmUI.createWidget(hmUI.widget.TEXT_IMG, {
-          x: 100,
-          y: 100 + i * 30,
-          text: current[i].toString(),
-          ...base,
-        });
-      }
+		// Game data layer
+		hmUI.createWidget(hmUI.widget.FILL_RECT, {
+			...STYLE_FULLSCREEN,
+			color: backgroundColor,
+		});
+		this.game = new Im02Game();
+		this.game.onFinish = (v) => this.onGameFinish(v);
+		this.game.init();
 
-      // Play btn
-      hmUI.createWidget(hmUI.widget.IMG, {
-        x: 0,
-        y: 250,
-        pos_x: 72,
-        pos_y: 30,
-        w: 192,
-        h: 100,
-        src: "play.png",
-      }).addEventListener(hmUI.event.CLICK_UP, () => {
-        hmApp.gotoPage({ url: "page/game", param: color });
-      });
+		// Menu group
+		this.menu = hmUI.createWidget(hmUI.widget.GROUP, STYLE_FULLSCREEN);
+		this.menu.createWidget(hmUI.widget.FILL_RECT, {
+			...STYLE_FULLSCREEN,
+			color: backgroundColor,
+		});
 
-      hmUI.createWidget(hmUI.widget.TEXT, {
-        x: 0,
-        y: 350,
-        w: 192,
-        h: 50,
-        align_h: hmUI.align.CENTER_H,
-        align_v: hmUI.align.CENTER_V,
-        text: "Изменить фон",
-        color: 0x0,
-        alpha: 192,
-      }).addEventListener(hmUI.event.CLICK_UP, () => {
-        let current = hmFS.SysProGetInt("im02_bg");
-        if (!current) current = 0;
-        current = (current + 1) % ElIM02TopScore.colorVariants.length;
-        color = ElIM02TopScore.colorVariants[current];
+		this.menu.createWidget(hmUI.widget.IMG, {
+			x: 16,
+			y: 80,
+			src: "logo.png",
+			alpha: 180,
+		});
+			
+		// Play btn
+		const playBtn = this.menu.createWidget(hmUI.widget.IMG, {
+			x: 48,
+			y: (490 - 96) / 2,
+			src: "main_menu/play.png",
+			alpha: 90,
+		});
+		const playBtnEvents = new TouchEventManager(playBtn);
+		playBtnEvents.ontouch = () => {
+			this.game.start();
+			this.updateMenuVisibility();
+		};
 
-        hmFS.SysProSetInt("im02_bg", current);
-        bg.setProperty(hmUI.prop.MORE, { color });
-      });
+		// Settings btn
+		const settingsBtn = this.menu.createWidget(hmUI.widget.IMG, {
+			x: 0,
+			y: 400,
+			src: "main_menu/settings.png",
+			alpha: 60
+		});
+		const settingsBtnEvents = new TouchEventManager(settingsBtn);
+		settingsBtnEvents.ontouch = () => {
+			hmApp.gotoPage({ url: "page/SettingsScreen"});
+		};
 
-      // Copyright
-      hmUI.createWidget(hmUI.widget.IMG, {
-        x: 29,
-        y: 420,
-        alpha: 80,
-        src: "copyright_do_not_remove.png",
-      });
-    }
-  }
+		// Top
+		this.menu.createWidget(hmUI.widget.IMG, {
+			x: 56,
+			y: 340,
+			src: "title_top.png",
+			alpha: 180
+		});
+		this.viewScore = this.menu.createWidget(hmUI.widget.TEXT_IMG, {
+			x: 0,
+			y: 370,
+			w: 192,
+			align_h: hmUI.align.CENTER_H,
+			text: "0",
+			font_array: [...Array(10).keys()].map((i) => `font/${i}.png`),
+		});
 
-  let __$$app$$__ = __$$hmAppManager$$__.currentApp;
-  let __$$module$$__ = __$$app$$__.current;
-  __$$module$$__.module = DeviceRuntimeCore.Page({
-    onInit() {
-      hmSetting.setBrightScreen(30);
-      hmUI.setLayerScrolling(false);
-      
-      new ElIM02TopScore().start();
-    },
-    onDestroy() {
-      hmSetting.setBrightScreenCancel();
-    }
-  });
-})();
+		// Load highscore
+		this.updateMenuVisibility();
+	}
+}
+
+
+let __$$app$$__ = __$$hmAppManager$$__.currentApp;
+let __$$module$$__ = __$$app$$__.current;
+__$$module$$__.module = DeviceRuntimeCore.Page({
+	onInit(bg) {
+		hmSetting.setBrightScreen(360);
+		hmUI.setLayerScrolling(false);
+		(new GameHomeScreen()).build();
+	},
+	onDestroy() {
+		Vibro.cancel();
+		hmSetting.setBrightScreenCancel();
+	}
+});
