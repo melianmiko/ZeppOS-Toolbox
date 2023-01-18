@@ -1,17 +1,9 @@
 import {t, extendLocale} from "../../lib/i18n";
-import { SettingsListScreen } from "../utils/SettingsListScreen";
+import { SettingsListScreen } from "../../lib/SettingsListScreen";
 
-extendLocale({
-	"danger_warn": {
-		"en-US": "This option will show some features, that may cause your device to fail to boot. Continuing, you agree that in some moment all settings of that device may become lost.",
-		"es-Es": "Esta opción mostrará algunas características que pueden causar que su dispositivo no arranque. Continuando, usted acepta que en algún momento se pueden perder todas las configuraciones de ese dispositivo."
+import {TOGGLE_DANGER_TRANSLATIONS} from "../utils/translations";
 
-	},
-	"danger_agree": {
-		"en-US": "Agree, enable",
-		"es-Es": "Aceptar, habilitar"
-	}
-})
+extendLocale(TOGGLE_DANGER_TRANSLATIONS);
 
 class DnagerToggle extends SettingsListScreen {
 	build() {

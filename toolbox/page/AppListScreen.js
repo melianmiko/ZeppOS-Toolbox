@@ -1,15 +1,9 @@
 import {FsUtils} from "../../lib/FsUtils";
 import {t, extendLocale} from "../../lib/i18n";
 
-extendLocale({
-  "title_apps": {
-      "en-US": "Apps",
-      "zh-CN": "应用",
-      "zh-TW": "應用",
-      "ru-RU": "Приложения",
-      "es-Es": "Apps"
-  },
-})
+import {APP_LIST_TRANSLATIONS} from "../utils/translations";
+
+extendLocale(APP_LIST_TRANSLATIONS);
 
 class AppsListScreen {
   app_list_item_type = {

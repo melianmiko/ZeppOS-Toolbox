@@ -1,24 +1,9 @@
 import {t, extendLocale} from "../../lib/i18n";
 import {TouchEventManager} from "../../lib/TouchEventManager";
 
-extendLocale({
-  "timer_start": {
-      "en-US": "Begin",
-      "zh-CN": "开始",
-      "zh-TW": "開始",
-      "ru-RU": "Начать",
-	  "de-DE": "Start",
-	  "es-Es": "Iniciar"
-  },
-  "timer_stop": {
-      "en-US": "Cancel",
-      "zh-CN": "取消",
-      "zh-TW": "取消",
-      "ru-RU": "Отмена",
-	  "de-DE": "Stop",
-	  "es-Es": "Detener"
-  },
-})
+import {TIMER_TRANSLATIONS} from "../utils/translations";
+
+extendLocale(TIMER_TRANSLATIONS)
 
 class TimerSetScreen {
 	STYLE_DISPLAY = {

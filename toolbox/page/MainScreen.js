@@ -1,19 +1,11 @@
-import {QS_BUTTONS, DEFAULT_SETTINGS} from "../utils/data";
-
 import {FsUtils} from "../../lib/FsUtils";
 import {t, extendLocale} from "../../lib/i18n";
 import {TouchEventManager} from "../../lib/TouchEventManager";
 
-extendLocale({
-  "action_customize": {
-      "en-US": "Settings",
-      "zh-CN": "设置",
-      "zh-TW": "設定",
-      "ru-RU": "Настроить",
-      "de-DE": "Einstellungen",
-      "es-Es": "Ajustes"
-  }
-});
+import {QS_BUTTONS, DEFAULT_SETTINGS} from "../utils/data";
+import {MAIN_SCREEN_TRANSLATIONS} from "../utils/translations";
+
+extendLocale(MAIN_SCREEN_TRANSLATIONS);
 
 class MainScreen {
   baseBrightnessConfig = {

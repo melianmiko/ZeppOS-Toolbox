@@ -1,56 +1,9 @@
 import {FsUtils} from "../../lib/FsUtils";
 import {t, extendLocale} from "../../lib/i18n";
 
-extendLocale({
-  "storage_total": {
-      "en-US": "Total",
-      "zh-CN": "总空间",
-      "zh-TW": "手環容量",
-      "ru-RU": "Всего",
-      "de-DE": "Gesamt",
-      "es-Es": "Total"
-  },
-  "storage_free": {
-      "en-US": "Free",
-      "zh-CN": "余空间",
-      "zh-TW": "可用空間",
-      "ru-RU": "Свободно",
-      "de-DE": "Frei",
-      "es-Es": "Libre"
-  },
-  "storage_system": {
-      "en-US": "ZeppOS",
-      "zh-CN": "系统固件",
-      "zh-TW": "系統韌體",
-      "ru-RU": "ZeppOS",
-      "de-DE": "ZeppOS",
-      "es-Es": "ZeppOS"
-  },
-  "storage_watchface": {
-      "en-US": "Watchfaces",
-      "zh-CN": "JS表盘",
-      "zh-TW": "JS錶盤",
-      "ru-RU": "Циферблаты",
-      "de-DE": "Ziffernblätter",
-      "es-Es": "Watchfaces"
-  },
-  "storage_app": {
-      "en-US": "Apps",
-      "zh-CN": "JS应用",
-      "zh-TW": "JS應用",
-      "ru-RU": "Приложения",
-      "de-DE": "Apps",
-      "es-Es": "Apps"
-  },
-  "storage_unknown": {
-      "en-US": "Unknown",
-      "zh-CN": "未知",
-      "zh-TW": "未知",
-      "ru-RU": "Неизвестно",
-      "de-DE": "Unbekannt",
-      "es-Es": "Desconocido"
-  },
-})
+import {STORAGE_INFO_TRANSLATIONS} from "../utils/translations";
+
+extendLocale(STORAGE_INFO_TRANSLATIONS);
 
 class StorageInfoScreen {
   cupStyle = {

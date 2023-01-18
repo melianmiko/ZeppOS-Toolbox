@@ -1,16 +1,9 @@
 import {t, extendLocale} from "../../lib/i18n";
 import {TouchEventManager} from "../../lib/TouchEventManager";
 
-extendLocale({
-	"reboot_confirm": {
-		"en-US": "Click to confirm",
-		"zh-TW": "\u8f15\u6309\u4ee5\u91cd\u555f",
-		"ru-RU": "Нажмите для подтверждения",
-		"de-DE": "Klick zum Bestätigen",
-		"es-Es": "Click para confirmar"
+import {REBOOT_CONFIRM_TRANSLATIONS} from "../utils/translations";
 
-	}
-})
+extendLocale(REBOOT_CONFIRM_TRANSLATIONS);
 
 let __$$app$$__ = __$$hmAppManager$$__.currentApp;
 let __$$module$$__ = __$$app$$__.current;
