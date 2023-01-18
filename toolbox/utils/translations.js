@@ -255,7 +255,7 @@ export const SETTINGS_HOME_TRANSLATIONS = {
     "en-US": "Reader font size",
     "zh-CN": "",
     "zh-TW": "",
-    "ru-RU": "Разм. текста при чтении:"
+    "ru-RU": "Разм. текста при чтении:",
     "de-DE": "",
     "es-ES": "",
   }

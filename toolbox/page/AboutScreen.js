@@ -1,6 +1,6 @@
 import {QS_BUTTONS} from "../utils/data";
 
-const APP_VERSION = "v2023-01-10";
+const APP_VERSION = "v2023-01-19";
 
 const AUTHORS = [
   ["melianmiko", "Developer"],

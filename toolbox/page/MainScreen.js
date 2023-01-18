@@ -25,7 +25,6 @@ class MainScreen {
     try {
       settings = FsUtils.fetchJSON("/storage/mmk_tb_layout.json");
     } catch(e) {
-      console.log(e);
       settings = DEFAULT_SETTINGS;
     }
 
