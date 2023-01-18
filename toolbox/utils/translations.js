@@ -8,7 +8,7 @@ export const APP_EDIT_TRANSLATIONS = {
     "zh-TW": "卸載",
     "ru-RU": "Удалить",
     "de-DE": "Deinstallieren",
-    "es-Es": "Desinstalar",
+    "es-ES": "Desinstalar",
   },
   action_launch: {
     "en-US": "Launch",
@@ -16,7 +16,7 @@ export const APP_EDIT_TRANSLATIONS = {
     "zh-TW": "發射",
     "ru-RU": "Запустить",
     "de-DE": "Starten",
-    "es-Es": "Ejecutar",
+    "es-ES": "Ejecutar",
   },
   uninstall_complete: {
     "en-US": "Uninstalled",
@@ -24,7 +24,7 @@ export const APP_EDIT_TRANSLATIONS = {
     "zh-TW": "已卸載",
     "ru-RU": "Удалено",
     "de-DE": "Deinstalliert",
-    "es-Es": "Desinstalado",
+    "es-ES": "Desinstalado",
   },
   apps_notice_uninstall: {
     "en-US": "Please reboot device to finish",
@@ -32,7 +32,7 @@ export const APP_EDIT_TRANSLATIONS = {
     "zh-TW": "請重啟設備以完成",
     "ru-RU": "Перезагрузите устройство для завершения",
     "de-DE": "Bitte das Gerät neustarten um abzuschließen",
-    "es-Es": "Por favor reinicie el dispositivo",
+    "es-ES": "Por favor reinicie el dispositivo",
   },
   field_size: {
     "en-US": "Size",
@@ -40,7 +40,7 @@ export const APP_EDIT_TRANSLATIONS = {
     "zh-TW": "應用程序大小",
     "ru-RU": "Размер",
     "de-DE": "Größe",
-    "es-Es": "Tamaño",
+    "es-ES": "Tamaño",
   },
   field_vendor: {
     "en-US": "Vendor",
@@ -48,7 +48,7 @@ export const APP_EDIT_TRANSLATIONS = {
     "zh-CN": "小贩",
     "ru-RU": "Разработчик",
     "de-DE": "Hersteller",
-    "es-Es": "Desarrollador",
+    "es-ES": "Desarrollador",
   },
   file_size_ext: {
     "en-US": "Size (ext. config)",
@@ -56,7 +56,7 @@ export const APP_EDIT_TRANSLATIONS = {
     "zh-TW": "大小（外部文件）",
     "ru-RU": "Размер (внешн. файлы)",
     "de-DE": "Größe (ext. config)",
-    "es-Es": "Tamaño (ext. config)",
+    "es-ES": "Tamaño (ext. config)",
   },
   conf_full: {
     "en-US": "Don't keep ext. files on uninstall",
@@ -64,7 +64,7 @@ export const APP_EDIT_TRANSLATIONS = {
     "zh-TW": "卸載時刪除外部文件",
     "ru-RU": "Также удалять внешние файлы",
     "de-DE": "ext Dateien bei Deinstallation NICHT bebehalten",
-    "es-Es": "No conservar archivos ext. después de desinstalar",
+    "es-ES": "No conservar archivos ext. después de desinstalar",
   },
   headline_adv: {
     "en-US": "Advanced",
@@ -72,7 +72,7 @@ export const APP_EDIT_TRANSLATIONS = {
     "zh-TW": "先進的",
     "ru-RU": "Дополнительно",
     "de-DE": "Erweitert",
-    "es-Es": "Avanzado",
+    "es-ES": "Avanzado",
   },
 };
 
@@ -85,7 +85,7 @@ export const APP_LIST_TRANSLATIONS = {
     "zh-CN": "应用",
     "zh-TW": "應用",
     "ru-RU": "Приложения",
-    "es-Es": "Apps",
+    "es-ES": "Apps",
   },
 };
 
@@ -99,7 +99,7 @@ export const FILE_EDIT_TRANSLATIONS = {
     "zh-TW": "以圖片形式檢視",
     "ru-RU": "Прсм. изображение",
     "de-DE": "Zeige als Bild",
-    "es-Es": "Mostrar como imagen",
+    "es-ES": "Mostrar como imagen",
   },
   file_view_as_text: {
     "en-US": "View as text",
@@ -107,7 +107,7 @@ export const FILE_EDIT_TRANSLATIONS = {
     "zh-TW": "以文字形式檢視",
     "ru-RU": "Просм. текст",
     "de-DE": "Zeige als Text",
-    "es-Es": "Mostrar como texto",
+    "es-ES": "Mostrar como texto",
   },
   file_view_as_bin: {
     "en-US": "View as binary",
@@ -115,7 +115,7 @@ export const FILE_EDIT_TRANSLATIONS = {
     "zh-TW": "以二進制形式查看",
     "ru-RU": "Просм. бинарно",
     "de-DE": "Zeige binär",
-    "es-Es": "Mostrar como binario",
+    "es-ES": "Mostrar como binario",
   },
   file_paste: {
     "en-US": "Paste",
@@ -123,7 +123,7 @@ export const FILE_EDIT_TRANSLATIONS = {
     "zh-TW": "貼上",
     "ru-RU": "Вставить",
     "de-DE": "Einfügen",
-    "es-Es": "Pegar",
+    "es-ES": "Pegar",
   },
   file_cut: {
     "en-US": "Cut",
@@ -131,7 +131,7 @@ export const FILE_EDIT_TRANSLATIONS = {
     "zh-TW": "剪下",
     "ru-RU": "Вырезать",
     "de-DE": "Ausschneiden",
-    "es-Es": "Cortar",
+    "es-ES": "Cortar",
   },
   file_copy: {
     "en-US": "Copy",
@@ -139,7 +139,7 @@ export const FILE_EDIT_TRANSLATIONS = {
     "zh-TW": "複製",
     "ru-RU": "Копировать",
     "de-DE": "Kopieren",
-    "es-Es": "Copiar",
+    "es-ES": "Copiar",
   },
   file_delete: {
     "en-US": "Delete",
@@ -147,7 +147,7 @@ export const FILE_EDIT_TRANSLATIONS = {
     "zh-TW": "刪除",
     "ru-RU": "Удалить",
     "de-DE": "Löschen",
-    "es-Es": "Borrar",
+    "es-ES": "Borrar",
   },
   file_manage: {
     "en-US": "Edit...",
@@ -155,7 +155,7 @@ export const FILE_EDIT_TRANSLATIONS = {
     "zh-TW": "編輯...",
     "ru-RU": "Изменить...",
     "de-DE": "Bearbeiten...",
-    "es-Es": "Editar...",
+    "es-ES": "Editar...",
   },
 };
 
@@ -166,7 +166,7 @@ export const MAIN_SCREEN_TRANSLATIONS = {
     "zh-TW": "設定",
     "ru-RU": "Настроить",
     "de-DE": "Einstellungen",
-    "es-Es": "Ajustes",
+    "es-ES": "Ajustes",
   },
 };
 
@@ -176,7 +176,7 @@ export const REBOOT_CONFIRM_TRANSLATIONS = {
     "zh-TW": "輕按以重啟",
     "ru-RU": "Нажмите для подтверждения",
     "de-DE": "Klick zum Bestätigen",
-    "es-Es": "Click para confirmar",
+    "es-ES": "Click para confirmar",
   },
 };
 
@@ -187,7 +187,7 @@ export const SETTINGS_HOME_TRANSLATIONS = {
     "zh-TW": "保留最後一個計時器值",
     "ru-RU": "Запоминать посл. таймер",
     "de-DE": "Letzten Timerwert bebehalten",
-    "es-Es": "Mantener valor del último temporizador",
+    "es-ES": "Mantener valor del último temporizador",
   },
   cfg_fs_unit: {
     "en-US": "Use Base-2 filesize\n1KB = 1024 B",
@@ -195,12 +195,12 @@ export const SETTINGS_HOME_TRANSLATIONS = {
     "zh-TW": "使用 Base-2 文件大小\n1KB = 1024 B",
     "ru-RU": "Считать размер файлов в осн. 2\n1KB = 1024 B",
     "de-DE": "Base-2 Dateigröße\n1KB = 1024 B",
-    "es-Es": "Usar tamaño de archivo base-2\n1KB = 1024 B",
+    "es-ES": "Usar tamaño de archivo base-2\n1KB = 1024 B",
   },
   cfg_danger_mode: {
     "en-US": "Show danger features",
     "ru-RU": "Разрешить опасные функции",
-    "es-Es": "Mostrar funcionalidades peligrosas",
+    "es-ES": "Mostrar funcionalidades peligrosas",
   },
   settings_ui: {
     "en-US": "Customize",
@@ -208,7 +208,7 @@ export const SETTINGS_HOME_TRANSLATIONS = {
     "zh-TW": "定製",
     "ru-RU": "Главная",
     "de-DE": "Anpassen",
-    "es-Es": "Editar",
+    "es-ES": "Editar",
   },
   settings_lang: {
     "en-US": "Language",
@@ -216,7 +216,7 @@ export const SETTINGS_HOME_TRANSLATIONS = {
     "zh-TW": "語言",
     "ru-RU": "Язык",
     "de-DE": "Sprache",
-    "es-Es": "Idioma",
+    "es-ES": "Idioma",
   },
   action_info: {
     "en-US": "About",
@@ -224,7 +224,7 @@ export const SETTINGS_HOME_TRANSLATIONS = {
     "zh-TW": "關於",
     "ru-RU": "О Toolbox",
     "de-DE": "Über...",
-    "es-Es": "Acerca de",
+    "es-ES": "Acerca de",
   },
 };
 
@@ -235,7 +235,7 @@ export const STORAGE_INFO_TRANSLATIONS = {
     "zh-TW": "手環容量",
     "ru-RU": "Всего",
     "de-DE": "Gesamt",
-    "es-Es": "Total",
+    "es-ES": "Total",
   },
   storage_free: {
     "en-US": "Free",
@@ -243,7 +243,7 @@ export const STORAGE_INFO_TRANSLATIONS = {
     "zh-TW": "可用空間",
     "ru-RU": "Свободно",
     "de-DE": "Frei",
-    "es-Es": "Libre",
+    "es-ES": "Libre",
   },
   storage_system: {
     "en-US": "ZeppOS",
@@ -251,7 +251,7 @@ export const STORAGE_INFO_TRANSLATIONS = {
     "zh-TW": "系統韌體",
     "ru-RU": "ZeppOS",
     "de-DE": "ZeppOS",
-    "es-Es": "ZeppOS",
+    "es-ES": "ZeppOS",
   },
   storage_watchface: {
     "en-US": "Watchfaces",
@@ -259,7 +259,7 @@ export const STORAGE_INFO_TRANSLATIONS = {
     "zh-TW": "JS錶盤",
     "ru-RU": "Циферблаты",
     "de-DE": "Ziffernblätter",
-    "es-Es": "Watchfaces",
+    "es-ES": "Watchfaces",
   },
   storage_app: {
     "en-US": "Apps",
@@ -267,7 +267,7 @@ export const STORAGE_INFO_TRANSLATIONS = {
     "zh-TW": "JS應用",
     "ru-RU": "Приложения",
     "de-DE": "Apps",
-    "es-Es": "Apps",
+    "es-ES": "Apps",
   },
   storage_unknown: {
     "en-US": "Unknown",
@@ -275,7 +275,7 @@ export const STORAGE_INFO_TRANSLATIONS = {
     "zh-TW": "未知",
     "ru-RU": "Неизвестно",
     "de-DE": "Unbekannt",
-    "es-Es": "Desconocido",
+    "es-ES": "Desconocido",
   },
 };
 
@@ -286,7 +286,7 @@ export const TIMER_TRANSLATIONS = {
     "zh-TW": "開始",
     "ru-RU": "Начать",
     "de-DE": "Start",
-    "es-Es": "Iniciar",
+    "es-ES": "Iniciar",
   },
   timer_stop: {
     "en-US": "Cancel",
@@ -294,7 +294,7 @@ export const TIMER_TRANSLATIONS = {
     "zh-TW": "取消",
     "ru-RU": "Отмена",
     "de-DE": "Stop",
-    "es-Es": "Detener",
+    "es-ES": "Detener",
   },
 };
 
@@ -302,12 +302,12 @@ export const TOGGLE_DANGER_TRANSLATIONS = {
   danger_warn: {
     "en-US":
       "This option will show some features, that may cause your device to fail to boot. Continuing, you agree that in some moment all settings of that device may become lost.",
-    "es-Es":
+    "es-ES":
       "Esta opción mostrará algunas características que pueden causar que su dispositivo no arranque. Continuando, usted acepta que en algún momento se pueden perder todas las configuraciones de ese dispositivo.",
   },
   danger_agree: {
     "en-US": "Agree, enable",
-    "es-Es": "Aceptar, habilitar",
+    "es-ES": "Aceptar, habilitar",
   },
 };
 
@@ -322,7 +322,7 @@ export const QS_TILE_NAMES = {
     "zh-TW": "應用管理器",
     "ru-RU": "Упр. приложениями",
     "de-DE": "Apps Manager",
-    "es-Es": "Administrador de aplicacioness",
+    "es-ES": "Administrador de aplicacioness",
   },
   qs_files: {
     "en-US": "File manager",
@@ -330,7 +330,7 @@ export const QS_TILE_NAMES = {
     "zh-TW": "檔案管理器",
     "ru-RU": "Файловый менеджер",
     "de-DE": "Dateimanager",
-    "es-Es": "Administrador de archivos",
+    "es-ES": "Administrador de archivos",
   },
   qs_storage: {
     "en-US": "Disk usage",
@@ -338,7 +338,7 @@ export const QS_TILE_NAMES = {
     "zh-TW": "儲存空間",
     "ru-RU": "Память",
     "de-DE": "Speichernutzung",
-    "es-Es": "Uso de almacenamiento",
+    "es-ES": "Uso de almacenamiento",
   },
   qs_dnd: {
     "en-US": "DND settings",
@@ -346,7 +346,7 @@ export const QS_TILE_NAMES = {
     "zh-TW": "勿擾",
     "ru-RU": "Не беспокоить",
     "de-DE": "BNS Einstellungen",
-    "es-Es": "Ajustes DND",
+    "es-ES": "Ajustes DND",
   },
   qs_flashlight: {
     "en-US": "Flashlight app",
@@ -354,7 +354,7 @@ export const QS_TILE_NAMES = {
     "zh-TW": "手電筒",
     "ru-RU": "Фонарик",
     "de-DE": "Taschenlampe App",
-    "es-Es": "Luz flash",
+    "es-ES": "Luz flash",
   },
   qs_camera: {
     "en-US": "Camera app",
@@ -362,7 +362,7 @@ export const QS_TILE_NAMES = {
     "zh-TW": "遙控拍照",
     "ru-RU": "Камера",
     "de-DE": "Kamera App",
-    "es-Es": "Camara",
+    "es-ES": "Camara",
   },
   qs_settings: {
     "en-US": "Settings app",
@@ -370,7 +370,7 @@ export const QS_TILE_NAMES = {
     "zh-TW": "手環設定",
     "ru-RU": "Настройки",
     "de-DE": "Einstellungen App",
-    "es-Es": "Ajustes",
+    "es-ES": "Ajustes",
   },
   qs_brightness_btn: {
     "en-US": "Brightness",
@@ -378,7 +378,7 @@ export const QS_TILE_NAMES = {
     "zh-TW": "亮度",
     "ru-RU": "Яркость",
     "de-DE": "Helligkeit",
-    "es-Es": "Brillo",
+    "es-ES": "Brillo",
   },
   qs_aod: {
     "en-US": "AOD",
@@ -386,7 +386,7 @@ export const QS_TILE_NAMES = {
     "zh-TW": "AOD",
     "ru-RU": "AOD",
     "de-DE": "AOD",
-    "es-Es": "AOD",
+    "es-ES": "AOD",
   },
   qs_powersave: {
     "en-US": "Powersave",
@@ -394,7 +394,7 @@ export const QS_TILE_NAMES = {
     "zh-TW": "省電模式",
     "ru-RU": "Энергосбережение",
     "de-DE": "Energiesparen",
-    "es-Es": "Ahorro de energía",
+    "es-ES": "Ahorro de energía",
   },
   qs_system: {
     "en-US": "System settings",
@@ -402,7 +402,7 @@ export const QS_TILE_NAMES = {
     "zh-TW": "系統設定",
     "ru-RU": "Настройки системы",
     "de-DE": "Systemeinstellungen",
-    "es-Es": "Ajustes del sistema",
+    "es-ES": "Ajustes del sistema",
   },
   qs_applistsort: {
     "en-US": "App list sort",
@@ -410,7 +410,7 @@ export const QS_TILE_NAMES = {
     "zh-TW": "應用列表設定",
     "ru-RU": "Настр. меню приложений",
     "de-DE": "Apps sortieren",
-    "es-Es": "Ordener lista de apps",
+    "es-ES": "Ordener lista de apps",
   },
   qs_poweroff: {
     "en-US": "Power off",
@@ -418,7 +418,7 @@ export const QS_TILE_NAMES = {
     "zh-TW": "關機",
     "ru-RU": "Выключить",
     "de-DE": "Ausschalten",
-    "es-Es": "Apagar",
+    "es-ES": "Apagar",
   },
   qs_reboot: {
     "en-US": "Reboot",
@@ -426,7 +426,7 @@ export const QS_TILE_NAMES = {
     "zh-TW": "重啟",
     "ru-RU": "Перезагрузить",
     "de-DE": "Neustart",
-    "es-Es": "Reiniciar",
+    "es-ES": "Reiniciar",
   },
   qs_timer: {
     "en-US": "Background timer",
@@ -434,7 +434,7 @@ export const QS_TILE_NAMES = {
     "zh-TW": "後台計時器",
     "ru-RU": "Фоновый таймер",
     "de-DE": "Hintergrund Timer",
-    "es-Es": "Temporizador de fondo",
+    "es-ES": "Temporizador de fondo",
   },
   qs_wake_on_wrist: {
     "en-US": "Wake on Wrist",
@@ -442,6 +442,6 @@ export const QS_TILE_NAMES = {
     "zh-TW": "喚醒手腕",
     "ru-RU": "Пробуждение при повороте",
     "de-DE": "Aufwachen am Handgelenk",
-    "es-Es": "Wake on Wrist",
+    "es-ES": "Wake on Wrist",
   },
 };
