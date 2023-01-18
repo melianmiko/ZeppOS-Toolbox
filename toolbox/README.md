@@ -9,11 +9,12 @@ File & apps manager, background timer, Quick Settings access.
 - [🌍 Website](https://melianmiko.ru/en/sb7/toolbox/)
 - [📁 Download](https://st.melianmiko.ru/smartband7)
 
-## Authors
+## Contributors
 - Main developer: melianmiko
 - BandBBS publisher: Vanek905/zhenyok905
-- zh-TW translation author: 天劍血狐
-- de-DE translation author: harrybin
+- zh-TW translation: 天劍血狐
+- de-DE translation: harrybin
+- es-ES translation: arenasjuanf
 
 ## Used assets
 - Material Icons by Google LTD, Apache 2.0
