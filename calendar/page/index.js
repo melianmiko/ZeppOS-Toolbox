@@ -1,3 +1,5 @@
+import {FsUtils} from "../../lib/FsUtils";
+
 class AppCalendar {
   columns = [];
 
@@ -58,9 +60,9 @@ class AppCalendar {
     }
 
     this.highlights = hmUI.createWidget(hmUI.widget.TEXT, {
-      x: 12,
+      x: 0,
       y: 288,
-      w: 168,
+      w: 192,
       h: 0,
       text_size: 18,
       text_style: hmUI.text_style.WRAP,
@@ -179,3 +181,12 @@ class AppCalendar {
     })
   }
 }
+
+let __$$app$$__ = __$$hmAppManager$$__.currentApp;
+let __$$module$$__ = __$$app$$__.current;
+__$$module$$__.module = DeviceRuntimeCore.Page({
+  onInit() {
+    const cal = new AppCalendar();
+    cal.start();
+  },
+});
