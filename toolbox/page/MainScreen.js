@@ -47,11 +47,6 @@ class MainScreen {
     const battery = hmSensor.createSensor(hmSensor.id.BATTERY);
     const value = battery.current + "%";
 
-    hmUI.createWidget(hmUI.widget.IMG, {
-      x: 60,
-      y: 28,
-      src: "battery.png"
-    })
     hmUI.createWidget(hmUI.widget.TEXT, {
       x: 84,
       y: 28,
@@ -61,7 +56,26 @@ class MainScreen {
       color: 0x999999,
       align_h: hmUI.align.CENTER_H,
       align_v: hmUI.align.CENTER_V
-    })
+    });
+
+    const batImg = hmUI.createWidget(hmUI.widget.IMG, {
+      x: 0,
+      y: 0,
+      w: 192,
+      h: 64,
+      pos_x: 60,
+      pos_y: 28,
+      src: "battery.png"
+    });
+
+    const batEv = new TouchEventManager(batImg);
+    batEv.ontouch = () => hmApp.startApp({
+      url: "Settings_batteryManagerScreen",
+      native: true
+    });
+    batEv.onlongtouch = () => hmApp.startApp({
+      url: ""
+    });
   }
 
   drawButtons(tiles, topOffset) {

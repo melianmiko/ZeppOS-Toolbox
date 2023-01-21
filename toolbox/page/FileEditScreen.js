@@ -14,6 +14,8 @@ class FileEditScreen extends SettingsListScreen {
   }
 
   build() {
+    this.allowDanger = hmFS.SysProGetBool("mmk_tb_danger_mode");
+
     // Stats
     this.field("Location", this.path);
 
@@ -43,22 +45,48 @@ class FileEditScreen extends SettingsListScreen {
       });
     }
 
-    // Delete btn
+    if(this.path == "/storage") return;
+
+    if(this.canEdit()) {
+      this.buildEditRows(fileSize)
+    } else {
+      this.text(t("edit_enable_danger"));
+    }
+  }
+
+  buildEditRows(fileSize) {
     this.headline(t("file_manage"));
-    if(this.canPaste() && fileSize == 0) {
+    if(this.canPaste() && fileSize == 0)
       this.clickableItem(t("file_paste"), "menu/paste.png", () => {
         this.doPaste();
       })
-    }
+
     this.clickableItem(t("file_cut"), "menu/cut.png", () => {
       this.pathToBuffer(true);
     });
+
     this.clickableItem(t("file_copy"), "menu/copy.png", () => {
       this.pathToBuffer(false);
     });
+
     this.clickableItem(t("file_delete"), "menu/delete.png", () => {
       this.delete();
     });
+  }
+
+  canEdit() {
+    if(this.allowDanger) return true;
+    
+    const editablePaths = [
+      "/storage/js_apps",
+      "/storage/js_watchfaces"
+    ];
+
+    for(const ep of editablePaths)
+      if(this.path.startsWith(ep))
+        return true;
+
+    return false;
   }
 
   delete() {

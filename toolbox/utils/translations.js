@@ -170,6 +170,14 @@ export const FILE_EDIT_TRANSLATIONS = {
     "de-DE": "Bearbeiten...",
     "es-ES": "Editar...",
   },
+  edit_enable_danger: {
+    "en-US": "To edit this file/folder, unlock \"Danger features\" in app settings",
+    "zh-CN": "",
+    "zh-TW": "",
+    "ru-RU": "Чтобы редактировать этот объект, разблок. \"Опасные функции\" в настройках",
+    "de-DE": "",
+    "es-ES": "",
+  }
 };
 
 export const MAIN_SCREEN_TRANSLATIONS = {
@@ -212,10 +220,10 @@ export const SETTINGS_HOME_TRANSLATIONS = {
     "es-ES": "Usar tamaño de archivo base-2\n1KB = 1024 B",
   },
   cfg_danger_mode: {
-    "en-US": "Show danger features",
+    "en-US": "Unlock danger features",
     "zh-CN": "",
     "zh-TW": "",
-    "ru-RU": "Разрешить опасные функции",
+    "ru-RU": "Разблок. опасные функции",
     "de-DE": "",
     "es-ES": "Mostrar funcionalidades peligrosas",
   },
