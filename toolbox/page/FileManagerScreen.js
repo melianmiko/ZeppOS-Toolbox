@@ -3,15 +3,41 @@ import {FsUtils} from "../../lib/FsUtils";
 import {openPage} from "../utils/misc";
 
 class FileManagerScreen {
-  FILE_ROW_TYPE = {
+  maxItems = 16;
+
+  HEADER_ROW_TYPE = {
     type_id: 1,
+    item_height: 96,
+    item_bg_color: 0x0,
+    item_bg_radius: 0,
+    text_view: [{
+      x: 4,
+      y: 64,
+      w: 172,
+      h: 32,
+      key: "title",
+      color: 0xEEEEEE,
+    }],
+    text_view_count: 1,
+    image_view: [{
+      x: 84,
+      y: 24,
+      w: 24,
+      h: 24,
+      key: "icon"
+    }],
+    image_view_count: 1
+  };
+
+  FILE_ROW_TYPE = {
+    type_id: 2,
     item_height: 64,
-    item_bg_color: 0x222222,
+    item_bg_color: 0x111111,
     item_bg_radius: 12,
     text_view: [{
-      x: 56,
+      x: 44,
       y: 0,
-      w: 112,
+      w: 144,
       h: 64,
       key: "name",
       color: 0xffffff,
@@ -19,7 +45,7 @@ class FileManagerScreen {
     }],
     text_view_count: 1,
     image_view: [{
-      x: 16,
+      x: 10,
       y: 20,
       w: 24,
       h: 24,
@@ -47,39 +73,22 @@ class FileManagerScreen {
   start() {
     hmSetting.setBrightScreen(1800);
 
-    this.viewPath = hmUI.createWidget(hmUI.widget.TEXT, {
-      x: 48,
-      y: 0,
-      w: 96,
-      h: 64,
-      align_h: hmUI.align.CENTER_H,
-      align_v: hmUI.align.CENTER_V,
-      text: "",
-      color: 0xffffff
-    });
-
     this.viewFiles = hmUI.createWidget(hmUI.widget.SCROLL_LIST, {
-      x: 12,
-      y: 64,
-      w: 192-24,
-      h: 362,
-      item_space: 12,
-      item_config: [this.FILE_ROW_TYPE],
-      item_config_count: 1,
+      x: 0,
+      y: 0,
+      w: 192,
+      h: 490,
+      item_space: 8,
+      item_config: [
+        this.FILE_ROW_TYPE, 
+        this.HEADER_ROW_TYPE,
+      ],
+      item_config_count: 2,
       item_click_func: (_, i) => this.onRowClick(i),
       data_type_config: [],
       data_type_config_count: 0,
       data_array: [],
       data_count: 0
-    });
-
-    hmUI.createWidget(hmUI.widget.BUTTON, {
-      x: 0,
-      y: 426,
-      w: 192,
-      h: 64,
-      text: "...",
-      click_func: () => this.modify(this.path)
     });
 
     // Run
@@ -125,39 +134,85 @@ class FileManagerScreen {
       folders.push({name: "..", icon: "files/up.png"});
     }
 
-    for(let fn of dirContent) {
+    for(let i = 0; i < Math.min(dirContent.length, this.maxItems); i++) {
+      const fn = dirContent[i];
+
       if(this.isFolder(this.path + "/" + fn)) {
+
         folders.push({
           name: fn,
           icon: "files/folder.png"
         });
-        continue;
-      }
 
-      files.push({
-        name: fn,
-        icon: this.getFileIcon(fn)
-      });
+      } else {
+
+        files.push({
+          name: fn,
+          icon: this.getFileIcon(fn)
+        });
+
+      }
     }
 
-    this.contents = [...folders, ...files];
-    this.viewPath.setProperty(hmUI.prop.TEXT, this.path);
+    folders.sort(this._sortFnc);
+    files.sort(this._sortFnc);
+
+    this.contents = [
+      {
+        title: this.path, 
+        icon: "menu/context.png",
+        isContext: true
+      },
+      ...folders, 
+      ...files
+    ];
+
+    this.contents.push(dirContent.length > this.maxItems ? {
+      title: "",
+      icon: "menu/expand.png",
+      isExpand: true
+    } : {
+      title: "",
+      icon: ""
+    })
+
+    console.log(this.contents);
 
     this.viewFiles.setProperty(hmUI.prop.UPDATE_DATA, {
-      data_type_config: [{
-        start: 0,
-        end: this.contents.length-1,
-        type_id: 1,
-      }],
-      data_type_config_count: 1,
-      data_count: this.contents.length,
+      data_type_config: [
+        {
+          start: 0,
+          end: 0,
+          type_id: 1,
+        },
+        {
+          start: 1,
+          end: this.contents.length - 2,
+          type_id: 2,
+        },
+        {
+          start: this.contents.length - 1,
+          end: this.contents.length - 1,
+          type_id: 1,
+        },
+      ],
+      data_type_config_count: 3,
       data_array: this.contents,
+      data_count: this.contents.length,
       on_page: 1
     })
   }
 
   onRowClick(i) {
     if(!this.contents[i]) return;
+
+    if(this.contents[i].isContext) 
+      return this.modify(this.path);
+    else if(this.contents[i].isExpand) {
+      this.maxItems += 50;
+      return this.refresh();
+    }
+
     let val = this.contents[i].name;
 
     let path = this.path + "/" + val;
@@ -166,12 +221,15 @@ class FileManagerScreen {
     }
 
     if (this.isFolder(path)) {
-      // Directory
       console.log("newpath", path);
       this.applyPath(path);
     } else {
       this.modify(path);
     }
+  }
+
+  _sortFnc(a, b) {
+    return a.name < b.name ? -1 : 1;
   }
 }
 
@@ -181,6 +239,7 @@ let __$$app$$__ = __$$hmAppManager$$__.currentApp;
 let __$$module$$__ = __$$app$$__.current;
 __$$module$$__.module = DeviceRuntimeCore.Page({
   onInit(p) {
+    hmUI.setLayerScrolling(false);
     screen = new FileManagerScreen();
     screen.start();
   },
