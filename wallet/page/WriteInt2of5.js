@@ -1,5 +1,5 @@
 import { CardsStorage } from "../utils/CardsStorage";
-import { CanvasTGA } from "../lib/CanvasTGA.js";
+import { CanvasTGA } from "../../lib/CanvasTGA.js";
 import { CardWriterUI } from "../utils/CardWriterUI";
 
 const I2OF5_DATA = [

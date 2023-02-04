@@ -1,8 +1,8 @@
-import { qrcode } from "../lib/external/qrcode";
+import { qrcode } from "../../lib/3rd/qrcode";
 import { CardsStorage } from "../utils/CardsStorage";
-import { CanvasTGA } from "../lib/CanvasTGA.js";
-import {FsUtils} from "../lib/FsUtils";
-import {goBack} from "../lib/bugWorkaround";
+import { CanvasTGA } from "../../lib/CanvasTGA.js";
+import {FsUtils} from "../../lib/FsUtils";
+import {goBack} from "../../lib/bugWorkaround";
 
 class BackupTool {
 	start() {

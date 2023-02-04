@@ -1,7 +1,7 @@
-import {ScreenBoard} from "../utils/ScreenBoard";
-import {TouchEventManager} from "../lib/TouchEventManager";
+import {ScreenBoard} from "../../lib/ScreenBoard";
+import {TouchEventManager} from "../../lib/TouchEventManager";
 import {CardsStorage} from "../utils/CardsStorage";
-import {goBackGestureCallback} from "../lib/bugWorkaround";
+import {goBackGestureCallback} from "../../lib/bugWorkaround";
 
 const FORMATS = [
   "QR",

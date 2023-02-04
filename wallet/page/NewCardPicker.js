@@ -1,8 +1,8 @@
-import {TouchEventManager} from "../lib/TouchEventManager";
-import {ScreenBoard} from "../utils/ScreenBoard";
+import {TouchEventManager} from "../../lib/TouchEventManager";
+import {ScreenBoard} from "../../lib/ScreenBoard";
 import {CardsStorage} from "../utils/CardsStorage";
 import {CardTypes} from "../utils/database";
-import {goBackGestureCallback} from "../lib/bugWorkaround";
+import {goBackGestureCallback} from "../../lib/bugWorkaround";
 
 class SubScreen {
   widgets = [];

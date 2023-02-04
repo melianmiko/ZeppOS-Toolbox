@@ -1,8 +1,8 @@
 import { CardsStorage } from "../utils/CardsStorage";
-import { CanvasTGA } from "../lib/CanvasTGA.js";
+import { CanvasTGA } from "../../lib/CanvasTGA.js";
 import { autoPrettifyBarcode } from "../utils/CanvasTools";
 import { CardWriterUI } from "../utils/CardWriterUI";
-import { PDF417 } from "../lib/external/pdf417.js";
+import { PDF417 } from "../../lib/3rd/pdf417.js";
 
 class PdfWriter extends CardWriterUI {
   process(params) {

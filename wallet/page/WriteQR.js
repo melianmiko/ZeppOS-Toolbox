@@ -1,8 +1,8 @@
 import { CardsStorage } from "../utils/CardsStorage";
-import { CanvasTGA } from "../lib/CanvasTGA.js";
+import { CanvasTGA } from "../../lib/CanvasTGA.js";
 import { autoPrettifyBarcode } from "../utils/CanvasTools";
 import { CardWriterUI } from "../utils/CardWriterUI";
-import {qrcode} from "../lib/external/qrcode";
+import {qrcode} from "../../lib/3rd/qrcode";
 
 class QRWriter extends CardWriterUI {
   process(params) {

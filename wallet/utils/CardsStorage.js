@@ -1,4 +1,4 @@
-import {FsUtils} from "../lib/FsUtils";
+import {FsUtils} from "../../lib/FsUtils";
 
 export class CardsStorage {
 	constructor() {

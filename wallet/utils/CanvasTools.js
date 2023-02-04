@@ -1,4 +1,4 @@
-import { CanvasTGA } from "../lib/CanvasTGA.js";
+import { CanvasTGA } from "../../lib/CanvasTGA.js";
 
 export function autoPrettifyBarcode(canvas) {
 	canvas = CanvasTGA.rotate90(canvas);

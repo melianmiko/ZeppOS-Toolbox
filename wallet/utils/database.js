@@ -89,12 +89,9 @@ export const CardTypes = {
 	"fixprice": {
 		format: "EAN13",
 		keyboard: "123",
-		info: "Только первые 9 цифр с физической карты. Либо 13 под штрих-кодом",
-		displayFormat: format3,
-		inputValidate: (v) => v.length == 9,
-		codePostProcessing: (v) => {
-			return "2041" + v;
-		}
+		info: "13 цифр, под штрих-кодом",
+		displayFormat: formatEan13,
+		inputValidate: (v) => v.length == 13,
 	},
 	"detmir": {
 		format: "CODE128",

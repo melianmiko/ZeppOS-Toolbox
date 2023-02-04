@@ -1,6 +1,6 @@
-import {FsUtils} from "../lib/FsUtils";
+import {FsUtils} from "../../lib/FsUtils";
 import {CardsStorage} from "../utils/CardsStorage";
-import {TouchEventManager} from "../lib/TouchEventManager";
+import {TouchEventManager} from "../../lib/TouchEventManager";
 
 class HomePage {
   viewerVisible = false;

@@ -1,5 +1,5 @@
 import { CardsStorage } from "../utils/CardsStorage";
-import {goBackGestureCallback, goBack} from "../lib/bugWorkaround";
+import {goBackGestureCallback, goBack} from "../../lib/bugWorkaround";
 
 class CardViewScreen {
   constructor(params) {
