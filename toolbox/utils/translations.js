@@ -24,7 +24,7 @@ export const APP_EDIT_TRANSLATIONS = {
   },
   action_launch: {
     "en-US": "Launch",
-    "zh-CN": "发射",
+    "zh-CN": "启动",
     "zh-TW": "發射",
     "ru-RU": "Запустить",
     "de-DE": "Starten",
@@ -57,7 +57,7 @@ export const APP_EDIT_TRANSLATIONS = {
   field_vendor: {
     "en-US": "Vendor",
     "zh-TW": "小販",
-    "zh-CN": "小贩",
+    "zh-CN": "作者",
     "ru-RU": "Разработчик",
     "de-DE": "Hersteller",
     "es-ES": "Desarrollador",
@@ -80,7 +80,7 @@ export const APP_EDIT_TRANSLATIONS = {
   },
   headline_adv: {
     "en-US": "Advanced",
-    "zh-CN": "先进的",
+    "zh-CN": "高级",
     "zh-TW": "先進的",
     "ru-RU": "Дополнительно",
     "de-DE": "Erweitert",
@@ -124,7 +124,7 @@ export const FILE_EDIT_TRANSLATIONS = {
   },
   file_view_as_bin: {
     "en-US": "View as binary",
-    "zh-CN": "以文字形式檢視",
+    "zh-CN": "以十六进制查看",
     "zh-TW": "以二進制形式查看",
     "ru-RU": "Просм. бинарно",
     "de-DE": "Zeige binär",
@@ -172,7 +172,7 @@ export const FILE_EDIT_TRANSLATIONS = {
   },
   edit_enable_danger: {
     "en-US": "To edit this file/folder, unlock \"Danger features\" in app settings",
-    "zh-CN": "",
+    "zh-CN": "要编辑此文件/文件夹,请在应用程序设置中\"解锁危险功能\"",
     "zh-TW": "",
     "ru-RU": "Чтобы редактировать этот объект, разблок. \"Опасные функции\" в настройках",
     "de-DE": "",
@@ -194,7 +194,7 @@ export const MAIN_SCREEN_TRANSLATIONS = {
 export const REBOOT_CONFIRM_TRANSLATIONS = {
   reboot_confirm: {
     "en-US": "Click to confirm",
-    "zh-CN": "",
+    "zh-CN": "轻按以重启",
     "zh-TW": "輕按以重啟",
     "ru-RU": "Нажмите для подтверждения",
     "de-DE": "Klick zum Bestätigen",
@@ -221,7 +221,7 @@ export const SETTINGS_HOME_TRANSLATIONS = {
   },
   cfg_danger_mode: {
     "en-US": "Unlock danger features",
-    "zh-CN": "",
+    "zh-CN": "解锁危险功能",
     "zh-TW": "",
     "ru-RU": "Разблок. опасные функции",
     "de-DE": "",
@@ -253,7 +253,7 @@ export const SETTINGS_HOME_TRANSLATIONS = {
   },
   headline_tools: {
     "en-US": "Settings:",
-    "zh-CN": "",
+    "zh-CN": "设置:",
     "zh-TW": "",
     "ru-RU": "Настройки:",
     "de-DE": "",
@@ -261,7 +261,7 @@ export const SETTINGS_HOME_TRANSLATIONS = {
   },
   prop_font_size: {
     "en-US": "Reader font size",
-    "zh-CN": "",
+    "zh-CN": "阅读器字体大小",
     "zh-TW": "",
     "ru-RU": "Разм. текста при чтении:",
     "de-DE": "",
@@ -345,7 +345,8 @@ export const TOGGLE_DANGER_TRANSLATIONS = {
       "that may cause your device to fail to boot. "+
       "Continuing, you agree that in some moment all"+
       " settings of that device may become lost.",
-    "zh-CN": "",
+    "zh-CN": "此选项将显示一些可能导致您的设备无法启动功能."+
+      "如果您接受将来可能导致该设备的设置丢失的话请继续.",
     "zh-TW": "",
     "ru-RU": "",
     "de-De": "",
@@ -356,7 +357,7 @@ export const TOGGLE_DANGER_TRANSLATIONS = {
   },
   danger_agree: {
     "en-US": "Agree, enable",
-    "zh-CN": "",
+    "zh-CN": "接受并继续",
     "zh-TW": "",
     "ru-RU": "",
     "de-De": "",
@@ -395,7 +396,7 @@ export const QS_TILE_NAMES = {
   },
   qs_dnd: {
     "en-US": "DND settings",
-    "zh-CN": "请勿打扰",
+    "zh-CN": "勿扰设置",
     "zh-TW": "勿擾",
     "ru-RU": "Не беспокоить",
     "de-DE": "BNS Einstellungen",
@@ -411,7 +412,7 @@ export const QS_TILE_NAMES = {
   },
   qs_camera: {
     "en-US": "Camera app",
-    "zh-CN": "相机",
+    "zh-CN": "遥控拍照",
     "zh-TW": "遙控拍照",
     "ru-RU": "Камера",
     "de-DE": "Kamera App",
@@ -419,7 +420,7 @@ export const QS_TILE_NAMES = {
   },
   qs_settings: {
     "en-US": "Settings app",
-    "zh-CN": "设置应用",
+    "zh-CN": "手环设置",
     "zh-TW": "手環設定",
     "ru-RU": "Настройки",
     "de-DE": "Einstellungen App",
@@ -443,7 +444,7 @@ export const QS_TILE_NAMES = {
   },
   qs_powersave: {
     "en-US": "Powersave",
-    "zh-CN": "节能",
+    "zh-CN": "节能模式",
     "zh-TW": "省電模式",
     "ru-RU": "Энергосбережение",
     "de-DE": "Energiesparen",
@@ -451,7 +452,7 @@ export const QS_TILE_NAMES = {
   },
   qs_system: {
     "en-US": "System settings",
-    "zh-CN": "系统设置",
+    "zh-CN": "系统",
     "zh-TW": "系統設定",
     "ru-RU": "Настройки системы",
     "de-DE": "Systemeinstellungen",
@@ -459,7 +460,7 @@ export const QS_TILE_NAMES = {
   },
   qs_applistsort: {
     "en-US": "App list sort",
-    "zh-CN": "应用列表设置",
+    "zh-CN": "应用列表排序",
     "zh-TW": "應用列表設定",
     "ru-RU": "Настр. меню приложений",
     "de-DE": "Apps sortieren",
@@ -483,7 +484,7 @@ export const QS_TILE_NAMES = {
   },
   qs_timer: {
     "en-US": "Background timer",
-    "zh-CN": "后台定时器",
+    "zh-CN": "倒计时",
     "zh-TW": "後台計時器",
     "ru-RU": "Фоновый таймер",
     "de-DE": "Hintergrund Timer",
@@ -491,7 +492,7 @@ export const QS_TILE_NAMES = {
   },
   qs_wake_on_wrist: {
     "en-US": "Wake on Wrist",
-    "zh-CN": "唤醒手腕",
+    "zh-CN": "抬腕唤醒",
     "zh-TW": "喚醒手腕",
     "ru-RU": "Пробуждение при повороте",
     "de-DE": "Aufwachen am Handgelenk",
