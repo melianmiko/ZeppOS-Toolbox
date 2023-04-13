@@ -211,6 +211,15 @@ export const SETTINGS_HOME_TRANSLATIONS = {
     "de-DE": "Letzten Timerwert bebehalten",
     "es-ES": "Mantener valor del último temporizador",
   },
+  cfg_show_size_in_list: {
+    // cn/de/es made with Google Translate
+    "en-US": "Show file size in explorer",
+    "zh-CN": "在资源管理器中显示文件大小",
+    "zh-TW": "在資源管理器中顯示文件大小",
+    "ru-RU": "Размер файлов в проводнике",
+    "de-DE": "Dateigröße im Explorer anzeigen",
+    "es-ES": "Mostrar el tamaño del archivo en el explorador",
+  },
   cfg_fs_unit: {
     "en-US": "Use Base-2 filesize\n1KB = 1024 B",
     "zh-CN": "使用 Base-2 文件大小\n1KB = 1024 B",

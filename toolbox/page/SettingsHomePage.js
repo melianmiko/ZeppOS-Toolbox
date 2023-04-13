@@ -19,6 +19,7 @@ class SettingsHomePage extends SettingsListScreen {
     );
 
     this.headline(t("headline_tools"))
+    this.propCheckbox(t("cfg_show_size_in_list"), "mmk_tb_filesize", false);
     this.propCheckbox(t("cfg_timer_keep"), "mmk_tb_cfg_timer_keep", true);
     this.propCheckbox(t("cfg_fs_unit"), "mmk_tb_fs_unit", false);
     this.propInteger(t("prop_font_size"), "mmk_tb_fontsize", 16);
