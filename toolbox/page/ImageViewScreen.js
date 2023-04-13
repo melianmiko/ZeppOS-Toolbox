@@ -34,6 +34,7 @@ __$$module$$__.module = DeviceRuntimeCore.Page({
     AppGesture.withYellowWorkaround("left", {
       appid: 33904,
       url: "page/ImageViewScreen",
+      param: p,
     });
     AppGesture.init();
     new ImageViewScreen(p).start();

@@ -1,4 +1,5 @@
 import {FsUtils} from "../../lib/FsUtils";
+import { AppGesture } from "../../lib/AppGesture";
 
 const BOX_HEIGHT = 300;
 
@@ -79,12 +80,12 @@ class TextViewScreen {
 		});
 
 		// Overlay
-		this.overlay = hmUI.createWidget(hmUI.widget.IMG, {
-			x: 0,
-			y: 0,
-			src: "loading.png",
-			alpha: 200
-		});
+		// this.overlay = hmUI.createWidget(hmUI.widget.IMG, {
+		// 	x: 0,
+		// 	y: 0,
+		// 	src: "loading.png",
+		// 	alpha: 200
+		// });
 	}
 
 	getTextHeight(text) {
@@ -109,16 +110,16 @@ class TextViewScreen {
 	}
 
 	displayForward() {
-		this.overlay.setProperty(hmUI.prop.VISIBLE, true);
-		const ti = timer.createTimer(150, 150, () => {
-			timer.stopTimer(ti);
+		// this.overlay.setProperty(hmUI.prop.VISIBLE, true);
+		// const ti = timer.createTimer(150, 150, () => {
+			// timer.stopTimer(ti);
 			this._displayForward();
-			this.overlay.setProperty(hmUI.prop.VISIBLE, false);
-		});
+			// this.overlay.setProperty(hmUI.prop.VISIBLE, false);
+		// });
 	}
 
 	_displayForward() {
-		const temp = new Uint8Array(4);
+		const temp = new Uint8Array(15 * 4);
 
 		hmFS.read(this.file, temp.buffer, 0, temp.byteLength);
 
@@ -127,26 +128,32 @@ class TextViewScreen {
 			readSinceLastSpace = 0,
 			result = "";
 
-		while(readBytes < readLimit) {
-			hmFS.seek(this.file, this.position + readBytes, hmFS.SEEK_SET);
-			hmFS.read(this.file, temp.buffer, 0, 4);
+		for(let step = 15; step > 0; step = Math.floor(step / 2)) {
+			while(readBytes < readLimit) {
+				hmFS.seek(this.file, this.position + readBytes, hmFS.SEEK_SET);
+				hmFS.read(this.file, temp.buffer, 0, step * 4);
 
-			const [char, byteLength] = FsUtils.decodeUtf8(temp, 1, 0);
+				const [char, byteLength] = FsUtils.decodeUtf8(temp, step, 0);
 
-			// Check screen fit
-			if(this.getTextHeight(result + char) > BOX_HEIGHT) {
-				if(char != " " && char != "\n" && readBytes - readSinceLastSpace > 0) {
-					readBytes -= readSinceLastSpace;
-					result = result.substring(0, result.lastIndexOf(" "));
+				// Check screen fit
+				if(this.getTextHeight(result + char) > BOX_HEIGHT) {
+					if(char != " " && char != "\n" && readBytes - readSinceLastSpace > 0) {
+						readBytes -= readSinceLastSpace;
+						result = result.substring(0, result.lastIndexOf(" "));
+					}
+					break;
 				}
-				break;
+
+				readBytes += byteLength;
+				const spaceIndex = char.indexOf(" ");
+				if(spaceIndex > -1) {
+					readSinceLastSpace = spaceIndex;
+				} else {
+					readSinceLastSpace += byteLength;
+				}
+
+				result += result.length == 0 ? char.trim() : char;
 			}
-
-			readBytes += byteLength;
-			char == " " ? readSinceLastSpace = 0 : readSinceLastSpace += byteLength;
-
-			if(result != "" || char != "\n")
-				result += char;
 		}
 
 		this.bufferSize = readBytes;
@@ -193,6 +200,13 @@ let __$$app$$__ = __$$hmAppManager$$__.currentApp;
 let __$$module$$__ = __$$app$$__.current;
 __$$module$$__.module = DeviceRuntimeCore.Page({
   onInit(p) {
+    AppGesture.withYellowWorkaround("left", {
+      appid: 33904,
+      url: "page/TextViewScreen",
+      param: p,
+    });
+    AppGesture.init();
+
   	if(!p) p = "/storage/js_apps/00008470/README.txt";
     new TextViewScreen(p).start();
   }

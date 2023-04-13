@@ -112,6 +112,7 @@ __$$module$$__.module = DeviceRuntimeCore.Page({
     AppGesture.withYellowWorkaround("left", {
       appid: 33904,
       url: "page/HexdumpScreen",
+      param: p,
     });
     AppGesture.init();
     new HexdumpScreen(p).start();
