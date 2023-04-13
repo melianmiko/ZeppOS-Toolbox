@@ -1,3 +1,5 @@
+import { AppGesture } from "../../lib/AppGesture";
+
 class ImageViewScreen {
 	constructor(data) {
 		this.path = data;
@@ -29,6 +31,11 @@ let __$$app$$__ = __$$hmAppManager$$__.currentApp;
 let __$$module$$__ = __$$app$$__.current;
 __$$module$$__.module = DeviceRuntimeCore.Page({
   onInit(p) {
+    AppGesture.withYellowWorkaround("left", {
+      appid: 33904,
+      url: "page/ImageViewScreen",
+    });
+    AppGesture.init();
     new ImageViewScreen(p).start();
   }
 });

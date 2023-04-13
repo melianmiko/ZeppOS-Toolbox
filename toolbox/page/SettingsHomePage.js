@@ -1,5 +1,6 @@
 import { t, extendLocale } from "../../lib/i18n";
 import { SettingsListScreen } from "../../lib/SettingsListScreen";
+import { AppGesture } from "../../lib/AppGesture";
 
 import { SETTINGS_HOME_TRANSLATIONS } from "../utils/translations";
 import {openPage} from "../utils/misc";
@@ -39,6 +40,12 @@ let __$$app$$__ = __$$hmAppManager$$__.currentApp;
 let __$$module$$__ = __$$app$$__.current;
 __$$module$$__.module = DeviceRuntimeCore.Page({
   onInit(p) {
+    AppGesture.withYellowWorkaround("left", {
+      appid: 33904,
+      url: "page/SettingsHomePage",
+    });
+    AppGesture.init();
+
     this.screen = new SettingsHomePage();
     this.screen.start();
   },

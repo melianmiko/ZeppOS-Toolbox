@@ -1,5 +1,6 @@
 import {t, extendLocale} from "../../lib/i18n";
 import {TouchEventManager} from "../../lib/TouchEventManager";
+import { AppGesture } from "../../lib/AppGesture";
 
 import {REBOOT_CONFIRM_TRANSLATIONS} from "../utils/translations";
 
@@ -9,6 +10,12 @@ let __$$app$$__ = __$$hmAppManager$$__.currentApp;
 let __$$module$$__ = __$$app$$__.current;
 __$$module$$__.module = DeviceRuntimeCore.Page({
   onInit(p) {
+    AppGesture.withYellowWorkaround("left", {
+      appid: 33904,
+      url: "page/RebootConfirmScreen",
+    });
+    AppGesture.init();
+
   	const g = hmUI.createWidget(hmUI.widget.GROUP, {
   		x: 0,
   		y: 0,

@@ -1,4 +1,5 @@
 import {QS_BUTTONS} from "../utils/data";
+import { AppGesture } from "../../lib/AppGesture";
 
 const APP_VERSION = "v2023-01-21";
 
@@ -150,6 +151,12 @@ let __$$app$$__ = __$$hmAppManager$$__.currentApp;
 let __$$module$$__ = __$$app$$__.current;
 __$$module$$__.module = DeviceRuntimeCore.Page({
   onInit(p) {
+    AppGesture.withYellowWorkaround("left", {
+      appid: 33904,
+      url: "page/AboutScreen",
+    });
+    AppGesture.init();
+
     this.screen = new AboutScreen();
     this.screen.start();
   }
