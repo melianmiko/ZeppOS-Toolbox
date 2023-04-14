@@ -41,7 +41,7 @@ class AboutScreen extends BaseAboutScreen {
           width: 175, 
           height: 175, 
           i: -1
-        });
+        })
       });
     }
   };
