@@ -1,8 +1,10 @@
 import { CardsStorage } from "../utils/CardsStorage";
-import {goBackGestureCallback, goBack} from "../../lib/bugWorkaround";
+import {goBack} from "../../lib/bugWorkaround";
+import { AppGesture } from "../../lib/AppGesture";
 
 class CardViewScreen {
   constructor(params) {
+    this.paramsSource = params;
     this.params = JSON.parse(params);
     this.editPaneVisible = false;
   }
@@ -11,7 +13,8 @@ class CardViewScreen {
     this.lastBrightness = hmSetting.getBrightness();
     hmSetting.setBrightness(100);
     hmSetting.setBrightScreen(180);
-    hmApp.registerGestureEvent((i) => this.gestureHandle(i));
+
+    this.initGestures();
 
     const x = (192 - this.params.width) / 2;
     const y = (490 - this.params.height) / 2;
@@ -32,16 +35,20 @@ class CardViewScreen {
     });
   }
 
-  gestureHandle(i) {
-    if (i === hmApp.gesture.RIGHT && this.editPaneVisible) {
-      this.hideEditPane();
-      return true;
-    } else if (i === hmApp.gesture.LEFT && !this.editPaneVisible) {
-      this.showEditPane();
-      return true;
-    }
-
-    return goBackGestureCallback(i);
+  initGestures() {
+    AppGesture.on("up", () => {
+      if(this.editPaneVisible) this.hideEditPane();
+    });
+    AppGesture.on("down", () => {
+      if(!this.editPaneVisible) this.showEditPane();
+    });
+    AppGesture.withYellowWorkaround("left", {
+      appid: 18858,
+      url: "page/CardView",
+      param: this.paramsSource,
+    });
+    AppGesture.withHighLoadBackWorkaround();
+    AppGesture.init();
   }
 
   showEditPane() {

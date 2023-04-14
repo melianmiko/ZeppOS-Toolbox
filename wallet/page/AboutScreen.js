@@ -36,7 +36,12 @@ class AboutScreen extends BaseAboutScreen {
     } else {
       hmApp.gotoPage({
         url: "page/CardView",
-        param: JSON.stringify({filename: 'donate.png', width: 175, height: 175, i: -1})
+        param: JSON.stringify({
+          filename: 'donate.png', 
+          width: 175, 
+          height: 175, 
+          i: -1
+        });
       });
     }
   };

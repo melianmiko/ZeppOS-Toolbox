@@ -2,7 +2,7 @@ import {TouchEventManager} from "../../lib/TouchEventManager";
 import {ScreenBoard} from "../../lib/ScreenBoard";
 import {CardsStorage} from "../utils/CardsStorage";
 import {CardTypes} from "../utils/database";
-import {goBackGestureCallback} from "../../lib/bugWorkaround";
+import { AppGesture } from "../../lib/AppGesture";
 
 class SubScreen {
   widgets = [];
@@ -161,8 +161,14 @@ let __$$app$$__ = __$$hmAppManager$$__.currentApp;
 let __$$module$$__ = __$$app$$__.current;
 __$$module$$__.module = DeviceRuntimeCore.Page({
   onInit() {
+    AppGesture.withYellowWorkaround("left", {
+      appid: 18858,
+      url: "page/NewCardPicker",
+    });
+    AppGesture.withHighLoadBackWorkaround();
+    AppGesture.init();
+
     hmSetting.setBrightScreen(600);
-    hmApp.registerGestureEvent(goBackGestureCallback);
     (new IconsSubscreen()).build();
   },
   onDestroy() {
