@@ -4,8 +4,8 @@ import {t, extendLocale} from "../../lib/i18n";
 
 extendLocale({
   app_name: {
-    "en-US": "Calendar",
-    "ru-RU": "Календарь",
+    "en-US": "Gallery",
+    "ru-RU": "Галерея",
   },
   action_uninstall: {
     "en-US": "Uninstall",
@@ -22,7 +22,7 @@ extendLocale({
 });
 
 class AboutScreen extends BaseAboutScreen {
-  appId = 29067;
+  appId = 20042;
   appName = t("app_name");
   version = "v2023-04-14";
 
@@ -41,7 +41,7 @@ let __$$module$$__ = __$$app$$__.current;
 __$$module$$__.module = DeviceRuntimeCore.Page({
   onInit(p) {
     AppGesture.withYellowWorkaround("left", {
-      appid: 337482,
+      appid: 20042,
       url: "page/AboutScreen",
     });
     AppGesture.init();
