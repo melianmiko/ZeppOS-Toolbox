@@ -4,8 +4,8 @@ import {t, extendLocale} from "../../lib/i18n";
 
 extendLocale({
   app_name: {
-    "en-US": "Calculator",
-    "ru-RU": "Калькулятор",
+    "en-US": "Calendar",
+    "ru-RU": "Календарь",
   },
   action_uninstall: {
     "en-US": "Uninstall",
@@ -22,7 +22,7 @@ extendLocale({
 });
 
 class AboutScreen extends BaseAboutScreen {
-  appId = 33904;
+  appId = 29067;
   appName = t("app_name");
   version = "v2023-04-14";
 

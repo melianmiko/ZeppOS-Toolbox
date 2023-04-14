@@ -1,3 +1,4 @@
+import { AppGesture } from "../../lib/AppGesture";
 import {FsUtils} from "../../lib/FsUtils";
 
 class AppCalendar {
@@ -35,13 +36,20 @@ class AppCalendar {
 
     this.display = hmUI.createWidget(hmUI.widget.TEXT, {
       x: 0,
-      y: 32,
+      y: 40,
       w: 192,
-      h: 100,
+      h: 50,
       color: 0xffffff,
       text_size: 24,
       text: "Hello",
       align_h: hmUI.align.CENTER_H,
+    });
+
+    this.display.addEventListener(hmUI.event.CLICK_UP, () => {
+      const time = hmSensor.createSensor(hmSensor.id.TIME);
+      this.currentYear = time.year;
+      this.currentMonth = time.month;
+      this.laodContent();
     });
 
     for (let i = 0; i < 7; i++) {
@@ -186,6 +194,13 @@ let __$$app$$__ = __$$hmAppManager$$__.currentApp;
 let __$$module$$__ = __$$app$$__.current;
 __$$module$$__.module = DeviceRuntimeCore.Page({
   onInit() {
+    AppGesture.on("left", () => {
+      hmApp.gotoPage({
+        url: "page/AboutScreen",
+      });
+    });
+    AppGesture.init();
+
     const cal = new AppCalendar();
     cal.start();
   },
