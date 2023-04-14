@@ -57,6 +57,7 @@ export class Im02Game {
 		if (this.started) return;
 		this.initGameState();
 
+		Vibro.enabled = !hmFS.SysProGetBool("mmk_game_no_vibro");
 		Vibro.run(50);
 
 		this.animTick();
