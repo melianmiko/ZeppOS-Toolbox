@@ -1,73 +1,25 @@
-import {FsUtils} from "../../lib/FsUtils";
+import { FsUtils } from "../../lib/FsUtils";
+import { AppGesture } from "../../lib/AppGesture";
+import { BaseAboutScreen } from "../../lib/BaseAboutScreen";
 
-const APP_VERSION = "v2023-02-04";
+class AboutScreen extends BaseAboutScreen {
+  appId = 18858;
+  appName = "Кошелёк";
+  version = "v2023-04-13";
 
-const ABOUT_INFO = [
-  ["melianmiko", "Разработчик"],
-  ["JsBarcode\nqrcode-generator\npdf417-js", "Исп. библиотеки"]
-];
+  infoRows = [
+    ["MelianMiko", "Разработчик"],
+    ["melianmiko.ru", "Загружено с"],
+    ["JsBarcode\nqrcode-generator\npdf417-js", "Исп. библиотеки"]
+  ];
 
-class AboutScreen {
-  drawBasement() {
-    hmUI.createWidget(hmUI.widget.IMG, {
-      x: (192-100)/2,
-      y: 48,
-      src: "icon.png"
-    });
-    hmUI.createWidget(hmUI.widget.TEXT, {
-      x: 0,
-      y: 158,
-      w: 192,
-      h: 48,
-      text: "Wallet",
-      text_size: 28,
-      color: 0xFFFFFF,
-      align_h: hmUI.align.CENTER_H
-    });
-    hmUI.createWidget(hmUI.widget.TEXT, {
-      x: 0,
-      y: 194,
-      w: 192,
-      h: 32,
-      text: APP_VERSION,
-      text_size: 18,
-      color: 0xAAAAAA,
-      align_h: hmUI.align.CENTER_H
-    });
+  donateText = "Поддержать";
 
-    hmUI.createWidget(hmUI.widget.BUTTON, {
-      x: 16,
-      y: 240,
-      w: 192-32,
-      h: 48,
-      text: "Поддержать",
-      radius: 24,
-      color: 0xF48FB1,
-      normal_color: 0x17030e,
-      press_color: 0x380621,
-      click_func: () => this.openDonate()
-    })
-    hmUI.createWidget(hmUI.widget.BUTTON, {
-      x: 16,
-      y: 296,
-      w: 192-32,
-      h: 48,
-      text: "Экспорт",
-      radius: 24,
-      color: 0xFFFFFF,
-      normal_color: 0x111111,
-      press_color: 0x222222,
-      click_func: () => this.openBackup()
-    })
-  }
+  uninstallText = "Удалить";
+  uninstallConfirm = "Нажмите ещё раз для подтверждения";
+  uninstallResult = "Приложение и все его данные удалены. Немедленно перезагрузите устройство.";
 
-  openBackup() {
-    hmApp.gotoPage({
-      url: "page/BackupTool"
-    })
-  }
-
-  openDonate() {
+  donateUrl = () => {
     const [st, e] = FsUtils.stat(FsUtils.fullPath("donate.png"));
 
     if(e != 0) {
@@ -87,59 +39,25 @@ class AboutScreen {
         param: JSON.stringify({filename: 'donate.png', width: 175, height: 175, i: -1})
       });
     }
-  }
+  };
 
-  drawInfo() {
-    let posY = 364;
-    for(let [name, info] of ABOUT_INFO) {
-      const metrics = hmUI.getTextLayout(name, {
-        text_width: 192,
-        text_size: 18
-      });
-
-      hmUI.createWidget(hmUI.widget.TEXT, {
-        x: 0,
-        y: posY,
-        w: 192,
-        h: 24,
-        text_size: 16,
-        color: 0xAAAAAA,
-        text: info,
-        align_h: hmUI.align.CENTER_H
-      });
-
-      hmUI.createWidget(hmUI.widget.TEXT, {
-        x: 0,
-        y: posY + 24,
-        w: 192,
-        h: metrics.height + 24,
-        text_size: 18,
-        color: 0xFFFFFF,
-        text: name,
-        text_style: hmUI.text_style.WRAP,
-        align_h: hmUI.align.CENTER_H
-      });
-
-      posY += metrics.height + 32;
-    }
-  }
-
-  start() {
-    hmSetting.setBrightScreen(60);
-    this.drawBasement();
-    this.drawInfo();
-  }
-
-  finish() {
-    hmSetting.setBrightScreenCancel();
+  onUninstall() {
+    // Remove config files
+    hmFS.remove("/storage/mmk_cards.json");
   }
 }
+
 
 let __$$app$$__ = __$$hmAppManager$$__.currentApp;
 let __$$module$$__ = __$$app$$__.current;
 __$$module$$__.module = DeviceRuntimeCore.Page({
   onInit(p) {
-    this.screen = new AboutScreen();
-    this.screen.start();
+    AppGesture.withYellowWorkaround("left", {
+      appid: 18858,
+      url: "page/AboutScreen",
+    });
+    AppGesture.init();
+
+    new AboutScreen().start();
   }
 });
