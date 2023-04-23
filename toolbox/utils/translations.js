@@ -24,7 +24,7 @@ export const APP_EDIT_TRANSLATIONS = {
   },
   tap_to_confirm: {
     "en-US": "Tap again to confirm",
-    "zh-CN": "",
+    "zh-CN": "再次点击以确认",
     "zh-TW": "",
     "ru-RU": "Нажмите ещё раз для подтверждения",
     "de-DE": "",

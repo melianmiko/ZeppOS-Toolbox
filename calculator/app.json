@@ -17,6 +17,9 @@
   "i18n": {
     "ru-RU": {
       "appName": "Калькулятор"
+    },
+    "zh-CN": {
+      "appName": "计算器"
     }
   },
   "module": {
