@@ -6,18 +6,22 @@ extendLocale({
   app_name: {
     "en-US": "Calculator",
     "ru-RU": "Калькулятор",
+    "zh-CN": "计算器",
   },
   action_uninstall: {
     "en-US": "Uninstall",
     "ru-RU": "Удалить",
+    "zh-CN": "卸载",
   },
   tap_to_confirm: {
     "en-US": "Tap again to confirm",
     "ru-RU": "Нажмите ещё раз для подтверждения",
+    "zh-CN": "再次点击以确认",
   },
   uninstall_complete: {
     "en-US": "Uninstalled.\nPlease reboot device to finish",
     "ru-RU": "Удалено.\nПерезагрузите устройство для завершения",
+    "zh-CN": "已卸载,请重启设备以应用",
   },
 });
 
