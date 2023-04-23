@@ -1,5 +1,6 @@
 import {t, extendLocale} from "../../lib/i18n";
 import { SettingsListScreen } from "../../lib/SettingsListScreen";
+import { AppGesture } from "../../lib/AppGesture";
 
 import {TOGGLE_DANGER_TRANSLATIONS} from "../utils/translations";
 
@@ -26,6 +27,12 @@ let __$$app$$__ = __$$hmAppManager$$__.currentApp;
 let __$$module$$__ = __$$app$$__.current;
 __$$module$$__.module = DeviceRuntimeCore.Page({
   onInit(p) {
+    AppGesture.withYellowWorkaround("left", {
+      appid: 33904,
+      url: "page/ToggleDanger",
+    });
+    AppGesture.init();
+
   	(new DnagerToggle).start();
   }
 });

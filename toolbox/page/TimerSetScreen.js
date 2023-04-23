@@ -2,6 +2,7 @@ import {t, extendLocale} from "../../lib/i18n";
 import {TouchEventManager} from "../../lib/TouchEventManager";
 
 import {TIMER_TRANSLATIONS} from "../utils/translations";
+import { AppGesture } from "../../lib/AppGesture";
 
 extendLocale(TIMER_TRANSLATIONS)
 
@@ -222,6 +223,12 @@ let __$$app$$__ = __$$hmAppManager$$__.currentApp;
 let __$$module$$__ = __$$app$$__.current;
 __$$module$$__.module = DeviceRuntimeCore.Page({
   onInit(p) {
+    AppGesture.withYellowWorkaround("left", {
+      appid: 33904,
+      url: "page/TimerSetScreen",
+    });
+    AppGesture.init();
+    
     new TimerSetScreen().start();
   }
 });

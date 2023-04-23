@@ -5,6 +5,7 @@ import {TouchEventManager} from "../../lib/TouchEventManager";
 import {QS_BUTTONS, DEFAULT_SETTINGS} from "../utils/data";
 import {MAIN_SCREEN_TRANSLATIONS} from "../utils/translations";
 import {openPage} from "../utils/misc";
+import { AppGesture } from "../../lib/AppGesture";
 
 extendLocale(MAIN_SCREEN_TRANSLATIONS);
 
@@ -191,6 +192,12 @@ let __$$app$$__ = __$$hmAppManager$$__.currentApp;
 let __$$module$$__ = __$$app$$__.current;
 __$$module$$__.module = DeviceRuntimeCore.Page({
   onInit(p) {
+    AppGesture.withYellowWorkaround("left", {
+      appid: 33904,
+      url: "page/MainScreen",
+    });
+    AppGesture.init();
+    
     new MainScreen().start();
   }
 });

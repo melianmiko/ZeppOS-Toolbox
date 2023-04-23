@@ -1,3 +1,4 @@
+import { AppGesture } from "../../lib/AppGesture";
 import {FsUtils} from "../../lib/FsUtils";
 
 import {openPage} from "../utils/misc";
@@ -52,6 +53,42 @@ class FileManagerScreen {
       key: "icon"
     }],
     image_view_count: 1
+  };
+
+  FILE_ROW_TYPE_WITH_SIZE = {
+    type_id: 3,
+    item_height: 64,
+    item_bg_color: 0x111111,
+    item_bg_radius: 12,
+    text_view: [
+      {
+        x: 44,
+        y: 0,
+        w: 144,
+        h: 32,
+        key: "name",
+        color: 0xffffff,
+        text_size: 22
+      },
+      {
+        x: 44,
+        y: 32,
+        w: 144,
+        h: 24,
+        key: "size",
+        color: 0xAAAAAA,
+        text_size: 20,
+      },
+    ],
+    text_view_count: 2,
+    image_view: [{
+      x: 10,
+      y: 20,
+      w: 24,
+      h: 24,
+      key: "icon"
+    }],
+    image_view_count: 1
   }
 
   path = "/storage/js_apps";
@@ -61,6 +98,7 @@ class FileManagerScreen {
 
   constructor() {
     this.path = FsUtils.getSelfPath();
+    this.showFileSizes = !!hmFS.SysProGetBool("mmk_tb_filesize");
 
     const lastPath = hmFS.SysProGetChars("mmk_tb_lastpath");
     if(!!lastPath) this.path = lastPath;
@@ -80,10 +118,11 @@ class FileManagerScreen {
       h: 490,
       item_space: 8,
       item_config: [
-        this.FILE_ROW_TYPE, 
+        this.FILE_ROW_TYPE,
         this.HEADER_ROW_TYPE,
+        this.FILE_ROW_TYPE_WITH_SIZE,
       ],
-      item_config_count: 2,
+      item_config_count: 3,
       item_click_func: (_, i) => this.onRowClick(i),
       data_type_config: [],
       data_type_config_count: 0,
@@ -131,27 +170,34 @@ class FileManagerScreen {
       files = [];
 
     if (this.path !== "/storage") {
-      folders.push({name: "..", icon: "files/up.png"});
+      folders.push({
+        name: "..", 
+        icon: "files/up.png",
+        size: "",
+      });
     }
 
     for(let i = 0; i < Math.min(dirContent.length, this.maxItems); i++) {
       const fn = dirContent[i];
+      const path = `${this.path}/${fn}`
+      const isFolder = this.isFolder(path);
 
-      if(this.isFolder(this.path + "/" + fn)) {
+      const row = {
+        name: fn,
+        icon: isFolder ? "files/folder.png" : this.getFileIcon(fn),
+        size: ""
+      };
 
-        folders.push({
-          name: fn,
-          icon: "files/folder.png"
-        });
-
-      } else {
-
-        files.push({
-          name: fn,
-          icon: this.getFileIcon(fn)
-        });
-
+      if(!isFolder && this.showFileSizes) {
+        try {
+          const [st, e] = FsUtils.stat(path);
+          if(st.size) {
+            row.size = FsUtils.printBytes(st.size);
+          }
+        } catch(e) {}
       }
+
+      isFolder ? folders.push(row) : files.push(row);
     }
 
     folders.sort(this._sortFnc);
@@ -188,7 +234,7 @@ class FileManagerScreen {
         {
           start: 1,
           end: this.contents.length - 2,
-          type_id: 2,
+          type_id: this.showFileSizes ? 3 : 2,
         },
         {
           start: this.contents.length - 1,
@@ -239,6 +285,12 @@ let __$$app$$__ = __$$hmAppManager$$__.currentApp;
 let __$$module$$__ = __$$app$$__.current;
 __$$module$$__.module = DeviceRuntimeCore.Page({
   onInit(p) {
+    AppGesture.withYellowWorkaround("left", {
+      appid: 33904,
+      url: "page/FileManagerScreen",
+    });
+    AppGesture.init();
+
     hmUI.setLayerScrolling(false);
     screen = new FileManagerScreen();
     screen.start();

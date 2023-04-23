@@ -4,6 +4,8 @@ import {SettingsListScreen} from "../../lib/SettingsListScreen";
 import {BG_OPTIONS, BG_OPTION_KEY, HIGHSCORE_KEY} from "../src/Options.js"
 import {OPTION_NAMES} from "../src/Locale";
 
+import { AppGesture } from "../../lib/AppGesture";
+
 extendLocale(OPTION_NAMES);
 
 class Im02Settings extends SettingsListScreen {
@@ -20,6 +22,7 @@ class Im02Settings extends SettingsListScreen {
 		});
 
 		this.headline(t("Game options"))
+	    this.propCheckbox(t("Disable vibration"), "mmk_game_no_vibro", false);
 		this.setCurrentColorName = this.field(t("Background color"),
 			BG_OPTIONS[this.colorID][0], 
 			() => this.nextColor());
@@ -36,6 +39,12 @@ let __$$app$$__ = __$$hmAppManager$$__.currentApp;
 let __$$module$$__ = __$$app$$__.current;
 __$$module$$__.module = DeviceRuntimeCore.Page({
 	onInit(bg) {
+	    AppGesture.withYellowWorkaround("left", {
+	      appid: 93464,
+	      url: "page/SettingsScreen",
+	    });
+	    AppGesture.init();
+
 		hmUI.setLayerScrolling(true);
 		(new Im02Settings()).start();
 	}

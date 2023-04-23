@@ -1,4 +1,5 @@
 import {FsUtils} from "../../lib/FsUtils";
+import { AppGesture } from "../../lib/AppGesture";
 import {t, extendLocale} from "../../lib/i18n";
 
 import {APP_LIST_TRANSLATIONS} from "../utils/translations";
@@ -138,6 +139,12 @@ let __$$app$$__ = __$$hmAppManager$$__.currentApp;
 let __$$module$$__ = __$$app$$__.current;
 __$$module$$__.module = DeviceRuntimeCore.Page({
   onInit(p) {
+    AppGesture.withYellowWorkaround("left", {
+      appid: 33904,
+      url: "page/AppsListScreen",
+    });
+    AppGesture.init();
+
     new AppsListScreen().start();
   }
 });

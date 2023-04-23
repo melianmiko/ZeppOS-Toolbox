@@ -1,32 +1,23 @@
+import { AppGesture } from "../../lib/AppGesture";
 import {SettingsListScreen} from "../../lib/SettingsListScreen";
 
-const PROP_LOCALE = "locale.name";
-const PROP_FOLLOW_PHONE = "settings_language_follow_phone";
-
-const LOCALES_LIST = {
-  "ru": "Russian",
-  "en": "English",
-  "zh-CN": "Chineese",
-  "zh-TW": "Chineese (traditional)"
-}
-
-function setSystemLocale(val) {
-  hmFS.SysProSetInt(PROP_FOLLOW_PHONE, 0)
-  hmFS.SysProSetChars(PROP_LOCALE, val);
-  hmUI.showToast({text: "Ready, please reboot NOW."});
-}
-
-class MoreLocaleScreen extends SettingsListScreen {
+class IndexScreen extends SettingsListScreen {
   build() {
+    this.clickableItem("Select locale...", "menu/lang.png", () => {
+      hmApp.gotoPage({url: "page/ChangeLocale"});
+    });
     this.clickableItem("About...", "menu/info.png", () => {
       hmApp.gotoPage({url: "page/AboutScreen"});
     });
 
-    this.headline("Select locale:");
+    const savedCode = hmFS.SysProGetInt("settings_data_language"),
+          savedLocale = hmFS.SysProGetChars("locale.name"),
+          currentLocale = DeviceRuntimeCore.HmUtils.getLanguage(),
+          currentCode = hmSetting.getLanguage();
 
-    for(const code in LOCALES_LIST) {
-      this.addLocaleRow(code, LOCALES_LIST[code]);
-    }
+    this.headline("Status:");
+    this.field("Current config", `${currentLocale} (${currentCode})`);
+    this.field("Saved data", `${savedLocale} (${savedCode})`);
   }
 
   addLocaleRow(code, title) {
@@ -39,6 +30,12 @@ let __$$app$$__ = __$$hmAppManager$$__.currentApp;
 let __$$module$$__ = __$$app$$__.current;
 __$$module$$__.module = DeviceRuntimeCore.Page({
   onInit() {
-    (new MoreLocaleScreen()).start();
+    AppGesture.withYellowWorkaround("left", {
+      appid: 531545236,
+      url: "page/index",
+    });
+    AppGesture.init();
+
+    (new IndexScreen()).start();
   }
 });

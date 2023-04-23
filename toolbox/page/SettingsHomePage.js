@@ -1,5 +1,6 @@
 import { t, extendLocale } from "../../lib/i18n";
 import { SettingsListScreen } from "../../lib/SettingsListScreen";
+import { AppGesture } from "../../lib/AppGesture";
 
 import { SETTINGS_HOME_TRANSLATIONS } from "../utils/translations";
 import {openPage} from "../utils/misc";
@@ -19,6 +20,7 @@ class SettingsHomePage extends SettingsListScreen {
     );
 
     this.headline(t("headline_tools"))
+    this.propCheckbox(t("cfg_show_size_in_list"), "mmk_tb_filesize", false);
     this.propCheckbox(t("cfg_timer_keep"), "mmk_tb_cfg_timer_keep", true);
     this.propCheckbox(t("cfg_fs_unit"), "mmk_tb_fs_unit", false);
     this.propInteger(t("prop_font_size"), "mmk_tb_fontsize", 16);
@@ -38,6 +40,12 @@ let __$$app$$__ = __$$hmAppManager$$__.currentApp;
 let __$$module$$__ = __$$app$$__.current;
 __$$module$$__.module = DeviceRuntimeCore.Page({
   onInit(p) {
+    AppGesture.withYellowWorkaround("left", {
+      appid: 33904,
+      url: "page/SettingsHomePage",
+    });
+    AppGesture.init();
+
     this.screen = new SettingsHomePage();
     this.screen.start();
   },

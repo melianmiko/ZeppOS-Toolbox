@@ -1,4 +1,5 @@
 import {SettingsListScreen} from "../../lib/SettingsListScreen";
+import { AppGesture } from "../../lib/AppGesture";
 
 const available_locales = {
   "en-US": "English",
@@ -36,6 +37,12 @@ let __$$app$$__ = __$$hmAppManager$$__.currentApp;
 let __$$module$$__ = __$$app$$__.current;
 __$$module$$__.module = DeviceRuntimeCore.Page({
   onInit(p) {
+    AppGesture.withYellowWorkaround("left", {
+      appid: 33904,
+      url: "page/SettingsLangScreen",
+    });
+    AppGesture.init();
+
     this.screen = new SettingsLangScreen();
     this.screen.start();
   }

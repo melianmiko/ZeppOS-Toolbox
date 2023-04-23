@@ -22,6 +22,14 @@ export const APP_EDIT_TRANSLATIONS = {
     "de-DE": "Deinstallieren",
     "es-ES": "Desinstalar",
   },
+  tap_to_confirm: {
+    "en-US": "Tap again to confirm",
+    "zh-CN": "",
+    "zh-TW": "",
+    "ru-RU": "Нажмите ещё раз для подтверждения",
+    "de-DE": "",
+    "es-ES": "",
+  },
   action_launch: {
     "en-US": "Launch",
     "zh-CN": "启动",
@@ -210,6 +218,15 @@ export const SETTINGS_HOME_TRANSLATIONS = {
     "ru-RU": "Запоминать посл. таймер",
     "de-DE": "Letzten Timerwert bebehalten",
     "es-ES": "Mantener valor del último temporizador",
+  },
+  cfg_show_size_in_list: {
+    // cn/de/es made with Google Translate
+    "en-US": "Show file size in explorer",
+    "zh-CN": "在资源管理器中显示文件大小",
+    "zh-TW": "在資源管理器中顯示文件大小",
+    "ru-RU": "Размер файлов в проводнике",
+    "de-DE": "Dateigröße im Explorer anzeigen",
+    "es-ES": "Mostrar el tamaño del archivo en el explorador",
   },
   cfg_fs_unit: {
     "en-US": "Use Base-2 filesize\n1KB = 1024 B",

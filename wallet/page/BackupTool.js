@@ -1,8 +1,8 @@
+import { AppGesture } from "../../lib/AppGesture";
 import { qrcode } from "../../lib/3rd/qrcode";
 import { CardsStorage } from "../utils/CardsStorage";
 import { CanvasTGA } from "../../lib/CanvasTGA.js";
 import {FsUtils} from "../../lib/FsUtils";
-import {goBack} from "../../lib/bugWorkaround";
 
 class BackupTool {
 	start() {
@@ -156,6 +156,13 @@ let __$$app$$__ = __$$hmAppManager$$__.currentApp;
 let __$$module$$__ = __$$app$$__.current;
 __$$module$$__.module = DeviceRuntimeCore.Page({
 	onInit(params) {
+    AppGesture.withYellowWorkaround("left", {
+      appid: 18858,
+      url: "page/BackupTool",
+    });
+    AppGesture.withHighLoadBackWorkaround();
+    AppGesture.init();
+
 		new BackupTool().start();
 	},
 });
