@@ -6,6 +6,7 @@ Contributors:
 - zh-TW translation: 天劍血狐
 - de-DE translation: harrybin
 - es-ES translation: arenasjuanf
+- pt-BR translation: NiziulLuizin
 
 Full source code can be found here: 
 - https://github.com/melianmiko/SmartBand7-Apps

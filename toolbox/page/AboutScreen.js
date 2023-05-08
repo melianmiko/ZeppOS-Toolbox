@@ -17,6 +17,7 @@ class AboutScreen extends BaseAboutScreen {
     ["天劍血狐", "zh-TW translation"],
     ["harrybin", "de-DE translation"],
     ["arenasjuanf", "es-ES translation"],
+    ['NiziulLuizin', "pt-BR translation"],
   ];
 
   uninstallText = t("action_uninstall");

@@ -3,9 +3,10 @@ import { AppGesture } from "../../lib/AppGesture";
 
 const available_locales = {
   "en-US": "English",
-  "es-Es": "Español",
+  "es-ES": "Español",
   "de-DE": "Deutsch",
   "ru-RU": "Русский",
+  "pt-BR": "Português",
   "zh-CN": "简体中文",
   "zh-TW": "繁體中文",
 };

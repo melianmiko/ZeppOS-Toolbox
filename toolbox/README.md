@@ -15,6 +15,7 @@ File & apps manager, background timer, Quick Settings access.
 - zh-TW translation: 天劍血狐
 - de-DE translation: harrybin
 - es-ES translation: arenasjuanf
+- pt-BR translation: NiziulLuizin
 
 ## Used assets
 - Material Icons by Google LTD, Apache 2.0
