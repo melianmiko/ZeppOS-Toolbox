@@ -7,7 +7,7 @@ class AboutScreen extends BaseAboutScreen {
     super();
     this.appId = 18858;
     this.appName = "Кошелёк";
-    this.version = "v2023-04-13";
+    this.version = "v2023-05-08";
 
     this.infoRows = [
       ["MelianMiko", "Разработчик"],
