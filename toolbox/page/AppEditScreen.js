@@ -8,12 +8,11 @@ import {APP_EDIT_TRANSLATIONS} from "../utils/translations";
 extendLocale(APP_EDIT_TRANSLATIONS)
 
 class AppEditScreen extends SettingsListScreen {
-	dontKeepSettings = true;
-
 	constructor(dirname) {
 		super();
 		
 		this.dirname = dirname;
+		this.dontKeepSettings = true;
 		this.path = "/storage/js_apps/" + dirname;
 		this.appConfig = {};
 	}
@@ -165,9 +164,7 @@ class AppEditScreen extends SettingsListScreen {
 }
 
 
-let __$$app$$__ = __$$hmAppManager$$__.currentApp;
-let __$$module$$__ = __$$app$$__.current;
-__$$module$$__.module = DeviceRuntimeCore.Page({
+age({
 	onInit(dirname) {
 		AppGesture.withYellowWorkaround("left", {
 			appid: 33904,

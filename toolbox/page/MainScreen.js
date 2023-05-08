@@ -6,17 +6,11 @@ import {QS_BUTTONS, DEFAULT_SETTINGS} from "../utils/data";
 import {MAIN_SCREEN_TRANSLATIONS} from "../utils/translations";
 import {openPage} from "../utils/misc";
 import { AppGesture } from "../../lib/AppGesture";
+import { baseBrightnessConfig } from "./styles/MainScreenStyles";
 
 extendLocale(MAIN_SCREEN_TRANSLATIONS);
 
 class MainScreen {
-  baseBrightnessConfig = {
-    x: 12,
-    y: 72,
-    h: 80,
-    radius: 8,
-  };
-
   _getSettings() {
     let settings = {
       tiles: ["apps", "files"],
@@ -138,20 +132,20 @@ class MainScreen {
 
   drawBrightness() {
     hmUI.createWidget(hmUI.widget.FILL_RECT, {
-      ...this.baseBrightnessConfig,
+      ...baseBrightnessConfig,
       color: 0x222222,
       w: 168
     });
 
     this.widgetBrightness = hmUI.createWidget(hmUI.widget.FILL_RECT, {
-      ...this.baseBrightnessConfig,
+      ...baseBrightnessConfig,
       color: 0x555555,
       alpha: 80,
       w: 10
     });
 
     const basement = hmUI.createWidget(hmUI.widget.IMG, {
-      ...this.baseBrightnessConfig,
+      ...baseBrightnessConfig,
       w: 168,
       pos_x: 8,
       pos_y: 22,
@@ -187,10 +181,7 @@ class MainScreen {
   }
 }
 
-
-let __$$app$$__ = __$$hmAppManager$$__.currentApp;
-let __$$module$$__ = __$$app$$__.current;
-__$$module$$__.module = DeviceRuntimeCore.Page({
+Page({
   onInit(p) {
     AppGesture.withYellowWorkaround("left", {
       appid: 33904,

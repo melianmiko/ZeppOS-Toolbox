@@ -34,9 +34,7 @@ class SettingsLangScreen extends SettingsListScreen {
 	}
 }
 
-let __$$app$$__ = __$$hmAppManager$$__.currentApp;
-let __$$module$$__ = __$$app$$__.current;
-__$$module$$__.module = DeviceRuntimeCore.Page({
+Page({
   onInit(p) {
     AppGesture.withYellowWorkaround("left", {
       appid: 33904,

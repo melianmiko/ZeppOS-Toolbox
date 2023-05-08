@@ -6,8 +6,10 @@ import { AppGesture } from "../../lib/AppGesture";
 import {QS_BUTTONS, DEFAULT_SETTINGS} from "../utils/data";
 
 class SettingsUiScreen {
-  userTiels = null;
-  settings = null;
+  constructor() {
+    this.userTiels = null;
+    this.settings = null;
+  }
 
   _load() {
     try {
@@ -110,9 +112,7 @@ class SettingsUiScreen {
 
 
 let screen;
-let __$$app$$__ = __$$hmAppManager$$__.currentApp;
-let __$$module$$__ = __$$app$$__.current;
-__$$module$$__.module = DeviceRuntimeCore.Page({
+Page({
   onInit(p) {
     AppGesture.withYellowWorkaround("left", {
       appid: 33904,

@@ -3,45 +3,22 @@ import {TouchEventManager} from "../../lib/TouchEventManager";
 
 import {TIMER_TRANSLATIONS} from "../utils/translations";
 import { AppGesture } from "../../lib/AppGesture";
+import {STYLE_DISPLAY, STYLE_EDIT_BTN, STYLE_EDIT_DEG, STYLE_EDIT_INC} from "./styles/TimerStyles";
 
 extendLocale(TIMER_TRANSLATIONS)
 
 class TimerSetScreen {
-	STYLE_DISPLAY = {
-		x: 0,
-		text_size: 80,
-		align_h: hmUI.align.CENTER_H,
-		align_v: hmUI.align.CENTER_V,
-		w: 192,
-		h: 96,
-		color: 0xffffff
-	};
-	STYLE_EDIT_BTN = {
-		text_size: 48,
-		align_h: hmUI.align.CENTER_H,
-		align_v: hmUI.align.CENTER_V,
-		h: 96,
-		w: 50,
-		color: 0xAAAAAA
-	};
-	STYLE_EDIT_INC = {
-		text: "+",
-		x: 142
-	};
-	STYLE_EDIT_DEG = {
-		text: "−",
-		x: 0
+	constructor() {
+		this.hour = 0;
+		this.minute = 1;
+		this.second = 0;
+
+		this.editButtons = [];
+		this.localTimer = null;
+		this.timerID = null;
+		this.startedTime = 0;
+		this.endTime = 0;
 	}
-
-	hour = 0;
-	minute = 1;
-	second = 0;
-
-	editButtons = [];
-	localTimer = null;
-	timerID = null;
-	startedTime = 0;
-	endTime = 0;
 
 	formatDisplay(v) {
 		return v.toString().padStart(2, "0");
@@ -78,24 +55,24 @@ class TimerSetScreen {
 		this.viewHour = hmUI.createWidget(hmUI.widget.TEXT, {
 			y: 72,
 			text: this.formatDisplay(this.hour),
-			...this.STYLE_DISPLAY
+			...STYLE_DISPLAY
 		});
 		this.viewMinute = hmUI.createWidget(hmUI.widget.TEXT, {
 			y: 72 + 96,
 			text: this.formatDisplay(this.minute),
-			...this.STYLE_DISPLAY
+			...STYLE_DISPLAY
 		});
 		this.viewSecond = hmUI.createWidget(hmUI.widget.TEXT, {
 			y: 72 + 96*2,
 			text: this.formatDisplay(this.second),
-			...this.STYLE_DISPLAY
+			...STYLE_DISPLAY
 		});
 
 		["hour", "minute", "second"].map((key, i) => {
 			[-1, 1].map((dir) => {
 				const widget = hmUI.createWidget(hmUI.widget.TEXT, {
-					...this.STYLE_EDIT_BTN,
-					...(dir > 0 ? this.STYLE_EDIT_INC : this.STYLE_EDIT_DEG),
+					...STYLE_EDIT_BTN,
+					...(dir > 0 ? STYLE_EDIT_INC : STYLE_EDIT_DEG),
 					y: 72 + 96*i
 				});
 				const events = new TouchEventManager(widget);
@@ -218,10 +195,7 @@ class TimerSetScreen {
 	}
 }
 
-
-let __$$app$$__ = __$$hmAppManager$$__.currentApp;
-let __$$module$$__ = __$$app$$__.current;
-__$$module$$__.module = DeviceRuntimeCore.Page({
+Page({
   onInit(p) {
     AppGesture.withYellowWorkaround("left", {
       appid: 33904,

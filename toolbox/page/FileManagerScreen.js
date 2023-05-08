@@ -2,101 +2,18 @@ import { AppGesture } from "../../lib/AppGesture";
 import {FsUtils} from "../../lib/FsUtils";
 
 import {openPage} from "../utils/misc";
+import {HEADER_ROW_TYPE, FILE_ROW_TYPE, FILE_ROW_TYPE_WITH_SIZE} from "./styles/FileManagerRowTypes";
 
 class FileManagerScreen {
-  maxItems = 16;
-
-  HEADER_ROW_TYPE = {
-    type_id: 1,
-    item_height: 96,
-    item_bg_color: 0x0,
-    item_bg_radius: 0,
-    text_view: [{
-      x: 4,
-      y: 64,
-      w: 172,
-      h: 32,
-      key: "title",
-      color: 0xEEEEEE,
-    }],
-    text_view_count: 1,
-    image_view: [{
-      x: 84,
-      y: 24,
-      w: 24,
-      h: 24,
-      key: "icon"
-    }],
-    image_view_count: 1
-  };
-
-  FILE_ROW_TYPE = {
-    type_id: 2,
-    item_height: 64,
-    item_bg_color: 0x111111,
-    item_bg_radius: 12,
-    text_view: [{
-      x: 44,
-      y: 0,
-      w: 144,
-      h: 64,
-      key: "name",
-      color: 0xffffff,
-      text_size: 22
-    }],
-    text_view_count: 1,
-    image_view: [{
-      x: 10,
-      y: 20,
-      w: 24,
-      h: 24,
-      key: "icon"
-    }],
-    image_view_count: 1
-  };
-
-  FILE_ROW_TYPE_WITH_SIZE = {
-    type_id: 3,
-    item_height: 64,
-    item_bg_color: 0x111111,
-    item_bg_radius: 12,
-    text_view: [
-      {
-        x: 44,
-        y: 0,
-        w: 144,
-        h: 32,
-        key: "name",
-        color: 0xffffff,
-        text_size: 22
-      },
-      {
-        x: 44,
-        y: 32,
-        w: 144,
-        h: 24,
-        key: "size",
-        color: 0xAAAAAA,
-        text_size: 20,
-      },
-    ],
-    text_view_count: 2,
-    image_view: [{
-      x: 10,
-      y: 20,
-      w: 24,
-      h: 24,
-      key: "icon"
-    }],
-    image_view_count: 1
-  }
-
-  path = "/storage/js_apps";
-  editPath = null;
-  content = [];
-  rows = [];
 
   constructor() {
+    this.maxItems = 16;
+
+    this.path = "/storage/js_apps";
+    this.editPath = null;
+    this.content = [];
+    this.rows = [];
+
     this.path = FsUtils.getSelfPath();
     this.showFileSizes = !!hmFS.SysProGetBool("mmk_tb_filesize");
 
@@ -118,9 +35,9 @@ class FileManagerScreen {
       h: 490,
       item_space: 8,
       item_config: [
-        this.FILE_ROW_TYPE,
-        this.HEADER_ROW_TYPE,
-        this.FILE_ROW_TYPE_WITH_SIZE,
+        FILE_ROW_TYPE,
+        HEADER_ROW_TYPE,
+        FILE_ROW_TYPE_WITH_SIZE,
       ],
       item_config_count: 3,
       item_click_func: (_, i) => this.onRowClick(i),
@@ -281,9 +198,7 @@ class FileManagerScreen {
 
 
 let screen;
-let __$$app$$__ = __$$hmAppManager$$__.currentApp;
-let __$$module$$__ = __$$app$$__.current;
-__$$module$$__.module = DeviceRuntimeCore.Page({
+Page({
   onInit(p) {
     AppGesture.withYellowWorkaround("left", {
       appid: 33904,

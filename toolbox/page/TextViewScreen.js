@@ -4,14 +4,13 @@ import { AppGesture } from "../../lib/AppGesture";
 const BOX_HEIGHT = 300;
 
 class TextViewScreen {
-	PAGE_SIZE = 256;
-
-	fontSize = 16;
-	position = 0;
-	bufferSize = 0;
-	backStack = [];
-
 	constructor(data) {
+		this.PAGE_SIZE = 256;
+
+		this.fontSize = 16;
+		this.position = 0;
+		this.bufferSize = 0;
+		this.backStack = [];
 		this.path = data;
 	}
 
@@ -78,14 +77,6 @@ class TextViewScreen {
 		}).addEventListener(hmUI.event.CLICK_UP, () => {
 			this.pageBack();
 		});
-
-		// Overlay
-		// this.overlay = hmUI.createWidget(hmUI.widget.IMG, {
-		// 	x: 0,
-		// 	y: 0,
-		// 	src: "loading.png",
-		// 	alpha: 200
-		// });
 	}
 
 	getTextHeight(text) {
@@ -110,12 +101,7 @@ class TextViewScreen {
 	}
 
 	displayForward() {
-		// this.overlay.setProperty(hmUI.prop.VISIBLE, true);
-		// const ti = timer.createTimer(150, 150, () => {
-			// timer.stopTimer(ti);
-			this._displayForward();
-			// this.overlay.setProperty(hmUI.prop.VISIBLE, false);
-		// });
+		this._displayForward();
 	}
 
 	_displayForward() {
@@ -196,9 +182,7 @@ class TextViewScreen {
 }
 
 
-let __$$app$$__ = __$$hmAppManager$$__.currentApp;
-let __$$module$$__ = __$$app$$__.current;
-__$$module$$__.module = DeviceRuntimeCore.Page({
+Page({
   onInit(p) {
     AppGesture.withYellowWorkaround("left", {
       appid: 33904,

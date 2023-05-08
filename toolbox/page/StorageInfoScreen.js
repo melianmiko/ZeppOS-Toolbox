@@ -7,15 +7,15 @@ import {STORAGE_INFO_TRANSLATIONS} from "../utils/translations";
 extendLocale(STORAGE_INFO_TRANSLATIONS);
 
 class StorageInfoScreen {
-  cupStyle = {
-    x: 16,
-    y: 72,
-    w: 32,
-    h: 320,
-    color: 0x111111
-  }
-
   start() {
+    const cupStyle = {
+      x: 16,
+      y: 72,
+      w: 32,
+      h: 320,
+      color: 0x111111
+    };
+
     const storage = hmSetting.getDiskInfo();
     const config = [
       {
@@ -52,7 +52,7 @@ class StorageInfoScreen {
 
     let posY = 56, usedY = 0;
 
-    hmUI.createWidget(hmUI.widget.FILL_RECT, this.cupStyle);
+    hmUI.createWidget(hmUI.widget.FILL_RECT, cupStyle);
 
     for (let i in config) {
       const currentRow = config[i];
@@ -81,13 +81,13 @@ class StorageInfoScreen {
       // Visual
       if (currentRow.key != "free" && currentRow.key != "total") {
         let height = Math.round(
-          this.cupStyle.h * (storage[currentRow.key] / storage.total)
+          cupStyle.h * (storage[currentRow.key] / storage.total)
         );
         if(height < 2) continue;
 
         hmUI.createWidget(hmUI.widget.FILL_RECT, {
-          ...(this.cupStyle),
-          y: this.cupStyle.y + this.cupStyle.h - usedY - height,
+          ...(cupStyle),
+          y: cupStyle.y + cupStyle.h - usedY - height,
           h: height,
           color: currentRow.color,
         });
@@ -98,10 +98,7 @@ class StorageInfoScreen {
   }
 }
 
-
-let __$$app$$__ = __$$hmAppManager$$__.currentApp;
-let __$$module$$__ = __$$app$$__.current;
-__$$module$$__.module = DeviceRuntimeCore.Page({
+Page({
   onInit(p) {
     AppGesture.withYellowWorkaround("left", {
       appid: 33904,

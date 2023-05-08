@@ -8,23 +8,25 @@ import {openPage} from "../utils/misc";
 extendLocale(APP_LIST_TRANSLATIONS);
 
 class AppsListScreen {
-  app_list_item_type = {
-    type_id: 1,
-    item_height: 64,
-    item_bg_color: 0x222222,
-    item_bg_radius: 8,
-    text_view: [
-      {
-        x: 0,
-        y: 0,
-        w: 192 - 16,
-        h: 64,
-        key: "name",
-        color: 0xffffff,
-        text_size: 26,
-      },
-    ],
-    text_view_count: 1,
+  constructor() {
+    this.app_list_item_type = {
+      type_id: 1,
+      item_height: 64,
+      item_bg_color: 0x222222,
+      item_bg_radius: 8,
+      text_view: [
+        {
+          x: 0,
+          y: 0,
+          w: 192 - 16,
+          h: 64,
+          key: "name",
+          color: 0xffffff,
+          text_size: 26,
+        },
+      ],
+      text_view_count: 1,
+    }
   }
 
   mkEditParam(dirname) {
@@ -134,10 +136,7 @@ class AppsListScreen {
   }
 }
 
-
-let __$$app$$__ = __$$hmAppManager$$__.currentApp;
-let __$$module$$__ = __$$app$$__.current;
-__$$module$$__.module = DeviceRuntimeCore.Page({
+Page({
   onInit(p) {
     AppGesture.withYellowWorkaround("left", {
       appid: 33904,
