@@ -1,5 +1,5 @@
 {
-	"def_format": "TGA-P",
 	"esbuild": true,
+	"with_zeus_compat": true,
 	"esbuild_params": "--bundle --minify"
 }

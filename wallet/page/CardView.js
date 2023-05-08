@@ -103,9 +103,7 @@ class CardViewScreen {
 }
 
 let current;
-let __$$app$$__ = __$$hmAppManager$$__.currentApp;
-let __$$module$$__ = __$$app$$__.current;
-__$$module$$__.module = DeviceRuntimeCore.Page({
+Page({
   onInit(p) {
     current = new CardViewScreen(p);
     current.build();

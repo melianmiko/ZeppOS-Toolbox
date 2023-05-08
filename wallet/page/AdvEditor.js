@@ -18,14 +18,16 @@ const FORMATS = [
 ]
 
 class AdvEditorScreen {
-  y = 96;
-  data = {
-    format: "QR",
-    icon: "",
-    title: "Card",
-    color: "0099FF",
-    content: "123"
-  };
+  constructor() {
+    this.y = 96;
+    this.data = {
+      format: "QR",
+      icon: "",
+      title: "Card",
+      color: "0099FF",
+      content: "123"
+    };
+  }
 
   start() {
     hmUI.createWidget(hmUI.widget.FILL_RECT, {
@@ -147,9 +149,7 @@ class AdvEditorScreen {
 }
 
 
-let __$$app$$__ = __$$hmAppManager$$__.currentApp;
-let __$$module$$__ = __$$app$$__.current;
-__$$module$$__.module = DeviceRuntimeCore.Page({
+Page({
   onInit() {
     AppGesture.withYellowWorkaround("left", {
       appid: 18858,

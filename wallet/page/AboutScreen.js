@@ -3,23 +3,26 @@ import { AppGesture } from "../../lib/AppGesture";
 import { BaseAboutScreen } from "../../lib/BaseAboutScreen";
 
 class AboutScreen extends BaseAboutScreen {
-  appId = 18858;
-  appName = "Кошелёк";
-  version = "v2023-04-13";
+  constructor() {
+    super();
+    this.appId = 18858;
+    this.appName = "Кошелёк";
+    this.version = "v2023-04-13";
 
-  infoRows = [
-    ["MelianMiko", "Разработчик"],
-    ["melianmiko.ru", "Загружено с"],
-    ["JsBarcode\nqrcode-generator\npdf417-js", "Исп. библиотеки"]
-  ];
+    this.infoRows = [
+      ["MelianMiko", "Разработчик"],
+      ["melianmiko.ru", "Загружено с"],
+      ["JsBarcode\nqrcode-generator\npdf417-js", "Исп. библиотеки"]
+    ];
 
-  donateText = "Поддержать";
+    this.donateText = "Поддержать";
 
-  uninstallText = "Удалить";
-  uninstallConfirm = "Нажмите ещё раз для подтверждения";
-  uninstallResult = "Приложение и все его данные удалены. Немедленно перезагрузите устройство.";
+    this.uninstallText = "Удалить";
+    this.uninstallConfirm = "Нажмите ещё раз для подтверждения";
+    this.uninstallResult = "Приложение и все его данные удалены. Немедленно перезагрузите устройство.";
+  }
 
-  donateUrl = () => {
+  donateUrl() {
     const [st, e] = FsUtils.stat(FsUtils.fullPath("donate.png"));
 
     if(e != 0) {
@@ -53,9 +56,7 @@ class AboutScreen extends BaseAboutScreen {
 }
 
 
-let __$$app$$__ = __$$hmAppManager$$__.currentApp;
-let __$$module$$__ = __$$app$$__.current;
-__$$module$$__.module = DeviceRuntimeCore.Page({
+Page({
   onInit(p) {
     AppGesture.withYellowWorkaround("left", {
       appid: 18858,

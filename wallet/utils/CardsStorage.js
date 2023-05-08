@@ -71,7 +71,7 @@ export class CardsStorage {
 
 	_writeCanvas(canvas, fn) {
 		const buffer = canvas.data.buffer;
-		const f = FsUtils.open(FsUtils.fullPath(fn), hmFS.O_WRONLY | hmFS.O_CREAT);
+		const f = hmFS.open_asset(fn, hmFS.O_WRONLY | hmFS.O_CREAT);
 		hmFS.write(f, buffer, 0, buffer.byteLength);
 		hmFS.close(f);
 	}

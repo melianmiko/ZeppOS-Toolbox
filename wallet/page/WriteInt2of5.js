@@ -64,9 +64,7 @@ class I2of5Writer extends CardWriterUI {
   }
 }
 
-let __$$app$$__ = __$$hmAppManager$$__.currentApp;
-let __$$module$$__ = __$$app$$__.current;
-__$$module$$__.module = DeviceRuntimeCore.Page({
+Page({
   onInit(params) {
     (new I2of5Writer()).start(params)
   }

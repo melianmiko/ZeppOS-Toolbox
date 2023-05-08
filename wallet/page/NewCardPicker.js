@@ -5,9 +5,8 @@ import {CardTypes} from "../utils/database";
 import { AppGesture } from "../../lib/AppGesture";
 
 class SubScreen {
-  widgets = [];
-
   constructor() {
+    this.widgets = [];
     hmApp.setLayerY(0);
   }
 
@@ -157,9 +156,7 @@ class KeyboardSubscreen extends SubScreen {
 }
 
 
-let __$$app$$__ = __$$hmAppManager$$__.currentApp;
-let __$$module$$__ = __$$app$$__.current;
-__$$module$$__.module = DeviceRuntimeCore.Page({
+Page({
   onInit() {
     AppGesture.withYellowWorkaround("left", {
       appid: 18858,
@@ -171,7 +168,7 @@ __$$module$$__.module = DeviceRuntimeCore.Page({
     hmSetting.setBrightScreen(600);
     (new IconsSubscreen()).build();
   },
-  onDestroy() {
-    hmApp.unregisterGestureEvent();
-  }
+  // onDestroy() {
+  //   hmApp.unregisterGestureEvent();
+  // }
 });

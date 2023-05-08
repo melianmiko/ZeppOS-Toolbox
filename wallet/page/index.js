@@ -3,10 +3,9 @@ import {CardsStorage} from "../utils/CardsStorage";
 import {TouchEventManager} from "../../lib/TouchEventManager";
 
 class HomePage {
-  viewerVisible = false;
-  lastBrightness = 0;
-
   constructor() {
+    this.viewerVisible = false;
+    this.lastBrightness = 0;
     this.storage = new CardsStorage();
     this.loadBackup();
   }
@@ -81,7 +80,10 @@ class HomePage {
   }
 
   openImage(data) {
-    const [st, e] = FsUtils.stat(FsUtils.fullPath(data.filename));
+    const [st, e] = hmFS.stat_asset(data.filename);
+    console.log(`View card: ${JSON.stringify(data)}, e=${e}`);
+    console.log(JSON.stringify(st));
+    
     if(e != 0)
       return CardsStorage.startWrite(data);
 
@@ -93,10 +95,11 @@ class HomePage {
 }
 
 
-let __$$app$$__ = __$$hmAppManager$$__.currentApp;
-let __$$module$$__ = __$$app$$__.current;
-__$$module$$__.module = DeviceRuntimeCore.Page({
+Page({
   onInit() {
     (new HomePage()).start();
+  },
+  onDestroy() {
+    
   }
 });
