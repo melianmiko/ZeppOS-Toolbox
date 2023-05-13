@@ -50,7 +50,7 @@ def build_qs(target, out_size):
 			bg = "#111111"
 
 		print(f"Processing {filename}")
-		mask = get_material_symbol(QS_ICONS[filename], 64)
+		mask = get_material_symbol(QS_ICONS[filename], 56)
 		icon = colorize(mask, color)
 
 		tile = Image.new("RGBA", (out_size, out_size))

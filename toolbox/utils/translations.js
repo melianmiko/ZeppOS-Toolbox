@@ -234,6 +234,73 @@ export const REBOOT_CONFIRM_TRANSLATIONS = {
 };
 
 export const SETTINGS_HOME_TRANSLATIONS = {
+  settings_ui: {
+    "en-US": "Customize",
+    "zh-CN": "定制",
+    "zh-TW": "定製",
+    "ru-RU": "Главная",
+    "de-DE": "Anpassen",
+    "es-ES": "Editar",
+    "pt-BR": "Personalizar",
+  },
+  settings_lang: {
+    "en-US": "Language",
+    "zh-CN": "语言",
+    "zh-TW": "語言",
+    "ru-RU": "Язык",
+    "de-DE": "Sprache",
+    "es-ES": "Idioma",
+    "pt-BR": "Idioma",
+  },
+  action_info: {
+    "en-US": "About",
+    "zh-CN": "关于",
+    "zh-TW": "關於",
+    "ru-RU": "О Toolbox",
+    "de-DE": "Über...",
+    "es-ES": "Acerca de",
+    "pt-BR": "Detalhes do app",
+  },
+  settings_misc: {
+    // All except RU and EN made by Google.Translate
+    "en-US": "Preferences",
+    "zh-CN": "优先",
+    "zh-TW": "偏好",
+    "ru-RU": "Предпочтения",
+    "de-DE": "Präferenzen",
+    "es-ES": "Preferencias",
+    "pt-BR": "Preferências",
+  },
+  headline_settings: {
+    "en-US": "Settings:",
+    "zh-CN": "设置:",
+    "zh-TW": "",
+    "ru-RU": "Настройки:",
+    "de-DE": "",
+    "es-ES": "",
+    "pt-BR": "Configurações",
+  },
+  headline_all_tools: {
+    "en-US": "All tools:",
+    "zh-CN": "",
+    "zh-TW": "",
+    "ru-RU": "Все инстументы:",
+    "de-DE": "",
+    "es-ES": "",
+    "pt-BR": "",
+  }
+};
+
+export const SETTINGS_MISC_TRANSLATIONS = {
+  cfg_skip_main_page: {
+    "en-US": "Hide main screen (open toolbox to settings list directly)",
+    "zh-CN": "",
+    "zh-TW": "",
+    "ru-RU": "Скрыть главный экран (открывать Toolbox сразу в настройках)",
+    "de-DE": "",
+    "es-ES": "",
+    "pt-BR": "",
+  },
   cfg_timer_keep: {
     "en-US": "Keep last timer value",
     "zh-CN": "保留最后一个计时器值",
@@ -271,42 +338,6 @@ export const SETTINGS_HOME_TRANSLATIONS = {
     "es-ES": "Mostrar funcionalidades peligrosas",
     "pt-BR": "Desbloquear recursos perigosos",
   },
-  settings_ui: {
-    "en-US": "Customize",
-    "zh-CN": "定制",
-    "zh-TW": "定製",
-    "ru-RU": "Главная",
-    "de-DE": "Anpassen",
-    "es-ES": "Editar",
-    "pt-BR": "Personalizar",
-  },
-  settings_lang: {
-    "en-US": "Language",
-    "zh-CN": "语言",
-    "zh-TW": "語言",
-    "ru-RU": "Язык",
-    "de-DE": "Sprache",
-    "es-ES": "Idioma",
-    "pt-BR": "Idioma",
-  },
-  action_info: {
-    "en-US": "About",
-    "zh-CN": "关于",
-    "zh-TW": "關於",
-    "ru-RU": "О Toolbox",
-    "de-DE": "Über...",
-    "es-ES": "Acerca de",
-    "pt-BR": "Detalhes do app",
-  },
-  headline_tools: {
-    "en-US": "Settings:",
-    "zh-CN": "设置:",
-    "zh-TW": "",
-    "ru-RU": "Настройки:",
-    "de-DE": "",
-    "es-ES": "",
-    "pt-BR": "Configurações",
-  },
   prop_font_size: {
     "en-US": "Reader font size",
     "zh-CN": "阅读器字体大小",
@@ -315,8 +346,8 @@ export const SETTINGS_HOME_TRANSLATIONS = {
     "de-DE": "",
     "es-ES": "",
     "pt-BR": "Tamanho da fonte do editor",
-  }
-};
+  },
+}
 
 export const STORAGE_INFO_TRANSLATIONS = {
   storage_total: {

@@ -164,7 +164,7 @@ class AppEditScreen extends SettingsListScreen {
 }
 
 
-age({
+Page({
 	onInit(dirname) {
 		AppGesture.withYellowWorkaround("left", {
 			appid: 33904,

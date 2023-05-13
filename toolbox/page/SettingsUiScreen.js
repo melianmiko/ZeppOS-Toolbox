@@ -41,7 +41,7 @@ class SettingsUiScreen {
 
     // Brightness
     const brightnessToggle = hmUI.createWidget(hmUI.widget.IMG, {
-      x: 12,
+      x: 0,
       y: 72,
       src: "edit/brightness_cfg.png",
       alpha: this.settings.withBrightness ? 255 : 100
@@ -60,16 +60,16 @@ class SettingsUiScreen {
       if(!config) return;
       if(config.danger && !this.allowDanger) return;
 
-      const x = 12 + (i % 2) * 90;
-      const y = 164 + Math.floor(i / 2) * 90;
+      const x = (i % 2) * 100;
+      const y = 154 + Math.floor(i / 2) * 100;
 
       const btn = hmUI.createWidget(hmUI.widget.IMG, {
         x,
         y,
-        w: 78,
-        h: 78,
+        w: 92,
+        h: 92,
         alpha: this.settings.tiles.indexOf(id) > -1 ? 255 : 100,
-        src: "qs/" + id + ".png",
+        src: `qs/${id}.png`,
       });
 
       const events = new TouchEventManager(btn);
@@ -82,7 +82,7 @@ class SettingsUiScreen {
     });
 
     // Screen overflow
-    const end_y = 176 + Math.ceil(Object.keys(QS_BUTTONS).length / 2) * 90;
+    const end_y = 166 + Math.ceil(Object.keys(QS_BUTTONS).length / 2) * 100;
     hmUI.createWidget(hmUI.widget.TEXT, {
       x: 0,
       y: end_y,

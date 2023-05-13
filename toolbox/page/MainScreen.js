@@ -8,6 +8,8 @@ import {openPage} from "../utils/misc";
 import { AppGesture } from "../../lib/AppGesture";
 import { baseBrightnessConfig } from "./styles/MainScreenStyles";
 
+import { SettingsHomePage } from "./SettingsHomePage";
+
 extendLocale(MAIN_SCREEN_TRANSLATIONS);
 
 class MainScreen {
@@ -151,8 +153,8 @@ class MainScreen {
     const basement = hmUI.createWidget(hmUI.widget.IMG, {
       ...baseBrightnessConfig,
       w: 192,
-      pos_x: 18,
-      pos_y: 20,
+      pos_x: 20,
+      pos_y: 18,
       alpha: 200,
       src: "brightness.png",
     });
@@ -192,7 +194,9 @@ Page({
       url: "page/MainScreen",
     });
     AppGesture.init();
-    
-    new MainScreen().start();
+      
+    const skipMain = hmFS.SysProGetBool("mmk_tb_skip_home");
+    const screen = skipMain ? new SettingsHomePage() : new MainScreen();
+    screen.start();
   }
 });

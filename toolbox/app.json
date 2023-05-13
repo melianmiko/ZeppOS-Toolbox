@@ -41,6 +41,7 @@
             "page/RebootConfirmScreen",
             "page/SettingsHomePage",
             "page/SettingsLangScreen",
+            "page/SettingsMiscPage",
             "page/SettingsUiScreen",
             "page/StorageInfoScreen",
             "page/TextViewScreen",

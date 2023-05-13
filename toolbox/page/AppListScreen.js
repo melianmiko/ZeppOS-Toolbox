@@ -1,49 +1,29 @@
-import {FsUtils} from "../../lib/FsUtils";
+import { FsUtils } from "../../lib/FsUtils";
 import { AppGesture } from "../../lib/AppGesture";
-import {t, extendLocale} from "../../lib/i18n";
+import { t, extendLocale } from "../../lib/i18n";
 
-import {APP_LIST_TRANSLATIONS} from "../utils/translations";
-import {openPage} from "../utils/misc";
+import { APP_LIST_TRANSLATIONS } from "../utils/translations";
+import { FILE_ROW_TYPE, HEADER_ROW_TYPE } from "./styles/FileManagerRowTypes";
+import { openPage } from "../utils/misc";
 
 extendLocale(APP_LIST_TRANSLATIONS);
 
 class AppsListScreen {
-  constructor() {
-    this.app_list_item_type = {
-      type_id: 1,
-      item_height: 64,
-      item_bg_color: 0x222222,
-      item_bg_radius: 8,
-      text_view: [
-        {
-          x: 0,
-          y: 0,
-          w: 192 - 16,
-          h: 64,
-          key: "name",
-          color: 0xffffff,
-          text_size: 26,
-        },
-      ],
-      text_view_count: 1,
-    }
-  }
-
   mkEditParam(dirname) {
-      try {
-        const path = "/storage/js_apps/" + dirname;
-        const appConfig = FsUtils.fetchJSON(path + '/app.json');
+    try {
+      const path = "/storage/js_apps/" + dirname;
+      const appConfig = FsUtils.fetchJSON(path + '/app.json');
 
-        let name = appConfig.app.appName;
-        let vender = appConfig.app.vender;
-        let data = {dirname, name, vender};
-        let icon = path + "/assets/" + appConfig.app.icon;
-        icon = this.prepareTempFile(icon);
+      let name = appConfig.app.appName;
+      let vender = appConfig.app.vender;
+      let data = { dirname, name, vender };
+      let icon = path + "/assets/" + appConfig.app.icon;
+      icon = this.prepareTempFile(icon);
 
-        return {dirname, name, vender, icon}
-      } catch (e) {
-        return {};
-      }
+      return { dirname, name, vender, icon }
+    } catch (e) {
+      return {};
+    }
   }
 
   fetchApps() {
@@ -63,13 +43,18 @@ class AppsListScreen {
         const endIndex = jsonString.indexOf("\"", stIndex);
 
         let name = jsonString.substring(stIndex, endIndex);
-        if(stIndex < 0 || endIndex < 0) name = dirname;
+        if (stIndex < 0 || endIndex < 0) name = dirname;
 
-        out.push({ name, dirname });
+        out.push({ 
+          name, 
+          dirname,
+          icon: "menu/apps.png"
+        });
       } catch (e) {
         console.log(e);
         out.push({
           name: dirname,
+          icon: "menu/files.png",
           dirname
         });
       }
@@ -80,13 +65,13 @@ class AppsListScreen {
 
   prepareTempFile(sourcePath) {
     const current = hmFS.SysProGetChars("mmk_tb_temp");
-    if(current) {
+    if (current) {
       const path = FsUtils.fullPath(current);
       hmFS.remove(path);
     }
 
-    if(sourcePath === "") return "";
-      
+    if (sourcePath === "") return "";
+
     const data = FsUtils.read(sourcePath);
     const newFile = "temp_" + Math.round(Math.random() * 100000) + ".png";
     const dest = hmFS.open_asset(newFile, hmFS.O_WRONLY | hmFS.O_CREAT);
@@ -103,35 +88,48 @@ class AppsListScreen {
 
     const apps = this.fetchApps();
 
-    hmUI.createWidget(hmUI.widget.TEXT, {
-      x: 48,
-      y: 0,
-      w: 96,
-      h: 64,
-      text: t("title_apps"),
-      color: 0xffffff,
-      align_h: hmUI.align.CENTER_H,
-      align_v: hmUI.align.CENTER_V,
-    });
-
     hmUI.createWidget(hmUI.widget.SCROLL_LIST, {
-      x: 8,
-      y: 64,
-      w: 192 - 16,
-      h: 378,
+      x: 0,
+      y: 0,
+      w: 192,
+      h: 490,
       item_space: 8,
-      item_config: [this.app_list_item_type],
-      item_config_count: 1,
+      item_config: [HEADER_ROW_TYPE, FILE_ROW_TYPE],
+      item_config_count: 2,
       item_click_func: (list, index) => {
-        const data = apps[index];
+        if(index == 0) return;
+        const data = apps[index - 1];
         openPage("AppEditScreen", data.dirname);
       },
-      data_type_config: [
-        { start: 0, end: apps.length - 1, type_id: 1 },
+      data_type_config: [{
+          start: 0,
+          end: 0,
+          type_id: 1,
+        },
+        {
+          start: 1,
+          end: apps.length,
+          type_id: 2,
+        },
+        {
+          start: apps.length + 1,
+          end: apps.length + 1,
+          type_id: 1,
+        },
       ],
-      data_type_config_count: 1,
-      data_array: apps,
-      data_count: apps.length,
+      data_type_config_count: 3,
+      data_array: [
+        {
+          title: t("title_apps"),
+          icon: "",
+        },
+        ...apps,
+        {
+          title: "",
+          icon: "",
+        },
+      ],
+      data_count: apps.length + 2,
     });
   }
 }
