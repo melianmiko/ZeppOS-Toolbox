@@ -1,0 +1,7 @@
+{
+	"def_format": "TGA-RLP",
+	"auto_rgba": false,
+	"esbuild": true,
+	"with_zeus_compat": true,
+	"esbuild_params": "--bundle"
+}
