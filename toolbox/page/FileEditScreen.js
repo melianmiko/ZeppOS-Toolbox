@@ -31,7 +31,7 @@ class FileEditScreen extends SettingsListScreen {
 
     // Open btns
     if(fileSize > 0) {
-      if(this.path.endsWith(".png")) {
+      if(this.path.endsWith(".png") || this.path.extends(".tga")) {
         this.clickableItem(t("file_view_as_image"), "files/img.png", () => {
           openPage("ImageViewScreen", this.prepareTempFile(this.path));
         })
