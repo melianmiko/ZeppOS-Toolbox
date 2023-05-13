@@ -29,7 +29,7 @@ class MainScreen {
 
   start() {
     const {tiles, withBrightness, withBattery} = this._getSettings();
-    const topOffset = withBrightness ? 164 : 72
+    const topOffset = withBrightness ? 152 : 72
 
     this.allowDanger = hmFS.SysProGetBool("mmk_tb_danger_mode");
 
@@ -80,12 +80,16 @@ class MainScreen {
       if(!config) return;
       if(config.danger && !this.allowDanger) return;
 
+      let iconName = `qs/${id}.png`;
+      if(config.isEnabled && config.isEnabled())
+        iconName = `qs/${id}_on.png`
+
       const widgetConfig = {
-        x: 12 + (i % 2) * 90,
-        y: topOffset + Math.floor(i / 2) * 90,
-        w: 78,
-        h: 78,
-        src: "qs/" + id + ".png",
+        x: 0 + (i % 2) * 100,
+        y: topOffset + Math.floor(i / 2) * 100,
+        w: 92,
+        h: 92,
+        src: iconName,
       }
 
       const widget = hmUI.createWidget(hmUI.widget.IMG, widgetConfig);
@@ -116,7 +120,7 @@ class MainScreen {
     // Edit button
     const editButton = hmUI.createWidget(hmUI.widget.TEXT, {
       x: 0,
-      y: topOffset + 12 + Math.ceil(i / 2) * 90,
+      y: topOffset + 12 + Math.ceil(i / 2) * 100,
       w: 192,
       h: 72,
       align_h: hmUI.align.CENTER_H,
@@ -134,21 +138,21 @@ class MainScreen {
     hmUI.createWidget(hmUI.widget.FILL_RECT, {
       ...baseBrightnessConfig,
       color: 0x222222,
-      w: 168
+      w: 192
     });
 
     this.widgetBrightness = hmUI.createWidget(hmUI.widget.FILL_RECT, {
       ...baseBrightnessConfig,
-      color: 0x555555,
+      color: 0x999999,
       alpha: 80,
       w: 10
     });
 
     const basement = hmUI.createWidget(hmUI.widget.IMG, {
       ...baseBrightnessConfig,
-      w: 168,
-      pos_x: 8,
-      pos_y: 22,
+      w: 192,
+      pos_x: 18,
+      pos_y: 20,
       alpha: 200,
       src: "brightness.png",
     });
@@ -173,7 +177,7 @@ class MainScreen {
   }
 
   _updateBrightness() {
-    const val = 168 * (hmSetting.getBrightness() / 100);
+    const val = 192 * (hmSetting.getBrightness() / 100);
     this.widgetBrightness.setProperty(hmUI.prop.MORE, {
       w: Math.max(val, 24),
       alpha: val == 0 ? 0 : 200,

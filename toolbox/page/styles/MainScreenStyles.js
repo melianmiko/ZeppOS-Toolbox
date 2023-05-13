@@ -1,6 +1,6 @@
 export const baseBrightnessConfig = {
-  x: 12,
+  x: 0,
   y: 72,
-  h: 80,
-  radius: 8,
+  h: 72,
+  radius: 36,
 };

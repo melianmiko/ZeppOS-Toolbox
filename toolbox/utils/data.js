@@ -40,6 +40,10 @@ export const QS_BUTTONS = {
   dnd: {
     url: "Settings_dndModelScreen",
     type: "native",
+    isEnabled: () => {
+      const response = hmFS.SysProGetChars("settings_data_dnd");
+      return response && response.length > 0;
+    }
   },
 
   flashlight: {
@@ -65,6 +69,11 @@ export const QS_BUTTONS = {
   aod: {
     url: "Settings_standbyModelScreen",
     type: "native",
+    isEnabled: () => {
+      // Yes, `sytem`, thats typo in Mi Band firmware
+      const response = hmFS.SysProGetBool("sytem.screen_aod_mode")
+      return response;
+    }
   },
 
   powersave: {
