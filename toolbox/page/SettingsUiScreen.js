@@ -3,62 +3,58 @@ import {t} from "../../lib/i18n";
 import {TouchEventManager} from "../../lib/TouchEventManager";
 import { AppGesture } from "../../lib/AppGesture";
 
-import {QS_BUTTONS, DEFAULT_SETTINGS} from "../utils/data";
+import {QS_BUTTONS} from "../utils/data";
+
+const { config } = getApp()._options.globalData;
 
 class SettingsUiScreen {
   constructor() {
     this.userTiels = null;
-    this.settings = null;
-  }
-
-  _load() {
-    try {
-      this.settings = FsUtils.fetchJSON("/storage/mmk_tb_layout.json");
-    } catch(e) {
-      console.log(e);
-      this.settings = DEFAULT_SETTINGS;
-    }
   }
 
   start () {
-    this._load();
-    this.allowDanger = hmFS.SysProGetBool("mmk_tb_danger_mode");
+    const allowDanger = config.get("allowDanger", false);
 
     // Battety
+    let withBattery = config.get("withBattery", false);
     const batteryToggle = hmUI.createWidget(hmUI.widget.IMG, {
       x: 60,
       y: 28,
       src: 'edit/battery_pv.png',
-      alpha: this.settings.withBattery ? 255 : 100
+      alpha: withBattery ? 255 : 100
     });
     const batteryToggleEvents = new TouchEventManager(batteryToggle);
     batteryToggleEvents.ontouch = () => {
-      this.settings.withBattery = !this.settings.withBattery;
+      withBattery = !withBattery;
+      config.set("withBattery", withBattery);
       batteryToggle.setProperty(hmUI.prop.MORE, {
-        alpha: this.settings.withBattery ? 255 : 100
+        alpha: withBattery ? 255 : 100
       })
     };
 
     // Brightness
+    let withBrightness = config.get("withBrightness");
     const brightnessToggle = hmUI.createWidget(hmUI.widget.IMG, {
       x: 0,
       y: 72,
       src: "edit/brightness_cfg.png",
-      alpha: this.settings.withBrightness ? 255 : 100
+      alpha: withBrightness ? 255 : 100
     });
     const brightnessToggleEvents = new TouchEventManager(brightnessToggle);
     brightnessToggleEvents.ontouch = () => {
-      this.settings.withBrightness = !this.settings.withBrightness;
+      withBrightness = !withBrightness
+      config.set('withBrightness', withBrightness);
       brightnessToggle.setProperty(hmUI.prop.MORE, {
-        alpha: this.settings.withBrightness ? 255 : 100
+        alpha: withBrightness ? 255 : 100
       })
     };
 
     let i = 0;
+    const tiles = config.get("tiles", []);
     Object.keys(QS_BUTTONS).forEach((id) => {
       const config = QS_BUTTONS[id];
       if(!config) return;
-      if(config.danger && !this.allowDanger) return;
+      if(config.danger && !allowDanger) return;
 
       const x = (i % 2) * 100;
       const y = 154 + Math.floor(i / 2) * 100;
@@ -68,7 +64,7 @@ class SettingsUiScreen {
         y,
         w: 92,
         h: 92,
-        alpha: this.settings.tiles.indexOf(id) > -1 ? 255 : 100,
+        alpha: tiles.indexOf(id) > -1 ? 255 : 100,
         src: `qs/${id}.png`,
       });
 
@@ -92,21 +88,20 @@ class SettingsUiScreen {
     });
   }
 
-  finish() {
-    FsUtils.writeText("/storage/mmk_tb_layout.json", JSON.stringify(this.settings));
-  }
-
   _toggleTile(id, btn) {
-    const ind = this.settings.tiles.indexOf(id);
+    let tiles = config.get("tiles", []);
+    const ind = tiles.indexOf(id);
 
     if(ind < 0) {
-      this.settings.tiles.push(id);
+      tiles.push(id);
       btn.setProperty(hmUI.prop.MORE, {alpha: 255})
     } else {
-      this.settings.tiles = this.settings.tiles.filter((i) => i !== id);
-      console.log(this.settings.tiles);
+      tiles = tiles.filter((i) => i !== id);
+      console.log(tiles);
       btn.setProperty(hmUI.prop.MORE, {alpha: 100})
     }
+
+    config.set("tiles", tiles);
   }
 }
 
@@ -123,7 +118,4 @@ Page({
     screen = new SettingsUiScreen();
     screen.start();
   },
-  onDestroy: () => {
-    screen.finish();
-  }
 });

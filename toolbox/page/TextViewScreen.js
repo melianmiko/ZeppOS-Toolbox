@@ -2,6 +2,7 @@ import {FsUtils} from "../../lib/FsUtils";
 import { AppGesture } from "../../lib/AppGesture";
 
 const BOX_HEIGHT = 300;
+const { config } = getApp()._options.globalData;
 
 class TextViewScreen {
 	constructor(data) {
@@ -19,7 +20,7 @@ class TextViewScreen {
 		hmUI.setLayerScrolling(false);
 
 		// Prepare config
-		const userFontSize = hmFS.SysProGetInt("mmk_tb_fontsize");
+		const userFontSize = config.get("readerFontSize");
 		if(userFontSize) this.fontSize = userFontSize;
 
 		// Prepare file

@@ -8,7 +8,7 @@ const TEMPLATE = {
     "de-DE": "",
     "es-ES": "",
     "pt-BR": "",
-  }
+  },
 }
 
 /**
@@ -23,6 +23,15 @@ export const APP_EDIT_TRANSLATIONS = {
     "de-DE": "Deinstallieren",
     "es-ES": "Desinstalar",
     "pt-BR": "Desinstalar",
+  },
+  action_show_files: {
+    "en-US": "Show in file manager",
+    "zh-CN": "",
+    "zh-TW": "",
+    "ru-RU": "Показать в проводнике",
+    "de-DE": "",
+    "es-ES": "",
+    "pt-BR": "",
   },
   tap_to_confirm: {
     "en-US": "Tap again to confirm",
@@ -292,6 +301,15 @@ export const SETTINGS_HOME_TRANSLATIONS = {
 };
 
 export const SETTINGS_MISC_TRANSLATIONS = {
+  cfg_auto_open_files: {
+    "en-US": "Open *.txt files with one click",
+    "zh-CN": "",
+    "zh-TW": "",
+    "ru-RU": "Открывать *.txt файлы одним касанием",
+    "de-DE": "",
+    "es-ES": "",
+    "pt-BR": "",
+  },
   cfg_skip_main_page: {
     "en-US": "Hide main screen (open toolbox to settings list directly)",
     "zh-CN": "",

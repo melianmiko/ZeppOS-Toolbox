@@ -4,20 +4,22 @@ import { AppGesture } from "../../lib/AppGesture";
 
 import {TOGGLE_DANGER_TRANSLATIONS} from "../utils/translations";
 
+const { config } = getApp()._options.globalData;
+
 extendLocale(TOGGLE_DANGER_TRANSLATIONS);
 
 class DnagerToggle extends SettingsListScreen {
 	build() {
-    const allowDanger = hmFS.SysProGetBool("mmk_tb_danger_mode");
+    const allowDanger = config.get("allowDanger", false);
     if(allowDanger) {
-    	hmFS.SysProSetBool("mmk_tb_danger_mode", false);
+    	config.set("allowDanger", false);
     	hmApp.goBack();
     	return;
     }
 
     this.text(t("danger_warn"));
     this.clickableItem(t("danger_agree"), "menu/cb_true.png", () => {
-    	hmFS.SysProSetBool("mmk_tb_danger_mode", true);
+      config.set("allowDanger", true);
     	hmApp.goBack();
     });
 	}

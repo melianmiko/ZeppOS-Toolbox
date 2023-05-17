@@ -4,21 +4,22 @@ import {FsUtils} from "../../lib/FsUtils";
 import {openPage} from "../utils/misc";
 import {HEADER_ROW_TYPE, FILE_ROW_TYPE, FILE_ROW_TYPE_WITH_SIZE} from "./styles/FileManagerRowTypes";
 
-class FileManagerScreen {
+const { config } = getApp()._options.globalData;
 
-  constructor() {
+class FileManagerScreen {
+  constructor(path) {
     this.maxItems = 16;
 
-    this.path = "/storage/js_apps";
+    this.path = path ? path : "/storage/js_apps";
     this.editPath = null;
     this.content = [];
     this.rows = [];
 
     this.path = FsUtils.getSelfPath();
-    this.showFileSizes = !!hmFS.SysProGetBool("mmk_tb_filesize");
+    this.showFileSizes = config.get("fmShowSizes", false);
 
     const lastPath = hmFS.SysProGetChars("mmk_tb_lastpath");
-    if(!!lastPath) this.path = lastPath;
+    if(!!lastPath & !path) this.path = lastPath;
   }
 
   finish() {
@@ -52,6 +53,10 @@ class FileManagerScreen {
   }
 
   modify(path) {
+    if(config.get("autoOpenFiles", false) && path.endsWith(".txt")) {
+      return openPage("TextViewScreen", path);
+    }
+
     openPage("FileEditScreen", path);
   }
 
@@ -207,7 +212,7 @@ Page({
     AppGesture.init();
 
     hmUI.setLayerScrolling(false);
-    screen = new FileManagerScreen();
+    screen = new FileManagerScreen(p);
     screen.start();
   },
   onDestroy: () => {

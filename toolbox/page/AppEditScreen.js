@@ -13,7 +13,7 @@ class AppEditScreen extends SettingsListScreen {
 		
 		this.dirname = dirname;
 		this.dontKeepSettings = true;
-		this.path = "/storage/js_apps/" + dirname;
+		this.path = `/storage/js_apps/${dirname}`;
 		this.appConfig = {};
 	}
 
@@ -41,6 +41,16 @@ class AppEditScreen extends SettingsListScreen {
 		})
 
 		this.baseColor = 0xFFFFFF;
+		this.headline(t("headline_adv"));
+		this.field("ID (dec / hex", `${this.appConfig.app.appId} / ${this.dirname}`);
+		this.clickableItem(t("action_show_files"), "menu/files.png", () => {
+			const path = `/storage/js_apps/${this.dirname}`;
+			hmApp.gotoPage({
+				url: "page/FileManagerScreen",
+				param: path
+			})
+		});
+
 		if(this.appConfig.externalFilesList) {
 			let configSize = 0;
 			for(const path of this.appConfig.externalFilesList) {
@@ -48,7 +58,6 @@ class AppEditScreen extends SettingsListScreen {
 				if(st !== null && st.size) configSize += st.size;
 			}
 
-			this.headline(t("headline_adv"));
 			this.field(t("file_size_ext"), FsUtils.printBytes(configSize));
 			this.checkbox(t("conf_full"), this, "dontKeepSettings");
 		}

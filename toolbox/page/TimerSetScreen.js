@@ -7,6 +7,8 @@ import {STYLE_DISPLAY, STYLE_EDIT_BTN, STYLE_EDIT_DEG, STYLE_EDIT_INC} from "./s
 
 extendLocale(TIMER_TRANSLATIONS)
 
+const { config } = getApp()._options.globalData;
+
 class TimerSetScreen {
 	constructor() {
 		this.hour = 0;
@@ -26,8 +28,7 @@ class TimerSetScreen {
 
 	start() {
 		// Load all
-		let cfg = hmFS.SysProGetBool("mmk_tb_cfg_timer_keep");
-		if(cfg === undefined) cfg = true;
+		let cfg = config.get("timerKeepLast", true);
 
 		const lastDX = hmFS.SysProGetInt("mmk_tb_timer_last");
 		if(lastDX && cfg) {

@@ -12,6 +12,8 @@ import { SettingsHomePage } from "./SettingsHomePage";
 
 extendLocale(MAIN_SCREEN_TRANSLATIONS);
 
+const { config } = getApp()._options.globalData;
+
 class MainScreen {
   _getSettings() {
     let settings = {
@@ -31,7 +33,7 @@ class MainScreen {
 
   start() {
     const {tiles, withBrightness, withBattery} = this._getSettings();
-    const topOffset = withBrightness ? 152 : 72
+    const topOffset = withBrightness ? 160 : 72
 
     this.allowDanger = hmFS.SysProGetBool("mmk_tb_danger_mode");
 
@@ -195,7 +197,7 @@ Page({
     });
     AppGesture.init();
       
-    const skipMain = hmFS.SysProGetBool("mmk_tb_skip_home");
+    const skipMain = config.get("skipMainPage", false);
     const screen = skipMain ? new SettingsHomePage() : new MainScreen();
     screen.start();
   }
