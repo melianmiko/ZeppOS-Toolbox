@@ -2,6 +2,9 @@ from PIL import Image, ImageDraw
 from pathlib import Path
 from cairosvg import svg2png
 import io
+import requests
+import os
+import subprocess
 
 # import requests
 
@@ -29,17 +32,26 @@ QS_ICONS = {
 }
 
 def main():
-	build_qs("mi-band-7", 92)
+	build_qs("mi-band-7", 92, 56)
 
 
 def get_material_symbol(name, size):
 	url = f"{MUI_ICONS_BASE_URL}/{name}/materialsymbolsoutlined/{name}_48px.svg"
-	png_bytes = svg2png(url=url, scale=size / 48)
-	img = Image.open(io.BytesIO(png_bytes))
+	r = requests.get(url)
+	with open("temp.svg", "wb") as f:
+		f.write(r.content)
+	subprocess.Popen(["inkscape", f"--export-width={size}",
+								  f"--export-type=png",
+								  f"--export-background-opacity=0"
+								  f"--export-filename=temp.png",
+								  "temp.svg"]).wait()
+	img = Image.open("temp.png")
+	os.remove("temp.svg")
+	os.remove("temp.png")
 	return img
 
 
-def build_qs(target, out_size):
+def build_qs(target, out_size, in_size):
 	out_dir = Path(f"{target}/qs")
 	for filename in QS_ICONS:
 		if filename.endswith("_on.png"):
@@ -50,7 +62,7 @@ def build_qs(target, out_size):
 			bg = "#111111"
 
 		print(f"Processing {filename}")
-		mask = get_material_symbol(QS_ICONS[filename], 56)
+		mask = get_material_symbol(QS_ICONS[filename], in_size)
 		icon = colorize(mask, color)
 
 		tile = Image.new("RGBA", (out_size, out_size))
