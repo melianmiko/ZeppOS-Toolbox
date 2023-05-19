@@ -303,7 +303,7 @@ export const SETTINGS_HOME_TRANSLATIONS = {
 export const SETTINGS_MISC_TRANSLATIONS = {
   cfg_auto_open_files: {
     "en-US": "Open *.txt files with one click",
-    "zh-CN": "点击打开 *.txt 文件",
+    "zh-CN": "单击打开 *.txt 文件",
     "zh-TW": "",
     "ru-RU": "Открывать *.txt файлы одним касанием",
     "de-DE": "",
@@ -331,7 +331,7 @@ export const SETTINGS_MISC_TRANSLATIONS = {
   cfg_show_size_in_list: {
     // de/es made with Google Translate
     "en-US": "Show file size in explorer",
-    "zh-CN": "在文件理器中显示文件大小",
+    "zh-CN": "在文件管理器中显示文件大小",
     "zh-TW": "在資源管理器中顯示文件大小",
     "ru-RU": "Размер файлов в проводнике",
     "de-DE": "Dateigröße im Explorer anzeigen",
