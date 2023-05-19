@@ -26,7 +26,7 @@ export const APP_EDIT_TRANSLATIONS = {
   },
   action_show_files: {
     "en-US": "Show in file manager",
-    "zh-CN": "",
+    "zh-CN": "在文件管理器中显示",
     "zh-TW": "",
     "ru-RU": "Показать в проводнике",
     "de-DE": "",
@@ -273,7 +273,7 @@ export const SETTINGS_HOME_TRANSLATIONS = {
   settings_misc: {
     // All except RU and EN made by Google.Translate
     "en-US": "Preferences",
-    "zh-CN": "优先",
+    "zh-CN": "偏好",
     "zh-TW": "偏好",
     "ru-RU": "Предпочтения",
     "de-DE": "Präferenzen",
@@ -291,7 +291,7 @@ export const SETTINGS_HOME_TRANSLATIONS = {
   },
   headline_all_tools: {
     "en-US": "All tools:",
-    "zh-CN": "",
+    "zh-CN": "所有工具:",
     "zh-TW": "",
     "ru-RU": "Все инстументы:",
     "de-DE": "",
@@ -303,7 +303,7 @@ export const SETTINGS_HOME_TRANSLATIONS = {
 export const SETTINGS_MISC_TRANSLATIONS = {
   cfg_auto_open_files: {
     "en-US": "Open *.txt files with one click",
-    "zh-CN": "",
+    "zh-CN": "单击打开 *.txt 文件",
     "zh-TW": "",
     "ru-RU": "Открывать *.txt файлы одним касанием",
     "de-DE": "",
@@ -312,7 +312,7 @@ export const SETTINGS_MISC_TRANSLATIONS = {
   },
   cfg_skip_main_page: {
     "en-US": "Hide main screen (open toolbox to settings list directly)",
-    "zh-CN": "",
+    "zh-CN": "隐藏主界面(直接进入Toolbox设置)",
     "zh-TW": "",
     "ru-RU": "Скрыть главный экран (открывать Toolbox сразу в настройках)",
     "de-DE": "",
@@ -329,9 +329,9 @@ export const SETTINGS_MISC_TRANSLATIONS = {
     "pt-BR": "Manter o valor do último temporizador",
   },
   cfg_show_size_in_list: {
-    // cn/de/es made with Google Translate
+    // de/es made with Google Translate
     "en-US": "Show file size in explorer",
-    "zh-CN": "在资源管理器中显示文件大小",
+    "zh-CN": "在文件管理器中显示文件大小",
     "zh-TW": "在資源管理器中顯示文件大小",
     "ru-RU": "Размер файлов в проводнике",
     "de-DE": "Dateigröße im Explorer anzeigen",
