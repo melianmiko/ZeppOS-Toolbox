@@ -273,7 +273,7 @@ export const SETTINGS_HOME_TRANSLATIONS = {
   settings_misc: {
     // All except RU and EN made by Google.Translate
     "en-US": "Preferences",
-    "zh-CN": "优先",
+    "zh-CN": "偏好",
     "zh-TW": "偏好",
     "ru-RU": "Предпочтения",
     "de-DE": "Präferenzen",
@@ -331,7 +331,7 @@ export const SETTINGS_MISC_TRANSLATIONS = {
   cfg_show_size_in_list: {
     // de/es made with Google Translate
     "en-US": "Show file size in explorer",
-    "zh-CN": "在资文件理器中显示文件大小",
+    "zh-CN": "在文件理器中显示文件大小",
     "zh-TW": "在資源管理器中顯示文件大小",
     "ru-RU": "Размер файлов в проводнике",
     "de-DE": "Dateigröße im Explorer anzeigen",
