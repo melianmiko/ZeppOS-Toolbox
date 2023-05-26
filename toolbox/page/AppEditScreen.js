@@ -1,7 +1,7 @@
-import {FsUtils} from "../../lib/FsUtils";
 import {t, extendLocale} from "../../lib/i18n";
 import {SettingsListScreen} from "../../lib/SettingsListScreen";
 import { AppGesture } from "../../lib/AppGesture";
+import {FsTools, Path} from "../../lib/Path";
 
 import {APP_EDIT_TRANSLATIONS} from "../utils/translations";
 
@@ -13,15 +13,15 @@ class AppEditScreen extends SettingsListScreen {
 		
 		this.dirname = dirname;
 		this.dontKeepSettings = true;
-		this.path = `/storage/js_apps/${dirname}`;
+		this.entry = new Path("full", `/storage/js_apps/${dirname}`);
+		this.dataEntry = new Path("full", `/storage/js_apps/data/${dirname}`);
 		this.appConfig = {};
 	}
 
 	build() {
 		this.preloadAll();
 
-		let size = FsUtils.sizeTree(this.path);
-
+		let size = this.entry.size();
 		this.image(this.iconPath, 100);
 		this.h1(this.appConfig.app.appName);
 
@@ -33,7 +33,7 @@ class AppEditScreen extends SettingsListScreen {
 		});
 
 		this.field(t("field_vendor"), this.appConfig.app.vender);
-		this.field(t("field_size"), FsUtils.printBytes(size));
+		this.field(t("field_size"), FsTools.printBytes(size));
 
 		this.baseColor = 0xFF8888;
 		this.clickableItem(t("action_uninstall"), "menu/delete.png", () => {
@@ -47,18 +47,20 @@ class AppEditScreen extends SettingsListScreen {
 			const path = `/storage/js_apps/${this.dirname}`;
 			hmApp.gotoPage({
 				url: "page/FileManagerScreen",
-				param: path
+				param: JSON.stringify({
+					path
+				})
 			})
 		});
 
 		if(this.appConfig.externalFilesList) {
 			let configSize = 0;
 			for(const path of this.appConfig.externalFilesList) {
-				const [st, e] = FsUtils.stat(path);
+				const [st, e] = new Path("full", path).stat();
 				if(st !== null && st.size) configSize += st.size;
 			}
 
-			this.field(t("file_size_ext"), FsUtils.printBytes(configSize));
+			this.field(t("file_size_ext"), FsTools.printBytes(configSize));
 			this.checkbox(t("conf_full"), this, "dontKeepSettings");
 		}
 
@@ -66,14 +68,14 @@ class AppEditScreen extends SettingsListScreen {
 	}
 
 	preloadAll() {
-			try {
-				this.appConfig = FsUtils.fetchJSON(this.path + '/app.json');
+		try {
+			this.appConfig = this.entry.get("app.json").fetchJSON();
 
-				let icon = this.path + "/assets/" + this.appConfig.app.icon;
-				this.iconPath = this._prepareTempFile(icon);
-			} catch (e) {
-				console.log(e);
-			}
+			let icon = this.entry.get(`assets/${this.appConfig.app.icon}`);
+			this.iconPath = this._prepareTempFile(icon);
+		} catch (e) {
+			console.log(e);
+		}
 	}
 
 	_prepareFinishGroup() {
@@ -132,34 +134,30 @@ class AppEditScreen extends SettingsListScreen {
 		this.finishGroup = group;
 	}
 
-	_prepareTempFile(sourcePath) {
+	_prepareTempFile(sourceEntry) {
 		const current = hmFS.SysProGetChars("mmk_tb_temp");
 		if(current) {
-			const path = FsUtils.fullPath(current);
-			hmFS.remove(path);
+			new Path("assets", current).remove();
 		}
 
-		if(sourcePath === "") return "";
-			
-		const data = FsUtils.read(sourcePath);
+		if(!sourceEntry.exists()) return "";
+
 		const newFile = "temp_" + Math.round(Math.random() * 100000) + ".png";
-		const dest = hmFS.open_asset(newFile, hmFS.O_WRONLY | hmFS.O_CREAT);
-		hmFS.seek(dest, 0, hmFS.SEEK_SET);
-		hmFS.write(dest, data, 0, data.byteLength);
-		hmFS.close(dest);
+		const dest = new Path("assets", newFile);
+		sourceEntry.copy(dest);
 
 		hmFS.SysProSetChars("mmk_tb_temp", newFile);
 		return newFile;
 	}
 
 	uninstall() {
-		FsUtils.rmTree("/storage/js_apps/" + this.dirname);
-		FsUtils.rmTree("/storage/js_apps/data" + this.dirname);
+		this.entry.removeTree();
+		this.dataEntry.removeTree();
 
 		if(this.appConfig.externalFilesList) {
 			for(const path of this.appConfig.externalFilesList) {
 				try {
-					hmFS.remove(path);
+					new Path("full", path).remove();
 				} catch(e) {
 					console.log(e);
 				}

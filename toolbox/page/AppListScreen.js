@@ -1,4 +1,4 @@
-import { FsUtils } from "../../lib/FsUtils";
+import {Path} from "../../lib/Path";
 import { AppGesture } from "../../lib/AppGesture";
 import { t, extendLocale } from "../../lib/i18n";
 
@@ -9,15 +9,18 @@ import { openPage } from "../utils/misc";
 extendLocale(APP_LIST_TRANSLATIONS);
 
 class AppsListScreen {
+  constructor() {
+    this.root = new Path("full", "/storage/js_apps");
+  }
+
   mkEditParam(dirname) {
     try {
-      const path = "/storage/js_apps/" + dirname;
-      const appConfig = FsUtils.fetchJSON(path + '/app.json');
+      const appConfig = this.root.get(`${dirname}/app.json`).fetchJSON();
 
       let name = appConfig.app.appName;
       let vender = appConfig.app.vender;
       let data = { dirname, name, vender };
-      let icon = path + "/assets/" + appConfig.app.icon;
+      let icon = this.root.get(`${dirname}/assets/${appConfig.app.icon}`);
       icon = this.prepareTempFile(icon);
 
       return { dirname, name, vender, icon }
@@ -28,15 +31,14 @@ class AppsListScreen {
 
   fetchApps() {
     const out = [];
-    const [contents, e] = hmFS.readdir("/storage/js_apps");
+    const [contents, e] = this.root.list();
 
     for (let i in contents) {
       const dirname = contents[i];
       if (dirname == "data") continue;
 
       try {
-        const path = "/storage/js_apps/" + dirname;
-        const jsonString = FsUtils.fetchTextFile(path + '/app.json', 368);
+        const jsonString = this.root.get(`${dirname}/app.json`).fetchText(368);
 
         const appNameIndex = jsonString.indexOf("appName") + 8;
         const stIndex = jsonString.indexOf("\"", appNameIndex) + 1;
@@ -66,15 +68,14 @@ class AppsListScreen {
   prepareTempFile(sourcePath) {
     const current = hmFS.SysProGetChars("mmk_tb_temp");
     if (current) {
-      const path = FsUtils.fullPath(current);
       hmFS.remove(path);
     }
 
     if (sourcePath === "") return "";
 
-    const data = FsUtils.read(sourcePath);
+    const data = new Path("full", sourcePath).fetch();
     const newFile = "temp_" + Math.round(Math.random() * 100000) + ".png";
-    const dest = hmFS.open_asset(newFile, hmFS.O_WRONLY | hmFS.O_CREAT);
+    const dest = hmFS.open(newFile, hmFS.O_WRONLY | hmFS.O_CREAT);
     hmFS.seek(dest, 0, hmFS.SEEK_SET);
     hmFS.write(dest, data, 0, data.byteLength);
     hmFS.close(dest);

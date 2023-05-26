@@ -1,5 +1,5 @@
 import { AppGesture } from "../../lib/AppGesture";
-import {FsUtils} from "../../lib/FsUtils";
+import { Path, FsTools } from "../../lib/Path";
 
 import {openPage} from "../utils/misc";
 import {HEADER_ROW_TYPE, FILE_ROW_TYPE, FILE_ROW_TYPE_WITH_SIZE} from "./styles/FileManagerRowTypes";
@@ -7,19 +7,24 @@ import {HEADER_ROW_TYPE, FILE_ROW_TYPE, FILE_ROW_TYPE_WITH_SIZE} from "./styles/
 const { config } = getApp()._options.globalData;
 
 class FileManagerScreen {
-  constructor(path) {
+  constructor(params) {
     this.maxItems = 16;
 
-    this.path = path ? path : "/storage/js_apps";
     this.editPath = null;
     this.content = [];
     this.rows = [];
 
-    this.path = FsUtils.getSelfPath();
     this.showFileSizes = config.get("fmShowSizes", false);
 
-    const lastPath = hmFS.SysProGetChars("mmk_tb_lastpath");
-    if(!!lastPath & !path) this.path = lastPath;
+    let currentPath = FsTools.fullAssetPath("");
+    let lastPath = hmFS.SysProGetChars("mmk_tb_lastpath");
+    if(params.path) {
+      currentPath = params.path;
+    } else if(!!lastPath) {
+      currentPath = lastPath
+    }
+
+    this.entry = new Path("full", currentPath);
   }
 
   finish() {
@@ -49,7 +54,7 @@ class FileManagerScreen {
     });
 
     // Run
-    this.applyPath(this.path);
+    this.applyPathEntry(this.entry);
   }
 
   modify(path) {
@@ -60,16 +65,10 @@ class FileManagerScreen {
     openPage("FileEditScreen", path);
   }
 
-  applyPath(path) {
-    this.path = path;
+  applyPathEntry(entry) {
+    this.entry = entry;
     this.refresh();
-    hmFS.SysProSetChars("mmk_tb_lastpath", path);
-  }
-
-  isFolder(path) {
-      const [st, e] = FsUtils.stat(path);
-      if(st == null) return true; // force for unavailables
-      return (st.mode & 32768) == 0;
+    hmFS.SysProSetChars("mmk_tb_lastpath", entry.absolutePath);
   }
 
   getFileIcon(path) {
@@ -85,13 +84,13 @@ class FileManagerScreen {
   }
 
   refresh() {
-    const [dirContent, e] = hmFS.readdir(this.path);
-    console.log("refr", this.path);
+    console.log("refr", this.entry.absolutePath);
+    const [dirContent, e] = this.entry.list();
 
     let folders = [],
       files = [];
 
-    if (this.path !== "/storage") {
+    if (this.entry.absolutePath !== "/storage") {
       folders.push({
         name: "..", 
         icon: "files/up.png",
@@ -101,8 +100,8 @@ class FileManagerScreen {
 
     for(let i = 0; i < Math.min(dirContent.length, this.maxItems); i++) {
       const fn = dirContent[i];
-      const path = `${this.path}/${fn}`
-      const isFolder = this.isFolder(path);
+      const item = this.entry.get(fn);
+      const isFolder = item.isFolder();
 
       const row = {
         name: fn,
@@ -112,9 +111,9 @@ class FileManagerScreen {
 
       if(!isFolder && this.showFileSizes) {
         try {
-          const [st, e] = FsUtils.stat(path);
+          const [st, e] = item.stat();
           if(st.size) {
-            row.size = FsUtils.printBytes(st.size);
+            row.size = FsTools.printBytes(st.size);
           }
         } catch(e) {}
       }
@@ -127,7 +126,7 @@ class FileManagerScreen {
 
     this.contents = [
       {
-        title: this.path, 
+        title: this.entry.absolutePath, 
         icon: "menu/context.png",
         isContext: true
       },
@@ -175,7 +174,7 @@ class FileManagerScreen {
     if(!this.contents[i]) return;
 
     if(this.contents[i].isContext) 
-      return this.modify(this.path);
+      return this.modify(this.entry.absolutePath);
     else if(this.contents[i].isExpand) {
       this.maxItems += 50;
       return this.refresh();
@@ -183,14 +182,17 @@ class FileManagerScreen {
 
     let val = this.contents[i].name;
 
-    let path = this.path + "/" + val;
+    let path = this.entry.absolutePath;
     if (val == "..") {
-      path = this.path.substring(0, this.path.lastIndexOf("/"));
+      path = path.substring(0, path.lastIndexOf("/"));
+    } else {
+      path = path + "/" + val;
     }
 
-    if (this.isFolder(path)) {
+    const entry = new Path("full", path);
+    if (entry.isFolder()) {
       console.log("newpath", path);
-      this.applyPath(path);
+      this.applyPathEntry(entry);
     } else {
       this.modify(path);
     }
@@ -211,8 +213,13 @@ Page({
     });
     AppGesture.init();
 
+    let params = {};
+    if(typeof p == "string" && p[0] == "{") {
+      params = JSON.parse(p);
+    }
+
     hmUI.setLayerScrolling(false);
-    screen = new FileManagerScreen(p);
+    screen = new FileManagerScreen(params);
     screen.start();
   },
   onDestroy: () => {
