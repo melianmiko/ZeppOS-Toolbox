@@ -6,8 +6,6 @@ import {openPage} from "../utils/misc";
 import { AppGesture } from "../../lib/AppGesture";
 import { baseBrightnessConfig } from "./styles/MainScreenStyles";
 
-import { SettingsHomePage } from "./SettingsHomePage";
-
 const { config, t } = getApp()._options.globalData;
 
 class MainScreen {
@@ -170,14 +168,19 @@ class MainScreen {
 
 Page({
   onInit(p) {
+    const skipMain = config.get("skipMainPage", false);
+    if(skipMain) return hmApp.reloadPage({
+      appid: 33904,
+      url: "page/SettingsHomePage"
+    })
+
     AppGesture.withYellowWorkaround("left", {
       appid: 33904,
       url: "page/MainScreen",
     });
     AppGesture.init();
       
-    const skipMain = config.get("skipMainPage", false);
-    const screen = skipMain ? new SettingsHomePage() : new MainScreen();
+    const screen = new MainScreen();
     screen.start();
   }
 });

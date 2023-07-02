@@ -1,4 +1,4 @@
-import {SettingsListScreen} from "../../lib/SettingsListScreen";
+import {ListScreen} from "../../lib/mmk/ListScreen";
 import { AppGesture } from "../../lib/AppGesture";
 
 const available_locales = {
@@ -11,9 +11,11 @@ const available_locales = {
   "zh-TW": "繁體中文",
 };
 
-class SettingsLangScreen extends SettingsListScreen {
-	build() {
-		this.current = hmFS.SysProGetChars("mmk_tb_lang");
+const { config } = getApp()._options.globalData;
+
+class SettingsLangScreen extends ListScreen {
+	start() {
+		this.current = config.get("locale", "false");
 		if(!this.current) this.current = "false";
 
 		const osLocale = DeviceRuntimeCore.HmUtils.getLanguage();
@@ -23,14 +25,19 @@ class SettingsLangScreen extends SettingsListScreen {
 
 		for(let key in available_locales)
 			this.localeRow(available_locales[key], key);
+    this.offset();
 	}
 
 	localeRow(prettyName, key) {
 		const active = this.current == key;
-		this.clickableItem(prettyName, `menu/cb_${active}.png`, () => {
-			hmFS.SysProSetChars("mmk_tb_lang", key);
-			hmApp.goBack();
-		});
+    this.row({
+      text: prettyName,
+      icon: `menu/cb_${active}.png`,
+      callback: () => {
+        config.set("locale", key);
+  			hmApp.goBack();
+  		}
+    });
 	}
 }
 

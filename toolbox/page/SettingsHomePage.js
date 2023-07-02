@@ -5,7 +5,7 @@ import {openPage} from "../utils/misc";
 
 const { config, t } = getApp()._options.globalData;
 
-export class SettingsHomePage extends ListScreen {
+class SettingsHomePage extends ListScreen {
   start() {
     this.row({
       text: t("About"),

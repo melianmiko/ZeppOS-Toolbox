@@ -1,5 +1,5 @@
-import {FsUtils} from "../../lib/FsUtils";
-import { AppGesture } from "../../lib/AppGesture";
+import {FsTools} from "../../lib/mmk/Path";
+import { AppGesture } from "../../lib/mmk/AppGesture";
 
 const { config, t } = getApp()._options.globalData;
 
@@ -16,27 +16,33 @@ class StorageInfoScreen {
     const storage = hmSetting.getDiskInfo();
     const config = [
       {
-        key: "Total",
+        key: "total",
+        label: t("Total"),
         color: 0x999999,
       },
       {
-        key: "Free",
+        key: "free",
+        label: t("Free"),
         color: 0xAAAAAA,
       },
       {
-        key: "ZeppOS",
+        key: "system",
+        label: t("ZeppOS"),
         color: 0xFFCC80
       },
       {
-        key: "Watchfaces",
+        key: "watchface",
+        label: t("Watchfaces"),
         color: 0x4fc3f7,
       },
       {
-        key: "Apps",
+        key: "app",
+        label: t("Apps"),
         color: 0xFFAB91,
       },
       {
-        key: "Unknown",
+        key: "unknown",
+        label: t("Unknown"),
         color: 0x616161,
       },
     ];
@@ -44,7 +50,7 @@ class StorageInfoScreen {
     // Calc unknown
     storage.unknown = storage.total;
     for(let i in config)
-      if(config[i].key !== "Total" && config[i].key !== "Unknown") 
+      if(config[i].key !== "total" && config[i].key !== "unknown") 
         storage.unknown -= storage[config[i].key]
 
     let posY = 56, usedY = 0;
@@ -62,7 +68,7 @@ class StorageInfoScreen {
         w: 120,
         h: 24,
         color: currentRow.color,
-        text: t(currentRow.key),
+        text: currentRow.label,
       });
       hmUI.createWidget(hmUI.widget.TEXT, {
         x: 72,
@@ -71,12 +77,12 @@ class StorageInfoScreen {
         h: 48,
         text_size: 24,
         color: 0xffffff,
-        text: FsUtils.printBytes(storage[currentRow.key]),
+        text: FsTools.printBytes(storage[currentRow.key]),
       });
       posY += 64;
 
       // Visual
-      if (currentRow.key != "Free" && currentRow.key != "Total") {
+      if (currentRow.key != "free" && currentRow.key != "total") {
         let height = Math.round(
           cupStyle.h * (storage[currentRow.key] / storage.total)
         );

@@ -1,6 +1,6 @@
 import { ConfigStorage } from "../lib/mmk/ConfigStorage";
 import { Path } from "../lib/mmk/Path";
-import { t, loadLocale } from "../lib/mmk/i18n";
+import { t, loadLocale, setPreferedLanguage } from "../lib/mmk/i18n";
 import { initTranslations } from "./utils/translations";
 
 const configFile = new Path("full", "/storage/mmk_tb_layout.json");
@@ -24,6 +24,8 @@ App({
   },
   onCreate(options) {
     config.load();
+
+    setPreferedLanguage(config.get("locale", "false"));
     initTranslations(loadLocale);
   },
   onDestroy(options) {
