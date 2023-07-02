@@ -1,4 +1,3 @@
-import {FsUtils} from "../../lib/FsUtils";
 import {TouchEventManager} from "../../lib/TouchEventManager";
 
 import {QS_BUTTONS} from "../utils/data";

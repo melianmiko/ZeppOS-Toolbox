@@ -1,4 +1,3 @@
-import {FsUtils} from "../../lib/FsUtils";
 import {TouchEventManager} from "../../lib/TouchEventManager";
 import { AppGesture } from "../../lib/AppGesture";
 
