@@ -8,7 +8,7 @@ class AboutScreen extends BaseAboutScreen {
     super();
     this.appId = 33904;
     this.appName = "toolbox";
-    this.version = "v2023-05-26";
+    this.version = "v2023-06-30";
 
     this.infoRows = [
       ["melianmiko", "Developer"],
