@@ -1,12 +1,10 @@
 import {FsUtils} from "../../lib/FsUtils";
-import {t, extendLocale} from "../../lib/i18n";
 import {SettingsListScreen} from "../../lib/SettingsListScreen";
 import { AppGesture } from "../../lib/AppGesture";
 
-import {FILE_EDIT_TRANSLATIONS} from "../utils/translations";
 import {openPage} from "../utils/misc";
 
-extendLocale(FILE_EDIT_TRANSLATIONS);
+const { config, t } = getApp()._options.globalData;
 
 class FileEditScreen extends SettingsListScreen {
   constructor(data) {
@@ -18,13 +16,13 @@ class FileEditScreen extends SettingsListScreen {
     this.allowDanger = hmFS.SysProGetBool("mmk_tb_danger_mode");
 
     // Stats
-    this.field("Location", this.path);
+    this.field(t("Location"), this.path);
 
     let fileSize = 0;
     try {
       const [st, e] = FsUtils.stat(this.path);
       if(st.size) {
-        this.field(t("field_size"), FsUtils.printBytes(st.size));
+        this.field(t("Size"), FsUtils.printBytes(st.size));
         fileSize = st.size;
       }
     } catch(e) {}
@@ -32,16 +30,16 @@ class FileEditScreen extends SettingsListScreen {
     // Open btns
     if(fileSize > 0) {
       if(this.path.endsWith(".png") || this.path.endsWith(".tga")) {
-        this.clickableItem(t("file_view_as_image"), "files/img.png", () => {
+        this.clickableItem(t("View as image"), "files/img.png", () => {
           openPage("ImageViewScreen", this.prepareTempFile(this.path));
         })
       }
 
-      this.clickableItem(t("file_view_as_text"), "files/text.png", () => {
+      this.clickableItem(t("View as text"), "files/text.png", () => {
         openPage("TextViewScreen", this.path);
       });
 
-      this.clickableItem(t("file_view_as_bin"), "files/file.png", () => {
+      this.clickableItem(t("View as binary"), "files/file.png", () => {
         openPage("HexdumpScreen", this.path);
       });
     }
@@ -51,26 +49,26 @@ class FileEditScreen extends SettingsListScreen {
     if(this.canEdit()) {
       this.buildEditRows(fileSize)
     } else {
-      this.text(t("edit_enable_danger"));
+      this.text(t("To edit this file/folder, unlock \"Danger features\" in app settings"));
     }
   }
 
   buildEditRows(fileSize) {
-    this.headline(t("file_manage"));
+    this.headline(t("Edit..."));
     if(this.canPaste() && fileSize == 0)
-      this.clickableItem(t("file_paste"), "menu/paste.png", () => {
+      this.clickableItem(t("Paste"), "menu/paste.png", () => {
         this.doPaste();
       })
 
-    this.clickableItem(t("file_cut"), "menu/cut.png", () => {
+    this.clickableItem(t("Cut"), "menu/cut.png", () => {
       this.pathToBuffer(true);
     });
 
-    this.clickableItem(t("file_copy"), "menu/copy.png", () => {
+    this.clickableItem(t("Copy"), "menu/copy.png", () => {
       this.pathToBuffer(false);
     });
 
-    this.clickableItem(t("file_delete"), "menu/delete.png", () => {
+    this.clickableItem(t("Delete"), "menu/delete.png", () => {
       this.delete();
     });
   }

@@ -1,45 +1,24 @@
 import {FsUtils} from "../../lib/FsUtils";
-import {t, extendLocale} from "../../lib/i18n";
 import {TouchEventManager} from "../../lib/TouchEventManager";
 
-import {QS_BUTTONS, DEFAULT_SETTINGS} from "../utils/data";
-import {MAIN_SCREEN_TRANSLATIONS} from "../utils/translations";
+import {QS_BUTTONS} from "../utils/data";
 import {openPage} from "../utils/misc";
 import { AppGesture } from "../../lib/AppGesture";
 import { baseBrightnessConfig } from "./styles/MainScreenStyles";
 
 import { SettingsHomePage } from "./SettingsHomePage";
 
-extendLocale(MAIN_SCREEN_TRANSLATIONS);
-
-const { config } = getApp()._options.globalData;
+const { config, t } = getApp()._options.globalData;
 
 class MainScreen {
-  _getSettings() {
-    let settings = {
-      tiles: ["apps", "files"],
-      withBrightness: true,
-      withBattery: false
-    };
-
-    try {
-      settings = FsUtils.fetchJSON("/storage/mmk_tb_layout.json");
-    } catch(e) {
-      settings = DEFAULT_SETTINGS;
-    }
-
-    return settings;
-  }
-
   start() {
-    const {tiles, withBrightness, withBattery} = this._getSettings();
-    const topOffset = withBrightness ? 160 : 72
+    const topOffset = config.get("withBrightness", true) ? 160 : 72
 
     this.allowDanger = config.get("allowDanger", false);
 
-    if(withBattery) this.drawBattery();
-    if(withBrightness) this.drawBrightness();
-    this.drawButtons(tiles, topOffset);
+    if(config.get("withBattery", false)) this.drawBattery();
+    if(config.get("withBrightness", true)) this.drawBrightness();
+    this.drawButtons(config.get("tiles", []), topOffset);
   }
 
   drawBattery() {
@@ -129,7 +108,7 @@ class MainScreen {
       h: 72,
       align_h: hmUI.align.CENTER_H,
       align_v: hmUI.align.CENTER_V,
-      text: t("action_customize"),
+      text: t("Settings"),
       color: 0x999999
     });
     const editButtonEvents = new TouchEventManager(editButton);

@@ -1,11 +1,8 @@
-import {t, extendLocale} from "../../lib/i18n";
 import {SettingsListScreen} from "../../lib/SettingsListScreen";
 import { AppGesture } from "../../lib/AppGesture";
 import {FsTools, Path} from "../../lib/Path";
 
-import {APP_EDIT_TRANSLATIONS} from "../utils/translations";
-
-extendLocale(APP_EDIT_TRANSLATIONS)
+const { config, t } = getApp()._options.globalData;
 
 class AppEditScreen extends SettingsListScreen {
 	constructor(dirname) {
@@ -25,25 +22,25 @@ class AppEditScreen extends SettingsListScreen {
 		this.image(this.iconPath, 100);
 		this.h1(this.appConfig.app.appName);
 
-		this.clickableItem(t("action_launch"), "menu/play.png", () => {
+		this.clickableItem(t("Launch"), "menu/play.png", () => {
 			hmApp.startApp({
 				appid: this.appConfig.app.appId,
 				url: this.appConfig.module.page.pages[0]
 			});
 		});
 
-		this.field(t("field_vendor"), this.appConfig.app.vender);
-		this.field(t("field_size"), FsTools.printBytes(size));
+		this.field(t("Vendor"), this.appConfig.app.vender);
+		this.field(t("Size"), FsTools.printBytes(size));
 
 		this.baseColor = 0xFF8888;
-		this.clickableItem(t("action_uninstall"), "menu/delete.png", () => {
+		this.clickableItem(t("Uninstall"), "menu/delete.png", () => {
 			this.uninstall();
 		})
 
 		this.baseColor = 0xFFFFFF;
-		this.headline(t("headline_adv"));
-		this.field("ID (dec / hex", `${this.appConfig.app.appId} / ${this.dirname}`);
-		this.clickableItem(t("action_show_files"), "menu/files.png", () => {
+		this.headline(t("Advanced"));
+		this.field("ID (dec / hex)", `${this.appConfig.app.appId} / ${this.dirname}`);
+		this.clickableItem(t("Show in file manager"), "menu/files.png", () => {
 			const path = `/storage/js_apps/${this.dirname}`;
 			hmApp.gotoPage({
 				url: "page/FileManagerScreen",
@@ -60,8 +57,8 @@ class AppEditScreen extends SettingsListScreen {
 				if(st !== null && st.size) configSize += st.size;
 			}
 
-			this.field(t("file_size_ext"), FsTools.printBytes(configSize));
-			this.checkbox(t("conf_full"), this, "dontKeepSettings");
+			this.field(t("Size (ext. config)"), FsTools.printBytes(configSize));
+			this.checkbox(t("Don't keep ext. files on uninstall"), this, "dontKeepSettings");
 		}
 
 		this._prepareFinishGroup();
@@ -101,23 +98,23 @@ class AppEditScreen extends SettingsListScreen {
 			text_style: hmUI.text_style.WRAP,
 			align_h: hmUI.align.CENTER_H,
 			color: 0x66BB6A,
-			text: t("uninstall_complete")
+			text: t("Uninstalled")
 		});
 		group.createWidget(hmUI.widget.TEXT, {
 			x: 0,
 			y: 180,
 			w: 192,
-			h: 80,
+			h: 120,
 			text_size: 20,
 			text_style: hmUI.text_style.WRAP,
 			align_h: hmUI.align.CENTER_H,
 			color: 0xffffff,
-			text: t("apps_notice_uninstall")
+			text: t("Please reboot device to finish")
 		});
 
 		group.createWidget(hmUI.widget.IMG, {
 			x: 0,
-			y: 320,
+			y: 400,
 			w: 192,
 			h: 48,
 			pos_x: (192-48)/2,

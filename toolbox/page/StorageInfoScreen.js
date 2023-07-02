@@ -1,10 +1,7 @@
 import {FsUtils} from "../../lib/FsUtils";
-import {t, extendLocale} from "../../lib/i18n";
 import { AppGesture } from "../../lib/AppGesture";
 
-import {STORAGE_INFO_TRANSLATIONS} from "../utils/translations";
-
-extendLocale(STORAGE_INFO_TRANSLATIONS);
+const { config, t } = getApp()._options.globalData;
 
 class StorageInfoScreen {
   start() {
@@ -19,27 +16,27 @@ class StorageInfoScreen {
     const storage = hmSetting.getDiskInfo();
     const config = [
       {
-        key: "total",
+        key: "Total",
         color: 0x999999,
       },
       {
-        key: "free",
+        key: "Free",
         color: 0xAAAAAA,
       },
       {
-        key: "system",
+        key: "ZeppOS",
         color: 0xFFCC80
       },
       {
-        key: "watchface",
+        key: "Watchfaces",
         color: 0x4fc3f7,
       },
       {
-        key: "app",
+        key: "Apps",
         color: 0xFFAB91,
       },
       {
-        key: "unknown",
+        key: "Unknown",
         color: 0x616161,
       },
     ];
@@ -47,7 +44,7 @@ class StorageInfoScreen {
     // Calc unknown
     storage.unknown = storage.total;
     for(let i in config)
-      if(config[i].key !== "total" && config[i].key !== "unknown") 
+      if(config[i].key !== "Total" && config[i].key !== "Unknown") 
         storage.unknown -= storage[config[i].key]
 
     let posY = 56, usedY = 0;
@@ -65,7 +62,7 @@ class StorageInfoScreen {
         w: 120,
         h: 24,
         color: currentRow.color,
-        text: t("storage_" + currentRow.key),
+        text: t(currentRow.key),
       });
       hmUI.createWidget(hmUI.widget.TEXT, {
         x: 72,
@@ -79,7 +76,7 @@ class StorageInfoScreen {
       posY += 64;
 
       // Visual
-      if (currentRow.key != "free" && currentRow.key != "total") {
+      if (currentRow.key != "Free" && currentRow.key != "Total") {
         let height = Math.round(
           cupStyle.h * (storage[currentRow.key] / storage.total)
         );

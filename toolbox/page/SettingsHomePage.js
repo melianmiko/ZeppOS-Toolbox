@@ -1,56 +1,53 @@
-import { t, extendLocale } from "../../lib/mmk/i18n";
 import { ListScreen } from "../../lib/mmk/ListScreen";
 import { AppGesture } from "../../lib/mmk/AppGesture";
 
-import { SETTINGS_HOME_TRANSLATIONS, QS_TILE_NAMES } from "../utils/translations";
 import {openPage} from "../utils/misc";
 
-extendLocale(SETTINGS_HOME_TRANSLATIONS);
-extendLocale(QS_TILE_NAMES);
+const { config, t } = getApp()._options.globalData;
 
 export class SettingsHomePage extends ListScreen {
   start() {
     this.row({
-      text: t("action_info"),
+      text: t("About"),
       icon: "menu/info.png",
       callback: () => openPage("AboutScreen")
     })
 
-    this.headline(t("headline_all_tools"));
+    this.headline(t("All tools:"));
     this.row({
-      text: t("qs_apps"),
+      text: t("Apps manager"),
       icon: "menu/apps.png",
       callback: () => openPage("AppListScreen")
-    })
+    });
     this.row({
-      text: t("qs_files"),
+      text: t("File manager"),
       icon: "menu/files.png",
       callback: () => openPage("FileManagerScreen")
-    })
+    });
     this.row({
-      text: t("qs_storage"),
+      text: t("Disk usage"),
       icon: "menu/storage.png",
       callback: () => openPage("StorageInfoScreen")
-    })
+    });
     this.row({
-      text: t("qs_timer"),
+      text: t("Background timer"),
       icon: "menu/timer.png",
       callback: () => openPage("TimerSetScreen")
-    })
+    });
 
-    this.headline(t("headline_settings"));
+    this.headline(t("Settings:"));
     this.row({
-      text: t("settings_ui"),
+      text: t("Customize"),
       icon: "menu/ui.png",
       callback: () => openPage("SettingsUiScreen")
-    })
+    });
     this.row({
-      text: t("settings_lang"),
+      text: t("Language"),
       icon: "menu/lang.png",
       callback: () => openPage("SettingsLangScreen")
-    })
+    });
     this.row({
-      text: t("settings_misc"),
+      text: t("Preferences"),
       icon: "menu/settings_misc.png",
       callback: () => openPage("SettingsMiscPage")
     });

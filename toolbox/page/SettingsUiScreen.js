@@ -1,11 +1,10 @@
 import {FsUtils} from "../../lib/FsUtils";
-import {t} from "../../lib/i18n";
 import {TouchEventManager} from "../../lib/TouchEventManager";
 import { AppGesture } from "../../lib/AppGesture";
 
 import {QS_BUTTONS} from "../utils/data";
 
-const { config } = getApp()._options.globalData;
+const { config, t } = getApp()._options.globalData;
 
 class SettingsUiScreen {
   constructor() {
@@ -70,7 +69,7 @@ class SettingsUiScreen {
 
       const events = new TouchEventManager(btn);
       events.ontouch = () => {
-        hmUI.showToast({text: t("qs_" + id)})
+        hmUI.showToast({text: config.title})
         this._toggleTile(id, btn);
       };
 

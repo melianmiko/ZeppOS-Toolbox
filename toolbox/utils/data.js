@@ -1,43 +1,32 @@
-import { extendLocale } from "../../lib/i18n";
-import { QS_TILE_NAMES } from "./translations";
-
-extendLocale(QS_TILE_NAMES);
-
-export const DEFAULT_SETTINGS = {
-  tiles: [
-    "apps",
-    "files",
-    "storage",
-    "timer",
-    "dnd",
-    "camera"
-  ],
-  withBrightness: true,
-  withBattery: false
-};
+const { config, t } = getApp()._options.globalData;
 
 export const QS_BUTTONS = {
   apps: {
+    title: t("Apps manager"),
     url: "AppListScreen",
     type: "internal",
   },
 
   files: {
+    title: t("File manager"),
     url: "FileManagerScreen",
     type: "internal",
   },
 
   storage: {
+    title: t("Disk usage"),
     url: "StorageInfoScreen",
     type: "internal",
   },
 
   timer: {
+    title: t("Background timer"),
     url: "TimerSetScreen",
     type: "internal",
   },
 
   dnd: {
+    title: t("DND settings"),
     url: "Settings_dndModelScreen",
     type: "native",
     isEnabled: () => {
@@ -47,26 +36,31 @@ export const QS_BUTTONS = {
   },
 
   flashlight: {
+    title: t("Flashlight app"),
     url: "FlashLightScreen",
     type: "native",
   },
 
   camera: {
+    title: t("Camera app"),
     url: "HidcameraScreen",
     type: "native",
   },
 
   settings: {
+    title: t("Settings app"),
     url: "Settings_homeScreen",
     type: "native",
   },
 
   brightness_btn: {
+    title: t("Brightness"),
     url: "Settings_lightAdjustScreen",
     type: "native",
   },
 
   aod: {
+    title: t("AOD"),
     url: "Settings_standbyModelScreen",
     type: "native",
     isEnabled: () => {
@@ -77,32 +71,38 @@ export const QS_BUTTONS = {
   },
 
   powersave: {
+    title: t("Powersave"),
     url: "LowBatteryScreen",
     type: "native",
   },
 
   system: {
+    title: t("System settings"),
     url: "Settings_systemScreen",
     type: "native",
   },
 
   applistsort: {
+    title: t("App list sort"),
     url: "Settings_applistSortScreen",
     type: "native",
   },
 
   poweroff: {
+    title: t("Power off"),
     url: "HmReStartScreen",
     type: "native",
   },
 
   reboot: {
+    title: t("Reboot"),
     url: "RebootConfirmScreen",
     type: "internal",
     danger: true,
   },
 
   wake_on_wrist: {
+    title: t("Wake on Wrist"),
     url: "Settings_wristHomeScreen",
     type: "native",
   },

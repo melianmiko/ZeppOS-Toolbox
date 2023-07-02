@@ -1,28 +1,24 @@
-import { t, extendLocale } from "../../lib/i18n";
 import { SettingsListScreen } from "../../lib/SettingsListScreen";
 import { AppGesture } from "../../lib/AppGesture";
 
-import { SETTINGS_MISC_TRANSLATIONS } from "../utils/translations";
 import { openPage } from "../utils/misc";
 
-const { config } = getApp()._options.globalData;
-
-extendLocale(SETTINGS_MISC_TRANSLATIONS);
+const { config, t } = getApp()._options.globalData;
 
 class SettingsMiscPage extends SettingsListScreen {
   build() {
-    this.configCheckbox(t("cfg_skip_main_page"), "skipMainPage", false);
-    this.configCheckbox(t("cfg_auto_open_files"), "autoOpenFiles", false);
-    this.configCheckbox(t("cfg_show_size_in_list"), "fmShowSizes", false);
-    this.configCheckbox(t("cfg_timer_keep"), "timerKeepLast", true);
+    this.configCheckbox(t("Hide main screen (open toolbox to settings list directly)"), "skipMainPage", false);
+    this.configCheckbox(t("Open *.txt files with one click"), "autoOpenFiles", false);
+    this.configCheckbox(t("Show file size in explorer"), "fmShowSizes", false);
+    this.configCheckbox(t("Keep last timer value"), "timerKeepLast", true);
 
     // Kept in SysPro... for compat with FsUtils
-    this.propCheckbox(t("cfg_fs_unit"), "mmk_tb_fs_unit", false);
+    this.propCheckbox(t("Use Base-2 filesize\n1KB = 1024 B"), "mmk_tb_fs_unit", false);
 
-    this.configInteger(t("prop_font_size"), "readerFontSize", 16);
+    this.configInteger(t("Reader font size"), "readerFontSize", 16);
 
     const allowDanger = config.get("allowDanger", false);
-    this.clickableItem(t("cfg_danger_mode"), `menu/cb_${allowDanger}.png`, () => {
+    this.clickableItem(t("Unlock danger features"), `menu/cb_${allowDanger}.png`, () => {
       openPage("ToggleDanger");
     })
   }

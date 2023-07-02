@@ -1,12 +1,10 @@
 import {Path} from "../../lib/Path";
 import { AppGesture } from "../../lib/AppGesture";
-import { t, extendLocale } from "../../lib/i18n";
 
-import { APP_LIST_TRANSLATIONS } from "../utils/translations";
 import { FILE_ROW_TYPE, HEADER_ROW_TYPE } from "./styles/FileManagerRowTypes";
 import { openPage } from "../utils/misc";
 
-extendLocale(APP_LIST_TRANSLATIONS);
+const { config, t } = getApp()._options.globalData;
 
 class AppsListScreen {
   constructor() {
@@ -121,7 +119,7 @@ class AppsListScreen {
       data_type_config_count: 3,
       data_array: [
         {
-          title: t("title_apps"),
+          title: t("Apps"),
           icon: "",
         },
         ...apps,

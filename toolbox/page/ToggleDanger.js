@@ -1,12 +1,7 @@
-import {t, extendLocale} from "../../lib/i18n";
 import { SettingsListScreen } from "../../lib/SettingsListScreen";
 import { AppGesture } from "../../lib/AppGesture";
 
-import {TOGGLE_DANGER_TRANSLATIONS} from "../utils/translations";
-
-const { config } = getApp()._options.globalData;
-
-extendLocale(TOGGLE_DANGER_TRANSLATIONS);
+const { config, t } = getApp()._options.globalData;
 
 class DnagerToggle extends SettingsListScreen {
 	build() {
@@ -17,8 +12,8 @@ class DnagerToggle extends SettingsListScreen {
     	return;
     }
 
-    this.text(t("danger_warn"));
-    this.clickableItem(t("danger_agree"), "menu/cb_true.png", () => {
+    this.text(t("This option will show some features, that may cause your device to fail to boot. Continuing, you agree that in some moment all settings of that device may become lost." ));
+    this.clickableItem(t("Agree, enable"), "menu/cb_true.png", () => {
       config.set("allowDanger", true);
     	hmApp.goBack();
     });

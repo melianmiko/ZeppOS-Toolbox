@@ -1,10 +1,7 @@
-import {t, extendLocale} from "../../lib/i18n";
 import {TouchEventManager} from "../../lib/TouchEventManager";
 import { AppGesture } from "../../lib/AppGesture";
 
-import {REBOOT_CONFIRM_TRANSLATIONS} from "../utils/translations";
-
-extendLocale(REBOOT_CONFIRM_TRANSLATIONS);
+const { config, t } = getApp()._options.globalData;
 
 Page({
   onInit(p) {
@@ -39,7 +36,7 @@ Page({
   		align_h: hmUI.align.CENTER_H,
   		text_style: hmUI.text_style.WRAP,
   		color: 0x999999,
-  		text: t("reboot_confirm")
+  		text: t("Click to confirm")
   	})
   }
 });

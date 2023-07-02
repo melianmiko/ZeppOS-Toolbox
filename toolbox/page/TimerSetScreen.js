@@ -1,13 +1,9 @@
-import {t, extendLocale} from "../../lib/i18n";
 import {TouchEventManager} from "../../lib/TouchEventManager";
 
-import {TIMER_TRANSLATIONS} from "../utils/translations";
 import { AppGesture } from "../../lib/AppGesture";
 import {STYLE_DISPLAY, STYLE_EDIT_BTN, STYLE_EDIT_DEG, STYLE_EDIT_INC} from "./styles/TimerStyles";
 
-extendLocale(TIMER_TRANSLATIONS)
-
-const { config } = getApp()._options.globalData;
+const { config, t } = getApp()._options.globalData;
 
 class TimerSetScreen {
 	constructor() {
@@ -181,7 +177,7 @@ class TimerSetScreen {
 		});
 
 		// Set button text
-		const buttonText = this.timerID === null ? t("timer_start") : t("timer_stop");
+		const buttonText = this.timerID === null ? t("Begin") : t("Cancel");
 		this.actionButton.setProperty(hmUI.prop.TEXT, buttonText);
 
 		// UI update timer

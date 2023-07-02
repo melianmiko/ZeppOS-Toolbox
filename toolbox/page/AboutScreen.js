@@ -1,10 +1,7 @@
 import { AppGesture } from "../../lib/mmk/AppGesture";
 import { BaseAboutScreen } from "../../lib/mmk/BaseAboutScreen";
-import {t, extendLocale} from "../../lib/mmk/i18n";
 
-import {APP_EDIT_TRANSLATIONS} from "../utils/translations";
-
-extendLocale(APP_EDIT_TRANSLATIONS);
+const { config, t } = getApp()._options.globalData;
 
 class AboutScreen extends BaseAboutScreen {
   constructor() {
@@ -23,9 +20,9 @@ class AboutScreen extends BaseAboutScreen {
       ['NiziulLuizin', "pt-BR translation"],
     ];
 
-    this.uninstallText = t("action_uninstall");
-    this.uninstallConfirm = t("tap_to_confirm");
-    this.uninstallResult = t("uninstall_complete") + ".\n" + t("apps_notice_uninstall");
+    this.uninstallText = t("Uninstall");
+    this.uninstallConfirm = t("Tap again to confirm");
+    this.uninstallResult = t("Uninstalled") + ".\n" + t("Please reboot device to finish");
   }
 }
 
