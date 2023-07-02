@@ -1,6 +1,6 @@
-import { t, extendLocale } from "../../lib/i18n";
-import { SettingsListScreen } from "../../lib/SettingsListScreen";
-import { AppGesture } from "../../lib/AppGesture";
+import { t, extendLocale } from "../../lib/mmk/i18n";
+import { ListScreen } from "../../lib/mmk/ListScreen";
+import { AppGesture } from "../../lib/mmk/AppGesture";
 
 import { SETTINGS_HOME_TRANSLATIONS, QS_TILE_NAMES } from "../utils/translations";
 import {openPage} from "../utils/misc";
@@ -8,36 +8,54 @@ import {openPage} from "../utils/misc";
 extendLocale(SETTINGS_HOME_TRANSLATIONS);
 extendLocale(QS_TILE_NAMES);
 
-export class SettingsHomePage extends SettingsListScreen {
-  build() {
-    this.clickableItem(t("action_info"), "menu/info.png", () =>
-      openPage("AboutScreen")
-    );
+export class SettingsHomePage extends ListScreen {
+  start() {
+    this.row({
+      text: t("action_info"),
+      icon: "menu/info.png",
+      callback: () => openPage("AboutScreen")
+    })
 
     this.headline(t("headline_all_tools"));
-    this.clickableItem(t("qs_apps"), "menu/apps.png", () =>
-      openPage("AppListScreen")
-    );
-    this.clickableItem(t("qs_files"), "menu/files.png", () =>
-      openPage("FileManagerScreen")
-    );
-    this.clickableItem(t("qs_storage"), "menu/storage.png", () =>
-      openPage("StorageInfoScreen")
-    );
-    this.clickableItem(t("qs_timer"), "menu/timer.png", () =>
-      openPage("TimerSetScreen")
-    );
+    this.row({
+      text: t("qs_apps"),
+      icon: "menu/apps.png",
+      callback: () => openPage("AppListScreen")
+    })
+    this.row({
+      text: t("qs_files"),
+      icon: "menu/files.png",
+      callback: () => openPage("FileManagerScreen")
+    })
+    this.row({
+      text: t("qs_storage"),
+      icon: "menu/storage.png",
+      callback: () => openPage("StorageInfoScreen")
+    })
+    this.row({
+      text: t("qs_timer"),
+      icon: "menu/timer.png",
+      callback: () => openPage("TimerSetScreen")
+    })
 
     this.headline(t("headline_settings"));
-    this.clickableItem(t("settings_ui"), "menu/ui.png", () =>
-      openPage("SettingsUiScreen")
-    );
-    this.clickableItem(t("settings_lang"), "menu/lang.png", () =>
-      openPage("SettingsLangScreen")
-    );
-    this.clickableItem(t("settings_misc"), "menu/settings_misc.png", () =>
-      openPage("SettingsMiscPage")
-    );
+    this.row({
+      text: t("settings_ui"),
+      icon: "menu/ui.png",
+      callback: () => openPage("SettingsUiScreen")
+    })
+    this.row({
+      text: t("settings_lang"),
+      icon: "menu/lang.png",
+      callback: () => openPage("SettingsLangScreen")
+    })
+    this.row({
+      text: t("settings_misc"),
+      icon: "menu/settings_misc.png",
+      callback: () => openPage("SettingsMiscPage")
+    });
+
+    this.offset();
   }
 }
 

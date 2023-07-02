@@ -1,6 +1,6 @@
-import { AppGesture } from "../../lib/AppGesture";
-import { BaseAboutScreen } from "../../lib/BaseAboutScreen";
-import {t, extendLocale} from "../../lib/i18n";
+import { AppGesture } from "../../lib/mmk/AppGesture";
+import { BaseAboutScreen } from "../../lib/mmk/BaseAboutScreen";
+import {t, extendLocale} from "../../lib/mmk/i18n";
 
 import {APP_EDIT_TRANSLATIONS} from "../utils/translations";
 
@@ -15,6 +15,7 @@ class AboutScreen extends BaseAboutScreen {
 
     this.infoRows = [
       ["melianmiko", "Developer"],
+      ["mmk.pw", "Website"],
       ["Vanek905/zhenyok905", "BandBBS publisher"],
       ["天劍血狐", "zh-TW translation"],
       ["harrybin", "de-DE translation"],
@@ -25,11 +26,6 @@ class AboutScreen extends BaseAboutScreen {
     this.uninstallText = t("action_uninstall");
     this.uninstallConfirm = t("tap_to_confirm");
     this.uninstallResult = t("uninstall_complete") + ".\n" + t("apps_notice_uninstall");
-  }
-
-  onUninstall() {
-    // Remove config files
-    hmFS.remove("/storage/mmk_tb_layout.json");
   }
 }
 

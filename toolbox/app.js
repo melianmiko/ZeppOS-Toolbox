@@ -1,7 +1,9 @@
 import { DEFAULT_SETTINGS } from "./utils/data";
-import { ConfigStorage } from "../lib/ConfigStorage";
+import { ConfigStorage } from "../lib/mmk/ConfigStorage";
+import { Path } from "../lib/mmk/Path";
 
-const config = new ConfigStorage("/storage/mmk_tb_layout.json", DEFAULT_SETTINGS);
+const configFile = new Path("full", "/storage/mmk_tb_layout.json");
+const config = new ConfigStorage(configFile, DEFAULT_SETTINGS);
 
 App({
   globalData: {

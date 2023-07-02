@@ -35,7 +35,7 @@ class MainScreen {
     const {tiles, withBrightness, withBattery} = this._getSettings();
     const topOffset = withBrightness ? 160 : 72
 
-    this.allowDanger = hmFS.SysProGetBool("mmk_tb_danger_mode");
+    this.allowDanger = config.get("allowDanger", false);
 
     if(withBattery) this.drawBattery();
     if(withBrightness) this.drawBrightness();
