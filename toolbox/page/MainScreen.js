@@ -97,10 +97,6 @@ class MainScreen {
         }
       };
       
-      events.onlongtouch = () => {
-        openPage("SettingsUiScreen");
-      };
-
       i++;
     });
 
