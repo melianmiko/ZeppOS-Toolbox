@@ -13,7 +13,7 @@ class MainScreen {
     this.allowDanger = config.get("allowDanger", false);
 
     const withBattery = config.get("withBattery", false);
-    const withBrightness = config.get("withBrightness", true);
+    const withBrightness = config.get("withBrightness", true) && !hmSetting.getScreenAutoBright();
     const compact = deviceName == "Band 7";
     hmUI.setStatusBarVisible(!withBattery);
 

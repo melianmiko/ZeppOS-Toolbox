@@ -9,10 +9,10 @@ import {SCREEN_WIDTH, SCREEN_HEIGHT} from "../../lib/mmk/UiParams";
 
 const basePath = new Path("full", "/storage");
 const clientConfig = {
-  screenWidth: 240,
-  screenHeight: 240,
+  screenWidth: SCREEN_WIDTH,
+  screenHeight: SCREEN_HEIGHT,
   deviceName: deviceName,
-  imageCodec: "TGA-RGBA" // see zmake readme
+  imageCodec: "TGA-16"
 }
 
 const appId = 33904;
@@ -21,7 +21,7 @@ const requestHandler = new RemManHandler(basePath, clientConfig);
 
 Page({
   onInit() {
-    const page = new RemManPage(messageBuilder);
+    const page = new RemManPage(messageBuilder, requestHandler);
     page.start();
 
     messageBuilder.connect(() => {

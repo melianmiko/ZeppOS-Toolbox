@@ -18,6 +18,7 @@ class TextViewScreen {
 	start() {
 		hmSetting.setBrightScreen(1800);
 		hmUI.setLayerScrolling(false);
+    hmUI.setStatusBarVisible(false);
 
 		// Prepare file
 		const [st, e] = this.entry.stat();

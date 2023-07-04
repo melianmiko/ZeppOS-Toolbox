@@ -33,6 +33,7 @@ class FileManagerScreen {
 
   start() {
     hmSetting.setBrightScreen(1800);
+    hmUI.setStatusBarVisible(false);
 
     this.viewFiles = hmUI.createWidget(hmUI.widget.SCROLL_LIST, {
       x: SCREEN_MARGIN_X,

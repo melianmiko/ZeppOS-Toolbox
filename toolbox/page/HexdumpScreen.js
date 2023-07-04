@@ -13,6 +13,7 @@ class HexdumpScreen {
 	}
 
 	start() {
+    hmUI.setStatusBarVisible(false);
 		const offsetX = Math.floor((WIDGET_WIDTH - this.count * 42) / 2) + SCREEN_MARGIN_X
 		this.size = FsUtils.stat(this.path)[0].size;
 		this.file = FsUtils.open(this.path);
