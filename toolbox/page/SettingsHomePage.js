@@ -1,5 +1,6 @@
 import { ListScreen } from "../../lib/mmk/ListScreen";
 import { AppGesture } from "../../lib/mmk/AppGesture";
+import { IS_LOW_RAM_DEVICE } from "../../lib/mmk/UiParams";
 
 import {openPage} from "../utils/misc";
 
@@ -25,11 +26,16 @@ class SettingsHomePage extends ListScreen {
       callback: () => openPage("FileManagerScreen")
     });
     this.row({
+      text: t("Remote manager"),
+      icon: "menu/files.png",
+      callback: () => openPage("RemoteManScreen")
+    });
+    this.row({
       text: t("Disk usage"),
       icon: "menu/storage.png",
       callback: () => openPage("StorageInfoScreen")
     });
-    this.row({
+    if(IS_LOW_RAM_DEVICE) this.row({
       text: t("Background timer"),
       icon: "menu/timer.png",
       callback: () => openPage("TimerSetScreen")
@@ -41,6 +47,13 @@ class SettingsHomePage extends ListScreen {
       icon: "menu/ui.png",
       callback: () => openPage("SettingsUiScreen")
     });
+    this.row({
+      text: t("Reader font size"),
+      icon: "menu/ui.png",
+      callback: () => {
+        openPage("SettingsFontSize")
+      }
+    })
     this.row({
       text: t("Language"),
       icon: "menu/lang.png",

@@ -23,6 +23,7 @@ export const QS_BUTTONS = {
     title: t("Background timer"),
     url: "TimerSetScreen",
     type: "internal",
+    lowRamOnly: true,
   },
 
   dnd: {

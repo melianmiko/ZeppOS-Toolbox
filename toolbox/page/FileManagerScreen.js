@@ -1,8 +1,8 @@
-import { AppGesture } from "../../lib/AppGesture";
-import { Path, FsTools } from "../../lib/Path";
+import { AppGesture } from "../../lib/mmk/AppGesture";
+import { Path, FsTools } from "../../lib/mmk/Path";
+import { WIDGET_WIDTH, SCREEN_MARGIN_Y, SCREEN_HEIGHT, SCREEN_MARGIN_X } from "../../lib/mmk/UiParams";
 
 import {openPage} from "../utils/misc";
-import {HEADER_ROW_TYPE, FILE_ROW_TYPE, FILE_ROW_TYPE_WITH_SIZE} from "./styles/FileManagerRowTypes";
 
 const { config } = getApp()._options.globalData;
 
@@ -17,7 +17,7 @@ class FileManagerScreen {
     this.showFileSizes = config.get("fmShowSizes", false);
 
     let currentPath = FsTools.fullAssetPath("");
-    let lastPath = hmFS.SysProGetChars("mmk_tb_lastpath");
+    let lastPath = config.get("lastPath", false);
     if(params.path) {
       currentPath = params.path;
     } else if(!!lastPath) {
@@ -35,15 +35,98 @@ class FileManagerScreen {
     hmSetting.setBrightScreen(1800);
 
     this.viewFiles = hmUI.createWidget(hmUI.widget.SCROLL_LIST, {
-      x: 0,
+      x: SCREEN_MARGIN_X,
       y: 0,
-      w: 192,
-      h: 490,
+      w: WIDGET_WIDTH,
+      h: SCREEN_HEIGHT,
       item_space: 8,
       item_config: [
-        FILE_ROW_TYPE,
-        HEADER_ROW_TYPE,
-        FILE_ROW_TYPE_WITH_SIZE,
+        {
+          // Header
+          type_id: 1,
+          item_height: SCREEN_MARGIN_Y,
+          item_bg_color: 0x0,
+          item_bg_radius: 0,
+          text_view: [{
+            x: SCREEN_MARGIN_Y > 80 ? 4 : 56,
+            y: SCREEN_MARGIN_Y > 80 ? 48 : 22,
+            w: WIDGET_WIDTH - (SCREEN_MARGIN_Y > 80 ? 0 : 56),
+            h: 32,
+            key: "title",
+            color: 0xEEEEEE,
+            text_size: 18,
+          }],
+          text_view_count: 1,
+          image_view: [{
+            x: SCREEN_MARGIN_Y > 80 ? Math.floor((WIDGET_WIDTH - 24) / 2) : (WIDGET_WIDTH > 200 ? 32 : 12),
+            y: SCREEN_MARGIN_Y > 80 ? 24 : 24,
+            w: 24,
+            h: 24,
+            key: "icon"
+          }],
+          image_view_count: 1
+        }, 
+        {
+          // File row without size
+          type_id: 2,
+          item_height: 64,
+          item_bg_color: 0x111111,
+          item_bg_radius: 12,
+          text_view: [{
+            x: 44,
+            y: 0,
+            w: WIDGET_WIDTH - 48,
+            h: 64,
+            key: "name",
+            color: 0xffffff,
+            text_size: 22
+          }],
+          text_view_count: 1,
+          image_view: [{
+            x: 10,
+            y: 20,
+            w: 24,
+            h: 24,
+            key: "icon"
+          }],
+          image_view_count: 1
+        },
+        {
+          // File row with size
+          type_id: 3,
+          item_height: 64,
+          item_bg_color: 0x111111,
+          item_bg_radius: 12,
+          text_view: [
+            {
+              x: 44,
+              y: 0,
+              w: WIDGET_WIDTH - 48,
+              h: 32,
+              key: "name",
+              color: 0xffffff,
+              text_size: 22
+            },
+            {
+              x: 44,
+              y: 32,
+              w: WIDGET_WIDTH - 48,
+              h: 24,
+              key: "size",
+              color: 0xAAAAAA,
+              text_size: 20,
+            },
+          ],
+          text_view_count: 2,
+          image_view: [{
+            x: 10,
+            y: 20,
+            w: 24,
+            h: 24,
+            key: "icon"
+          }],
+          image_view_count: 1
+        },
       ],
       item_config_count: 3,
       item_click_func: (_, i) => this.onRowClick(i),
@@ -68,7 +151,7 @@ class FileManagerScreen {
   applyPathEntry(entry) {
     this.entry = entry;
     this.refresh();
-    hmFS.SysProSetChars("mmk_tb_lastpath", entry.absolutePath);
+    config.set("lastPath", entry.absolutePath);
   }
 
   getFileIcon(path) {

@@ -1,30 +1,36 @@
 import {TouchEventManager} from "../../lib/TouchEventManager";
+import { AppGesture } from "../../lib/mmk/AppGesture";
+import { WIDGET_WIDTH, SCREEN_WIDTH, SCREEN_MARGIN_X, IS_LOW_RAM_DEVICE } from "../../lib/mmk/UiParams";
+import { deviceName } from "../../lib/mmk/DeviceIdentifier";
 
-import {QS_BUTTONS} from "../utils/data";
+import { QS_BUTTONS } from "../utils/data";
 import {openPage} from "../utils/misc";
-import { AppGesture } from "../../lib/AppGesture";
-import { baseBrightnessConfig } from "./styles/MainScreenStyles";
 
 const { config, t } = getApp()._options.globalData;
 
 class MainScreen {
   start() {
-    const topOffset = config.get("withBrightness", true) ? 160 : 72
-
     this.allowDanger = config.get("allowDanger", false);
 
-    if(config.get("withBattery", false)) this.drawBattery();
-    if(config.get("withBrightness", true)) this.drawBrightness();
-    this.drawButtons(config.get("tiles", []), topOffset);
+    const withBattery = config.get("withBattery", false);
+    const withBrightness = config.get("withBrightness", true);
+    const compact = deviceName == "Band 7";
+    hmUI.setStatusBarVisible(!withBattery);
+
+    if(withBattery) this.drawBattery();
+    if(withBrightness) this.drawBrightness(compact ? 48 : 72);
+
+    this.drawButtons(config.get("tiles", []), compact ? 48 : 72, withBrightness ? 2 : 0);
   }
 
   drawBattery() {
     const battery = hmSensor.createSensor(hmSensor.id.BATTERY);
     const value = battery.current + "%";
+    const compact = deviceName == "Band 7";
 
     hmUI.createWidget(hmUI.widget.TEXT, {
-      x: 84,
-      y: 28,
+      x: Math.floor((SCREEN_WIDTH - 48) / 2),
+      y: compact ? 7 : 28,
       w: 48,
       h: 24,
       text: value,
@@ -36,10 +42,10 @@ class MainScreen {
     const batImg = hmUI.createWidget(hmUI.widget.IMG, {
       x: 0,
       y: 0,
-      w: 192,
+      w: SCREEN_WIDTH,
       h: 64,
-      pos_x: 60,
-      pos_y: 28,
+      pos_x: Math.floor((SCREEN_WIDTH - 72) / 2) - 4,
+      pos_y: compact ? 7 : 28,
       src: "battery.png"
     });
 
@@ -48,25 +54,26 @@ class MainScreen {
       url: "Settings_batteryManagerScreen",
       native: true
     });
-    batEv.onlongtouch = () => hmApp.startApp({
-      url: ""
-    });
   }
 
-  drawButtons(tiles, topOffset) {
-    let i = 0;
+  drawButtons(tiles, topOffset, countExists = 0) {
+    const columns = Math.floor((WIDGET_WIDTH + 4) / 96);
+    const offsetX = Math.floor((SCREEN_WIDTH - (96 * columns) + 4) / 2);
+
+    let i = countExists;
     tiles.forEach((id) => {
       const config = QS_BUTTONS[id];
       if(!config) return;
       if(config.danger && !this.allowDanger) return;
+      if(config.lowRamOnly && !IS_LOW_RAM_DEVICE) return;
 
       let iconName = `qs/${id}.png`;
       if(config.isEnabled && config.isEnabled())
         iconName = `qs/${id}_on.png`
 
       const widgetConfig = {
-        x: 0 + (i % 2) * 100,
-        y: topOffset + Math.floor(i / 2) * 100,
+        x: offsetX + (i % columns) * 96,
+        y: topOffset + Math.floor(i / columns) * 96,
         w: 92,
         h: 92,
         src: iconName,
@@ -98,27 +105,54 @@ class MainScreen {
     });
 
     // Edit button
-    const editButton = hmUI.createWidget(hmUI.widget.TEXT, {
-      x: 0,
-      y: topOffset + 12 + Math.ceil(i / 2) * 100,
-      w: 192,
+    const withCustomize = WIDGET_WIDTH >= 300;
+    const editButtonEvents = new TouchEventManager(hmUI.createWidget(hmUI.widget.TEXT, {
+      x: SCREEN_MARGIN_X,
+      y: topOffset + 12 + Math.ceil(i / columns) * 100,
+      w: WIDGET_WIDTH / (withCustomize ? 2 : 1) - (withCustomize ? 8 : 0),
       h: 72,
-      align_h: hmUI.align.CENTER_H,
+      align_h: withCustomize ? hmUI.align.RIGHT : hmUI.align.CENTER_H,
       align_v: hmUI.align.CENTER_V,
       text: t("Settings"),
+      text_size: 18,
       color: 0x999999
-    });
-    const editButtonEvents = new TouchEventManager(editButton);
+    }));
     editButtonEvents.ontouch = () => {
       openPage("SettingsHomePage");
     }
+
+    if(withCustomize) {
+      const customizeButtonEvents = new TouchEventManager(hmUI.createWidget(hmUI.widget.TEXT, {
+        x: SCREEN_MARGIN_X + (WIDGET_WIDTH / 2) + 16,
+        y: topOffset + 12 + Math.ceil(i / columns) * 100,
+        w: WIDGET_WIDTH / 2 - 2,
+        h: 72,
+        align_h: withCustomize ? hmUI.align.LEFT : hmUI.align.CENTER_H,
+        align_v: hmUI.align.CENTER_V,
+        text: t("Customize"),
+        text_size: 18,
+        color: 0x999999
+      }));
+      customizeButtonEvents.ontouch = () => {
+        openPage("SettingsUiScreen");
+      }
+    }
   }
 
-  drawBrightness() {
+  drawBrightness(y) {
+    const columns = Math.floor((WIDGET_WIDTH + 4) / 96);
+    const offsetX = Math.floor((SCREEN_WIDTH - (96 * columns) + 4) / 2);
+    const baseBrightnessConfig = {
+      x: offsetX,
+      y,
+      h: 92,
+      radius: 46,
+    };
+
     hmUI.createWidget(hmUI.widget.FILL_RECT, {
       ...baseBrightnessConfig,
       color: 0x222222,
-      w: 192
+      w: 188
     });
 
     this.widgetBrightness = hmUI.createWidget(hmUI.widget.FILL_RECT, {
@@ -130,9 +164,9 @@ class MainScreen {
 
     const basement = hmUI.createWidget(hmUI.widget.IMG, {
       ...baseBrightnessConfig,
-      w: 192,
+      w: 188,
       pos_x: 20,
-      pos_y: 18,
+      pos_y: 28,
       alpha: 200,
       src: "brightness.png",
     });
@@ -157,7 +191,7 @@ class MainScreen {
   }
 
   _updateBrightness() {
-    const val = 192 * (hmSetting.getBrightness() / 100);
+    const val = 188 * (hmSetting.getBrightness() / 100);
     this.widgetBrightness.setProperty(hmUI.prop.MORE, {
       w: Math.max(val, 24),
       alpha: val == 0 ? 0 : 200,

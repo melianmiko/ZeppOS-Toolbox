@@ -1,4 +1,5 @@
-import { AppGesture } from "../../lib/AppGesture";
+import { AppGesture } from "../../lib/mmk/AppGesture";
+import { SCREEN_WIDTH } from "../../lib/mmk/UiParams";
 
 let vibrate;
 
@@ -15,7 +16,7 @@ Page({
     // Bell icon
     let counter = 0;
     let icon = hmUI.createWidget(hmUI.widget.IMG, {
-      x: (192-64)/2,
+      x: (SCREEN_WIDTH - 64) / 2,
       y: 120,
       src: "timer/bell.png"
     });
@@ -27,7 +28,7 @@ Page({
 
     // Exit button
     hmUI.createWidget(hmUI.widget.IMG, {
-      x: (192-72)/2,
+      x: (SCREEN_WIDTH - 72) / 2,
       y: 300,
       src: "timer/bell_stop.png"
     }).addEventListener(hmUI.event.CLICK_UP, () => {

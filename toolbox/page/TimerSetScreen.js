@@ -1,6 +1,7 @@
-import {TouchEventManager} from "../../lib/TouchEventManager";
+import { TouchEventManager } from "../../lib/mmk/TouchEventManager";
+import { AppGesture } from "../../lib/mmk/AppGesture";
+import { WIDGET_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_MARGIN_X, SCREEN_MARGIN_Y } from "../../lib/mmk/UiParams";
 
-import { AppGesture } from "../../lib/AppGesture";
 import {STYLE_DISPLAY, STYLE_EDIT_BTN, STYLE_EDIT_DEG, STYLE_EDIT_INC} from "./styles/TimerStyles";
 
 const { config, t } = getApp()._options.globalData;
@@ -50,17 +51,17 @@ class TimerSetScreen {
 
 	initView() {
 		this.viewHour = hmUI.createWidget(hmUI.widget.TEXT, {
-			y: 72,
+			y: SCREEN_MARGIN_Y,
 			text: this.formatDisplay(this.hour),
 			...STYLE_DISPLAY
 		});
 		this.viewMinute = hmUI.createWidget(hmUI.widget.TEXT, {
-			y: 72 + 96,
+			y: SCREEN_MARGIN_Y + 88,
 			text: this.formatDisplay(this.minute),
 			...STYLE_DISPLAY
 		});
 		this.viewSecond = hmUI.createWidget(hmUI.widget.TEXT, {
-			y: 72 + 96*2,
+			y: SCREEN_MARGIN_Y + 88*2,
 			text: this.formatDisplay(this.second),
 			...STYLE_DISPLAY
 		});
@@ -70,7 +71,7 @@ class TimerSetScreen {
 				const widget = hmUI.createWidget(hmUI.widget.TEXT, {
 					...STYLE_EDIT_BTN,
 					...(dir > 0 ? STYLE_EDIT_INC : STYLE_EDIT_DEG),
-					y: 72 + 96*i
+					y: SCREEN_MARGIN_Y + 88*i
 				});
 				const events = new TouchEventManager(widget);
 
@@ -89,11 +90,12 @@ class TimerSetScreen {
 			})
 		});
 
+		const freeSpace = Math.min(72, SCREEN_HEIGHT - SCREEN_MARGIN_Y - 88 * 3);
 		this.actionButton = hmUI.createWidget(hmUI.widget.BUTTON, {
 			x: 0,
-			y: 400,
-			w: 192,
-			h: 90,
+			y: SCREEN_HEIGHT- freeSpace,
+			w: SCREEN_WIDTH,
+			h: freeSpace,
 			text: "Start",
 			normal_color: 0x222222,
 			press_color: 0x333333,

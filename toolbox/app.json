@@ -28,6 +28,9 @@
   "targets": {
     "mi-band-7": {
       "module": {
+        "app-side": {
+          "path": "app-side/index"
+        },
         "page": {
           "pages": [
             "page/MainScreen",
@@ -47,7 +50,8 @@
             "page/TextViewScreen",
             "page/TimerOutScreen",
             "page/TimerSetScreen",
-            "page/ToggleDanger"
+            "page/ToggleDanger",
+            "page/RemoteManScreen"
           ]
         }
       },
@@ -87,6 +91,47 @@
         {
             "name": "l66_5",
             "deviceSource": 266
+        }
+      ],
+      "designWidth": 194
+    },
+    "gts-4-mini": {
+      "module": {
+        "app-side": {
+          "path": "app-side/index"
+        },
+        "page": {
+          "pages": [
+            "page/MainScreen",
+            "page/AboutScreen",
+            "page/AppEditScreen",
+            "page/AppListScreen",
+            "page/FileEditScreen",
+            "page/FileManagerScreen",
+            "page/HexdumpScreen",
+            "page/ImageViewScreen",
+            "page/RebootConfirmScreen",
+            "page/SettingsHomePage",
+            "page/SettingsLangScreen",
+            "page/SettingsMiscPage",
+            "page/SettingsUiScreen",
+            "page/StorageInfoScreen",
+            "page/TextViewScreen",
+            "page/TimerOutScreen",
+            "page/TimerSetScreen",
+            "page/ToggleDanger",
+            "page/RemoteManScreen"
+          ]
+        }
+      },
+      "platforms": [
+        {
+          "name": "gts-4-mini",
+          "deviceSource": 246
+        },
+        {
+          "name": "gts-4-mini-2",
+          "deviceSource": 247
         }
       ],
       "designWidth": 194

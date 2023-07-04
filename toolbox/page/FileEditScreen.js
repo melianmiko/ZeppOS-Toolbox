@@ -1,46 +1,65 @@
-import {FsUtils} from "../../lib/FsUtils";
-import {SettingsListScreen} from "../../lib/SettingsListScreen";
-import { AppGesture } from "../../lib/AppGesture";
+import { Path, FsTools } from "../../lib/mmk/Path";
+import { ListScreen } from "../../lib/mmk/ListScreen";
+import { AppGesture } from "../../lib/mmk/AppGesture";
 
 import {openPage} from "../utils/misc";
 
 const { config, t } = getApp()._options.globalData;
 
-class FileEditScreen extends SettingsListScreen {
+class FileEditScreen extends ListScreen {
   constructor(data) {
     super();
-    this.path = data;
+    this.entry = new Path("full", data);
   }
 
-  build() {
-    this.allowDanger = hmFS.SysProGetBool("mmk_tb_danger_mode");
+  start() {
+    const path = this.entry.absolutePath;
+
+    this.allowDanger = config.get("allowDanger", false);
 
     // Stats
-    this.field(t("Location"), this.path);
+    this.field({
+      headline: t("Location"), 
+      text: path
+    });
 
     let fileSize = 0;
     try {
-      const [st, e] = FsUtils.stat(this.path);
+      const [st, e] = this.entry.stat();
       if(st.size) {
-        this.field(t("Size"), FsUtils.printBytes(st.size));
+        this.field({
+          headline: t("Size"), 
+          text: FsTools.printBytes(st.size)
+        });
         fileSize = st.size;
       }
     } catch(e) {}
 
     // Open btns
     if(fileSize > 0) {
-      if(this.path.endsWith(".png") || this.path.endsWith(".tga")) {
-        this.clickableItem(t("View as image"), "files/img.png", () => {
-          openPage("ImageViewScreen", this.prepareTempFile(this.path));
+      if(path.endsWith(".png") || path.endsWith(".tga")) {
+        this.row({
+          text: t("View as image"),
+          icon: "files/img.png",
+          callback: () => {
+            openPage("ImageViewScreen", this.prepareTempFile());
+          }
         })
       }
 
-      this.clickableItem(t("View as text"), "files/text.png", () => {
-        openPage("TextViewScreen", this.path);
+      this.row({
+        text: t("View as text"),
+        icon: "files/text.png",
+        callback: () => {
+          openPage("TextViewScreen", path);
+        }
       });
-
-      this.clickableItem(t("View as binary"), "files/file.png", () => {
-        openPage("HexdumpScreen", this.path);
+      this.row({
+        text: t("View as binary"),
+        icon: "files/file.png",
+        callback: () => {
+          openPage("HexdumpScreen", path);
+        }
       });
     }
 
@@ -51,25 +70,41 @@ class FileEditScreen extends SettingsListScreen {
     } else {
       this.text(t("To edit this file/folder, unlock \"Danger features\" in app settings"));
     }
+
+    this.offset();
   }
 
   buildEditRows(fileSize) {
     this.headline(t("Edit..."));
     if(this.canPaste() && fileSize == 0)
-      this.clickableItem(t("Paste"), "menu/paste.png", () => {
-        this.doPaste();
-      })
+      this.row({
+        text: t("Paste"),
+        icon: "menu/paste.png",
+        callback: () => {
+          this.doPaste();
+        }
+      });
 
-    this.clickableItem(t("Cut"), "menu/cut.png", () => {
-      this.pathToBuffer(true);
+    this.row({
+      text: t("Cut"),
+      icon: "menu/cut.png",
+      callback: () => {
+        this.pathToBuffer(true);
+      }
     });
-
-    this.clickableItem(t("Copy"), "menu/copy.png", () => {
-      this.pathToBuffer(false);
+    this.row({
+      text: t("Copy"),
+      icon: "menu/copy.png",
+      callback: () => {
+        this.pathToBuffer(false);
+      }
     });
-
-    this.clickableItem(t("Delete"), "menu/delete.png", () => {
-      this.delete();
+    this.row({
+      text: t("Delete"),
+      icon: "menu/delete.png",
+      callback: () => {
+        this.delete();
+      }
     });
   }
 
@@ -82,57 +117,56 @@ class FileEditScreen extends SettingsListScreen {
     ];
 
     for(const ep of editablePaths)
-      if(this.path.startsWith(ep))
+      if(this.entry.absolutePath.startsWith(ep))
         return true;
 
     return false;
   }
 
   delete() {
-    FsUtils.rmTree(this.path);
+    this.entry.removeTree();
     hmApp.goBack();
   }
 
   canPaste() {
-    const val = hmFS.SysProGetChars("mmk_tb_fm_buffer_path");
+    const val = config.get("fmClipboard", false);
     if(!val) return false;
 
-    const [st, e] = FsUtils.stat(val);
-    return e == 0 && !this.path.startsWith(val) && this.path != val;
+    const [st, e] = new Path("full", val).stat();
+    return e == 0 && !this.entry.absolutePath.startsWith(val) && this.entry.absolutePath != val;
   }
 
   doPaste() {
-    const src = hmFS.SysProGetChars("mmk_tb_fm_buffer_path");
-    const deleteSource = hmFS.SysProGetBool("mmk_tb_buffer_del");
+    const src = config.get("fmClipboard", false);
+    const deleteSource = config.get("fmPasteMode") == "cut";
     const filename = src.substring(src.lastIndexOf("/"));
-    const dest = this.path + filename;
+    const dest = this.entry.get(filename);
 
-    FsUtils.copyTree(src, dest, deleteSource);
-    hmFS.SysProSetChars("mmk_tb_fm_buffer_path", "");
+    new Path("full", src).copyTree(dest, deleteSource);
+    if(deleteSource) config.set("fmClipboard", "");
     hmApp.goBack();
   }
 
   pathToBuffer(deleteSource) {
-    hmFS.SysProSetChars("mmk_tb_fm_buffer_path", this.path);
-    hmFS.SysProSetBool("mmk_tb_buffer_del", deleteSource);
+    config.update({
+      fmClipboard: this.entry.absolutePath,
+      fmPasteMode: deleteSource ? "cut" : "copy"
+    })
     hmApp.goBack();
   }
 
   prepareTempFile(sourcePath) {
-    const current = hmFS.SysProGetChars("mmk_tb_temp");
+    const current = config.get("imageViewTempFile", false);
     if(current) {
-      const path = FsUtils.fullPath(current);
-      hmFS.remove(path);
+      new Path("assets", current).remove();
     }
 
-    const data = FsUtils.read(sourcePath);
+    // const data = FsUtils.read(sourcePath);
     const newFile = "temp_" + Math.round(Math.random() * 100000) + ".png";
-    const dest = hmFS.open_asset(newFile, hmFS.O_WRONLY | hmFS.O_CREAT);
-    hmFS.seek(dest, 0, hmFS.SEEK_SET);
-    hmFS.write(dest, data, 0, data.byteLength);
-    hmFS.close(dest);
+    const dest = new Path("assets", newFile);
+    this.entry.copy(dest);
 
-    hmFS.SysProSetChars("mmk_tb_temp", newFile);
+    config.set("imageViewTempFile", newFile);
     return newFile;
   }
 }

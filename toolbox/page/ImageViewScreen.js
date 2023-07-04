@@ -1,4 +1,5 @@
-import { AppGesture } from "../../lib/AppGesture";
+import { AppGesture } from "../../lib/mmk/AppGesture";
+import { SCREEN_HEIGHT, SCREEN_WIDTH } from "../../lib/mmk/UiParams";
 
 class ImageViewScreen {
 	constructor(data) {
@@ -19,8 +20,8 @@ class ImageViewScreen {
       hmUI.showToast({text: width + "x" + height});
 
       hmUI.createWidget(hmUI.widget.IMG, {
-        x: (192 - width) / 2,
-        y: (490 - height) / 2,
+        x: (SCREEN_WIDTH - width) / 2,
+        y: (SCREEN_HEIGHT - height) / 2,
         src: this.path
       });
 	}

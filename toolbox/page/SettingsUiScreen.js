@@ -1,5 +1,6 @@
-import {TouchEventManager} from "../../lib/TouchEventManager";
-import { AppGesture } from "../../lib/AppGesture";
+import {TouchEventManager} from "../../lib/mmk/TouchEventManager";
+import { AppGesture } from "../../lib/mmk/AppGesture";
+import { WIDGET_WIDTH, SCREEN_WIDTH, SCREEN_MARGIN_X, IS_LOW_RAM_DEVICE } from "../../lib/mmk/UiParams";
 
 import {QS_BUTTONS} from "../utils/data";
 
@@ -11,12 +12,16 @@ class SettingsUiScreen {
   }
 
   start () {
+    hmUI.setStatusBarVisible(false);
+
     const allowDanger = config.get("allowDanger", false);
+    const columns = Math.floor((WIDGET_WIDTH + 4) / 96);
+    const offsetX = Math.floor((SCREEN_WIDTH - (96 * columns) + 4) / 2);
 
     // Battety
     let withBattery = config.get("withBattery", false);
     const batteryToggle = hmUI.createWidget(hmUI.widget.IMG, {
-      x: 60,
+      x: Math.floor((SCREEN_WIDTH - 72) / 2),
       y: 28,
       src: 'edit/battery_pv.png',
       alpha: withBattery ? 255 : 100
@@ -33,7 +38,7 @@ class SettingsUiScreen {
     // Brightness
     let withBrightness = config.get("withBrightness");
     const brightnessToggle = hmUI.createWidget(hmUI.widget.IMG, {
-      x: 0,
+      x: offsetX,
       y: 72,
       src: "edit/brightness_cfg.png",
       alpha: withBrightness ? 255 : 100
@@ -47,19 +52,17 @@ class SettingsUiScreen {
       })
     };
 
-    let i = 0;
+    let i = 2;
     const tiles = config.get("tiles", []);
     Object.keys(QS_BUTTONS).forEach((id) => {
       const config = QS_BUTTONS[id];
       if(!config) return;
       if(config.danger && !allowDanger) return;
-
-      const x = (i % 2) * 100;
-      const y = 154 + Math.floor(i / 2) * 100;
+      if(config.lowRamOnly && !IS_LOW_RAM_DEVICE) return;
 
       const btn = hmUI.createWidget(hmUI.widget.IMG, {
-        x,
-        y,
+        x: offsetX + (i % columns) * 96,
+        y: 72 + Math.floor(i / columns) * 96,
         w: 92,
         h: 92,
         alpha: tiles.indexOf(id) > -1 ? 255 : 100,
@@ -76,11 +79,11 @@ class SettingsUiScreen {
     });
 
     // Screen overflow
-    const end_y = 166 + Math.ceil(Object.keys(QS_BUTTONS).length / 2) * 100;
+    const end_y = 72 + Math.ceil(i / columns) * 100;
     hmUI.createWidget(hmUI.widget.TEXT, {
       x: 0,
       y: end_y,
-      w: 192,
+      w: WIDGET_WIDTH,
       h: 72,
       text: ""
     });

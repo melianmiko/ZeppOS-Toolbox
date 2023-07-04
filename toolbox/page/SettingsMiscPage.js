@@ -1,25 +1,24 @@
-import { SettingsListScreen } from "../../lib/SettingsListScreen";
-import { AppGesture } from "../../lib/AppGesture";
+import { ListScreen } from "../../lib/mmk/ListScreen";
+import { AppGesture } from "../../lib/mmk/AppGesture";
 
 import { openPage } from "../utils/misc";
 
 const { config, t } = getApp()._options.globalData;
 
-class SettingsMiscPage extends SettingsListScreen {
+class SettingsMiscPage extends ListScreen {
   build() {
     this.configCheckbox(t("Hide main screen (open toolbox to settings list directly)"), "skipMainPage", false);
     this.configCheckbox(t("Open *.txt files with one click"), "autoOpenFiles", false);
     this.configCheckbox(t("Show file size in explorer"), "fmShowSizes", false);
     this.configCheckbox(t("Keep last timer value"), "timerKeepLast", true);
 
-    // Kept in SysPro... for compat with FsUtils
     this.propCheckbox(t("Use Base-2 filesize\n1KB = 1024 B"), "mmk_tb_fs_unit", false);
 
-    this.configInteger(t("Reader font size"), "readerFontSize", 16);
-
     const allowDanger = config.get("allowDanger", false);
-    this.clickableItem(t("Unlock danger features"), `menu/cb_${allowDanger}.png`, () => {
-      openPage("ToggleDanger");
+    this.row({
+      text: t("Unlock danger features"),
+      icon: `menu/cb_${allowDanger}.png`,
+      callback: () => openPage("ToggleDanger")
     })
   }
 
@@ -30,9 +29,23 @@ class SettingsMiscPage extends SettingsListScreen {
   }
 
   configCheckbox(name, key, fallback) {
-    this.controlledCheckbox(name, config.get(key, fallback), (val) => {
-      config.set(key, val);
-    });
+    this.checkboxRow({
+      text: name,
+      iconFalse: "menu/cb_false.png",
+      iconTrue: "menu/cb_true.png",
+      value: config.get(key, fallback),
+      callback: (v) => config.set(key, v)
+    })
+  }
+
+  propCheckbox(name, key, fallback) {
+    this.checkboxRow({
+      text: name,
+      iconFalse: "menu/cb_false.png",
+      iconTrue: "menu/cb_true.png",
+      value: hmFS.SysProGetBool(key),
+      callback: (v) => hmFS.SysProGetBool(key, v)
+    })
   }
 }
 

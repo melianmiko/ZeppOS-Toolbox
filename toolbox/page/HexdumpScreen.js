@@ -1,35 +1,42 @@
 import { AppGesture } from "../../lib/AppGesture";
 import {FsUtils} from "../../lib/FsUtils";
+import { WIDGET_WIDTH, SCREEN_MARGIN_Y, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_MARGIN_X } from "../../lib/mmk/UiParams";
 
 class HexdumpScreen {
 	constructor(data) {
 		this.path = data;
 		this.offset = 0;
+		this.count = Math.floor(WIDGET_WIDTH / 42);
+		this.count -= this.count % 4;
+		this.lines = 10;
+		console.log(this.count);
 	}
 
 	start() {
+		const offsetX = Math.floor((WIDGET_WIDTH - this.count * 42) / 2) + SCREEN_MARGIN_X
 		this.size = FsUtils.stat(this.path)[0].size;
 		this.file = FsUtils.open(this.path);
 
 		this.header = hmUI.createWidget(hmUI.widget.TEXT, {
-			x: 0,
+			x: SCREEN_MARGIN_X,
 			y: 0,
-			w: 192,
-			h: 72,
+			w: WIDGET_WIDTH,
+			h: SCREEN_MARGIN_Y,
 			align_h: hmUI.align.CENTER_H,
 			align_v: hmUI.align.CENTER_V,
 			text: "hello",
-			color: 0x999999
+			color: 0x999999,
+			text_size: 22,
 		});
 
 		this.columns = [];
 		this.textColumns = [];
-		for(let i = 0; i < 4; i++) {
+		for(let i = 0; i < this.count; i++) {
 			this.columns.push(hmUI.createWidget(hmUI.widget.TEXT, {
-				x: 4 + (26*i),
-				y: 96,
+				x: offsetX + (26*i),
+				y: SCREEN_MARGIN_Y,
 				w: 30,
-				h: 320,
+				h: SCREEN_HEIGHT - SCREEN_MARGIN_Y,
 				text_size: 18,
 				text: "00\n00\n00",
 				color: 0xFFFFFF,
@@ -37,10 +44,10 @@ class HexdumpScreen {
 			}));
 
 			this.textColumns.push(hmUI.createWidget(hmUI.widget.TEXT, {
-				x: 116 + (18*i),
-				y: 96,
+				x: offsetX + (26 * this.count) + 2 + (16*i),
+				y: SCREEN_MARGIN_Y,
 				w: 18,
-				h: 320,
+				h: SCREEN_HEIGHT - SCREEN_MARGIN_Y,
 				text_size: 18,
 				text: "a",
 				color: 0xAAAAAA,
@@ -51,27 +58,27 @@ class HexdumpScreen {
 		hmUI.createWidget(hmUI.widget.IMG, {
 			x: 0,
 			y: 0,
-			w: 192,
-			h: 245,
+			w: SCREEN_WIDTH,
+			h: Math.floor(SCREEN_HEIGHT / 2),
 			src: ""
 		}).addEventListener(hmUI.event.CLICK_UP, () => {
-			this.refresh(this.offset - 64);
+			this.refresh(this.offset - (this.lines * this.count));
 		})
 		hmUI.createWidget(hmUI.widget.IMG, {
 			x: 0,
-			y: 245,
-			w: 192,
-			h: 245,
+			y: Math.floor(SCREEN_HEIGHT / 2),
+			w: SCREEN_WIDTH,
+			h: Math.floor(SCREEN_HEIGHT / 2),
 			src: ""
 		}).addEventListener(hmUI.event.CLICK_UP, () => {
-			this.refresh(this.offset + 64);
+			this.refresh(this.offset + (this.lines * this.count));
 		})
 
 		this.refresh(this.offset);
 	}
 
 	refresh(newOffset) {
-		const lines = 16;
+		const lines = this.lines;
 
 		if(newOffset > this.size) return;
 		if(newOffset < 0) return;
@@ -79,21 +86,21 @@ class HexdumpScreen {
 		const headerText = newOffset.toString(16) + " / " + this.size.toString(16);
 		this.header.setProperty(hmUI.prop.TEXT, headerText.toUpperCase());
 
-		const buffer = new ArrayBuffer(4 * lines);
+		const buffer = new ArrayBuffer(this.count * lines);
 		const view = new Uint8Array(buffer);
 		hmFS.seek(this.file, newOffset, hmFS.SEEK_SET);
-		hmFS.read(this.file, buffer, 0, 4 * lines);
+		hmFS.read(this.file, buffer, 0, this.count * lines);
 
 		// Update byte columns
-		for(let i = 0; i < 4; i++) {
+		for(let i = 0; i < this.count; i++) {
 			let data = "", text = "";
 			for(let j = 0; j < lines; j++) {
-				if(newOffset + (4*j) + i > this.size) break;
-				let charCode = view[(4*j) + i];
+				if(newOffset + (this.count*j) + i > this.size) break;
+				let charCode = view[(this.count*j) + i];
 				if(charCode < 32 || charCode > 126)
 					charCode = 46; // .
 
-				data += view[(4*j) + i].toString(16).padStart(2, "0").toUpperCase() + "\n";
+				data += view[(this.count*j) + i].toString(16).padStart(2, "0").toUpperCase() + "\n";
 				text += String.fromCharCode(charCode) + "\n";
 			}
 

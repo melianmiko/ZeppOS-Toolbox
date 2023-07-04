@@ -1,10 +1,11 @@
-import {SettingsListScreen} from "../../lib/SettingsListScreen";
-import { AppGesture } from "../../lib/AppGesture";
-import {FsTools, Path} from "../../lib/Path";
+import { ListScreen } from "../../lib/mmk/ListScreen";
+import { AppGesture } from "../../lib/mmk/AppGesture";
+import {FsTools, Path} from "../../lib/mmk/Path";
+import { SCREEN_WIDTH, SCREEN_HEIGHT } from "../../lib/mmk/UiParams";
 
 const { config, t } = getApp()._options.globalData;
 
-class AppEditScreen extends SettingsListScreen {
+class AppEditScreen extends ListScreen {
 	constructor(dirname) {
 		super();
 		
@@ -15,39 +16,66 @@ class AppEditScreen extends SettingsListScreen {
 		this.appConfig = {};
 	}
 
-	build() {
+	start() {
 		this.preloadAll();
 
 		let size = this.entry.size();
-		this.image(this.iconPath, 100);
-		this.h1(this.appConfig.app.appName);
-
-		this.clickableItem(t("Launch"), "menu/play.png", () => {
-			hmApp.startApp({
-				appid: this.appConfig.app.appId,
-				url: this.appConfig.module.page.pages[0]
-			});
+		this.image({
+			src: this.iconPath,
+			height: 100
+		});
+		this.text({
+			text: this.appConfig.app.appName,
+			fontSize: this.fontSize + 4
 		});
 
-		this.field(t("Vendor"), this.appConfig.app.vender);
-		this.field(t("Size"), FsTools.printBytes(size));
-
-		this.baseColor = 0xFF8888;
-		this.clickableItem(t("Uninstall"), "menu/delete.png", () => {
-			this.uninstall();
+		this.field({
+			headline: t("Vendor"),
+			text: this.appConfig.app.vender
+		})
+		this.field({
+			headline: t("Size"),
+			text: FsTools.printBytes(size)
 		})
 
-		this.baseColor = 0xFFFFFF;
+		this.row({
+			text: t("Launch"),
+			icon: "menu/play.png",
+			callback: () => {
+				hmApp.startApp({
+					appid: this.appConfig.app.appId,
+					url: this.appConfig.module.page.pages[0]
+				});
+			}
+		});
+
+		this.row({
+			text: t("Uninstall"),
+			color: 0xFF8888,
+			icon: "menu/delete.png",
+			callback: () => {
+				this.uninstall();
+			}
+		})
+
 		this.headline(t("Advanced"));
-		this.field("ID (dec / hex)", `${this.appConfig.app.appId} / ${this.dirname}`);
-		this.clickableItem(t("Show in file manager"), "menu/files.png", () => {
-			const path = `/storage/js_apps/${this.dirname}`;
-			hmApp.gotoPage({
-				url: "page/FileManagerScreen",
-				param: JSON.stringify({
-					path
+
+		this.field({
+			headline: "ID (dec / hex)",
+			text: `${this.appConfig.app.appId} / ${this.dirname}`
+		});
+		this.row({
+			text: t("Show in file manager"),
+			icon: "menu/files.png",
+			callback: () => {
+				const path = `/storage/js_apps/${this.dirname}`;
+				hmApp.gotoPage({
+					url: "page/FileManagerScreen",
+					param: JSON.stringify({
+						path
+					})
 				})
-			})
+			}
 		});
 
 		if(this.appConfig.externalFilesList) {
@@ -57,10 +85,13 @@ class AppEditScreen extends SettingsListScreen {
 				if(st !== null && st.size) configSize += st.size;
 			}
 
-			this.field(t("Size (ext. config)"), FsTools.printBytes(configSize));
-			this.checkbox(t("Don't keep ext. files on uninstall"), this, "dontKeepSettings");
+			this.field({
+				headline: t("Size (ext. config)"), 
+				text: FsTools.printBytes(configSize)
+			});
 		}
 
+		this.offset();
 		this._prepareFinishGroup();
 	}
 
@@ -79,20 +110,20 @@ class AppEditScreen extends SettingsListScreen {
 		const group = hmUI.createWidget(hmUI.widget.GROUP, {
 			x: 0,
 			y: 0,
-			w: 192,
-			h: 482
+			w: SCREEN_WIDTH,
+			h: SCREEN_HEIGHT
 		});
 		group.createWidget(hmUI.widget.FILL_RECT, {
 			x: 0,
 			y: 0,
-			w: 192,
-			h: 482,
+			w: SCREEN_WIDTH,
+			h: SCREEN_HEIGHT,
 			color: 0x0
 		});
 		group.createWidget(hmUI.widget.TEXT, {
 			x: 0,
 			y: 120,
-			w: 192,
+			w: SCREEN_WIDTH,
 			h: 48,
 			text_size: 26,
 			text_style: hmUI.text_style.WRAP,
@@ -103,7 +134,7 @@ class AppEditScreen extends SettingsListScreen {
 		group.createWidget(hmUI.widget.TEXT, {
 			x: 0,
 			y: 180,
-			w: 192,
+			w: SCREEN_WIDTH,
 			h: 120,
 			text_size: 20,
 			text_style: hmUI.text_style.WRAP,
@@ -115,7 +146,7 @@ class AppEditScreen extends SettingsListScreen {
 		group.createWidget(hmUI.widget.IMG, {
 			x: 0,
 			y: 400,
-			w: 192,
+			w: SCREEN_WIDTH,
 			h: 48,
 			pos_x: (192-48)/2,
 			pos_y: 0,

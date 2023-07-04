@@ -1,31 +1,27 @@
-import {FsUtils} from "../../lib/FsUtils";
-import { AppGesture } from "../../lib/AppGesture";
+import { AppGesture } from "../../lib/mmk/AppGesture";
+import { Path, FsTools } from "../../lib/mmk/Path";
+import { WIDGET_WIDTH, SCREEN_MARGIN_Y, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_MARGIN_X } from "../../lib/mmk/UiParams";
 
-const BOX_HEIGHT = 300;
 const { config } = getApp()._options.globalData;
 
 class TextViewScreen {
 	constructor(data) {
 		this.PAGE_SIZE = 256;
 
-		this.fontSize = 16;
+		this.fontSize = config.get("fontSize", 16);
 		this.position = 0;
 		this.bufferSize = 0;
 		this.backStack = [];
-		this.path = data;
+		this.entry = new Path("full", data);
 	}
 
 	start() {
 		hmSetting.setBrightScreen(1800);
 		hmUI.setLayerScrolling(false);
 
-		// Prepare config
-		const userFontSize = config.get("readerFontSize");
-		if(userFontSize) this.fontSize = userFontSize;
-
 		// Prepare file
-		this.file = FsUtils.open(this.path, hmFS.O_RDONLY);
-		const [st, e] = FsUtils.stat(this.path);
+		const [st, e] = this.entry.stat();
+		this.file = this.entry.open(hmFS.O_RDONLY);
 		this.fileSize = st.size;
 
 		// Init
@@ -36,10 +32,10 @@ class TextViewScreen {
 	makeWidgets() {
 		// Text view
 		this.textView = hmUI.createWidget(hmUI.widget.TEXT, {
-			x: 0,
-			y: (490 - BOX_HEIGHT) / 2,
-			w: 192,
-			h: BOX_HEIGHT,
+			x: SCREEN_MARGIN_X,
+			y: SCREEN_MARGIN_Y,
+			w: WIDGET_WIDTH,
+			h: SCREEN_HEIGHT - (SCREEN_MARGIN_Y * 2),
 			text_size: this.fontSize,
 			color: 0xffffff,
 			text_style: hmUI.text_style.WRAP,
@@ -48,10 +44,10 @@ class TextViewScreen {
 
 		// Position view
 		this.posView = hmUI.createWidget(hmUI.widget.TEXT, {
-			x: 0,
+			x: SCREEN_MARGIN_X,
 			y: 0,
-			w: 192,
-			h: (490 - BOX_HEIGHT) / 2,
+			w: WIDGET_WIDTH,
+			h: SCREEN_MARGIN_Y,
 			text_size: 20,
 			align_h: hmUI.align.CENTER_H,
 			align_v: hmUI.align.CENTER_V,
@@ -62,9 +58,9 @@ class TextViewScreen {
 		// Next btn
 		hmUI.createWidget(hmUI.widget.IMG, {
 			x: 0,
-			y: 490/2,
-			w: 192,
-			h: 490/2
+			y: SCREEN_HEIGHT / 2,
+			w: SCREEN_WIDTH,
+			h: SCREEN_HEIGHT / 2
 		}).addEventListener(hmUI.event.CLICK_UP, () => {
 			this.pageNext();
 		});
@@ -73,8 +69,8 @@ class TextViewScreen {
 		hmUI.createWidget(hmUI.widget.IMG, {
 			x: 0,
 			y: 0,
-			w: 192,
-			h: 490/2
+			w: SCREEN_WIDTH,
+			h: SCREEN_HEIGHT / 2
 		}).addEventListener(hmUI.event.CLICK_UP, () => {
 			this.pageBack();
 		});
@@ -83,7 +79,7 @@ class TextViewScreen {
 	getTextHeight(text) {
 		return hmUI.getTextLayout(text, {
 			text_size: this.fontSize,
-			text_width: 192,
+			text_width: WIDGET_WIDTH,
 			wrapped: true
 		}).height;
 	}
@@ -107,6 +103,7 @@ class TextViewScreen {
 
 	_displayForward() {
 		const temp = new Uint8Array(15 * 4);
+		const boxHeight = SCREEN_HEIGHT - (SCREEN_MARGIN_Y * 2);
 
 		hmFS.read(this.file, temp.buffer, 0, temp.byteLength);
 
@@ -120,10 +117,10 @@ class TextViewScreen {
 				hmFS.seek(this.file, this.position + readBytes, hmFS.SEEK_SET);
 				hmFS.read(this.file, temp.buffer, 0, step * 4);
 
-				const [char, byteLength] = FsUtils.decodeUtf8(temp, step, 0);
+				const [char, byteLength] = FsTools.decodeUtf8(temp, step, 0);
 
 				// Check screen fit
-				if(this.getTextHeight(result + char) > BOX_HEIGHT) {
+				if(this.getTextHeight(result + char) > boxHeight) {
 					if(char != " " && char != "\n" && readBytes - readSinceLastSpace > 0) {
 						readBytes -= readSinceLastSpace;
 						result = result.substring(0, result.lastIndexOf(" "));
@@ -148,32 +145,6 @@ class TextViewScreen {
 
 		const progress = Math.floor((this.position + this.bufferSize) / this.fileSize * 100);
 		this.posView.setProperty(hmUI.prop.TEXT, progress + "%");
-	}
-
-	switchPage(delta) {
-		const newOffset = this.offset + (this.PAGE_SIZE*delta);
-		if(newOffset < 0) return;
-
-		hmFS.seek(this.file, newOffset, hmFS.SEEK_SET);
-		hmFS.read(this.file, buffer, 0, this.PAGE_SIZE);
-
-		const text = FsUtils.Utf8ArrayToStr(new Uint8Array(buffer));
-		const {height} = hmUI.getTextLayout(text, {
-			text_size: 20,
-			text_width: 176,
-			wrapped: 1
-		});
-
-		console.log(height, text);
-
-		this.textView.setProperty(hmUI.prop.MORE, {
-			h: height
-		});
-		this.textView.setProperty(hmUI.prop.TEXT, text);
-		this.buttonMore.setProperty(hmUI.prop.Y, height + 72);
-
-		this.offset = newOffset;
-		hmApp.setLayerY(0);
 	}
 
 	finish() {

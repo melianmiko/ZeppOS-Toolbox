@@ -1,7 +1,7 @@
-import {Path} from "../../lib/Path";
-import { AppGesture } from "../../lib/AppGesture";
+import {Path} from "../../lib/mmk/Path";
+import { AppGesture } from "../../lib/mmk/AppGesture";
+import { WIDGET_WIDTH, SCREEN_MARGIN_Y, SCREEN_HEIGHT, SCREEN_MARGIN_X } from "../../lib/mmk/UiParams";
 
-import { FILE_ROW_TYPE, HEADER_ROW_TYPE } from "./styles/FileManagerRowTypes";
 import { openPage } from "../utils/misc";
 
 const { config, t } = getApp()._options.globalData;
@@ -86,14 +86,62 @@ class AppsListScreen {
     hmUI.setLayerScrolling(false);
 
     const apps = this.fetchApps();
-
     hmUI.createWidget(hmUI.widget.SCROLL_LIST, {
-      x: 0,
+      x: SCREEN_MARGIN_X,
       y: 0,
-      w: 192,
-      h: 490,
+      w: WIDGET_WIDTH,
+      h: SCREEN_HEIGHT,
       item_space: 8,
-      item_config: [HEADER_ROW_TYPE, FILE_ROW_TYPE],
+      item_config: [
+        {
+          type_id: 1,
+          item_height: SCREEN_MARGIN_Y,
+          item_bg_color: 0x0,
+          item_bg_radius: 0,
+          text_view: [{
+            x: 4,
+            y: Math.floor((SCREEN_MARGIN_Y - 32) / 2),
+            w: WIDGET_WIDTH,
+            h: 32,
+            key: "title",
+            color: 0xEEEEEE,
+            text_size: 18,
+          }],
+          text_view_count: 1,
+          image_view: [{
+            x: 84,
+            y: 24,
+            w: 24,
+            h: 24,
+            key: "icon"
+          }],
+          image_view_count: 1
+        }, 
+        {
+          type_id: 2,
+          item_height: 64,
+          item_bg_color: 0x111111,
+          item_bg_radius: 12,
+          text_view: [{
+            x: 44,
+            y: 0,
+            w: WIDGET_WIDTH - 48,
+            h: 64,
+            key: "name",
+            color: 0xffffff,
+            text_size: 22
+          }],
+          text_view_count: 1,
+          image_view: [{
+            x: 10,
+            y: 20,
+            w: 24,
+            h: 24,
+            key: "icon"
+          }],
+          image_view_count: 1
+        }
+      ],
       item_config_count: 2,
       item_click_func: (list, index) => {
         if(index == 0) return;
