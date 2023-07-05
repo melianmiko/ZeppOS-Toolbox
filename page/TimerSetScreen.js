@@ -1,6 +1,6 @@
-import { TouchEventManager } from "../../lib/mmk/TouchEventManager";
-import { AppGesture } from "../../lib/mmk/AppGesture";
-import { WIDGET_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_MARGIN_X, SCREEN_MARGIN_Y } from "../../lib/mmk/UiParams";
+import { TouchEventManager } from "../lib/mmk/TouchEventManager";
+import { AppGesture } from "../lib/mmk/AppGesture";
+import { WIDGET_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_MARGIN_X, SCREEN_MARGIN_Y } from "../lib/mmk/UiParams";
 
 import {STYLE_DISPLAY, STYLE_EDIT_BTN, STYLE_EDIT_DEG, STYLE_EDIT_INC} from "./styles/TimerStyles";
 

@@ -1,7 +1,7 @@
-import { ListScreen } from "../../lib/mmk/ListScreen";
-import { AppGesture } from "../../lib/mmk/AppGesture";
-import {FsTools, Path} from "../../lib/mmk/Path";
-import { SCREEN_WIDTH, SCREEN_HEIGHT } from "../../lib/mmk/UiParams";
+import { ListScreen } from "../lib/mmk/ListScreen";
+import { AppGesture } from "../lib/mmk/AppGesture";
+import {FsTools, Path} from "../lib/mmk/Path";
+import { SCREEN_WIDTH, SCREEN_HEIGHT } from "../lib/mmk/UiParams";
 
 const { config, t } = getApp()._options.globalData;
 

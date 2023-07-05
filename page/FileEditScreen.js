@@ -1,6 +1,6 @@
-import { Path, FsTools } from "../../lib/mmk/Path";
-import { ListScreen } from "../../lib/mmk/ListScreen";
-import { AppGesture } from "../../lib/mmk/AppGesture";
+import { Path, FsTools } from "../lib/mmk/Path";
+import { ListScreen } from "../lib/mmk/ListScreen";
+import { AppGesture } from "../lib/mmk/AppGesture";
 
 import {openPage} from "../utils/misc";
 

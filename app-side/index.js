@@ -1,5 +1,5 @@
-import { MessageBuilder } from '../../lib/zeppos/message';
-import { RemManSideService } from "../../lib/mmk/remman/RemManSideService";
+import { MessageBuilder } from '../lib/zeppos/message';
+import { RemManSideService } from "../lib/mmk/remman/RemManSideService";
 
 const messageBuilder = new MessageBuilder();
 const remMan = new RemManSideService(messageBuilder);

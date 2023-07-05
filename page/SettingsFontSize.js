@@ -1,4 +1,4 @@
-import { FontSizeSetupScreen } from "../../lib/mmk/FontSizeSetupScreen";
+import { FontSizeSetupScreen } from "../lib/mmk/FontSizeSetupScreen";
 
 const { config } = getApp()._options.globalData
 

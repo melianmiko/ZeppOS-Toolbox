@@ -1,11 +1,11 @@
-import '../../lib/zeppos/device-polyfill'
-import { MessageBuilder } from '../../lib/zeppos/message'
-import { RemManHandler } from '../../lib/mmk/remman/RemManHandler'
-import { RemManPage } from '../../lib/mmk/remman/RemManPage'
+import '../lib/zeppos/device-polyfill'
+import { MessageBuilder } from '../lib/zeppos/message'
+import { RemManHandler } from '../lib/mmk/remman/RemManHandler'
+import { RemManPage } from '../lib/mmk/remman/RemManPage'
 
-import {Path} from "../../lib/mmk/Path";
-import {deviceName} from "../../lib/mmk/DeviceIdentifier";
-import {SCREEN_WIDTH, SCREEN_HEIGHT} from "../../lib/mmk/UiParams";
+import {Path} from "../lib/mmk/Path";
+import {deviceName} from "../lib/mmk/DeviceIdentifier";
+import {SCREEN_WIDTH, SCREEN_HEIGHT} from "../lib/mmk/UiParams";
 
 const basePath = new Path("full", "/storage");
 const clientConfig = {

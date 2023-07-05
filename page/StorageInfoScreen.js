@@ -1,7 +1,7 @@
-import {FsTools} from "../../lib/mmk/Path";
-import { AppGesture } from "../../lib/mmk/AppGesture";
-import { WIDGET_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_MARGIN_X, SCREEN_MARGIN_Y, BASE_FONT_SIZE } from "../../lib/mmk/UiParams";
-import { deviceName, deviceClass } from "../../lib/mmk/DeviceIdentifier";
+import {FsTools} from "../lib/mmk/Path";
+import { AppGesture } from "../lib/mmk/AppGesture";
+import { WIDGET_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_MARGIN_X, SCREEN_MARGIN_Y, BASE_FONT_SIZE } from "../lib/mmk/UiParams";
+import { deviceName, deviceClass } from "../lib/mmk/DeviceIdentifier";
 
 const { config, t } = getApp()._options.globalData;
 

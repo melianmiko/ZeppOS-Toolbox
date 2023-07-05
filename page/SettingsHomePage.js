@@ -1,6 +1,6 @@
-import { ListScreen } from "../../lib/mmk/ListScreen";
-import { AppGesture } from "../../lib/mmk/AppGesture";
-import { IS_LOW_RAM_DEVICE } from "../../lib/mmk/UiParams";
+import { ListScreen } from "../lib/mmk/ListScreen";
+import { AppGesture } from "../lib/mmk/AppGesture";
+import { IS_LOW_RAM_DEVICE } from "../lib/mmk/UiParams";
 
 import {openPage} from "../utils/misc";
 

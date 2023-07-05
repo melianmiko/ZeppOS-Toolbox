@@ -1,6 +1,6 @@
-import { AppGesture } from "../../lib/mmk/AppGesture";
-import { Path, FsTools } from "../../lib/mmk/Path";
-import { WIDGET_WIDTH, SCREEN_MARGIN_Y, SCREEN_HEIGHT, SCREEN_MARGIN_X } from "../../lib/mmk/UiParams";
+import { AppGesture } from "../lib/mmk/AppGesture";
+import { Path, FsTools } from "../lib/mmk/Path";
+import { WIDGET_WIDTH, SCREEN_MARGIN_Y, SCREEN_HEIGHT, SCREEN_MARGIN_X } from "../lib/mmk/UiParams";
 
 import {openPage} from "../utils/misc";
 

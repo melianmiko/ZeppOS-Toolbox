@@ -1,5 +1,5 @@
-import { AppGesture } from "../../lib/mmk/AppGesture";
-import { BaseAboutScreen } from "../../lib/mmk/BaseAboutScreen";
+import { AppGesture } from "../lib/mmk/AppGesture";
+import { BaseAboutScreen } from "../lib/mmk/BaseAboutScreen";
 
 const { config, t } = getApp()._options.globalData;
 

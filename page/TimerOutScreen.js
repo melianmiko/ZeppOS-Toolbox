@@ -1,5 +1,5 @@
-import { AppGesture } from "../../lib/mmk/AppGesture";
-import { SCREEN_WIDTH } from "../../lib/mmk/UiParams";
+import { AppGesture } from "../lib/mmk/AppGesture";
+import { SCREEN_WIDTH } from "../lib/mmk/UiParams";
 
 let vibrate;
 
