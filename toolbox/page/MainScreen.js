@@ -1,4 +1,4 @@
-import {TouchEventManager} from "../../lib/TouchEventManager";
+import {TouchEventManager} from "../../lib/mmk/TouchEventManager";
 import { AppGesture } from "../../lib/mmk/AppGesture";
 import { WIDGET_WIDTH, SCREEN_WIDTH, SCREEN_MARGIN_X, IS_LOW_RAM_DEVICE } from "../../lib/mmk/UiParams";
 import { deviceName } from "../../lib/mmk/DeviceIdentifier";

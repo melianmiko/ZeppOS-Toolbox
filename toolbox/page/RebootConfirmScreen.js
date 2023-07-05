@@ -1,5 +1,5 @@
-import {TouchEventManager} from "../../lib/TouchEventManager";
-import { AppGesture } from "../../lib/AppGesture";
+import {TouchEventManager} from "../../lib/mmk/TouchEventManager";
+import { AppGesture } from "../../lib/mmk/AppGesture";
 
 const { config, t } = getApp()._options.globalData;
 
