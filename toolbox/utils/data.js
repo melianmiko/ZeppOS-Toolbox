@@ -13,6 +13,12 @@ export const QS_BUTTONS = {
     type: "internal",
   },
 
+  remman: {
+    title: t("Remote manager"),
+    url: "RemoteManScreen",
+    type: "internal",
+  },
+
   storage: {
     title: t("Disk usage"),
     url: "StorageInfoScreen",

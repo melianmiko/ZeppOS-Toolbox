@@ -6,6 +6,8 @@ const { config, t } = getApp()._options.globalData;
 class AboutScreen extends BaseAboutScreen {
   constructor() {
     super();
+    this.fontSize = config.get("fontSize", this.fontSize);
+
     this.appId = 33904;
     this.appName = "toolbox";
     this.version = "v2023-07-02";

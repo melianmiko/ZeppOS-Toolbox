@@ -7,6 +7,11 @@ import {openPage} from "../utils/misc";
 const { config, t } = getApp()._options.globalData;
 
 class SettingsHomePage extends ListScreen {
+  constructor() {
+    super();
+    this.fontSize = config.get("fontSize", this.fontSize);
+  }
+
   start() {
     this.row({
       text: t("About"),
@@ -27,7 +32,7 @@ class SettingsHomePage extends ListScreen {
     });
     this.row({
       text: t("Remote manager"),
-      icon: "menu/files.png",
+      icon: "menu/remman.png",
       callback: () => openPage("RemoteManScreen")
     });
     this.row({
@@ -48,8 +53,8 @@ class SettingsHomePage extends ListScreen {
       callback: () => openPage("SettingsUiScreen")
     });
     this.row({
-      text: t("Reader font size"),
-      icon: "menu/ui.png",
+      text: t("Font size"),
+      icon: "menu/font_size.png",
       callback: () => {
         openPage("SettingsFontSize")
       }

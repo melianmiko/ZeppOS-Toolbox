@@ -14,6 +14,11 @@ const available_locales = {
 const { config } = getApp()._options.globalData;
 
 class SettingsLangScreen extends ListScreen {
+  constructor() {
+    super();
+    this.fontSize = config.get("fontSize", this.fontSize);
+  }
+
 	start() {
 		this.current = config.get("locale", "false");
 		if(!this.current) this.current = "false";

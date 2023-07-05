@@ -6,7 +6,12 @@ import { openPage } from "../utils/misc";
 const { config, t } = getApp()._options.globalData;
 
 class SettingsMiscPage extends ListScreen {
-  build() {
+  constructor() {
+    super();
+    this.fontSize = config.get("fontSize", this.fontSize);
+  }
+
+  start() {
     this.configCheckbox(t("Hide main screen (open toolbox to settings list directly)"), "skipMainPage", false);
     this.configCheckbox(t("Open *.txt files with one click"), "autoOpenFiles", false);
     this.configCheckbox(t("Show file size in explorer"), "fmShowSizes", false);
@@ -19,7 +24,8 @@ class SettingsMiscPage extends ListScreen {
       text: t("Unlock danger features"),
       icon: `menu/cb_${allowDanger}.png`,
       callback: () => openPage("ToggleDanger")
-    })
+    });
+    this.offset();
   }
 
   configInteger(name, key, fallback) {

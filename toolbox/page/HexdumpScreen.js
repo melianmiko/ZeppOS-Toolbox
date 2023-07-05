@@ -1,22 +1,21 @@
 import { AppGesture } from "../../lib/AppGesture";
-import {FsUtils} from "../../lib/FsUtils";
+import { Path } from "../../lib/mmk/Path";
 import { WIDGET_WIDTH, SCREEN_MARGIN_Y, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_MARGIN_X } from "../../lib/mmk/UiParams";
 
 class HexdumpScreen {
 	constructor(data) {
-		this.path = data;
+		this.entry = new Path("full", data);
 		this.offset = 0;
 		this.count = Math.floor(WIDGET_WIDTH / 42);
 		this.count -= this.count % 4;
 		this.lines = 10;
-		console.log(this.count);
 	}
 
 	start() {
     hmUI.setStatusBarVisible(false);
 		const offsetX = Math.floor((WIDGET_WIDTH - this.count * 42) / 2) + SCREEN_MARGIN_X
-		this.size = FsUtils.stat(this.path)[0].size;
-		this.file = FsUtils.open(this.path);
+		this.size = this.entry.stat()[0].size;
+		this.file = this.entry.open();
 
 		this.header = hmUI.createWidget(hmUI.widget.TEXT, {
 			x: SCREEN_MARGIN_X,

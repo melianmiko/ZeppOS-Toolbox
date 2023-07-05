@@ -16,46 +16,22 @@
   "debug": false,
   "i18n": {
     "ru-RU": {
-      "appName": "Инструменты"
+      "appName": "\u0418\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442\u044b"
     },
     "zh-CN": {
-      "appName": "工具箱"
+      "appName": "\u5de5\u5177\u7bb1"
     },
     "zh-TW": {
-      "appName": "工具箱"
+      "appName": "\u5de5\u5177\u7bb1"
     }
   },
   "targets": {
-    "mi-band-7": {
-      "module": {
-        "app-side": {
-          "path": "app-side/index"
-        },
-        "page": {
-          "pages": [
-            "page/MainScreen",
-            "page/AboutScreen",
-            "page/AppEditScreen",
-            "page/AppListScreen",
-            "page/FileEditScreen",
-            "page/FileManagerScreen",
-            "page/HexdumpScreen",
-            "page/ImageViewScreen",
-            "page/RebootConfirmScreen",
-            "page/SettingsHomePage",
-            "page/SettingsLangScreen",
-            "page/SettingsMiscPage",
-            "page/SettingsUiScreen",
-            "page/StorageInfoScreen",
-            "page/TextViewScreen",
-            "page/TimerOutScreen",
-            "page/TimerSetScreen",
-            "page/ToggleDanger",
-            "page/RemoteManScreen"
-          ]
-        }
-      },
+    "band-7": {
       "platforms": [
+        {
+          "name": "amazfit-band7-nfc",
+          "deviceSource": 252
+        },
         {
           "name": "amazfit-band7",
           "deviceSource": 253
@@ -65,44 +41,40 @@
           "deviceSource": 254
         },
         {
-            "name": "l66",
-            "deviceSource": 260
+          "name": "l66",
+          "deviceSource": 260
         },
         {
-            "name": "l66w",
-            "deviceSource": 261
+          "name": "l66w",
+          "deviceSource": 261
         },
         {
-            "name": "l66_1",
-            "deviceSource": 262
+          "name": "l66_1",
+          "deviceSource": 262
         },
         {
-            "name": "l66w_2",
-            "deviceSource": 263
+          "name": "l66w_2",
+          "deviceSource": 263
         },
         {
-            "name": "l66_3",
-            "deviceSource": 264
+          "name": "l66_3",
+          "deviceSource": 264
         },
         {
-            "name": "l66_4",
-            "deviceSource": 265
+          "name": "l66_4",
+          "deviceSource": 265
         },
         {
-            "name": "l66_5",
-            "deviceSource": 266
+          "name": "l66_5",
+          "deviceSource": 266
         }
       ],
-      "designWidth": 194
-    },
-    "gts-4-mini": {
+      "designWidth": 194,
       "module": {
-        "app-side": {
-          "path": "app-side/index"
-        },
         "page": {
           "pages": [
             "page/MainScreen",
+            "page/RemoteManScreen",
             "page/AboutScreen",
             "page/AppEditScreen",
             "page/AppListScreen",
@@ -114,16 +86,179 @@
             "page/SettingsHomePage",
             "page/SettingsLangScreen",
             "page/SettingsMiscPage",
+            "page/SettingsFontSize",
             "page/SettingsUiScreen",
             "page/StorageInfoScreen",
             "page/TextViewScreen",
             "page/TimerOutScreen",
             "page/TimerSetScreen",
-            "page/ToggleDanger",
-            "page/RemoteManScreen"
+            "page/ToggleDanger"
           ]
+        },
+        "app-side": {
+          "path": "app-side/index"
         }
-      },
+      }
+    },
+    "nxp": {
+      "platforms": [
+        {
+          "name": "gtr-4",
+          "deviceSource": 7930112
+        },
+        {
+          "name": "gtr-4-2",
+          "deviceSource": 7930113
+        },
+        {
+          "name": "t-rex-ultra",
+          "deviceSource": 6553856
+        },
+        {
+          "name": "t-rex-ultra",
+          "deviceSource": 6553857
+        },
+        {
+          "name": "gts-4",
+          "deviceSource": 7995648
+        },
+        {
+          "name": "gts-4-2",
+          "deviceSource": 7995649
+        },
+        {
+          "name": "falcon",
+          "deviceSource": 414
+        },
+        {
+          "name": "falcon-2",
+          "deviceSource": 415
+        },
+        {
+          "name": "cheetah",
+          "deviceSource": 8192256
+        },
+        {
+          "name": "cheetah-2",
+          "deviceSource": 8192257
+        },
+        {
+          "name": "cheetah-pro",
+          "deviceSource": 8126720
+        },
+        {
+          "name": "cheetah-pro-2",
+          "deviceSource": 8126721
+        },
+        {
+          "name": "gtr3pro",
+          "deviceSource": 229
+        },
+        {
+          "name": "gtr3pro-2",
+          "deviceSource": 230
+        },
+        {
+          "name": "gtr3pro-3",
+          "deviceSource": 6095106
+        },
+        {
+          "name": "gtr3",
+          "deviceSource": 226
+        },
+        {
+          "name": "gtr3-2",
+          "deviceSource": 227
+        },
+        {
+          "name": "gts3",
+          "deviceSource": 224
+        },
+        {
+          "name": "gts3-2",
+          "deviceSource": 225
+        },
+        {
+          "name": "t-rex-2",
+          "deviceSource": 418
+        },
+        {
+          "name": "t-rex-2-2",
+          "deviceSource": 419
+        }
+      ],
+      "module": {
+        "page": {
+          "pages": [
+            "page/MainScreen",
+            "page/RemoteManScreen",
+            "page/AboutScreen",
+            "page/AppEditScreen",
+            "page/AppListScreen",
+            "page/FileEditScreen",
+            "page/FileManagerScreen",
+            "page/HexdumpScreen",
+            "page/ImageViewScreen",
+            "page/RebootConfirmScreen",
+            "page/SettingsHomePage",
+            "page/SettingsLangScreen",
+            "page/SettingsMiscPage",
+            "page/SettingsFontSize",
+            "page/SettingsUiScreen",
+            "page/StorageInfoScreen",
+            "page/TextViewScreen",
+            "page/TimerOutScreen",
+            "page/TimerSetScreen",
+            "page/ToggleDanger"
+          ]
+        },
+        "app-side": {
+          "path": "app-side/index"
+        }
+      }
+    },
+    "mhs": {
+      "platforms": [
+        {
+          "name": "gtr-mini",
+          "deviceSource": 250
+        },
+        {
+          "name": "gtr-mini-2",
+          "deviceSource": 251
+        }
+      ],
+      "module": {
+        "page": {
+          "pages": [
+            "page/MainScreen",
+            "page/RemoteManScreen",
+            "page/AboutScreen",
+            "page/AppEditScreen",
+            "page/AppListScreen",
+            "page/FileEditScreen",
+            "page/FileManagerScreen",
+            "page/HexdumpScreen",
+            "page/ImageViewScreen",
+            "page/RebootConfirmScreen",
+            "page/SettingsHomePage",
+            "page/SettingsLangScreen",
+            "page/SettingsMiscPage",
+            "page/SettingsFontSize",
+            "page/SettingsUiScreen",
+            "page/StorageInfoScreen",
+            "page/TextViewScreen",
+            "page/TimerOutScreen",
+            "page/TimerSetScreen",
+            "page/ToggleDanger"
+          ]
+        },
+        "app-side": {
+          "path": "app-side/index"
+        }
+      }
+    },
+    "dialog": {
       "platforms": [
         {
           "name": "gts-4-mini",
@@ -134,7 +269,36 @@
           "deviceSource": 247
         }
       ],
-      "designWidth": 194
+      "designWidth": 194,
+      "module": {
+        "page": {
+          "pages": [
+            "page/MainScreen",
+            "page/RemoteManScreen",
+            "page/AboutScreen",
+            "page/AppEditScreen",
+            "page/AppListScreen",
+            "page/FileEditScreen",
+            "page/FileManagerScreen",
+            "page/HexdumpScreen",
+            "page/ImageViewScreen",
+            "page/RebootConfirmScreen",
+            "page/SettingsHomePage",
+            "page/SettingsLangScreen",
+            "page/SettingsMiscPage",
+            "page/SettingsFontSize",
+            "page/SettingsUiScreen",
+            "page/StorageInfoScreen",
+            "page/TextViewScreen",
+            "page/TimerOutScreen",
+            "page/TimerSetScreen",
+            "page/ToggleDanger"
+          ]
+        },
+        "app-side": {
+          "path": "app-side/index"
+        }
+      }
     }
   },
   "permissions": [],

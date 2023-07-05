@@ -8,6 +8,7 @@ const { config, t } = getApp()._options.globalData;
 class AppEditScreen extends ListScreen {
 	constructor(dirname) {
 		super();
+    this.fontSize = config.get("fontSize", this.fontSize);
 		
 		this.dirname = dirname;
 		this.dontKeepSettings = true;
@@ -163,19 +164,19 @@ class AppEditScreen extends ListScreen {
 	}
 
 	_prepareTempFile(sourceEntry) {
-		const current = hmFS.SysProGetChars("mmk_tb_temp");
-		if(current) {
-			new Path("assets", current).remove();
-		}
+    const current = config.get("imageViewTempFile", false);
+    if(current) {
+      new Path("assets", current).remove();
+    }
 
-		if(!sourceEntry.exists()) return "";
+    // const data = FsUtils.read(sourcePath);
+    const newFile = "temp_" + Math.round(Math.random() * 100000) + ".png";
+    const dest = new Path("assets", newFile);
+    console.log(`Copy ${sourceEntry.absolutePath} to ${dest.absolutePath}`)
+    sourceEntry.copy(dest);
 
-		const newFile = "temp_" + Math.round(Math.random() * 100000) + ".png";
-		const dest = new Path("assets", newFile);
-		sourceEntry.copy(dest);
-
-		hmFS.SysProSetChars("mmk_tb_temp", newFile);
-		return newFile;
+    config.set("imageViewTempFile", newFile);
+    return newFile;
 	}
 
 	uninstall() {

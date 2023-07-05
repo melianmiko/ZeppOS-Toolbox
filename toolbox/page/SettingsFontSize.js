@@ -3,8 +3,8 @@ import { FontSizeSetupScreen } from "../../lib/mmk/FontSizeSetupScreen";
 const { config } = getApp()._options.globalData
 
 class ConfiguredFontSizeSetupScreen extends FontSizeSetupScreen {
-  getSavedFontSize() {
-    return config.get("fontSize", 16);
+  getSavedFontSize(v) {
+    return config.get("fontSize", v);
   }
 
   onChange(v) {

@@ -1,6 +1,6 @@
 import {Path} from "../../lib/mmk/Path";
 import { AppGesture } from "../../lib/mmk/AppGesture";
-import { WIDGET_WIDTH, SCREEN_MARGIN_Y, SCREEN_HEIGHT, SCREEN_MARGIN_X } from "../../lib/mmk/UiParams";
+import { WIDGET_WIDTH, SCREEN_MARGIN_Y, SCREEN_HEIGHT, SCREEN_MARGIN_X, BASE_FONT_SIZE, ICON_SIZE_SMALL } from "../../lib/mmk/UiParams";
 
 import { openPage } from "../utils/misc";
 
@@ -8,23 +8,8 @@ const { config, t } = getApp()._options.globalData;
 
 class AppsListScreen {
   constructor() {
+    this.fontSize = config.get("fontSize", BASE_FONT_SIZE);
     this.root = new Path("full", "/storage/js_apps");
-  }
-
-  mkEditParam(dirname) {
-    try {
-      const appConfig = this.root.get(`${dirname}/app.json`).fetchJSON();
-
-      let name = appConfig.app.appName;
-      let vender = appConfig.app.vender;
-      let data = { dirname, name, vender };
-      let icon = this.root.get(`${dirname}/assets/${appConfig.app.icon}`);
-      icon = this.prepareTempFile(icon);
-
-      return { dirname, name, vender, icon }
-    } catch (e) {
-      return {};
-    }
   }
 
   fetchApps() {
@@ -33,7 +18,7 @@ class AppsListScreen {
 
     for (let i in contents) {
       const dirname = contents[i];
-      if (dirname == "data") continue;
+      if (dirname == "data" || dirname.endsWith(".del")) continue;
 
       try {
         const jsonString = this.root.get(`${dirname}/app.json`).fetchText(368);
@@ -63,25 +48,6 @@ class AppsListScreen {
     return out;
   }
 
-  prepareTempFile(sourcePath) {
-    const current = hmFS.SysProGetChars("mmk_tb_temp");
-    if (current) {
-      hmFS.remove(path);
-    }
-
-    if (sourcePath === "") return "";
-
-    const data = new Path("full", sourcePath).fetch();
-    const newFile = "temp_" + Math.round(Math.random() * 100000) + ".png";
-    const dest = hmFS.open(newFile, hmFS.O_WRONLY | hmFS.O_CREAT);
-    hmFS.seek(dest, 0, hmFS.SEEK_SET);
-    hmFS.write(dest, data, 0, data.byteLength);
-    hmFS.close(dest);
-
-    hmFS.SysProSetChars("mmk_tb_temp", newFile);
-    return newFile;
-  }
-
   start() {
     hmUI.setLayerScrolling(false);
 
@@ -105,14 +71,14 @@ class AppsListScreen {
             h: 32,
             key: "title",
             color: 0xEEEEEE,
-            text_size: 18,
+            text_size: this.fontSize - 2,
           }],
           text_view_count: 1,
           image_view: [{
             x: 84,
             y: 24,
-            w: 24,
-            h: 24,
+            w: ICON_SIZE_SMALL,
+            h: ICON_SIZE_SMALL,
             key: "icon"
           }],
           image_view_count: 1
@@ -123,20 +89,20 @@ class AppsListScreen {
           item_bg_color: 0x111111,
           item_bg_radius: 12,
           text_view: [{
-            x: 44,
+            x: ICON_SIZE_SMALL + 20,
             y: 0,
             w: WIDGET_WIDTH - 48,
             h: 64,
             key: "name",
             color: 0xffffff,
-            text_size: 22
+            text_size: this.fontSize,
           }],
           text_view_count: 1,
           image_view: [{
             x: 10,
-            y: 20,
-            w: 24,
-            h: 24,
+            y: Math.floor((64 - ICON_SIZE_SMALL)/2),
+            w: ICON_SIZE_SMALL,
+            h: ICON_SIZE_SMALL,
             key: "icon"
           }],
           image_view_count: 1

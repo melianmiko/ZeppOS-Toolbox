@@ -40,7 +40,7 @@ class FileEditScreen extends ListScreen {
       if(path.endsWith(".png") || path.endsWith(".tga")) {
         this.row({
           text: t("View as image"),
-          icon: "files/img.png",
+          icon: "menu/file_png.png",
           callback: () => {
             openPage("ImageViewScreen", this.prepareTempFile());
           }
@@ -49,14 +49,14 @@ class FileEditScreen extends ListScreen {
 
       this.row({
         text: t("View as text"),
-        icon: "files/text.png",
+        icon: "menu/file_txt.png",
         callback: () => {
           openPage("TextViewScreen", path);
         }
       });
       this.row({
         text: t("View as binary"),
-        icon: "files/file.png",
+        icon: "menu/file_base.png",
         callback: () => {
           openPage("HexdumpScreen", path);
         }
@@ -68,7 +68,7 @@ class FileEditScreen extends ListScreen {
     if(this.canEdit()) {
       this.buildEditRows(fileSize)
     } else {
-      this.text(t("To edit this file/folder, unlock \"Danger features\" in app settings"));
+      this.text({text: t("To edit this file/folder, unlock \"Danger features\" in app settings")});
     }
 
     this.offset();

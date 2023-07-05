@@ -18,10 +18,10 @@ const clientConfig = {
 const appId = 33904;
 const messageBuilder = new MessageBuilder({ appId })
 const requestHandler = new RemManHandler(basePath, clientConfig);
+const page = new RemManPage(messageBuilder, requestHandler);
 
 Page({
   onInit() {
-    const page = new RemManPage(messageBuilder, requestHandler);
     page.start();
 
     messageBuilder.connect(() => {
@@ -34,6 +34,7 @@ Page({
   },
 
   onDestroy() {
+    page.exit();
     messageBuilder.disConnect();
   },
 

@@ -13,7 +13,7 @@ class MainScreen {
     this.allowDanger = config.get("allowDanger", false);
 
     const withBattery = config.get("withBattery", false);
-    const withBrightness = config.get("withBrightness", true) && !hmSetting.getScreenAutoBright();
+    const withBrightness = config.get("withBrightness", true);
     const compact = deviceName == "Band 7";
     hmUI.setStatusBarVisible(!withBattery);
 
@@ -28,28 +28,19 @@ class MainScreen {
     const value = battery.current + "%";
     const compact = deviceName == "Band 7";
 
-    hmUI.createWidget(hmUI.widget.TEXT, {
-      x: Math.floor((SCREEN_WIDTH - 48) / 2),
+    const text = hmUI.createWidget(hmUI.widget.TEXT, {
+      x: 0,
       y: compact ? 7 : 28,
-      w: 48,
+      w: SCREEN_WIDTH,
       h: 24,
       text: value,
+      text_size: 20,
       color: 0x999999,
       align_h: hmUI.align.CENTER_H,
       align_v: hmUI.align.CENTER_V
     });
 
-    const batImg = hmUI.createWidget(hmUI.widget.IMG, {
-      x: 0,
-      y: 0,
-      w: SCREEN_WIDTH,
-      h: 64,
-      pos_x: Math.floor((SCREEN_WIDTH - 72) / 2) - 4,
-      pos_y: compact ? 7 : 28,
-      src: "battery.png"
-    });
-
-    const batEv = new TouchEventManager(batImg);
+    const batEv = new TouchEventManager(text);
     batEv.ontouch = () => hmApp.startApp({
       url: "Settings_batteryManagerScreen",
       native: true
@@ -150,6 +141,22 @@ class MainScreen {
       color: 0x222222,
       w: 188
     });
+
+    if(hmSetting.getScreenAutoBright()) {
+      const t = hmUI.createWidget(hmUI.widget.TEXT, {
+        ...baseBrightnessConfig,
+        w: 188,
+        text_size: 22,
+        align_h: hmUI.align.CENTER_H,
+        align_v: hmUI.align.CENTER_V,
+        text: "Automatic",
+        color: 0xAAAAAA
+      });
+
+      const ev = new TouchEventManager(t);
+      ev.ontouch = () => hmApp.startApp({url: "Settings_lightAdjustScreen", native: true})
+      return;
+    }
 
     this.widgetBrightness = hmUI.createWidget(hmUI.widget.FILL_RECT, {
       ...baseBrightnessConfig,

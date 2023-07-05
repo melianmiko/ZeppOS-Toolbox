@@ -12,6 +12,8 @@ export const strings = {
     "Advanced": "Advanced",
     "Apps": "Apps",
     "Location": "Location",
+    "Font size": "Font size",
+    "Remote manager": "Remote manager",
     "View as image": "View as image",
     "View as text": "View as text",
     "View as binary": "View as binary",

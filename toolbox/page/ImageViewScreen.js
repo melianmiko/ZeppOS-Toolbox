@@ -20,8 +20,8 @@ class ImageViewScreen {
       hmUI.showToast({text: width + "x" + height});
 
       hmUI.createWidget(hmUI.widget.IMG, {
-        x: (SCREEN_WIDTH - width) / 2,
-        y: (SCREEN_HEIGHT - height) / 2,
+        x: Math.max(0, Math.floor((SCREEN_WIDTH - width) / 2)),
+        y: Math.max(0, Math.floor((SCREEN_HEIGHT - height) / 2)),
         src: this.path
       });
 	}

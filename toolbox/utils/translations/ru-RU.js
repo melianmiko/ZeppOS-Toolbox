@@ -12,6 +12,8 @@ export const strings = {
     "Advanced": "Дополнительно",
     "Apps": "Приложения",
     "Location": "Расположение",
+    "Font size": "Размер текста",
+    "Remote manager": "Веб-проводник",
     "View as image": "Прсм. изображение",
     "View as text": "Просм. текст",
     "View as binary": "Просм. бинарно",
@@ -59,6 +61,6 @@ export const strings = {
     "Unknown": "Неизвестно",
     "Begin": "Начать",
     "Cancel": "Отмена",
-    "This option will show some features, that may cause your device to fail to boot. Continuing, you agree that in some moment all settings of that device may become lost.": "",
-    "Agree, enable": ""
+    "This option will show some features, that may cause your device to fail to boot. Continuing, you agree that in some moment all settings of that device may become lost.": "Эта опция разблокирует функции, которые потенциально могут навредить вашему устройству или его конфигурации. Используйте на свой страх и риск. Продолжить?",
+    "Agree, enable": "Да, включить"
 }

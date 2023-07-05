@@ -1,11 +1,15 @@
 import {FsTools} from "../../lib/mmk/Path";
 import { AppGesture } from "../../lib/mmk/AppGesture";
-import { WIDGET_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_MARGIN_X, SCREEN_MARGIN_Y } from "../../lib/mmk/UiParams";
+import { WIDGET_WIDTH, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_MARGIN_X, SCREEN_MARGIN_Y, BASE_FONT_SIZE } from "../../lib/mmk/UiParams";
 import { deviceName, deviceClass } from "../../lib/mmk/DeviceIdentifier";
 
 const { config, t } = getApp()._options.globalData;
 
 class StorageInfoScreen {
+  constructor() {
+    this.fontSize = config.get("fontSize", BASE_FONT_SIZE) - 2;
+  }
+
   renderVerticalCup(config, storage) {
     const cupStyle = {
       x: SCREEN_MARGIN_X + 24,
@@ -20,7 +24,7 @@ class StorageInfoScreen {
     let usedY = 0;
     for (let i in config) {
       const currentRow = config[i];
-      if(storage[currentRow.key] == 0) continue;
+      if(!storage[currentRow.key]) continue;
 
       if (currentRow.key != "free" && currentRow.key != "total") {
         let height = Math.round(
@@ -57,7 +61,7 @@ class StorageInfoScreen {
     let usedX = 0;
     for (let i in config) {
       const currentRow = config[i];
-      if(storage[currentRow.key] == 0) continue;
+      if(!storage[currentRow.key]) continue;
 
       if (currentRow.key != "free" && currentRow.key != "total") {
         let width = Math.round(
@@ -104,6 +108,11 @@ class StorageInfoScreen {
         color: 0x4fc3f7,
       },
       {
+        key: "music",
+        label: t("Music"),
+        color: 0x4fc3f7,
+      },
+      {
         key: "app",
         label: t("Apps"),
         color: 0xFFAB91,
@@ -121,6 +130,8 @@ class StorageInfoScreen {
       if(config[i].key !== "total" && config[i].key !== "unknown") 
         storage.unknown -= storage[config[i].key]
 
+    storage.unknown = Math.max(0, storage.unknown);
+
     // Graphics
     if(deviceClass == "band" || deviceClass == "miband") {
       this.renderVerticalCup(config, storage);
@@ -134,32 +145,37 @@ class StorageInfoScreen {
     const actualWidth = SCREEN_WIDTH - this.posX * 2;
     const columns = Math.max(1, Math.floor((actualWidth) / (rowWidth)));
     this.posX += Math.max(0, Math.floor((actualWidth - rowWidth * columns) / 2));
-    console.log(columns);
-    for (let i in config) {
-      const currentRow = config[i];
-      if(storage[currentRow.key] == 0) continue;
+    console.log(JSON.stringify(storage));
+
+    const entryHeight = (compactRows ? 32 : 48) + this.fontSize + 4;
+
+    let i = 0;
+    for (const currentRow of config) {
+      if(!storage[currentRow.key]) continue;
 
       // Text
       hmUI.createWidget(hmUI.widget.TEXT, {
         x: this.posX + (i % columns) * (rowWidth + 4) - 2,
-        y: this.posY + Math.floor(i / columns) * (compactRows ? 56 : 64),
+        y: this.posY + Math.floor(i / columns) * (entryHeight),
         w: rowWidth,
-        h: 24,
-        text_size: 18,
+        h: this.fontSize * 2,
+        text_size: this.fontSize,
         color: currentRow.color,
         text: currentRow.label,
         align_h: hmUI.align.CENTER_H,
       });
       hmUI.createWidget(hmUI.widget.TEXT, {
         x: this.posX + (i % columns) * (rowWidth + 4),
-        y: this.posY + Math.floor(i / columns) * (compactRows ? 56 : 64) + 24,
+        y: this.posY + Math.floor(i / columns) * (entryHeight) + this.fontSize + 4,
         w: rowWidth,
         h: compactRows ? 32 : 48,
-        text_size: 24,
+        text_size: this.fontSize + 6,
         color: 0xffffff,
         text: FsTools.printBytes(storage[currentRow.key]),
         align_h: hmUI.align.CENTER_H,
       });
+
+      i++;
     }
   }
 }

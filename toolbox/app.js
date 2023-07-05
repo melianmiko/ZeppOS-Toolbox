@@ -10,6 +10,7 @@ const config = new ConfigStorage(configFile, {
     "files",
     "storage",
     "timer",
+    "remman",
     "dnd",
     "camera"
   ],

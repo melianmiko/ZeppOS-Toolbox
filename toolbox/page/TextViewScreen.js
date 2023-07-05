@@ -1,6 +1,6 @@
 import { AppGesture } from "../../lib/mmk/AppGesture";
 import { Path, FsTools } from "../../lib/mmk/Path";
-import { WIDGET_WIDTH, SCREEN_MARGIN_Y, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_MARGIN_X } from "../../lib/mmk/UiParams";
+import { WIDGET_WIDTH, SCREEN_MARGIN_Y, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_MARGIN_X, BASE_FONT_SIZE } from "../../lib/mmk/UiParams";
 
 const { config } = getApp()._options.globalData;
 
@@ -8,7 +8,7 @@ class TextViewScreen {
 	constructor(data) {
 		this.PAGE_SIZE = 256;
 
-		this.fontSize = config.get("fontSize", 16);
+		this.fontSize = config.get("fontSize", BASE_FONT_SIZE);
 		this.position = 0;
 		this.bufferSize = 0;
 		this.backStack = [];
