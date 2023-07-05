@@ -1,4 +1,4 @@
-> Some projects was moved to their own, separate repositories: [Vibrant Extended](https://github.com/melianmiko/SmartBand7-VibrantExtended), [MoreLocale](https://github.com/melianmiko/SmartBand7-MoreLocale), [Wallet](https://github.com/melianmiko/ZeppOS-Wallet), [ZeppIconFix](https://github.com/melianmiko/SmartBand7-ZeppIconFix), [IM-02](https://github.com/melianmiko/ZeppOS-IM02)
+> Some projects was moved to their own, separate repositories: [Vibrant Extended](https://github.com/melianmiko/SmartBand7-VibrantExtended), [MoreLocale](https://github.com/melianmiko/SmartBand7-MoreLocale), [Wallet](https://github.com/melianmiko/ZeppOS-Wallet), [ZeppIconFix](https://github.com/melianmiko/SmartBand7-ZeppIconFix), [IM-02](https://github.com/melianmiko/ZeppOS-IM02), [some other drafts](https://github.com/melianmiko/SmartBand7-Drafts).
 
 # SmartBand7 Apps
 

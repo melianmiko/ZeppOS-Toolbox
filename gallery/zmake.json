@@ -1,5 +1,0 @@
-{
-	"def_format": "TGA-RLP",
-	"esbuild": true,
-	"esbuild_params": "--bundle"
-}
