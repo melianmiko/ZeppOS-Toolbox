@@ -8,6 +8,7 @@ export const strings = {
     'Size': '應用程序大小',
     'Folder': 'Folder',
     'Vendor': '小販',
+    'Automatic': 'Automatic',
     'Size (ext. config)': '大小（外部文件）',
     'Don\'t keep ext. files on uninstall': '卸載時刪除外部文件',
     'Connecting...': 'Connecting...',
