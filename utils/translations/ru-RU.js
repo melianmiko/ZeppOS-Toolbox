@@ -8,7 +8,7 @@ export const strings = {
     'Size': 'Размер',
     'Folder': 'Папка',
     'Vendor': 'Разработчик',
-    'Automatic': 'Automatic',
+    'Automatic': 'Авто',
     'Size (ext. config)': 'Размер (внешн. файлы)',
     'Don\'t keep ext. files on uninstall': 'Также удалять внешние файлы',
     'Connecting...': 'Подключение...',
