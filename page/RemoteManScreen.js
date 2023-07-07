@@ -24,7 +24,8 @@ const clientConfig = {
 const appId = 33904;
 const messageBuilder = new MessageBuilder({ appId })
 const requestHandler = new RemManHandler(basePath, clientConfig);
-const page = new RemManPage(messageBuilder, requestHandler, t);
+const page = new RemManPage(messageBuilder, requestHandler);
+page.gettext = t;
 
 Page({
   onInit() {

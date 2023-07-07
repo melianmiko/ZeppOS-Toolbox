@@ -6,7 +6,7 @@ import { deviceName } from "../lib/mmk/DeviceIdentifier";
 import { QS_BUTTONS } from "../utils/data";
 import {openPage} from "../utils/misc";
 
-const { config, t } = getApp()._options.globalData;
+const { config, t, offline } = getApp()._options.globalData;
 
 class MainScreen {
   start() {
@@ -51,12 +51,15 @@ class MainScreen {
     const columns = Math.floor((WIDGET_WIDTH + 4) / 96);
     const offsetX = Math.floor((SCREEN_WIDTH - (96 * columns) + 4) / 2);
 
+    const allowDanger = config.get("allowDanger", false);
+
     let i = countExists;
     tiles.forEach((id) => {
       const config = QS_BUTTONS[id];
-      if(!config) return;
-      if(config.danger && !this.allowDanger) return;
-      if(config.lowRamOnly && !IS_LOW_RAM_DEVICE) return;
+      if( (!config) ||
+          (config.danger && !allowDanger) ||
+          (config.lowRamOnly && !IS_LOW_RAM_DEVICE) ||
+          (config.online && offline) ) return;
 
       let iconName = `qs/${id}.png`;
       if(config.isEnabled && config.isEnabled())
@@ -143,17 +146,17 @@ class MainScreen {
     });
 
     if(hmSetting.getScreenAutoBright() && !IS_LOW_RAM_DEVICE) {
-      const t = hmUI.createWidget(hmUI.widget.TEXT, {
+      const textView = hmUI.createWidget(hmUI.widget.TEXT, {
         ...baseBrightnessConfig,
         w: 188,
         text_size: 22,
         align_h: hmUI.align.CENTER_H,
         align_v: hmUI.align.CENTER_V,
-        text: "Automatic",
+        text: t("Automatic"),
         color: 0xAAAAAA
       });
 
-      const ev = new TouchEventManager(t);
+      const ev = new TouchEventManager(textView);
       ev.ontouch = () => hmApp.startApp({url: "Settings_lightAdjustScreen", native: true})
       return;
     }

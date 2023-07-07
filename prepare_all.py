@@ -75,4 +75,4 @@ for target_id in targets:
   }
 
 with open("app.json", "w") as f:
-  f.write(json.dumps(app_json, indent=2))
+  f.write(json.dumps(app_json, indent=2, ensure_ascii=False))

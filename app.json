@@ -16,14 +16,17 @@
   "configVersion": "v2",
   "debug": false,
   "i18n": {
+    "en-US": {
+      "appName": "Toolbox"
+    },
     "ru-RU": {
-      "appName": "\u0418\u043d\u0441\u0442\u0440\u0443\u043c\u0435\u043d\u0442\u044b"
+      "appName": "Инструменты"
     },
     "zh-CN": {
-      "appName": "\u5de5\u5177\u7bb1"
+      "appName": "工具箱"
     },
     "zh-TW": {
-      "appName": "\u5de5\u5177\u7bb1"
+      "appName": "工具箱"
     }
   },
   "targets": {
