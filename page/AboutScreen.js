@@ -1,6 +1,7 @@
 import { AppGesture } from "../lib/mmk/AppGesture";
 import { BaseAboutScreen } from "../lib/mmk/BaseAboutScreen";
 import {VERSION} from "../version";
+import {FsTools} from "../lib/mmk/Path";
 
 const { config, t } = getApp()._options.globalData;
 
@@ -9,7 +10,7 @@ class AboutScreen extends BaseAboutScreen {
     super();
     this.fontSize = config.get("fontSize", this.fontSize);
 
-    this.appId = 33904;
+    this.appId = FsTools.getAppTags()[0];
     this.iconSize = 100;
     this.appName = "Toolbox";
     this.version = VERSION;

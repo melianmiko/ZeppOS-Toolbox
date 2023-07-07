@@ -22,6 +22,8 @@ class AppEditScreen extends ListScreen {
 		let size = this.entry.size();
 		this.image({
 			src: this.iconPath,
+			auto_scale: true,
+			width: 100,
 			height: 100
 		});
 		this.text({

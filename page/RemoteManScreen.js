@@ -15,6 +15,7 @@ const clientConfig = {
   screenWidth: SCREEN_WIDTH,
   screenHeight: SCREEN_HEIGHT,
   deviceName: deviceName,
+  diskFree: hmSetting.getDiskInfo().free,
   appName: `Toolbox ${VERSION}`,
   welcome: t("Welcome to RemoteManager!"),
   imageCodec: "TGA-16",
