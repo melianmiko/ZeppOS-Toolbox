@@ -29,7 +29,7 @@ class FileEditScreen extends ListScreen {
       if(st.size) {
         this.field({
           headline: t("Size"), 
-          text: FsTools.printBytes(st.size)
+          text: FsTools.printBytes(st.size, config.get("FsBase2", false))
         });
         fileSize = st.size;
       }

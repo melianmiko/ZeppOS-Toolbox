@@ -12,12 +12,12 @@ class SettingsMiscPage extends ListScreen {
   }
 
   start() {
-    this.configCheckbox(t("Hide main screen (open toolbox to settings list directly)"), "skipMainPage", false);
+    // this.configCheckbox(t("Hide main screen (open toolbox to settings list directly)"), "skipMainPage", false);
     this.configCheckbox(t("Open *.txt files with one click"), "autoOpenFiles", false);
     this.configCheckbox(t("Show file size in explorer"), "fmShowSizes", false);
     this.configCheckbox(t("Keep last timer value"), "timerKeepLast", true);
 
-    this.propCheckbox(t("Use Base-2 filesize\n1KB = 1024 B"), "mmk_tb_fs_unit", false);
+    this.configCheckbox(t("Use Base-2 filesize\n1KB = 1024 B"), "FsBase2", false);
 
     const allowDanger = config.get("allowDanger", false);
     this.row({

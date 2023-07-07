@@ -3,8 +3,10 @@ import { AppGesture } from "../lib/mmk/AppGesture";
 import { IS_LOW_RAM_DEVICE } from "../lib/mmk/UiParams";
 
 import {openPage} from "../utils/misc";
+import {default_config} from "../utils/default_config";
+import {Path} from "../lib/mmk/Path";
 
-const { config, t } = getApp()._options.globalData;
+const { config, offline, t } = getApp()._options.globalData;
 
 class SettingsHomePage extends ListScreen {
   constructor() {
@@ -30,7 +32,7 @@ class SettingsHomePage extends ListScreen {
       icon: "menu/files.png",
       callback: () => openPage("FileManagerScreen")
     });
-    this.row({
+    if(!offline) this.row({
       text: t("Remote manager"),
       icon: "menu/remman.png",
       callback: () => openPage("RemoteManScreen")
@@ -70,7 +72,26 @@ class SettingsHomePage extends ListScreen {
       callback: () => openPage("SettingsMiscPage")
     });
 
+    this.headline(t("Advanced:"));
+    this.row({
+      text: t("Restore defaults"),
+      icon: "menu/restore.png",
+      callback: () => this.wipe()
+    })
+    if(offline) this.text({
+      text: t("Looking for Remote Manager? It's available only in Zepp version, that installs from QR-Code"),
+    })
+
     this.offset();
+  }
+
+  wipe() {
+    try {
+      new Path("assets", config.get("imageViewTempFile", false)).remove();
+    } catch(_) {}
+
+    config.file.overrideWithJSON(default_config);
+    hmApp.gotoHome();
   }
 }
 

@@ -14,7 +14,7 @@ class MainScreen {
 
     const withBattery = config.get("withBattery", false);
     const withBrightness = config.get("withBrightness", true);
-    const compact = deviceName == "Band 7";
+    const compact = deviceName === "Band 7";
     hmUI.setStatusBarVisible(!withBattery);
 
     if(withBattery) this.drawBattery();
@@ -26,7 +26,7 @@ class MainScreen {
   drawBattery() {
     const battery = hmSensor.createSensor(hmSensor.id.BATTERY);
     const value = battery.current + "%";
-    const compact = deviceName == "Band 7";
+    const compact = deviceName === "Band 7";
 
     const text = hmUI.createWidget(hmUI.widget.TEXT, {
       x: 0,
@@ -142,7 +142,7 @@ class MainScreen {
       w: 188
     });
 
-    if(hmSetting.getScreenAutoBright()) {
+    if(hmSetting.getScreenAutoBright() && !IS_LOW_RAM_DEVICE) {
       const t = hmUI.createWidget(hmUI.widget.TEXT, {
         ...baseBrightnessConfig,
         w: 188,
@@ -204,11 +204,11 @@ class MainScreen {
 
 Page({
   onInit(p) {
-    const skipMain = config.get("skipMainPage", false);
-    if(skipMain) return hmApp.reloadPage({
-      appid: 33904,
-      url: "page/SettingsHomePage"
-    })
+    // const skipMain = config.get("skipMainPage", false);
+    // if(skipMain) return hmApp.reloadPage({
+    //   appid: 33904,
+    //   url: "page/SettingsHomePage"
+    // })
 
     AppGesture.withYellowWorkaround("left", {
       appid: 33904,

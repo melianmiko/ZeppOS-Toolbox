@@ -3,5 +3,8 @@
 	"esbuild": true,
 	"zeus_target": "band-7",
 	"with_zeus_compat": true,
-	"esbuild_params": "--bundle"
+	"esbuild_params": "--bundle",
+	"overrides": {
+		"app.js": "app_offline.js"
+	}
 }

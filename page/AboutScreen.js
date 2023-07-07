@@ -1,5 +1,6 @@
 import { AppGesture } from "../lib/mmk/AppGesture";
 import { BaseAboutScreen } from "../lib/mmk/BaseAboutScreen";
+import {VERSION} from "../version";
 
 const { config, t } = getApp()._options.globalData;
 
@@ -9,8 +10,9 @@ class AboutScreen extends BaseAboutScreen {
     this.fontSize = config.get("fontSize", this.fontSize);
 
     this.appId = 33904;
-    this.appName = "toolbox";
-    this.version = "v2023-07-02";
+    this.iconSize = 100;
+    this.appName = "Toolbox";
+    this.version = VERSION;
 
     this.infoRows = [
       ["melianmiko", "Developer"],

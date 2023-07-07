@@ -12,6 +12,7 @@
       "name": "1.0.0"
     }
   },
+  "defaultLanguage": "en-US",
   "configVersion": "v2",
   "debug": false,
   "i18n": {

@@ -53,6 +53,7 @@ MENU_ICONS = {
 	"storage.png": ("storage", "#FFFFFF"),
 	"timer.png": ("timer", "#FFFFFF"),
 	"ui.png": ("tune", "#FFFFFF"),
+	"restore.png": ('mop', "#FF9900"),
 }
 
 def main():

@@ -4,7 +4,7 @@ import { WIDGET_WIDTH, SCREEN_MARGIN_Y, SCREEN_HEIGHT, SCREEN_MARGIN_X } from ".
 
 import {openPage} from "../utils/misc";
 
-const { config } = getApp()._options.globalData;
+const { config, t } = getApp()._options.globalData;
 
 class FileManagerScreen {
   constructor(params) {
@@ -190,14 +190,14 @@ class FileManagerScreen {
       const row = {
         name: fn,
         icon: isFolder ? "files/folder.png" : this.getFileIcon(fn),
-        size: ""
+        size: t("Folder")
       };
 
       if(!isFolder && this.showFileSizes) {
         try {
           const [st, e] = item.stat();
           if(st.size) {
-            row.size = FsTools.printBytes(st.size);
+            row.size = FsTools.printBytes(st.size, config.get("FsBase2", false));
           }
         } catch(e) {}
       }

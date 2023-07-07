@@ -8,10 +8,9 @@ const { config, t } = getApp()._options.globalData;
 class AppEditScreen extends ListScreen {
 	constructor(dirname) {
 		super();
-    this.fontSize = config.get("fontSize", this.fontSize);
+    	this.fontSize = config.get("fontSize", this.fontSize);
 		
 		this.dirname = dirname;
-		this.dontKeepSettings = true;
 		this.entry = new Path("full", `/storage/js_apps/${dirname}`);
 		this.dataEntry = new Path("full", `/storage/js_apps/data/${dirname}`);
 		this.appConfig = {};
@@ -36,7 +35,7 @@ class AppEditScreen extends ListScreen {
 		})
 		this.field({
 			headline: t("Size"),
-			text: FsTools.printBytes(size)
+			text: FsTools.printBytes(size, config.get("FsBase2", false))
 		})
 
 		this.row({
@@ -88,7 +87,7 @@ class AppEditScreen extends ListScreen {
 
 			this.field({
 				headline: t("Size (ext. config)"), 
-				text: FsTools.printBytes(configSize)
+				text: FsTools.printBytes(configSize, config.get("FsBase2", false))
 			});
 		}
 

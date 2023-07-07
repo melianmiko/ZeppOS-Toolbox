@@ -17,6 +17,7 @@ export const QS_BUTTONS = {
     title: t("Remote manager"),
     url: "RemoteManScreen",
     type: "internal",
+    online: true,
   },
 
   storage: {

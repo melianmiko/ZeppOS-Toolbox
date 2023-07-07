@@ -11,7 +11,7 @@ App({
   globalData: {
     config,
     t,
-    offline: false
+    offline: true
   },
   onCreate(options) {
     config.load();

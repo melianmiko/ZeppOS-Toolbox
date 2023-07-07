@@ -26,7 +26,7 @@ class StorageInfoScreen {
       const currentRow = config[i];
       if(!storage[currentRow.key]) continue;
 
-      if (currentRow.key != "free" && currentRow.key != "total") {
+      if (currentRow.key !== "free" && currentRow.key !== "total") {
         let height = Math.round(
           cupStyle.h * (storage[currentRow.key] / storage.total)
         );
@@ -63,7 +63,7 @@ class StorageInfoScreen {
       const currentRow = config[i];
       if(!storage[currentRow.key]) continue;
 
-      if (currentRow.key != "free" && currentRow.key != "total") {
+      if (currentRow.key !== "free" && currentRow.key !== "total") {
         let width = Math.round(
           cupStyle.w * (storage[currentRow.key] / storage.total)
         );
@@ -86,7 +86,7 @@ class StorageInfoScreen {
 
   start() {
     const storage = hmSetting.getDiskInfo();
-    const config = [
+    const rows = [
       {
         key: "total",
         label: t("Total"),
@@ -126,31 +126,30 @@ class StorageInfoScreen {
 
     // Calc unknown
     storage.unknown = storage.total;
-    for(let i in config)
-      if(config[i].key !== "total" && config[i].key !== "unknown") 
-        storage.unknown -= storage[config[i].key]
+    for(let i in rows)
+      if(rows[i].key !== "total" && rows[i].key !== "unknown")
+        storage.unknown -= storage[rows[i].key]
 
     storage.unknown = Math.max(0, storage.unknown);
 
     // Graphics
-    if(deviceClass == "band" || deviceClass == "miband") {
-      this.renderVerticalCup(config, storage);
+    if(deviceClass === "band" || deviceClass === "miband") {
+      this.renderVerticalCup(rows, storage);
     } else {
-      this.renderLineCup(config, storage);
+      this.renderLineCup(rows, storage);
     }
 
     // Text
-    const compactRows = deviceName == "Band 7";
-    const rowWidth = deviceClass == "band" || deviceClass == "miband" ? 120 : 160;
+    const compactRows = deviceName === "Band 7";
+    const rowWidth = deviceClass === "band" || deviceClass === "miband" ? 120 : 160;
     const actualWidth = SCREEN_WIDTH - this.posX * 2;
     const columns = Math.max(1, Math.floor((actualWidth) / (rowWidth)));
     this.posX += Math.max(0, Math.floor((actualWidth - rowWidth * columns) / 2));
-    console.log(JSON.stringify(storage));
 
     const entryHeight = (compactRows ? 32 : 48) + this.fontSize + 4;
 
     let i = 0;
-    for (const currentRow of config) {
+    for (const currentRow of rows) {
       if(!storage[currentRow.key]) continue;
 
       // Text
@@ -171,7 +170,7 @@ class StorageInfoScreen {
         h: compactRows ? 32 : 48,
         text_size: this.fontSize + 6,
         color: 0xffffff,
-        text: FsTools.printBytes(storage[currentRow.key]),
+        text: FsTools.printBytes(storage[currentRow.key], config.get("FsBase2", false)),
         align_h: hmUI.align.CENTER_H,
       });
 
@@ -182,6 +181,8 @@ class StorageInfoScreen {
 
 Page({
   onInit(p) {
+    hmUI.setStatusBarVisible(false);
+
     AppGesture.withYellowWorkaround("left", {
       appid: 33904,
       url: "page/StorageInfoScreen",

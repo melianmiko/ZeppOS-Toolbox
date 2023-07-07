@@ -4,13 +4,9 @@ import { WIDGET_WIDTH, SCREEN_WIDTH, SCREEN_MARGIN_X, IS_LOW_RAM_DEVICE } from "
 
 import {QS_BUTTONS} from "../utils/data";
 
-const { config, t } = getApp()._options.globalData;
+const { config, offline } = getApp()._options.globalData;
 
 class SettingsUiScreen {
-  constructor() {
-    this.userTiels = null;
-  }
-
   start () {
     hmUI.setStatusBarVisible(false);
 
@@ -56,9 +52,10 @@ class SettingsUiScreen {
     const tiles = config.get("tiles", []);
     Object.keys(QS_BUTTONS).forEach((id) => {
       const config = QS_BUTTONS[id];
-      if(!config) return;
-      if(config.danger && !allowDanger) return;
-      if(config.lowRamOnly && !IS_LOW_RAM_DEVICE) return;
+      if( (!config) ||
+          (config.danger && !allowDanger) ||
+          (config.lowRamOnly && !IS_LOW_RAM_DEVICE) ||
+          (config.online && offline) ) return;
 
       const btn = hmUI.createWidget(hmUI.widget.IMG, {
         x: offsetX + (i % columns) * 96,
