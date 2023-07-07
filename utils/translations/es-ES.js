@@ -8,6 +8,7 @@ export const strings = {
     'Size': 'Tamaño',
     'Folder': 'Folder',
     'Vendor': 'Desarrollador',
+    'Automatic': 'Automatic',
     'Size (ext. config)': 'Tamaño (ext. config)',
     'Don\'t keep ext. files on uninstall': 'No conservar archivos ext. después de desinstalar',
     'Connecting...': 'Connecting...',
