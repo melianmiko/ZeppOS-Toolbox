@@ -5,13 +5,12 @@
 ZeppOS Toolbox
 ----------------------
 
-**Work in progress. App built from sources may not work as expected.**
-
 Combination of most useful tools for your device.
 File & apps manager, background timer, Quick Settings access.
 
 - [🌍 Website](https://melianmiko.ru/en/sb7/toolbox/)
 - [📁 Download](https://st.melianmiko.ru/smartband7)
+- [🚩 Translate to another language](https://crowdin.com/project/zeppos-toolbox)
 
 ## Contributors
 - Main developer: melianmiko
