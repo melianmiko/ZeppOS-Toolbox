@@ -1,8 +1,8 @@
 export const strings = {
-    'Uninstall': 'Uninstall',
+    'Uninstall': 'Odinstaluj',
     'Show in file manager': 'Show in file manager',
     'Tap again to confirm': 'Tap again to confirm',
-    'Launch': 'Launch',
+    'Launch': 'Uruchom',
     'Uninstalled': 'Uninstalled',
     'Please reboot device to finish': 'Please reboot device to finish',
     'Size': 'Size',
@@ -39,16 +39,16 @@ export const strings = {
     'Flashlight app': 'Flashlight app',
     'Camera app': 'Camera app',
     'Settings app': 'Settings app',
-    'Brightness': 'Brightness',
+    'Brightness': 'Jasność',
     'AOD': 'AOD',
     'Powersave': 'Powersave',
     'System settings': 'System settings',
     'App list sort': 'App list sort',
     'Power off': 'Power off',
-    'Reboot': 'Reboot',
+    'Reboot': 'Uruchom ponownie',
     'Background timer': 'Background timer',
     'Wake on Wrist': 'Wake on Wrist',
-    'Click to confirm': 'Click to confirm',
+    'Click to confirm': 'Kliknij, aby potwierdzić',
     'Customize': 'Customize',
     'Language': 'Language',
     'About': 'About',
@@ -70,5 +70,5 @@ export const strings = {
     'Begin': 'Begin',
     'Cancel': 'Cancel',
     'This option will show some features, that may cause your device to fail to boot. Continuing, you agree that in some moment all settings of that device may become lost.': 'This option will show some features, that may cause your device to fail to boot. Continuing, you agree that in some moment all settings of that device may become lost.',
-    'Agree, enable': 'Agree, enable'
+    'Agree, enable': 'Potwierdź, włącz'
 };
