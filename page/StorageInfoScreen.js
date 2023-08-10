@@ -110,7 +110,7 @@ class StorageInfoScreen {
       {
         key: "music",
         label: t("Music"),
-        color: 0x4fc3f7,
+        color: 0xF8BBD0,
       },
       {
         key: "app",
@@ -176,6 +176,14 @@ class StorageInfoScreen {
 
       i++;
     }
+
+    hmUI.createWidget(hmUI.widget.FILL_RECT, {
+      x: 0,
+      y: this.posY + Math.ceil(i / columns) * entryHeight,
+      w: 1,
+      h: SCREEN_MARGIN_Y,
+      color: 0x0
+    })
   }
 }
 
