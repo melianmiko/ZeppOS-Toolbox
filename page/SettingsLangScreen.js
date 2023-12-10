@@ -9,6 +9,7 @@ const available_locales = {
   "pt-BR": "Português",
   "zh-CN": "简体中文",
   "zh-TW": "繁體中文",
+  "ja-JP": "日本語",
 };
 
 const { config } = getApp()._options.globalData;
