@@ -1,6 +1,7 @@
 import {strings as enStrings} from "./translations/en-US.js";
 import {strings as deStrings} from "./translations/de-DE.js";
 import {strings as esStrings} from "./translations/es-ES.js";
+import {strings as jpStrings} from "./translations/ja-JP.js";
 import {strings as ptStrings} from "./translations/pt-BR.js";
 import {strings as ruStrings} from "./translations/ru-RU.js";
 import {strings as cnStrings} from "./translations/zh-CN.js";
@@ -10,6 +11,7 @@ export function initTranslations(loadLocale) {
   loadLocale("en-US", enStrings);
   loadLocale("de-DE", deStrings);
   loadLocale("es-ES", esStrings);
+  loadLocale("ja-JP", jpStrings);
   loadLocale("pt-BR", ptStrings);
   loadLocale("ru-RU", ruStrings);
   loadLocale("zh-CN", cnStrings);
