@@ -1,8 +1,8 @@
 export const strings = {
-    'Uninstall': 'Uninstall',
-    'Show in file manager': 'Show in file manager',
-    'Tap again to confirm': 'Tap again to confirm',
-    'Launch': 'Launch',
+    'Uninstall': 'Dezinstalează',
+    'Show in file manager': 'Arata in managerul de fișiere',
+    'Tap again to confirm': 'Apasa din nou sa confirmi',
+    'Launch': 'Deschide',
     'Uninstalled': 'Uninstalled',
     'Please reboot device to finish': 'Please reboot device to finish',
     'Size': 'Size',
