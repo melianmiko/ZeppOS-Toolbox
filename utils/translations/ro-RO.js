@@ -3,7 +3,7 @@ export const strings = {
     'Show in file manager': 'Arata in managerul de fișiere',
     'Tap again to confirm': 'Apasa din nou sa confirmi',
     'Launch': 'Deschide',
-    'Uninstalled': 'Uninstalled',
+    'Uninstalled': 'Dezinstalat',
     'Please reboot device to finish': 'Please reboot device to finish',
     'Size': 'Size',
     'Folder': 'Folder',
