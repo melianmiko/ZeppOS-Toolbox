@@ -5,6 +5,7 @@ import os
 
 project = Path(".").resolve()
 common_assets = project / "assets" / "common"
+lib_assets = project / "lib" / "mmk" / "assets"
 
 pages = [
   "MainScreen",
@@ -23,6 +24,7 @@ pages = [
   "SettingsFontSize",
   "SettingsUiScreen",
   "StorageInfoScreen",
+  "SettingsRemManUrlScreen",
   "TextViewScreen",
   "TimerOutScreen",
   "TimerSetScreen",
@@ -65,6 +67,9 @@ for target_id in targets:
   if target_id == "band-7":
     shutil.copytree(common_assets / "timer", assets_dir / "timer")
   shutil.copytree(common_assets / f"menu_{icon_size}", assets_dir / "menu")
+
+  # ScreenBaord data
+  shutil.copytree(lib_assets / "screen_board", assets_dir / "screen_board")
 
   # App.json
   app_json["targets"][target_id]["module"] = {

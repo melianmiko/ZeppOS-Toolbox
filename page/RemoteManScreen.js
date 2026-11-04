@@ -8,7 +8,7 @@ import {deviceName} from "../lib/mmk/DeviceIdentifier";
 import {SCREEN_WIDTH, SCREEN_HEIGHT} from "../lib/mmk/UiParams";
 import {VERSION} from "../version";
 
-const { t } = getApp()._options.globalData;
+const { t, config } = getApp()._options.globalData;
 
 const basePath = new Path("full", "/storage");
 const clientConfig = {
@@ -31,6 +31,11 @@ page.gettext = t;
 Page({
   onInit() {
     page.start();
+    page.userURL = config.get("remManUrl", "");
+
+    if(!page.userURL) {
+      page.userURL = "https://zfm.mmk.pw"
+    }
 
     messageBuilder.connect(() => {
       page.onConnect();

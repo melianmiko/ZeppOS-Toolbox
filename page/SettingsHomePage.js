@@ -61,6 +61,11 @@ class SettingsHomePage extends ListScreen {
         openPage("SettingsFontSize")
       }
     })
+    if(!offline) this.row({
+      text: t("Remote manager server URL"),
+      icon: "menu/remman.png",
+      callback: () => openPage("SettingsRemManUrlScreen")
+    });
     this.row({
       text: t("Language"),
       icon: "menu/lang.png",
